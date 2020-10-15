@@ -1,27 +1,24 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, Image, View, Modal } from "react-native";
+import { StyleSheet, Text, Image, View, Modal, ScrollView, Alert } from "react-native";
 import { Button } from 'react-native-paper';
-
+import Settings from '../../modals/Settings'
+import ProfileEdit from '../../modals/ProfileEdit'
+import ProfileView from '../../modals/ProfileView'
 import Icon from "react-native-vector-icons/Feather";
 const Profile = () => {
-    const [modalVisible, setModalVisible] = useState(false);
+    const [settingsModalVisible, setSettingsModalVisible] = useState(false);
+    const [profileEditModalVisible, setProfileEditModalVisible] = useState(false);
+    const [profileViewModalVisible, setProfileViewModalVisible] = useState(false);
     const onPress = () => {
         setModalVisible(true);
     };
     return (
         <View style={styles.container}>
-            <Modal style={styles.modal} visible={modalVisible} animationType="slide">
-                <Button
-                    style={styles.modalButton}
-                    onPress={() => setModalVisible(false)}
-                    mode="text">
-                    <Text>Cancel</Text>
-                </Button>
-            </Modal>
+            <Settings settingsModalVisible={settingsModalVisible} setSettingsModalVisible={setSettingsModalVisible} />
+            <ProfileEdit profileEditModalVisible={profileEditModalVisible} setProfileEditModalVisible={setProfileEditModalVisible} />
+            <ProfileView profileViewModalVisible={profileViewModalVisible} setProfileViewModalVisible={setProfileViewModalVisible} />
             <View style={styles.header}>
-                <Button onPress={() => setModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
-
-
+                <Button onPress={() => setSettingsModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
             </View>
             <View style={styles.profileSection}>
                 <View style={styles.imageContainer}>
@@ -33,6 +30,8 @@ const Profile = () => {
                         style={styles.images}
                     />
                 </View>
+                <Button onPress={() => setProfileEditModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
+                <Button onPress={() => setProfileViewModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
             </View>
         </View>
     );
@@ -46,13 +45,15 @@ const styles = StyleSheet.create({
     },
 
     header: {
+
         flex: 1,
         flexDirection: "row",
         width: 600,
         justifyContent: "flex-start",
     },
+
     settingsButton: { position: 'relative', left: 115, top: 30 },
-    modalButton: { position: "relative", top: 30, right: 120 },
+
     profileSection: { flex: 8, justifyContent: "center" },
     imageContainer: {
         height: 175,
