@@ -6,39 +6,40 @@ import ModalButtons from '../components/ModalButtons'
 const Settings = ({ settingsModalVisible, setSettingsModalVisible }) => {
 
     return (
-        <Modal style={styles.modal} visible={settingsModalVisible} animationType="slide">
-            <View style={styles.modalHeader}>
-                <Button
-                    style={styles.modalExitButton}
-                    onPress={() => setSettingsModalVisible(false)}
-                    mode="text">
-                    <Text>Cancel</Text>
+        <Modal visible={settingsModalVisible} animationType="slide">
+            <View style={styles.container}>
+                <View style={styles.modalHeader}>
+                    <Button
+                        style={styles.modalExitButton}
+                        onPress={() => setSettingsModalVisible(false)}
+                        mode="text">
+                        <Text style={styles.modalHeaderText}>Cancel</Text>
 
-                </Button>
-                <Text style={styles.modalHeaderText}>Settings</Text>
-                <Button
-                    style={styles.modalExitButton}
-                    onPress={() => setSettingsModalVisible(false)}
-                    mode="text">
-                    <Text>Done</Text>
+                    </Button>
+                    <Text style={styles.modalHeaderText}>Settings</Text>
+                    <Button
+                        style={styles.modalExitButton}
+                        onPress={() => setSettingsModalVisible(false)}
+                        mode="text">
+                        <Text style={styles.modalHeaderText}>Done</Text>
 
-                </Button>
+                    </Button>
+                </View>
+                <View style={styles.modalBody}>
+                    <ScrollView >
+                        <ModalButtons />
+                    </ScrollView>
+                </View>
             </View>
-            <View styles={styles.modalBody}>
-                <ScrollView >
-                    <ModalButtons />
-                </ScrollView>
-            </View>
-
         </Modal>
     )
 }
 const styles = StyleSheet.create({
-    modal: {},
-    modalHeader: { height: 70, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' },
-    modalBody: {},
-    modalExitButton: { position: 'relative', top: 10 },
-    modalHeaderText: { position: 'relative', top: 10 },
+    container: { backgroundColor: '#003f5c', flex: 1 },
+    modalHeader: { height: 70, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', flex: 1 },
+    modalBody: { flex: 7 },
+    modalHeaderText:{color:'white'}
+
 
 })
 

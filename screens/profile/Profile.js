@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, Image, View, Modal, ScrollView, Alert } from "react-native";
+import { StyleSheet, Text, Image, View, Modal, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { Button } from 'react-native-paper';
 import Settings from '../../modals/Settings'
 import ProfileEdit from '../../modals/ProfileEdit'
@@ -22,16 +22,19 @@ const Profile = () => {
             </View>
             <View style={styles.profileSection}>
                 <View style={styles.imageContainer}>
-                    <Image
-                        source={{
-                            uri:
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiVdszvNlg3PRHDEPCs6tRus26-XeBh0a5lQ&usqp=CAU",
-                        }}
-                        style={styles.images}
-                    />
+                    <TouchableOpacity style={styles.imageButton} onPress={() => setProfileViewModalVisible(true)}>
+                        <Image
+                            source={{
+                                uri:
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiVdszvNlg3PRHDEPCs6tRus26-XeBh0a5lQ&usqp=CAU",
+                            }}
+                            style={styles.images}
+                        />
+                    </TouchableOpacity>
+
                 </View>
-                <Button onPress={() => setProfileEditModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
-                <Button onPress={() => setProfileViewModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
+                <Button onPress={() => setProfileEditModalVisible(true)} style={styles.editModalButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
+
             </View>
         </View>
     );
@@ -42,6 +45,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: '#003f5c'
     },
 
     header: {
@@ -52,10 +56,11 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
     },
 
-    settingsButton: { position: 'relative', left: 115, top: 30 },
-
+    editModalButton: { position: 'relative', left: 60, top: -50 },
+    settingsButton: { position: 'relative', left: 110, top: 30 },
     profileSection: { flex: 8, justifyContent: "center" },
     imageContainer: {
+        backgroundColor: 'white',
         height: 175,
         width: 175,
         borderRadius: 175 / 2,
@@ -66,8 +71,9 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 
+
     images: {
-        position: "absolute",
+
         height: 150,
         width: 150,
         borderWidth: 5,

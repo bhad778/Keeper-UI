@@ -71,104 +71,73 @@ export default class Exemple extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.icon}>
+        <View style={styles.discoverHeader}>
           <Icon style={styles.inbox} name="inbox" size={30} color="black" />
-          <Text style={styles.discoverHeader}>Job Finder</Text>
+          <Text style={styles.discoverText}>Job Finder</Text>
+        </View>
+        <View style={styles.swiper}>
+          <Swiper
+
+            ref={(swiper) => {
+              this.swiper = swiper;
+            }}
+            onSwiped={() => this.onSwiped("general")}
+            onSwipedLeft={() => this.onSwiped("left")}
+            onSwipedRight={() => this.onSwiped("right")}
+            onTapCard={this.swipeLeft}
+            cards={this.state.cards}
+            cardIndex={this.state.cardIndex}
+            cardVerticalMargin={80}
+            renderCard={this.renderCard}
+            onSwipedAll={this.onSwipedAllCards}
+            stackSize={3}
+            stackSeparation={0}
+            backgroundColor='#003f5c'
+            overlayLabels={{
+
+              left: {
+                title: "NOPE",
+                style: {
+                  label: {
+                    backgroundColor: "black",
+                    borderColor: "black",
+                    color: "white",
+                    borderWidth: 1,
+                  },
+                  wrapper: {
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    justifyContent: "flex-start",
+                    marginTop: 30,
+                    marginLeft: -30,
+                  },
+                },
+              },
+              right: {
+                title: "LIKE",
+                style: {
+                  label: {
+                    backgroundColor: "black",
+                    borderColor: "black",
+                    color: "white",
+                    borderWidth: 1,
+                  },
+                  wrapper: {
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                    marginTop: 30,
+                    marginLeft: 30,
+                  },
+                },
+              },
+            }}
+            animateOverlayLabelsOpacity
+            animateCardOpacity
+            swipeBackCard
+          ></Swiper>
         </View>
 
-        <Swiper
-          style={styles.swiper}
-          ref={(swiper) => {
-            this.swiper = swiper;
-          }}
-          onSwiped={() => this.onSwiped("general")}
-          onSwipedLeft={() => this.onSwiped("left")}
-          onSwipedRight={() => this.onSwiped("right")}
-          onSwipedTop={() => this.onSwiped("top")}
-          onSwipedBottom={() => this.onSwiped("bottom")}
-          onTapCard={this.swipeLeft}
-          cards={this.state.cards}
-          cardIndex={this.state.cardIndex}
-          cardVerticalMargin={80}
-          renderCard={this.renderCard}
-          onSwipedAll={this.onSwipedAllCards}
-          stackSize={3}
-          stackSeparation={10}
-          backgroundColor="white"
-          overlayLabels={{
-            bottom: {
-              title: "BLEAH",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                },
-              },
-            },
-            left: {
-              title: "NOPE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  justifyContent: "flex-start",
-                  marginTop: 30,
-                  marginLeft: -30,
-                },
-              },
-            },
-            right: {
-              title: "LIKE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  marginTop: 30,
-                  marginLeft: 30,
-                },
-              },
-            },
-            top: {
-              title: "SUPER LIKE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                },
-              },
-            },
-          }}
-          animateOverlayLabelsOpacity
-          animateCardOpacity
-          swipeBackCard
-        ></Swiper>
       </View>
     );
   }
@@ -176,50 +145,43 @@ export default class Exemple extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
+
   },
 
-  icon: {
+  discoverHeader: {
+
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
     flex: 1,
-    height: 50,
-    width: 400,
     zIndex: 1,
     position: "absolute",
   },
+  swiper: { flex: 5 },
   inbox: {
-    marginTop: 12,
-    marginLeft: 15,
+    position: 'relative',
+    left: 15,
+    top: 29
   },
-  discoverHeader: {
-    marginTop: 10,
-    marginRight: 35,
+  discoverText: {
+    position: 'relative',
+    left: 70,
+    top: 25,
     fontSize: 40,
   },
 
   card: {
     flex: 1,
-    // borderRadius: 3rem,
     borderWidth: 2,
     borderColor: "#E8E8E8",
     justifyContent: "center",
     backgroundColor: "white",
+    borderRadius: 20
   },
   images: {
     flex: 1,
-    // borderRadius: "3rem",
+
   },
-  text: {
-    textAlign: "center",
-    fontSize: 50,
-    backgroundColor: "transparent",
-  },
-  done: {
-    textAlign: "center",
-    fontSize: 30,
-    color: "white",
-    backgroundColor: "transparent",
-  },
+
+
 });

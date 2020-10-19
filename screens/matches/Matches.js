@@ -91,6 +91,7 @@ const Matches = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#003f5c'
     },
 
     header: {
@@ -98,13 +99,15 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
         backgroundColor: "white",
         justifyContent: "center",
+        backgroundColor: "#003f5c"
     },
     searchIcon: {
         marginRight: 25,
     },
     matchesSection: { flex: 9, backgroundColor: "white" },
-    matchButton: { borderBottomColor: "#F0FFF0", borderBottomWidth: 5 },
+    matchButton: { borderBottomColor: "#fb5b5a", backgroundColor: "#003f5c", borderBottomWidth: 5 },
     imageContainer: {
+        backgroundColor: 'white',
         height: 175,
         width: 175,
         position: "relative",

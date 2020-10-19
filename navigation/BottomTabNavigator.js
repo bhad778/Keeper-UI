@@ -14,13 +14,13 @@ import Matches from '../screens/matches/Matches'
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
-            const colorScheme = useColorScheme();
-  const tintColorLight = "#2f95dc";
-  const tintColorDark = "#fff";
+  const colorScheme = useColorScheme('dark');
+  const tintColorLight = "#fb5b5a";
+  const tintColorDark = "#003f5c";
   const Colors = {
     light: {
       text: "#000",
-      background: "#fff",
+      background: "#003f5c",
       tint: tintColorLight,
       tabIconDefault: "#ccc",
       tabIconSelected: tintColorLight,

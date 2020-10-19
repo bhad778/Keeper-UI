@@ -70,14 +70,12 @@ export default Messages;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#003f5c",
   },
   header: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    borderBottomColor: "#F5FFFA",
-    borderBottomWidth: 5,
   },
   chatContainer: {
     flex: 8,
@@ -86,14 +84,15 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     position: "relative",
-    right: 14,
-    top: 1,
+    right: 90,
+    top: 30,
   },
   imageContainer: {
     height: 87.5,
     width: 87.5,
     position: "relative",
-    right: 3,
+    right: 45,
+    top: 15,
     borderRadius: 87.5 / 2,
     borderWidth: 5,
     justifyContent: "center",
