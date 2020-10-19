@@ -6,7 +6,7 @@ const ProfileEdit = ({ profileEditModalVisible, setProfileEditModalVisible }) =>
     return (
         <Modal animationType="slide" visible={profileEditModalVisible}>
             <View style={styles.header}>
-                <Text>Edit Profile</Text>
+
                 <Button
                     style={styles.modalExitButton}
                     onPress={() => setProfileEditModalVisible(false)}
@@ -26,55 +26,8 @@ const ProfileEdit = ({ profileEditModalVisible, setProfileEditModalVisible }) =>
                                 style={styles.images}
                             />
                         </View>
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={{
-                                    uri: "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
-                                }}
-                                style={styles.images}
-                            />
-                        </View>
-
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={{
-                                    uri: "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
-                                }}
-                                style={styles.images}
-                            />
-                        </View>
-
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={{
-                                    uri: "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
-                                }}
-                                style={styles.images}
-                            />
-                        </View>
-
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={{
-                                    uri: "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
-                                }}
-                                style={styles.images}
-                            />
-                        </View>
-
-                        <View style={styles.imageContainer}>
-                            <Image
-                                source={{
-                                    uri: "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
-                                }}
-                                style={styles.images}
-                            />
-                        </View>
                     </View>
-
-
                     <ModalButtons />
-
                 </ScrollView>
 
             </View>
