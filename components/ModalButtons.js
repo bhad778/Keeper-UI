@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Button } from 'react-native-paper';
-import { View, StyleSheet, Alert } from 'react-native';
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import Slider from '@react-native-community/slider';
+import React, { useState } from "react";
+import { Button } from "react-native-paper";
+import { View, StyleSheet, Alert } from "react-native";
+// import MultiSlider from '@ptomasroos/react-native-multi-slider';
+// import Slider from '@react-native-community/slider';
 const ModalButtons = () => {
-  const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
-  const multiSliderValuesChange = (values) => setMultiSliderValue(values);
+  // const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
+  // const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   return (
     <View style={styles.container}>
       <Button
         mode="contained"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => Alert.alert("Simple Button pressed")}
         title="string me"
         style={styles.modalButton}
         color="white"
@@ -21,13 +21,13 @@ const ModalButtons = () => {
         style={styles.modalButtonSlide}
         color="white"
       >
-        <Slider
+        {/* <Slider
           style={{ width: 260, height: 40 }}
           minimumValue={0}
           maximumValue={1}
           minimumTrackTintColor="#fb5b5a"
           maximumTrackTintColor="#ccc"
-        />
+        /> */}
       </Button>
 
       <Button
@@ -36,7 +36,7 @@ const ModalButtons = () => {
         style={styles.modalButtonSlide}
         color="white"
       >
-        <MultiSlider
+        {/* <MultiSlider
           values={[multiSliderValue[0], multiSliderValue[1]]}
           selectedStyle={{ backgroundColor: '#fb5b5a' }}
           sliderLength={250}
@@ -45,40 +45,40 @@ const ModalButtons = () => {
           max={100}
           allowOverlap={false}
           minMarkerOverlapDistance={10}
-        />
+        /> */}
       </Button>
 
       <Button
         mode="contained"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => Alert.alert("Simple Button pressed")}
         title="string me"
         style={styles.modalButton}
         color="white"
       />
       <Button
         mode="contained"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => Alert.alert("Simple Button pressed")}
         title="string me"
         style={styles.modalButton}
         color="white"
       />
       <Button
         mode="contained"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => Alert.alert("Simple Button pressed")}
         title="string me"
         style={styles.modalButton}
         color="white"
       />
       <Button
         mode="contained"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => Alert.alert("Simple Button pressed")}
         title="string me"
         style={styles.modalButton}
         color="white"
       />
       <Button
         mode="contained"
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => Alert.alert("Simple Button pressed")}
         title="string me"
         style={styles.modalButton}
         color="white"
@@ -87,7 +87,7 @@ const ModalButtons = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: { alignItems: 'center' },
+  container: { alignItems: "center" },
   modalButton: {
     margin: 20,
     height: 40,
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
     height: 60,
     width: 300,
     borderRadius: 20,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
