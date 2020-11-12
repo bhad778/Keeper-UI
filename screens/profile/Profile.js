@@ -1,87 +1,120 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, Image, View, Modal, ScrollView, Alert, TouchableOpacity } from "react-native";
-import { Button } from 'react-native-paper';
-import Settings from '../../modals/Settings'
-import ProfileEdit from '../../modals/ProfileEdit'
-import ProfileView from '../../modals/ProfileView'
-import Icon from "react-native-vector-icons/Feather";
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Modal,
+  ScrollView,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
+import { Button, Avatar } from 'react-native-paper';
+import Settings from '../../modals/Settings';
+import ProfileEdit from '../../modals/ProfileEdit';
+import ProfileView from '../../modals/ProfileView';
+import Icon from 'react-native-vector-icons/Feather';
 const Profile = () => {
-    const [settingsModalVisible, setSettingsModalVisible] = useState(false);
-    const [profileEditModalVisible, setProfileEditModalVisible] = useState(false);
-    const [profileViewModalVisible, setProfileViewModalVisible] = useState(false);
-    const onPress = () => {
-        setModalVisible(true);
-    };
-    return (
-        <View style={styles.container}>
-            <Settings settingsModalVisible={settingsModalVisible} setSettingsModalVisible={setSettingsModalVisible} />
-            <ProfileEdit profileEditModalVisible={profileEditModalVisible} setProfileEditModalVisible={setProfileEditModalVisible} />
-            <ProfileView profileViewModalVisible={profileViewModalVisible} setProfileViewModalVisible={setProfileViewModalVisible} />
-            <View style={styles.header}>
-                <Button onPress={() => setSettingsModalVisible(true)} style={styles.settingsButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
-            </View>
-            <View style={styles.profileSection}>
-                <View style={styles.imageContainer}>
-                    <TouchableOpacity style={styles.imageButton} onPress={() => setProfileViewModalVisible(true)}>
-                        <Image
-                            source={{
-                                uri:
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiVdszvNlg3PRHDEPCs6tRus26-XeBh0a5lQ&usqp=CAU",
-                            }}
-                            style={styles.images}
-                        />
-                    </TouchableOpacity>
-
-                </View>
-                <Button onPress={() => setProfileEditModalVisible(true)} style={styles.editModalButton} icon={() => <Icon name="settings" size={40} color="black" />} mode="text" />
-
-            </View>
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
+  const [profileEditModalVisible, setProfileEditModalVisible] = useState(false);
+  const [profileViewModalVisible, setProfileViewModalVisible] = useState(false);
+  const onPress = () => {
+    setModalVisible(true);
+  };
+  return (
+    <View style={styles.container}>
+      <Settings
+        settingsModalVisible={settingsModalVisible}
+        setSettingsModalVisible={setSettingsModalVisible}
+      />
+      <ProfileEdit
+        profileEditModalVisible={profileEditModalVisible}
+        setProfileEditModalVisible={setProfileEditModalVisible}
+      />
+      <ProfileView
+        profileViewModalVisible={profileViewModalVisible}
+        setProfileViewModalVisible={setProfileViewModalVisible}
+      />
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => setSettingsModalVisible(true)}
+          style={styles.settingsButton}
+        >
+          <Icon name="settings" size={30} color="black" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.profileSection}>
+        <View style={styles.imageContainer}>
+          <TouchableOpacity
+            style={styles.imageButton}
+            onPress={() => setProfileViewModalVisible(true)}
+          >
+            <Avatar.Image
+              size={150}
+              source={{
+                uri:
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiVdszvNlg3PRHDEPCs6tRus26-XeBh0a5lQ&usqp=CAU',
+              }}
+              style={styles.images}
+            />
+          </TouchableOpacity>
         </View>
-    );
+        <View style={styles.editModalButtonContainer}>
+          <TouchableOpacity
+            style={styles.editModalButton}
+            onPress={() => setProfileEditModalVisible(true)}
+          >
+            <Icon name="settings" size={40} color="black" />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.profileImageText}>Tap to edit profile</Text>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: '#003f5c'
-    },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
 
-    header: {
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    width: 600,
+    justifyContent: 'flex-start',
+  },
 
-        flex: 1,
-        flexDirection: "row",
-        width: 600,
-        justifyContent: "flex-start",
-    },
+  editModalButtonContainer: {
+    width: 60,
+    height: 60,
+    backgroundColor: 'white',
+    position: 'relative',
+    left: 115,
+    top: -60,
+    borderRadius: 40,
+  },
+  editModalButton: { position: 'relative', left: 7, top: 6 },
+  settingsButton: { position: 'relative', left: 110, top: 60 },
+  profileSection: { flex: 8, justifyContent: 'flex-start' },
+  imageContainer: {
+    position: 'relative',
+    top: 15,
+    backgroundColor: 'white',
+    height: 175,
+    width: 175,
+    borderRadius: 175 / 2,
 
-    editModalButton: { position: 'relative', left: 60, top: -50 },
-    settingsButton: { position: 'relative', left: 110, top: 30 },
-    profileSection: { flex: 8, justifyContent: "center" },
-    imageContainer: {
-        backgroundColor: 'white',
-        height: 175,
-        width: 175,
-        borderRadius: 175 / 2,
-        borderWidth: 5,
-        justifyContent: "center",
-        alignItems: "center",
-        margin: 10,
-        marginLeft: 10,
-    },
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+    marginLeft: 10,
+  },
 
-
-    images: {
-
-        height: 150,
-        width: 150,
-        borderWidth: 5,
-        borderRadius: 150 / 2,
-        resizeMode: "contain",
-    },
-
-
+  profileImageText: { position: 'relative', bottom: 50, left: 40 },
 });
 
 export default Profile;

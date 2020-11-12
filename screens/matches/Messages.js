@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
-import { Button } from "react-native-paper";
-import Icon from "react-native-vector-icons/Feather";
-import { GiftedChat } from "react-native-gifted-chat";
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { Avatar } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const Messages = ({ route, navigation }) => {
-  const { pic } = route.params;
+  const { pic, title } = route.params;
   const onPress = () => {
     navigation.goBack();
   };
@@ -15,19 +16,19 @@ const Messages = ({ route, navigation }) => {
     // example of system message
     {
       _id: 0,
-      text: "New room created.",
+      text: 'New room created.',
       createdAt: new Date().getTime(),
       system: true,
     },
     // example of chat message
     {
       _id: 1,
-      text: "Henlo!",
+      text: 'Henlo!',
       createdAt: new Date().getTime(),
       user: {
         _id: 2,
-        name: "Test User",
-        avatar: pic,
+        name: 'Test User',
+        avatar: ' ',
       },
     },
   ]);
@@ -38,21 +39,20 @@ const Messages = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Button
-          style={styles.backButton}
-          icon={() => <Icon name="chevron-left" size={50} />}
-          mode="text"
-          onPress={onPress}
-        ></Button>
+        <TouchableOpacity style={styles.backButton} onPress={onPress}>
+          <Icon color="#808080" name="chevron-left" size={30} />
+        </TouchableOpacity>
 
         <View style={styles.imageContainer}>
-          <Image
+          <Avatar.Image
+            size={40}
             source={{
               uri: pic,
             }}
             style={styles.images}
           />
         </View>
+        <Text style={styles.titleText}>{title}</Text>
       </View>
       <View style={styles.chatContainer}>
         <GiftedChat
@@ -70,43 +70,39 @@ export default Messages;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#003f5c",
+    backgroundColor: 'white',
   },
+  titleText: { position: 'relative', top: 16, right: 65, fontSize: 20 },
   header: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#F0F0F0',
   },
   chatContainer: {
-    flex: 8,
+    flex: 9,
   },
   backButton: {
     height: 100,
     width: 100,
-    position: "relative",
-    right: 90,
-    top: 30,
+    position: 'relative',
+    left: 10,
+    top: 50,
   },
   imageContainer: {
-    height: 87.5,
-    width: 87.5,
-    position: "relative",
-    right: 45,
+    height: 43.75,
+    width: 43.75,
+    position: 'relative',
+    right: 65,
     top: 15,
-    borderRadius: 87.5 / 2,
-    borderWidth: 5,
-    justifyContent: "center",
-    alignItems: "center",
+    borderRadius: 43.75 / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 10,
     marginLeft: 10,
   },
 
-  images: {
-    position: "absolute",
-    height: 75,
-    width: 75,
-    borderWidth: 5,
-    borderRadius: 75 / 2,
-    resizeMode: "contain",
-  },
+  images: {},
 });

@@ -1,67 +1,77 @@
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { Feather } from "@expo/vector-icons";
-import { useColorScheme, Image, View } from "react-native";
+import { Feather } from '@expo/vector-icons';
+import { useColorScheme, StyleSheet } from 'react-native';
 import Discover from '../screens/discover/Discover';
 import Profile from '../screens/profile/Profile';
-import Messages from '../screens/matches/Messages'
-import Matches from '../screens/matches/Matches'
 
-
+import Matches from '../screens/matches/Matches';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme('dark');
-  const tintColorLight = "#fb5b5a";
-  const tintColorDark = "#003f5c";
+  const colorScheme = useColorScheme();
+  const tintColorLight = '#fb5b5a';
+  const tintColorDark = '#fff';
   const Colors = {
     light: {
-      text: "#000",
-      background: "#003f5c",
+      text: '#000',
+      background: '#fff',
       tint: tintColorLight,
-      tabIconDefault: "#ccc",
+      tabIconDefault: '#ccc',
       tabIconSelected: tintColorLight,
     },
     dark: {
-      text: "#fff",
-      background: "#000",
+      text: '#fff',
+      background: '#000',
       tint: tintColorDark,
-      tabIconDefault: "#ccc",
+      tabIconDefault: '#ccc',
       tabIconSelected: tintColorDark,
     },
   };
 
   return (
     <Tab.Navigator
-      initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      initialRouteName="  "
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme].tint,
+        style: { borderTopWidth: 0, height: 75 },
+      }}
+    >
       <Tab.Screen
-        name="ProfileTab"
+        name=" "
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="user" size={35} color={color} />
+            <Feather style={styles.tabs} name="user" size={30} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="DiscoverTab"
+        name="  "
         component={Discover}
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="search" size={35} color={color} />
+            <Feather
+              style={styles.tabs}
+              name="search"
+              size={30}
+              color={color}
+            />
           ),
         }}
       />
       <Tab.Screen
-        name="MatchesTab"
+        name="   "
         component={Matches}
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="file-text" size={35} color={color} />
+            <Feather
+              style={styles.tabs}
+              name="file-text"
+              size={30}
+              color={color}
+            />
           ),
         }}
       />
@@ -69,9 +79,9 @@ export default function BottomTabNavigator() {
   );
 }
 
-
+const styles = StyleSheet.create({
+  tabs: { position: 'relative', top: 5 },
+});
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-
-
