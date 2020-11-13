@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jobfindingapp-dev-202907-authRole",
+      "UnauthRoleArn": "arn:aws:iam::382701914337:role/amplify-jobfindingapp-dev-202907-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::382701914337:role/amplify-jobfindingapp-dev-202907-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jobfindingapp-dev-202907-deployment",
+      "UnauthRoleName": "amplify-jobfindingapp-dev-202907-unauthRole",
+      "StackName": "amplify-jobfindingapp-dev-202907",
+      "StackId": "arn:aws:cloudformation:us-east-1:382701914337:stack/amplify-jobfindingapp-dev-202907/a060e1c0-254f-11eb-8c39-0a292b885373",
+      "AmplifyAppId": "d3o14b3ymh2esb"
+    }
+  }
+}
