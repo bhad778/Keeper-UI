@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import Swiper from 'react-native-deck-swiper';
+import { Button } from 'react-native-paper';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import Filters from '../../modals/Filters';
 import Icon from 'react-native-vector-icons/Feather';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Chip } from 'react-native-paper';
 export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      filtersModal: false,
       cards: this.hotGirls,
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
     };
   }
+
   hotGirls = [
     {
       img:
@@ -84,18 +86,46 @@ export default class Example extends Component {
       swipedAllCards: true,
     });
   };
+  swipeRight = (goTo) => {
+    this.props.navigation.navigate(goTo);
+  };
 
   swipeLeft = () => {
     this.swiper.swipeLeft();
   };
-
+  filtersModalOn = (visible) => {
+    this.setState({ filtersModal: visible });
+  };
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.discoverHeader}>
-          <Icon style={styles.inbox} name="inbox" size={20} color="black" />
-          <Text style={styles.discoverText}>Edge</Text>
+        <Filters
+          filtersModal={this.state.filtersModal}
+          filtersModalOn={this.filtersModalOn}
+        />
+        <View style={styles.headerContainer}>
+          <View style={styles.discoverHeader}>
+            <View style={styles.headerNewMatchesButtonContainer}>
+              <Button mode="text" style={styles.newMatchButton} color="black">
+                <Icon name="inbox" size={25} />
+              </Button>
+            </View>
+            <View style={styles.headerTextContainer}>
+              <Text style={styles.headerText}>Edge</Text>
+            </View>
+            <View style={styles.headerFilterButtonContainer}>
+              <Button
+                style={styles.filterButton}
+                mode="text"
+                color="black"
+                onPress={() => this.filtersModalOn(true)}
+              >
+                <Icon name="edit-2" size={25} />
+              </Button>
+            </View>
+          </View>
         </View>
+
         <View style={styles.swiper}>
           <Swiper
             ref={(swiper) => {
@@ -103,7 +133,7 @@ export default class Example extends Component {
             }}
             onSwiped={() => this.onSwiped('general')}
             onSwipedLeft={() => this.onSwiped('left')}
-            onSwipedRight={() => this.onSwiped('right')}
+            onSwipedRight={() => this.swipeRight('Matched')}
             onTapCard={this.swipeLeft}
             cards={this.state.cards}
             cardIndex={this.state.cardIndex}
@@ -165,25 +195,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
-  discoverHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 1,
-    zIndex: 1,
+  headerContainer: {
     position: 'absolute',
+    zIndex: 1,
+    width: '100%',
+    height: '13%',
+    alignItems: 'center',
+  },
+  discoverHeader: {
+    flex: 1,
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'white',
   },
   swiper: { flex: 5 },
-  inbox: {
-    position: 'relative',
-    left: 30,
-    top: 45,
+  headerNewMatchesButtonContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
   },
-  discoverText: {
-    position: 'relative',
+  newMatchButton: { alignItems: 'flex-start' },
+  headerTextContainer: {
+    height: '50%',
+    flex: 2,
+    alignItems: 'center',
+  },
+  headerFilterButtonContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  filterButton: { alignItems: 'flex-end' },
+
+  headerText: {
     color: 'black',
-    left: 155,
-    top: 40,
     fontSize: 25,
   },
 
@@ -191,11 +237,10 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 2,
     borderColor: '#E8E8E8',
-    justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 20,
   },
-  cardScrollView: {},
+
   images: {
     flex: 1,
     borderRadius: 20,
@@ -208,14 +253,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   chipsContainer: {
-    bottom: 10,
     position: 'absolute',
+    left: 8,
+    bottom: 8,
     backgroundColor: 'white',
     borderRadius: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    left: 10,
-    width: 350,
+    width: '95%',
   },
   infoOne: { margin: 10 },
   infoTwo: { margin: 10 },

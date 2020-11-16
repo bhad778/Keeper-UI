@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
-    flexDirection: 'row',
-    width: 600,
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
+    width: '90%',
+    alignItems: 'flex-start',
   },
 
   editModalButtonContainer: {
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   editModalButton: { position: 'relative', left: 7, top: 6 },
-  settingsButton: { position: 'relative', left: 110, top: 60 },
+  settingsButton: {},
   profileSection: { flex: 8, justifyContent: 'flex-start' },
   imageContainer: {
     position: 'relative',

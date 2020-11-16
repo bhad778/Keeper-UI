@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, Button } from 'react-native-paper';
 
 const Matched = ({ navigation }) => {
-  const onPress = () => {
-    navigation.navigate('Root');
+  const onYesPress = async () => {
+    navigation.navigate('Root', { message: true });
+  };
+  const onNoPress = async () => {
+    navigation.navigate('Root', { message: false });
   };
   return (
     <View style={styles.container}>
@@ -29,7 +32,7 @@ const Matched = ({ navigation }) => {
       </View>
       <View style={styles.buttonSection}>
         <Button
-          onPress={() => onPress()}
+          onPress={onYesPress}
           contentStyle={{ width: 200 }}
           color="white"
           dark={false}
@@ -40,6 +43,7 @@ const Matched = ({ navigation }) => {
         </Button>
 
         <Button
+          onPress={onNoPress}
           contentStyle={{ width: 200 }}
           color="white"
           dark={false}

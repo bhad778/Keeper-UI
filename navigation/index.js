@@ -37,11 +37,7 @@ function RootNavigator() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="JobBoard" component={JobBoard} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen
-        name="Messages"
-        component={Messages}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Messages" component={Messages} />
     </Stack.Navigator>
   );
 }

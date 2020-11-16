@@ -57,7 +57,6 @@ const Matches = ({ navigation }) => {
 
   const switchScreen = (img, name) => {
     navigation.navigate('Messages', {
-      screen: 'Messages',
       pic: img,
       title: name,
     });
@@ -67,21 +66,31 @@ const Matches = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.header} />
       <View style={styles.matchesSection}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={styles.scrollViewHeader}>Messages</Text>
-          {matches.map((item) => (
+        <ScrollView
+          contentContainerStyle={{ alignItems: 'center' }}
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.scrollViewHeaderTextContainer}>
+            <Text style={styles.scrollViewHeaderText}>Matches</Text>
+          </View>
+
+          {matches.map((item, i) => (
             <TouchableHighlight
+              key={i}
               style={styles.matchButton}
               underlayColor="#D3D3D3"
               onPress={() => {
                 switchScreen(item.img, item.name);
               }}
             >
-              <View>
+              <View style={styles.avatarImageContainer}>
                 <Avatar.Image
+                  size={40}
                   source={{ uri: item.img }}
                   style={styles.images}
                 />
+
                 <Text style={styles.name}>{item.name}</Text>
               </View>
             </TouchableHighlight>
@@ -105,25 +114,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
   },
+  scrollViewHeaderTextContainer: { alignItems: 'flex-start', width: '85%' },
+  scrollViewHeaderText: { fontSize: 35 },
+  matchesSection: {
+    flex: 8,
+    backgroundColor: 'white',
+  },
+  scrollView: { width: '100%' },
 
-  scrollViewHeader: { fontSize: 35 },
-  matchesSection: { flex: 8, backgroundColor: 'white', alignItems: 'center' },
   matchButton: {
-    justifyContent: 'center',
-    height: 80,
-    width: 350,
+    height: '15%',
+    width: '85%',
     borderBottomColor: '#ccc',
     backgroundColor: 'white',
     borderBottomWidth: 1,
   },
-
-  images: { position: 'relative', top: 20 },
+  avatarImageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: '100%',
+  },
+  images: { marginRight: 20 },
   name: {
-    height: 40,
-    width: 120,
-    position: 'relative',
-    left: 100,
-    bottom: 20,
     fontSize: 20,
   },
 });

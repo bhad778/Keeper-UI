@@ -9,7 +9,8 @@ import Matches from '../screens/matches/Matches';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator() {
+export default function BottomTabNavigator({ route }) {
+  const { message } = route.params;
   const colorScheme = useColorScheme();
   const tintColorLight = '#fb5b5a';
   const tintColorDark = '#fff';
@@ -32,7 +33,7 @@ export default function BottomTabNavigator() {
 
   return (
     <Tab.Navigator
-      initialRouteName="  "
+      initialRouteName={message === true ? '   ' : '  '}
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
         style: { borderTopWidth: 0, height: 75 },

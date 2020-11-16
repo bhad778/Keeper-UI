@@ -43,15 +43,14 @@ const Messages = ({ route, navigation }) => {
           <Icon color="#808080" name="chevron-left" size={30} />
         </TouchableOpacity>
 
-        <View style={styles.imageContainer}>
-          <Avatar.Image
-            size={40}
-            source={{
-              uri: pic,
-            }}
-            style={styles.images}
-          />
-        </View>
+        <Avatar.Image
+          size={30}
+          source={{
+            uri: pic,
+          }}
+          style={styles.images}
+        />
+
         <Text style={styles.titleText}>{title}</Text>
       </View>
       <View style={styles.chatContainer}>
@@ -72,8 +71,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  titleText: { position: 'relative', top: 16, right: 65, fontSize: 20 },
+
   header: {
+    marginTop: 10,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -84,25 +84,6 @@ const styles = StyleSheet.create({
   chatContainer: {
     flex: 9,
   },
-  backButton: {
-    height: 100,
-    width: 100,
-    position: 'relative',
-    left: 10,
-    top: 50,
-  },
-  imageContainer: {
-    height: 43.75,
-    width: 43.75,
-    position: 'relative',
-    right: 65,
-    top: 15,
-    borderRadius: 43.75 / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10,
-    marginLeft: 10,
-  },
 
-  images: {},
+  images: { marginRight: 10 },
 });
