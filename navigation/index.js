@@ -33,8 +33,8 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Matched" component={Matched} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Matched" component={Matched} />
       <Stack.Screen name="JobBoard" component={JobBoard} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="Messages" component={Messages} />

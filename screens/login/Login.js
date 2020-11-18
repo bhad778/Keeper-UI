@@ -9,16 +9,15 @@ import {
 } from 'react-native';
 import { Title } from 'react-native-paper';
 const Login = ({ navigation }) => {
-  const userInfo = { email: 'chadJobShredder@gmail.com', password: 'password' };
-  const [login, setLogin] = useState({ email: '', password: '' });
+  const userInfo = { email: 'ChadJobShredder@gmail.com', password: 'password' };
+  const [email, setEmail] = useState({ email: '' });
+  const [password, setPassword] = useState({ password: '' });
+
   const onPress = async () => {
-    if (
-      userInfo.email === login.email &&
-      userInfo.password === login.password
-    ) {
-      await AsyncStorage.setItem('isLoggedIn', '1');
+    if (userInfo.email === email && userInfo.password === password) {
+      /*await AsyncStorage.setItem('isLoggedIn', '1');*/
+      navigation.navigate('Root', { message: false });
     }
-    navigation.navigate('Root');
   };
   return (
     <View style={styles.container}>
@@ -28,7 +27,7 @@ const Login = ({ navigation }) => {
           style={styles.inputText}
           placeholder="Email..."
           placeholderTextColor="#003f5c"
-          onChangeText={(email) => this.setLogin(email)}
+          onChangeText={(email) => setEmail(email)}
         />
       </View>
       <View style={styles.inputView}>
@@ -37,7 +36,7 @@ const Login = ({ navigation }) => {
           style={styles.inputText}
           placeholder="Password..."
           placeholderTextColor="#003f5c"
-          onChangeText={(password) => setLogin(password)}
+          onChangeText={(password) => setPassword(password)}
         />
       </View>
       <TouchableOpacity>
