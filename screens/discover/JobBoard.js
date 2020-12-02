@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
+import AddJob from '../../modals/AddJob';
 
 const JobBoard = ({ navigation }) => {
-  const [buttonColor, setButtonColor] = useState('black');
-
   const [activeButtons, setActiveButtons] = useState([]);
 
-  const [typesOfJobs, setTypesOfJobs] = useState({
+  const [addJobModal, setAddJobModal] = useState(false);
+  const [typesOfJobs] = useState({
     jobs: [
       'carpenter',
       'teacher',
@@ -21,39 +21,26 @@ const JobBoard = ({ navigation }) => {
     ],
   });
   const onPress = (i) => {
-    if (activeButtons.includes(i)) {
-      setActiveButtons(activeButtons.filter((item) => item != i));
-    } else {
-      setActiveButtons((activeButtons) => [...activeButtons, i]);
-    }
-    console.log(activeButtons);
-  };
-
-  const switchScreen = () => {
-    navigation.navigate('Root');
+    setActiveButtons((activeButtons) => [...activeButtons, i]);
+    navigation.navigate('Root', { message: false });
   };
 
   return (
     <View style={styles.container}>
+      <AddJob addJobModal={addJobModal} setAddJobModal={setActiveButtons} />
       <View style={styles.header}>
-        <Button
-          color="black"
-          style={styles.headerButton}
-          onPress={switchScreen}
-          mode="text"
-        >
-          <Text>Done</Text>
-        </Button>
+        <Text style={styles.headerText}>Job Board</Text>
       </View>
       <View style={styles.jobOptionsSection}>
         <ScrollView>
+          <Button onPress={() => setAddJobModal(true)}>Add Job</Button>
           <View style={styles.flexDirectionRow}>
             {typesOfJobs.jobs.map((item, i) => (
               <Button
                 style={styles.jobButtons}
                 key={i}
                 onPress={() => onPress(i)}
-                color={activeButtons.includes(i) ? buttonColor : 'white'}
+                color={'white'}
                 mode="contained"
               >
                 <Text>{item}</Text>
@@ -68,7 +55,12 @@ const JobBoard = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'white' },
-  header: { flex: 1 },
+  header: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: { fontSize: 20 },
   jobOptionsSection: { flex: 6 },
   flexDirectionRow: {
     flexDirection: 'row',
