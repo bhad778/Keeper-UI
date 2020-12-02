@@ -1,3 +1,4 @@
+import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import {
   StyleSheet,
@@ -7,17 +8,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Title } from 'react-native-paper';
-const Login = ({ navigation }) => {
+
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const goToHomeScreen = () => {
-    navigation.navigate('Root', { message: false });
-  };
-
-  const signUp = () => {
-    navigation.navigate('SignUp');
-  };
+  async function addUser() {
+    try {
+      const { user } = await Auth.signUp({
+        username: email,
+        password: password,
+      });
+      console.log(user);
+    } catch (error) {
+      console.log('error signing up:', error);
+    }
+  }
   return (
     <View style={styles.container}>
       <Title style={styles.title}>Edge</Title>
@@ -38,15 +43,22 @@ const Login = ({ navigation }) => {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-      <TouchableOpacity>
-        <Text style={styles.forgot}>Forgot Password?</Text>
+      <TouchableOpacity onPress={addUser} style={styles.signUpBtn}>
+        <Text style={styles.loginText}>Sign up</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={goToHomeScreen} style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={signUp}>
-        <Text style={styles.loginText}>Signup</Text>
-      </TouchableOpacity>
+      {3 < 4 && (
+        <View>
+          <Text>enter verification code</Text>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.inputText}
+              placeholder="Email..."
+              placeholderTextColor="#003f5c"
+              onChangeText={(email) => setEmail(email)}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -88,5 +100,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-
-export default Login;
+export default SignUp;

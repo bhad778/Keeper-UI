@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "jobfindingapp7ae72ae4": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

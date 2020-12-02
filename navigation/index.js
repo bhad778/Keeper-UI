@@ -13,6 +13,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Messages from '../screens/matches/Messages';
 import Matched from '../screens/matches/Matched';
 import JobBoard from '../screens/discover/JobBoard';
+import SignUp from '../screens/login/SignUp';
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ ColorSchemeName }) {
@@ -33,9 +34,10 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Matched" component={Matched} />
       <Stack.Screen name="JobBoard" component={JobBoard} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Matched" component={Matched} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="Messages" component={Messages} />
     </Stack.Navigator>
