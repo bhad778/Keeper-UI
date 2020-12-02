@@ -15,6 +15,7 @@ import Matched from "../screens/matches/Matched";
 import JobBoard from "../screens/employer/jobBoard/JobBoard";
 import SignUp from "../screens/login/SignUp";
 import AddJob from "../screens/employer/addJob/AddJob";
+import EmployeeWhoLikedJob from "../screens/employer/EmployeeWhoLikedJob/EmployeeWhoLikedJob";
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ ColorSchemeName }) {
@@ -50,6 +51,10 @@ function RootNavigator() {
 
       <Stack.Screen name="Messages" component={Messages} />
       <Stack.Screen name="AddJob" component={AddJob} />
+      <Stack.Screen
+        name="EmployeeWhoLikedJob"
+        component={EmployeeWhoLikedJob}
+      />
     </Stack.Navigator>
   );
 }

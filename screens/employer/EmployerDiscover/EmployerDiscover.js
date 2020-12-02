@@ -102,12 +102,19 @@ export default class Example extends Component {
         <View style={styles.headerContainer}>
           <View style={styles.discoverHeader}>
             <View style={styles.headerNewMatchesButtonContainer}>
-              <Button mode="text" style={styles.newMatchButton} color="black">
+              <Button
+                mode="text"
+                style={styles.newMatchButton}
+                onPress={() => {
+                  this.props.navigation.navigate("EmployeeWhoLikedJob");
+                }}
+                color="black"
+              >
                 <Icon name="inbox" size={25} />
               </Button>
             </View>
             <View style={styles.headerTextContainer}>
-              <Text style={styles.headerText}>Edge</Text>
+              <Text style={styles.headerText}>Edg</Text>
             </View>
             <View style={styles.headerFilterButtonContainer}>
               <Button

@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import { Feather } from "@expo/vector-icons";
 import { useColorScheme, StyleSheet } from "react-native";
-import EmployeeDiscover from "../screens/EmployeeDiscover/EmployeeDiscover";
+import EmployeeDiscover from "../screens/employee/EmployeeDiscover/EmployeeDiscover";
 import Profile from "../screens/profile/Profile";
 
 import Matches from "../screens/matches/Matches";

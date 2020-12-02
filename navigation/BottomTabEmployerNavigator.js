@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import { Feather } from "@expo/vector-icons";
 import { useColorScheme, StyleSheet } from "react-native";
-import EmployersDiscover from "../screens/EmployersDiscover/EmployersDiscover";
+import EmployerDiscover from "../screens/employer/EmployerDiscover/EmployerDiscover";
 import Profile from "../screens/profile/Profile";
 
 import Matches from "../screens/matches/Matches";
@@ -50,7 +50,7 @@ export default function BottomTabNavigator({ route }) {
       />
       <Tab.Screen
         name="  "
-        component={EmployersDiscover}
+        component={EmployerDiscover}
         options={{
           tabBarIcon: ({ color }) => (
             <Feather
