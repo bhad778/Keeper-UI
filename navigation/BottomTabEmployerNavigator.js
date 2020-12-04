@@ -33,7 +33,7 @@ export default function BottomTabNavigator({ route }) {
 
   return (
     <Tab.Navigator
-      initialRouteName={message === true ? "   " : "  "}
+      initialRouteName={"  "}
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
         style: { borderTopWidth: 0, height: 75 },

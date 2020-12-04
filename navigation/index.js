@@ -11,11 +11,12 @@ import BottomTabEmployeeNavigator from "./BottomTabEmployeeNavigator";
 import BottomTabEmployerNavigator from "./BottomTabEmployerNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Messages from "../screens/matches/Messages";
+import EmployeeMatched from "../screens/matches/Matched";
 import Matched from "../screens/matches/Matched";
 import JobBoard from "../screens/employer/jobBoard/JobBoard";
 import SignUp from "../screens/login/SignUp";
 import AddJob from "../screens/employer/addJob/AddJob";
-import EmployeeWhoLikedJob from "../screens/employer/EmployeeWhoLikedJob/EmployeeWhoLikedJob";
+import EmployeesThatLikedJob from "../screens/employer/EmployeesThatLikedJob/EmployeesThatLikedJob";
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ ColorSchemeName }) {
@@ -39,7 +40,6 @@ function RootNavigator() {
       <Stack.Screen name="JobBoard" component={JobBoard} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="Matched" component={Matched} />
       <Stack.Screen
         name="RootEmployee"
         component={BottomTabEmployeeNavigator}
@@ -48,12 +48,12 @@ function RootNavigator() {
         name="RootEmployer"
         component={BottomTabEmployerNavigator}
       />
-
+      <Stack.Screen name="Matched" component={Matched} />
       <Stack.Screen name="Messages" component={Messages} />
       <Stack.Screen name="AddJob" component={AddJob} />
       <Stack.Screen
-        name="EmployeeWhoLikedJob"
-        component={EmployeeWhoLikedJob}
+        name="EmployeesThatLikedJob"
+        component={EmployeesThatLikedJob}
       />
     </Stack.Navigator>
   );
