@@ -106,7 +106,7 @@ export default class Example extends Component {
                 mode="text"
                 style={styles.newMatchButton}
                 onPress={() => {
-                  this.props.navigation.navigate("EmployeeWhoLikedJob");
+                  this.props.navigation.navigate("EmployeesThatLikedJob");
                 }}
                 color="black"
               >
@@ -114,7 +114,7 @@ export default class Example extends Component {
               </Button>
             </View>
             <View style={styles.headerTextContainer}>
-              <Text style={styles.headerText}>Edg</Text>
+              <Text style={styles.headerText}>Edge</Text>
             </View>
             <View style={styles.headerFilterButtonContainer}>
               <Button
@@ -137,7 +137,6 @@ export default class Example extends Component {
             onSwiped={() => this.onSwiped("general")}
             onSwipedLeft={() => this.onSwiped("left")}
             onSwipedRight={() => this.swipeRight("Matched")}
-            onTapCard={this.swipeLeft}
             cards={this.state.cards}
             cardIndex={this.state.cardIndex}
             cardVerticalMargin={80}

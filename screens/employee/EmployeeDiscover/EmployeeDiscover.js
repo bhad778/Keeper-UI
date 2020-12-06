@@ -3,12 +3,15 @@ import Swiper from "react-native-deck-swiper";
 import { Button } from "react-native-paper";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Filters from "../../../modals/Filters";
+import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Icon from "react-native-vector-icons/Feather";
+import { ScrollView } from "react-native-gesture-handler";
 export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filtersModal: false,
+      employeeInfoModal: false,
       cards: this.hotGirls,
       swipedAllCards: false,
       swipeDirection: "",
@@ -19,7 +22,7 @@ export default class Example extends Component {
   hotGirls = [
     {
       img:
-        "https://www.rollingstone.com/wp-content/uploads/2011/03/britneyspears.jpg",
+        "https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*",
       name: "Britney",
     },
     {
@@ -62,17 +65,6 @@ export default class Example extends Component {
     return (
       <View style={styles.card}>
         <Image style={styles.images} source={{ uri: card.img }} />
-        <View style={styles.chipsContainer}>
-          <Text style={styles.profileName}>{card.name}</Text>
-          <Text style={styles.infoOne}>
-            Somteimes I think about hoofing, but then again I could just
-            doof...or poof.
-          </Text>
-          <Text style={styles.infoTwo}>I said "hey"...no response.</Text>
-          <Text style={styles.infoThree}>
-            I just want you to sit on my lap, not asking for much.
-          </Text>
-        </View>
       </View>
     );
   };
@@ -96,6 +88,9 @@ export default class Example extends Component {
   filtersModalOn = (visible) => {
     this.setState({ filtersModal: visible });
   };
+  employeeInfoModalOn = (visible) => {
+    this.setState({ employeeInfoModal: visible });
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -103,89 +98,93 @@ export default class Example extends Component {
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
         />
+        <EmployeeInfoModal
+          employeeInfoModal={this.state.employeeInfoModal}
+          employeeInfoModalOn={this.employeeInfoModalOn}
+        />
         <View style={styles.headerContainer}>
-          <View style={styles.discoverHeader}>
-            <View style={styles.headerNewMatchesButtonContainer}>
-              <Button mode="text" style={styles.newMatchButton} color="black">
-                <Icon name="inbox" size={25} />
-              </Button>
-            </View>
-            <View style={styles.headerTextContainer}>
-              <Text style={styles.headerText}>Edge</Text>
-            </View>
-            <View style={styles.headerFilterButtonContainer}>
-              <Button
-                style={styles.filterButton}
-                mode="text"
-                color="black"
-                onPress={() => this.filtersModalOn(true)}
-              >
-                <Icon name="edit-2" size={25} />
-              </Button>
-            </View>
+          <View style={styles.peopleWhoLikeYou}>
+            <Button mode="text" style={styles.newMatchButton} color="black">
+              <Icon name="inbox" size={25} />
+            </Button>
+          </View>
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>Leen</Text>
+          </View>
+          <View style={styles.headerFilterButtonContainer}>
+            <Button
+              style={styles.filterButton}
+              mode="text"
+              color="black"
+              onPress={() => this.filtersModalOn(true)}
+            >
+              <Icon name="edit-2" size={25} />
+            </Button>
           </View>
         </View>
 
-        <View style={styles.swiper}>
-          <Swiper
-            ref={(swiper) => {
-              this.swiper = swiper;
-            }}
-            onSwiped={() => this.onSwiped("general")}
-            onSwipedLeft={() => this.onSwiped("left")}
-            onSwipedRight={() => this.swipeRight("Matched")}
-            onTapCard={this.swipeLeft}
-            cards={this.state.cards}
-            cardIndex={this.state.cardIndex}
-            cardVerticalMargin={80}
-            renderCard={this.renderCard}
-            onSwipedAll={this.onSwipedAllCards}
-            stackSize={3}
-            stackSeparation={0}
-            backgroundColor="white"
-            overlayLabels={{
-              left: {
-                title: "NOPE",
-                style: {
-                  label: {
-                    backgroundColor: "black",
-                    borderColor: "black",
-                    color: "white",
-                    borderWidth: 1,
-                  },
-                  wrapper: {
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                    justifyContent: "flex-start",
-                    marginTop: 30,
-                    marginLeft: -30,
-                  },
+        <Swiper
+          ref={(swiper) => {
+            this.swiper = swiper;
+          }}
+          onSwipedLeft={() => this.onSwiped("left")}
+          onTapCardDeadZone={200}
+          onSwipedRight={() => this.swipeRight("Matched")}
+          cards={this.state.cards}
+          cardIndex={this.state.cardIndex}
+          cardVerticalMargin={81}
+          overlayOpacityHorizontalThreshold={0.5}
+          renderCard={this.renderCard}
+          onSwipedAll={this.onSwipedAllCards}
+          stackSize={3}
+          overlayOpacityHorizontalThreshold={8}
+          onTapCard={() => this.employeeInfoModalOn(true)}
+          verticalSwipe={false}
+          stackSeparation={0}
+          onTapCardDeadZone
+          backgroundColor="white"
+          overlayLabels={{
+            left: {
+              title: "NOPE",
+              style: {
+                label: {
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
+                  borderWidth: 1,
+                },
+                wrapper: {
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  justifyContent: "flex-start",
+                  marginTop: 30,
+                  marginLeft: -30,
                 },
               },
-              right: {
-                title: "LIKE",
-                style: {
-                  label: {
-                    backgroundColor: "black",
-                    borderColor: "black",
-                    color: "white",
-                    borderWidth: 1,
-                  },
-                  wrapper: {
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    justifyContent: "flex-start",
-                    marginTop: 30,
-                    marginLeft: 30,
-                  },
+            },
+            right: {
+              title: "LIKE",
+              style: {
+                label: {
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
+                  borderWidth: 1,
+                },
+                wrapper: {
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  marginTop: 30,
+                  marginLeft: 30,
                 },
               },
-            }}
-            animateOverlayLabelsOpacity
-            animateCardOpacity
-            swipeBackCard
-          ></Swiper>
-        </View>
+            },
+          }}
+          animateOverlayLabelsOpacity
+          animateCardOpacity={false}
+          swipeBackCard
+        ></Swiper>
       </View>
     );
   }
@@ -196,73 +195,51 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    position: "absolute",
+    height: "12%",
     zIndex: 1,
-    width: "100%",
-    height: "13%",
-    alignItems: "center",
-  },
-  discoverHeader: {
-    flex: 1,
-    width: "90%",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "flex-end",
-    backgroundColor: "white",
   },
-  swiper: { flex: 5 },
-  headerNewMatchesButtonContainer: {
-    flex: 1,
+  peopleWhoLikeYou: {
+    position: "relative",
+    bottom: 2,
+    width: "32%",
     alignItems: "flex-start",
     justifyContent: "flex-end",
   },
-  newMatchButton: { alignItems: "flex-start" },
+
   headerTextContainer: {
-    height: "50%",
-    flex: 2,
+    position: "relative",
+    bottom: 7,
+    width: "32%",
     alignItems: "center",
+    justifyContent: "flex-end",
   },
   headerFilterButtonContainer: {
-    flex: 1,
+    position: "relative",
+    bottom: 2,
+    width: "32%",
+    justifyContent: "flex-end",
     alignItems: "flex-end",
   },
-  filterButton: { alignItems: "flex-end" },
+  filterButton: {},
 
   headerText: {
     color: "black",
-    fontSize: 25,
+    fontSize: 28,
   },
-
   card: {
-    flex: 1,
+    zIndex: 444,
+    flex: 2,
     borderWidth: 2,
     borderColor: "#E8E8E8",
     backgroundColor: "white",
     borderRadius: 20,
   },
-
   images: {
     flex: 1,
+    height: 401,
+    width: "100%",
     borderRadius: 20,
   },
-  profileName: {
-    position: "relative",
-    left: 5,
-    margin: 10,
-    color: "black",
-    fontSize: 40,
-  },
-  chipsContainer: {
-    position: "absolute",
-    left: 8,
-    bottom: 8,
-    backgroundColor: "white",
-    borderRadius: 20,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    width: "95%",
-  },
-  infoOne: { margin: 10 },
-  infoTwo: { margin: 10 },
-  infoThree: { margin: 10 },
 });

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import { GiftedChat } from 'react-native-gifted-chat';
-import { Avatar } from 'react-native-paper';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState } from "react";
+import { StyleSheet, View, Image, Text } from "react-native";
+import Icon from "react-native-vector-icons/Feather";
+import { GiftedChat } from "react-native-gifted-chat";
+import { Avatar } from "react-native-paper";
+import { TouchableOpacity } from "react-native-gesture-handler";
 const Messages = ({ route, navigation }) => {
   const { pic, title } = route.params;
   const onPress = () => {
@@ -16,19 +16,19 @@ const Messages = ({ route, navigation }) => {
     // example of system message
     {
       _id: 0,
-      text: 'New room created.',
+      text: "New room created.",
       createdAt: new Date().getTime(),
       system: true,
     },
     // example of chat message
     {
       _id: 1,
-      text: 'Henlo!',
+      text: "Henlo!",
       createdAt: new Date().getTime(),
       user: {
         _id: 2,
-        name: 'Test User',
-        avatar: ' ',
+        name: "Test User",
+        avatar: " ",
       },
     },
   ]);
@@ -42,16 +42,17 @@ const Messages = ({ route, navigation }) => {
         <TouchableOpacity style={styles.backButton} onPress={onPress}>
           <Icon color="#808080" name="chevron-left" size={30} />
         </TouchableOpacity>
-
-        <Avatar.Image
-          size={30}
-          source={{
-            uri: pic,
-          }}
-          style={styles.images}
-        />
-
-        <Text style={styles.titleText}>{title}</Text>
+        <View style={styles.avatarImage}>
+          <Avatar.Image
+            size={40}
+            source={{
+              uri: pic,
+            }}
+          />
+        </View>
+        <View>
+          <Text style={styles.titleText}>{title}</Text>
+        </View>
       </View>
       <View style={styles.chatContainer}>
         <GiftedChat
@@ -69,21 +70,22 @@ export default Messages;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
 
   header: {
     marginTop: 10,
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     borderBottomWidth: 0.5,
-    borderBottomColor: '#F0F0F0',
+    borderBottomColor: "#F0F0F0",
   },
   chatContainer: {
     flex: 9,
   },
 
-  images: { marginRight: 10 },
+  avatarImage: { width: "14%" },
+  backButton: { marginLeft: 10, marginRight: 10 },
 });
