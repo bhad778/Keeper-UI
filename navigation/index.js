@@ -36,20 +36,30 @@ const Stack = createStackNavigator();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="RootEmployee"
+        component={BottomTabEmployeeNavigator}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="JobBoard" component={JobBoard} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen
-        name="RootEmployee"
-        component={BottomTabEmployeeNavigator}
-      />
-      <Stack.Screen
         name="RootEmployer"
         component={BottomTabEmployerNavigator}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="Matched" component={Matched} />
-      <Stack.Screen name="Messages" component={Messages} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Matched"
+        component={Matched}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Messages"
+        component={Messages}
+      />
       <Stack.Screen name="AddJob" component={AddJob} />
       <Stack.Screen
         name="EmployeesThatLikedJob"
