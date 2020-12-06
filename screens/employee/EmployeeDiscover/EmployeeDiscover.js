@@ -137,6 +137,7 @@ export default class Example extends Component {
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}
           stackSize={3}
+          overlayOpacityHorizontalThreshold={8}
           onTapCard={() => this.employeeInfoModalOn(true)}
           verticalSwipe={false}
           stackSeparation={0}
@@ -181,7 +182,7 @@ export default class Example extends Component {
             },
           }}
           animateOverlayLabelsOpacity
-          animateCardOpacity
+          animateCardOpacity={false}
           swipeBackCard
         ></Swiper>
       </View>
@@ -194,24 +195,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    height: "10%",
+    height: "12%",
     zIndex: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
   peopleWhoLikeYou: {
-    width: "30%",
+    position: "relative",
+    bottom: 2,
+    width: "32%",
     alignItems: "flex-start",
     justifyContent: "flex-end",
   },
 
   headerTextContainer: {
-    width: "30%",
+    position: "relative",
+    bottom: 7,
+    width: "32%",
     alignItems: "center",
     justifyContent: "flex-end",
   },
   headerFilterButtonContainer: {
-    width: "30%",
+    position: "relative",
+    bottom: 2,
+    width: "32%",
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
@@ -219,9 +226,10 @@ const styles = StyleSheet.create({
 
   headerText: {
     color: "black",
-    fontSize: 25,
+    fontSize: 28,
   },
   card: {
+    zIndex: 444,
     flex: 2,
     borderWidth: 2,
     borderColor: "#E8E8E8",
