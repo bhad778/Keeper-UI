@@ -1,6 +1,6 @@
 {
   "auth": {
-    "pareae541826": {
+    "pare4a9fdec1": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
