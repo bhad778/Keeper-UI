@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Title } from 'react-native-paper';
-import { Keyboard } from 'react-native';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
