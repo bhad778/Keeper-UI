@@ -22,7 +22,7 @@ const SignUp = () => {
           phone_number: '+17708802074',
           name: 'Bryan',
           family_name: 'Hadaway',
-          'custom:custom:accountType': 'Cookie Dough',
+          'custom:custom:accountType': 'employer',
           'custom:custom:companyName': 'Marietta Pizza Co.',
         },
       });
