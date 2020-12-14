@@ -8,21 +8,31 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Title } from 'react-native-paper';
+import { Keyboard } from 'react-native';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  async function addUser() {
+
+  const signUp = async () => {
     try {
       const { user } = await Auth.signUp({
-        username: email,
-        password: password,
+        username: 'bhad778@gmail.com',
+        password: 'Ululavit#8',
+        attributes: {
+          phone_number: '+17708802074',
+          name: 'Bryan',
+          family_name: 'Hadaway',
+          'custom:custom:accountType': 'Cookie Dough',
+          'custom:custom:companyName': 'Marietta Pizza Co.',
+        },
       });
       console.log(user);
     } catch (error) {
       console.log('error signing up:', error);
     }
-  }
+  };
+
   return (
     <View style={styles.container}>
       <Title style={styles.title}>Edge</Title>
@@ -43,7 +53,7 @@ const SignUp = () => {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-      <TouchableOpacity onPress={addUser} style={styles.signUpBtn}>
+      <TouchableOpacity onPress={signUp} style={styles.signUpBtn}>
         <Text style={styles.loginText}>Sign up</Text>
       </TouchableOpacity>
       {3 < 4 && (

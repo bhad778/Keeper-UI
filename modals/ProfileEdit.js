@@ -8,7 +8,6 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button, Avatar } from 'react-native-paper';
 import ModalButtons from '../components/ModalButtons';
 const ProfileEdit = ({
