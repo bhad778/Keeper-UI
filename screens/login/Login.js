@@ -7,9 +7,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Title } from 'react-native-paper';
+import { Auth } from 'aws-amplify';
+
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // TODO sign in works now just need to take token and use it
+  // also need to navigate to correct page
+  const signIn = async () => {
+    try {
+      let signInResponse = await Auth.signIn(email, password);
+    } catch (error) {
+      console.log('error signing in', error);
+    }
+  };
 
   const goToHomeScreen = () => {
     navigation.navigate('Root', { message: false });
@@ -18,6 +30,7 @@ const Login = ({ navigation }) => {
   const signUp = () => {
     navigation.navigate('SignUp');
   };
+
   return (
     <View style={styles.container}>
       <Title style={styles.title}>Edge</Title>
@@ -41,7 +54,7 @@ const Login = ({ navigation }) => {
       <TouchableOpacity>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={goToHomeScreen} style={styles.loginBtn}>
+      <TouchableOpacity onPress={signIn} style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={signUp}>
