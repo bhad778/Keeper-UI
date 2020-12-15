@@ -37,13 +37,13 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="JobBoard" component={JobBoard} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="RootEmployee"
         component={BottomTabEmployeeNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="JobBoard" component={JobBoard} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen
         name="RootEmployer"
