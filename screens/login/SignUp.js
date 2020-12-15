@@ -10,12 +10,14 @@ import {
 import { Title } from 'react-native-paper';
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  let [user, setUser] = useState();
+  let [email, setEmail] = useState('bhad778@gmail.com');
+  let [password, setPassword] = useState('Ululavit#8');
+  let [confirmationCode, setConfirmationCode] = useState();
 
   const signUp = async () => {
     try {
-      const { user } = await Auth.signUp({
+      let signUpResponse = await Auth.signUp({
         username: 'bhad778@gmail.com',
         password: 'Ululavit#8',
         attributes: {
@@ -26,9 +28,17 @@ const SignUp = () => {
           'custom:custom:companyName': 'Marietta Pizza Co.',
         },
       });
-      console.log(user);
+      setUser(signUpResponse.user);
     } catch (error) {
       console.log('error signing up:', error);
+    }
+  };
+
+  const confirmSignUp = async () => {
+    try {
+      await Auth.confirmSignUp(email, confirmationCode);
+    } catch (error) {
+      console.log('error confirming sign up', error);
     }
   };
 
@@ -55,7 +65,7 @@ const SignUp = () => {
       <TouchableOpacity onPress={signUp} style={styles.signUpBtn}>
         <Text style={styles.loginText}>Sign up</Text>
       </TouchableOpacity>
-      {3 < 4 && (
+      {user && (
         <View>
           <Text>enter verification code</Text>
           <View style={styles.inputView}>
@@ -63,9 +73,12 @@ const SignUp = () => {
               style={styles.inputText}
               placeholder="Email..."
               placeholderTextColor="#003f5c"
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={(email) => setConfirmationCode(email)}
             />
           </View>
+          <TouchableOpacity onPress={confirmSignUp} style={styles.signUpBtn}>
+            <Text style={styles.loginText}>Confirm sign up</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
