@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  Modal,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import { Button } from 'react-native-paper';
-import ProfileViewImages from '../components/ProfileViewImages';
+import React from "react";
+import { StyleSheet, View, Modal, ScrollView } from "react-native";
+import { Button } from "react-native-paper";
+import ProfileViewImages from "../components/ProfileViewImages";
 const ProfileView = ({
   profileViewModalVisible,
   setProfileViewModalVisible,
@@ -44,12 +36,12 @@ const ProfileView = ({
 };
 
 const styles = StyleSheet.create({
-  profileEditContainer: { flex: 1, backgroundColor: 'white' },
+  profileEditContainer: { flex: 1, backgroundColor: "white" },
 
   header: { flex: 1 },
   profileSection: { flex: 8 },
 
-  modalExitButton: { position: 'relative', top: 35 },
+  modalExitButton: { position: "relative", top: 35 },
 });
 
 export default ProfileView;

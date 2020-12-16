@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-native-paper";
 import { View, StyleSheet, Alert } from "react-native";
 // import MultiSlider from '@ptomasroos/react-native-multi-slider';

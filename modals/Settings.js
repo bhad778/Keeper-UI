@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  Modal,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import { Button } from 'react-native-paper';
-import ModalButtons from '../components/ModalButtons';
+import React from "react";
+import { StyleSheet, Text, View, Modal, ScrollView } from "react-native";
+import { Button } from "react-native-paper";
+import ModalButtons from "../components/ModalButtons";
 const Settings = ({ settingsModalVisible, setSettingsModalVisible }) => {
   return (
     <Modal visible={settingsModalVisible} animationType="slide">
@@ -47,23 +39,23 @@ const Settings = ({ settingsModalVisible, setSettingsModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
-  container: { backgroundColor: 'white', flex: 1 },
+  container: { backgroundColor: "white", flex: 1 },
   modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
     flex: 1,
-    color: 'white',
+    color: "white",
     borderBottomWidth: 0.5,
-    borderBottomColor: '#F0F0F0',
+    borderBottomColor: "#F0F0F0",
   },
   modalExitButton: {
-    position: 'relative',
+    position: "relative",
     top: 20,
   },
 
-  modalBody: { flex: 8, backgroundColor: '#F8F8F8' },
-  modalHeaderTextSettings: { fontSize: 18, position: 'relative', top: 20 },
+  modalBody: { flex: 8, backgroundColor: "#F8F8F8" },
+  modalHeaderTextSettings: { fontSize: 18, position: "relative", top: 20 },
 });
 
 export default Settings;

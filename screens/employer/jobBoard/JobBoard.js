@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Button } from "react-native-paper";
 
 const JobBoard = ({ navigation }) => {
-  const [activeButtons, setActiveButtons] = useState([]);
-
   const [typesOfJobs] = useState({
     jobs: [
       "carpenter",
@@ -18,8 +16,7 @@ const JobBoard = ({ navigation }) => {
       "cheifffff",
     ],
   });
-  const goToFutureEmployees = (i) => {
-    setActiveButtons((activeButtons) => [...activeButtons, i]);
+  const goToFutureEmployees = () => {
     navigation.navigate("RootEmployer", { message: false });
   };
   const goToAddJobScreen = () => {

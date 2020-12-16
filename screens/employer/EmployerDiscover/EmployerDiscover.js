@@ -4,6 +4,7 @@ import { Button } from "react-native-paper";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Filters from "../../../modals/Filters";
 import Icon from "react-native-vector-icons/Feather";
+
 export default class Example extends Component {
   constructor(props) {
     super(props);

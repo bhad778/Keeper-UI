@@ -9,9 +9,9 @@ import {
 
 import Icon from "react-native-vector-icons/Feather";
 import ProfileView from "../../../modals/ProfileView";
+
 const EmployeesThatLikedJob = ({ navigation }) => {
   const [profileViewModalVisible, setProfileViewModalVisible] = useState(false);
-  const [images, setImages] = useState([]);
   const [peopleWhoLikedJob] = useState({
     people: [
       "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
@@ -25,8 +25,7 @@ const EmployeesThatLikedJob = ({ navigation }) => {
   const onPress = () => {
     navigation.goBack();
   };
-  const bringUpEmployeeProfile = (i) => {
-    setImages((images) => [...images, i]);
+  const bringUpEmployeeProfile = () => {
     setProfileViewModalVisible(true);
   };
   return (
@@ -44,7 +43,10 @@ const EmployeesThatLikedJob = ({ navigation }) => {
         <ScrollView style={styles.peopleWhoLikedYou}>
           <View style={styles.imagesContainer}>
             {peopleWhoLikedJob.people.map((item, i) => (
-              <TouchableOpacity onPress={() => bringUpEmployeeProfile(i)}>
+              <TouchableOpacity
+                key={i}
+                onPress={() => bringUpEmployeeProfile(i)}
+              >
                 <Image style={styles.images} source={{ uri: item }} />
               </TouchableOpacity>
             ))}

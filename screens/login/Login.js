@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-} from 'react-native';
-import { Title } from 'react-native-paper';
-import { Auth } from 'aws-amplify';
+} from "react-native";
+import { Title } from "react-native-paper";
+import { Auth } from "aws-amplify";
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // TODO sign in works now just need to take token and use it
   // also need to navigate to correct page
@@ -23,16 +23,16 @@ const Login = ({ navigation }) => {
       let signInResponse = await Auth.signIn(email, password);
       console.log(signInResponse);
     } catch (error) {
-      console.log('error signing in', error);
+      console.log("error signing in", error);
     }
   };
 
-  const goToHomeScreen = () => {
-    navigation.navigate('Root', { message: false });
-  };
+  // const goToHomeScreen = () => {
+  //   navigation.navigate('Root', { message: false });
+  // };
 
   const signUp = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate("SignUp");
   };
 
   return (
@@ -71,36 +71,36 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  title: { position: 'relative', bottom: 60, fontSize: 30 },
+  title: { position: "relative", bottom: 60, fontSize: 30 },
   inputView: {
-    width: '80%',
-    backgroundColor: '#ccc',
+    width: "80%",
+    backgroundColor: "#ccc",
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 20,
     borderWidth: 1,
   },
   inputText: {
     height: 50,
-    color: 'white',
+    color: "white",
   },
   forgot: {
-    color: 'white',
+    color: "white",
     fontSize: 11,
   },
   loginBtn: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
+    width: "80%",
+    backgroundColor: "#fb5b5a",
     borderRadius: 25,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 40,
     marginBottom: 10,
   },

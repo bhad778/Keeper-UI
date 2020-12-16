@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  Modal,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import { Button, Avatar } from 'react-native-paper';
-import ModalButtons from '../components/ModalButtons';
+import React from "react";
+import { StyleSheet, View, Modal, ScrollView } from "react-native";
+import { Button, Avatar } from "react-native-paper";
+import ModalButtons from "../components/ModalButtons";
 const ProfileEdit = ({
   profileEditModalVisible,
   setProfileEditModalVisible,
@@ -36,7 +28,7 @@ const ProfileEdit = ({
                 <Avatar.Image
                   source={{
                     uri:
-                      'https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg',
+                      "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
                   }}
                   style={styles.images}
                 />
@@ -50,21 +42,21 @@ const ProfileEdit = ({
   );
 };
 const styles = StyleSheet.create({
-  profileEditContainer: { backgroundColor: 'white', flex: 1 },
-  header: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  buttonText: { color: 'black', fontSize: 20 },
+  profileEditContainer: { backgroundColor: "white", flex: 1 },
+  header: { flex: 1, justifyContent: "center", alignItems: "center" },
+  buttonText: { color: "black", fontSize: 20 },
 
-  modalExitButton: { position: 'relative', top: 20 },
+  modalExitButton: { position: "relative", top: 20 },
   editSection: { flex: 9 },
-  profilePictures: { flexDirection: 'row', justifyContent: 'center' },
+  profilePictures: { flexDirection: "row", justifyContent: "center" },
   imageContainer: {
     height: 87.5,
     width: 87.5,
-    position: 'relative',
+    position: "relative",
     borderRadius: 87.5 / 2,
 
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10,
     marginLeft: 10,
   },

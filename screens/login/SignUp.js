@@ -1,36 +1,36 @@
-import { Auth } from 'aws-amplify';
-import React, { useState } from 'react';
+import { Auth } from "aws-amplify";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-} from 'react-native';
-import { Title } from 'react-native-paper';
+} from "react-native";
+import { Title } from "react-native-paper";
 
 const SignUp = () => {
   let [user, setUser] = useState();
-  let [email, setEmail] = useState('bhad778@gmail.com');
-  let [password, setPassword] = useState('Ululavit#8');
+  let [email, setEmail] = useState("bhad778@gmail.com");
+  let [, setPassword] = useState("Ululavit#8");
   let [confirmationCode, setConfirmationCode] = useState();
 
   const signUp = async () => {
     try {
       let signUpResponse = await Auth.signUp({
-        username: 'bhad778@gmail.com',
-        password: 'Ululavit#8',
+        username: "bhad778@gmail.com",
+        password: "Ululavit#8",
         attributes: {
-          phone_number: '+17708802074',
-          name: 'Bryan',
-          family_name: 'Hadaway',
-          'custom:custom:accountType': 'employer',
-          'custom:custom:companyName': 'Marietta Pizza Co.',
+          phone_number: "+17708802074",
+          name: "Bryan",
+          family_name: "Hadaway",
+          "custom:custom:accountType": "employer",
+          "custom:custom:companyName": "Marietta Pizza Co.",
         },
       });
       setUser(signUpResponse.user);
     } catch (error) {
-      console.log('error signing up:', error);
+      console.log("error signing up:", error);
     }
   };
 
@@ -38,7 +38,7 @@ const SignUp = () => {
     try {
       await Auth.confirmSignUp(email, confirmationCode);
     } catch (error) {
-      console.log('error confirming sign up', error);
+      console.log("error confirming sign up", error);
     }
   };
 
@@ -88,36 +88,36 @@ const SignUp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  title: { position: 'relative', bottom: 60, fontSize: 30 },
+  title: { position: "relative", bottom: 60, fontSize: 30 },
   inputView: {
-    width: '80%',
-    backgroundColor: '#ccc',
+    width: "80%",
+    backgroundColor: "#ccc",
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 20,
     borderWidth: 1,
   },
   inputText: {
     height: 50,
-    color: 'white',
+    color: "white",
   },
   forgot: {
-    color: 'white',
+    color: "white",
     fontSize: 11,
   },
   loginBtn: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
+    width: "80%",
+    backgroundColor: "#fb5b5a",
     borderRadius: 25,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 40,
     marginBottom: 10,
   },

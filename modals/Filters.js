@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  Modal,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import { Button } from 'react-native-paper';
-import ModalButtons from '../components/ModalButtons';
+import React from "react";
+import { StyleSheet, View, Modal, ScrollView } from "react-native";
+import { Button } from "react-native-paper";
+import ModalButtons from "../components/ModalButtons";
 
 const Filters = ({ filtersModal, filtersModalOn }) => {
   return (
@@ -35,7 +27,7 @@ const Filters = ({ filtersModal, filtersModalOn }) => {
 };
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { flex: 1, justifyContent: 'flex-end' },
+  header: { flex: 1, justifyContent: "flex-end" },
   modalSection: { flex: 8 },
 });
 

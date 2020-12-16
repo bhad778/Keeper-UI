@@ -4,12 +4,9 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableHighlight,
-  TextInput,
 } from "react-native";
 import { Avatar } from "react-native-paper";
-import Icon from "react-native-vector-icons/Feather";
 
 const Matches = ({ navigation }) => {
   const [matches] = useState([
@@ -112,7 +109,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     backgroundColor: "white",
     justifyContent: "center",
-    backgroundColor: "white",
   },
   scrollViewHeaderTextContainer: { alignItems: "flex-start", width: "85%" },
   scrollViewHeaderText: { fontSize: 35 },

@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+
 const AddJob = ({ navigation }) => {
   const goBack = () => {
     navigation.goBack();

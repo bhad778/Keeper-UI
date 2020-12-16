@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@aws-amplify/analytics@4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-4.0.3.tgz#ead5f7037388fcd96e57aa312b891e4c2ebd1dce"
+"@aws-amplify/analytics@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-4.0.2.tgz#97987d6712eebbf7085018604409c63883b41533"
   dependencies:
-    "@aws-amplify/cache" "3.1.40"
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/cache" "3.1.39"
+    "@aws-amplify/core" "3.8.6"
     "@aws-sdk/client-firehose" "1.0.0-rc.4"
     "@aws-sdk/client-kinesis" "1.0.0-rc.4"
     "@aws-sdk/client-personalize-events" "1.0.0-rc.4"
@@ -16,51 +16,51 @@
     lodash "^4.17.20"
     uuid "^3.2.1"
 
-"@aws-amplify/api-graphql@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/api-graphql/-/api-graphql-1.2.15.tgz#e969b86240eae55c81ed8de0016f9b4399f4f5aa"
+"@aws-amplify/api-graphql@1.2.14":
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/api-graphql/-/api-graphql-1.2.14.tgz#cfdbe0df9b3c126fa86a61238fd8ba93eceee5e0"
   dependencies:
-    "@aws-amplify/api-rest" "1.2.15"
-    "@aws-amplify/auth" "3.4.15"
-    "@aws-amplify/cache" "3.1.40"
-    "@aws-amplify/core" "3.8.7"
-    "@aws-amplify/pubsub" "3.2.13"
+    "@aws-amplify/api-rest" "1.2.14"
+    "@aws-amplify/auth" "3.4.14"
+    "@aws-amplify/cache" "3.1.39"
+    "@aws-amplify/core" "3.8.6"
+    "@aws-amplify/pubsub" "3.2.12"
     graphql "14.0.0"
     uuid "^3.2.1"
     zen-observable-ts "0.8.19"
 
-"@aws-amplify/api-rest@1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/api-rest/-/api-rest-1.2.15.tgz#4269316ae7cc57475d81d1e1eb9c047ee105a477"
+"@aws-amplify/api-rest@1.2.14":
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/api-rest/-/api-rest-1.2.14.tgz#dbf3edc76f7fb067793a8f404d549771717ca872"
   dependencies:
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/core" "3.8.6"
     axios "0.19.0"
 
-"@aws-amplify/api@3.2.15":
-  version "3.2.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/api/-/api-3.2.15.tgz#d048792bc10e479d92981089aac244b737510c82"
+"@aws-amplify/api@3.2.14":
+  version "3.2.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/api/-/api-3.2.14.tgz#3f400fca4960046b11020fd4403ba925354132b9"
   dependencies:
-    "@aws-amplify/api-graphql" "1.2.15"
-    "@aws-amplify/api-rest" "1.2.15"
+    "@aws-amplify/api-graphql" "1.2.14"
+    "@aws-amplify/api-rest" "1.2.14"
 
-"@aws-amplify/auth@3.4.15":
-  version "3.4.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-3.4.15.tgz#6cffaf39049b8954c745f15665fa889e5fe17f22"
+"@aws-amplify/auth@3.4.14":
+  version "3.4.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-3.4.14.tgz#60a388365d486f84a5c004269875d92ff5d727a2"
   dependencies:
-    "@aws-amplify/cache" "3.1.40"
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/cache" "3.1.39"
+    "@aws-amplify/core" "3.8.6"
     amazon-cognito-identity-js "4.5.5"
     crypto-js "^3.3.0"
 
-"@aws-amplify/cache@3.1.40":
-  version "3.1.40"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.40.tgz#6eb0970c4cf8a11005f7ac4ada5b1545829f8849"
+"@aws-amplify/cache@3.1.39":
+  version "3.1.39"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.39.tgz#a6c8ba9e490d2d4c36aa4446a5ecdf006ffbc1e3"
   dependencies:
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/core" "3.8.6"
 
-"@aws-amplify/core@3.8.7":
-  version "3.8.7"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.8.7.tgz#060934850473ccb32a1f5b51800d696aac84331d"
+"@aws-amplify/core@3.8.6":
+  version "3.8.6"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.8.6.tgz#2d0ba0abf963c0984616d05957f8817489320756"
   dependencies:
     "@aws-crypto/sha256-js" "1.0.0-alpha.0"
     "@aws-sdk/client-cognito-identity" "1.0.0-rc.4"
@@ -73,13 +73,13 @@
     url "^0.11.0"
     zen-observable-ts "0.8.19"
 
-"@aws-amplify/datastore@2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/datastore/-/datastore-2.9.1.tgz#48b78bd5cf1cc6a3fa82e56c3450f28a41251424"
+"@aws-amplify/datastore@2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/datastore/-/datastore-2.9.0.tgz#27aa8e5ebc1bf80858a7f92db0835fe4f3bc36c5"
   dependencies:
-    "@aws-amplify/api" "3.2.15"
-    "@aws-amplify/core" "3.8.7"
-    "@aws-amplify/pubsub" "3.2.13"
+    "@aws-amplify/api" "3.2.14"
+    "@aws-amplify/core" "3.8.6"
+    "@aws-amplify/pubsub" "3.2.12"
     idb "5.0.6"
     immer "6.0.1"
     ulid "2.3.0"
@@ -87,19 +87,19 @@
     zen-observable-ts "0.8.19"
     zen-push "0.2.1"
 
-"@aws-amplify/interactions@3.3.15":
-  version "3.3.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/interactions/-/interactions-3.3.15.tgz#1662a35dc27964536c9539c9e54bd5b87c0987c5"
+"@aws-amplify/interactions@3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/interactions/-/interactions-3.3.14.tgz#e489c106b858a3aed39659ea750a2dd57140422d"
   dependencies:
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/core" "3.8.6"
     "@aws-sdk/client-lex-runtime-service" "1.0.0-rc.4"
 
-"@aws-amplify/predictions@3.2.15":
-  version "3.2.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/predictions/-/predictions-3.2.15.tgz#28dbad85535cbc6e59765c47658de14b03e0e30c"
+"@aws-amplify/predictions@3.2.14":
+  version "3.2.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/predictions/-/predictions-3.2.14.tgz#b3c8ffd263f1942dcc88c85ea15f74e920d0cb31"
   dependencies:
-    "@aws-amplify/core" "3.8.7"
-    "@aws-amplify/storage" "3.3.15"
+    "@aws-amplify/core" "3.8.6"
+    "@aws-amplify/storage" "3.3.14"
     "@aws-sdk/client-comprehend" "1.0.0-rc.4"
     "@aws-sdk/client-polly" "1.0.0-rc.4"
     "@aws-sdk/client-rekognition" "1.0.0-rc.4"
@@ -109,23 +109,23 @@
     "@aws-sdk/util-utf8-node" "1.0.0-rc.3"
     uuid "^3.2.1"
 
-"@aws-amplify/pubsub@3.2.13":
-  version "3.2.13"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/pubsub/-/pubsub-3.2.13.tgz#5028cd89c5c918d269f79ed41c16b6e17b130315"
+"@aws-amplify/pubsub@3.2.12":
+  version "3.2.12"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/pubsub/-/pubsub-3.2.12.tgz#bd97756bf5412e2b1ea983383a37d2619c92b875"
   dependencies:
-    "@aws-amplify/auth" "3.4.15"
-    "@aws-amplify/cache" "3.1.40"
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/auth" "3.4.14"
+    "@aws-amplify/cache" "3.1.39"
+    "@aws-amplify/core" "3.8.6"
     graphql "14.0.0"
     paho-mqtt "^1.1.0"
     uuid "^3.2.1"
     zen-observable-ts "0.8.19"
 
-"@aws-amplify/storage@3.3.15":
-  version "3.3.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/storage/-/storage-3.3.15.tgz#e27a3ed3a815a492486931d7e9ec9f3c5545185c"
+"@aws-amplify/storage@3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/storage/-/storage-3.3.14.tgz#d0dbd47b10b35dfe50f50277609f8f0cb149b4f2"
   dependencies:
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/core" "3.8.6"
     "@aws-sdk/client-s3" "1.0.0-rc.4"
     "@aws-sdk/s3-request-presigner" "1.0.0-rc.4"
     "@aws-sdk/util-create-request" "1.0.0-rc.4"
@@ -138,11 +138,11 @@
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@aws-amplify/ui/-/ui-2.0.2.tgz#56bfc3674454f2a12d1cec247f38a444aa13ea09"
 
-"@aws-amplify/xr@2.2.15":
-  version "2.2.15"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/xr/-/xr-2.2.15.tgz#74fbb6903a7d7e2af1690f8439b2777100d5f209"
+"@aws-amplify/xr@2.2.14":
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/xr/-/xr-2.2.14.tgz#79464d1625dd7ba95ab2de923571f9758534b406"
   dependencies:
-    "@aws-amplify/core" "3.8.7"
+    "@aws-amplify/core" "3.8.6"
 
 "@aws-crypto/crc32@^1.0.0":
   version "1.0.0"
@@ -1214,32 +1214,19 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@~7.9.0":
-  version "7.9.6"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.9.6.tgz#d9aa1f580abf3b2286ef40b6904d390904c63376"
-  dependencies:
-    "@babel/code-frame" "^7.8.3"
-    "@babel/generator" "^7.9.6"
-    "@babel/helper-module-transforms" "^7.9.0"
-    "@babel/helpers" "^7.9.6"
-    "@babel/parser" "^7.9.6"
-    "@babel/template" "^7.8.6"
-    "@babel/traverse" "^7.9.6"
-    "@babel/types" "^7.9.6"
-    convert-source-map "^1.7.0"
-    debug "^4.1.0"
-    gensync "^1.0.0-beta.1"
-    json5 "^2.1.2"
-    lodash "^4.17.13"
-    resolve "^1.3.2"
-    semver "^5.4.1"
-    source-map "^0.5.0"
-
-"@babel/generator@^7.11.5", "@babel/generator@^7.11.6", "@babel/generator@^7.5.0", "@babel/generator@^7.9.0", "@babel/generator@^7.9.6":
+"@babel/generator@^7.11.5", "@babel/generator@^7.11.6", "@babel/generator@^7.5.0", "@babel/generator@^7.9.0":
   version "7.11.6"
   resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.11.6.tgz#b868900f81b163b4d464ea24545c61cbac4dc620"
   dependencies:
     "@babel/types" "^7.11.5"
+    jsesc "^2.5.1"
+    source-map "^0.5.0"
+
+"@babel/generator@^7.12.10":
+  version "7.12.11"
+  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.12.11.tgz#98a7df7b8c358c9a37ab07a24056853016aba3af"
+  dependencies:
+    "@babel/types" "^7.12.11"
     jsesc "^2.5.1"
     source-map "^0.5.0"
 
@@ -1415,6 +1402,10 @@
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.10.4.tgz#a78c7a7251e01f616512d31b10adcf52ada5e0d2"
 
+"@babel/helper-validator-identifier@^7.12.11":
+  version "7.12.11"
+  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.12.11.tgz#c9a1f021917dcb5ccf0d4e453e399022981fc9ed"
+
 "@babel/helper-wrap-function@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/helper-wrap-function/-/helper-wrap-function-7.10.4.tgz#8a6f701eab0ff39f765b5a1cfef409990e624b87"
@@ -1424,7 +1415,7 @@
     "@babel/traverse" "^7.10.4"
     "@babel/types" "^7.10.4"
 
-"@babel/helpers@^7.10.4", "@babel/helpers@^7.9.0", "@babel/helpers@^7.9.6":
+"@babel/helpers@^7.10.4", "@babel/helpers@^7.9.0":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.10.4.tgz#2abeb0d721aff7c0a97376b9e1f6f65d7a475044"
   dependencies:
@@ -1440,9 +1431,13 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.0.0", "@babel/parser@^7.1.0", "@babel/parser@^7.10.4", "@babel/parser@^7.11.5", "@babel/parser@^7.9.0", "@babel/parser@^7.9.6":
+"@babel/parser@^7.0.0", "@babel/parser@^7.1.0", "@babel/parser@^7.10.4", "@babel/parser@^7.11.5", "@babel/parser@^7.9.0":
   version "7.11.5"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.11.5.tgz#c7ff6303df71080ec7a4f5b8c003c58f1cf51037"
+
+"@babel/parser@^7.12.10", "@babel/parser@^7.7.0":
+  version "7.12.11"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.12.11.tgz#9ce3595bcd74bc5c466905e86c535b8b25011e79"
 
 "@babel/plugin-external-helpers@^7.0.0":
   version "7.10.4"
@@ -2065,7 +2060,7 @@
     "@babel/parser" "^7.10.4"
     "@babel/types" "^7.10.4"
 
-"@babel/traverse@^7.0.0", "@babel/traverse@^7.1.0", "@babel/traverse@^7.10.4", "@babel/traverse@^7.11.5", "@babel/traverse@^7.9.0", "@babel/traverse@^7.9.6":
+"@babel/traverse@^7.0.0", "@babel/traverse@^7.1.0", "@babel/traverse@^7.10.4", "@babel/traverse@^7.11.5", "@babel/traverse@^7.9.0":
   version "7.11.5"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.11.5.tgz#be777b93b518eb6d76ee2e1ea1d143daa11e61c3"
   dependencies:
@@ -2079,11 +2074,33 @@
     globals "^11.1.0"
     lodash "^4.17.19"
 
-"@babel/types@^7.0.0", "@babel/types@^7.10.4", "@babel/types@^7.10.5", "@babel/types@^7.11.0", "@babel/types@^7.11.5", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4", "@babel/types@^7.9.0", "@babel/types@^7.9.6":
+"@babel/traverse@^7.7.0":
+  version "7.12.10"
+  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.12.10.tgz#2d1f4041e8bf42ea099e5b2dc48d6a594c00017a"
+  dependencies:
+    "@babel/code-frame" "^7.10.4"
+    "@babel/generator" "^7.12.10"
+    "@babel/helper-function-name" "^7.10.4"
+    "@babel/helper-split-export-declaration" "^7.11.0"
+    "@babel/parser" "^7.12.10"
+    "@babel/types" "^7.12.10"
+    debug "^4.1.0"
+    globals "^11.1.0"
+    lodash "^4.17.19"
+
+"@babel/types@^7.0.0", "@babel/types@^7.10.4", "@babel/types@^7.10.5", "@babel/types@^7.11.0", "@babel/types@^7.11.5", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4", "@babel/types@^7.9.0":
   version "7.11.5"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.11.5.tgz#d9de577d01252d77c6800cee039ee64faf75662d"
   dependencies:
     "@babel/helper-validator-identifier" "^7.10.4"
+    lodash "^4.17.19"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.12.10", "@babel/types@^7.12.11", "@babel/types@^7.7.0":
+  version "7.12.11"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.12.11.tgz#a86e4d71e30a9b6ee102590446c98662589283ce"
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.12.11"
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
@@ -3155,6 +3172,10 @@
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-3.0.3.tgz#830167fd757ba70ac638747ba3169b2dbae60330"
 
+"@react-native-community/toolbar-android@0.1.0-rc.2":
+  version "0.1.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/toolbar-android/-/toolbar-android-0.1.0-rc.2.tgz#86cae655836afacc52d4063062cc59837d1a8640"
+
 "@react-navigation/bottom-tabs@5.8.0":
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.8.0.tgz#d7386809bceeead0adcaacf61b6563be9cefd5cb"
@@ -3315,18 +3336,25 @@
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
 
-"@types/react-native@~0.63.2":
-  version "0.63.25"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.25.tgz#a08bbe17a75cce993f52655a8fe75f30bf77e965"
+"@types/react-native@0.63.2":
+  version "0.63.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.2.tgz#428a4d71351ccbc31ab170b5f32477c7ce78dfd7"
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@~16.9.35":
+"@types/react@*":
   version "16.9.52"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.52.tgz#c46c72d1a1d8d9d666f4dd2066c0e22600ccfde1"
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
+
+"@types/react@16.9.35":
+  version "16.9.35"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -3684,29 +3712,29 @@ available-typed-arrays@^1.0.0, available-typed-arrays@^1.0.2:
   dependencies:
     array-filter "^1.0.0"
 
-aws-amplify-react-native@^4.2.9:
-  version "4.2.10"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-4.2.10.tgz#94f1aa9738dc88625549e40fa9569741dfeabc84"
+aws-amplify-react-native@4.2.9:
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-4.2.9.tgz#e26ebade72e218a3cad761b4166899d2f7844149"
   dependencies:
     babel-preset-es2015 "^6.24.1"
     buffer "^5.2.1"
 
-aws-amplify@^3.3.11:
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-3.3.12.tgz#f3dbd70f8da13160e2e753d0a873115fd3a97776"
+aws-amplify@3.3.11:
+  version "3.3.11"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-3.3.11.tgz#7560e6736dd7133889cede1bd995c29aedea2588"
   dependencies:
-    "@aws-amplify/analytics" "4.0.3"
-    "@aws-amplify/api" "3.2.15"
-    "@aws-amplify/auth" "3.4.15"
-    "@aws-amplify/cache" "3.1.40"
-    "@aws-amplify/core" "3.8.7"
-    "@aws-amplify/datastore" "2.9.1"
-    "@aws-amplify/interactions" "3.3.15"
-    "@aws-amplify/predictions" "3.2.15"
-    "@aws-amplify/pubsub" "3.2.13"
-    "@aws-amplify/storage" "3.3.15"
+    "@aws-amplify/analytics" "4.0.2"
+    "@aws-amplify/api" "3.2.14"
+    "@aws-amplify/auth" "3.4.14"
+    "@aws-amplify/cache" "3.1.39"
+    "@aws-amplify/core" "3.8.6"
+    "@aws-amplify/datastore" "2.9.0"
+    "@aws-amplify/interactions" "3.3.14"
+    "@aws-amplify/predictions" "3.2.14"
+    "@aws-amplify/pubsub" "3.2.12"
+    "@aws-amplify/storage" "3.3.14"
     "@aws-amplify/ui" "2.0.2"
-    "@aws-amplify/xr" "2.2.15"
+    "@aws-amplify/xr" "2.2.14"
 
 aws-sign2@~0.7.0:
   version "0.7.0"
@@ -3730,6 +3758,17 @@ babel-code-frame@^6.26.0:
     chalk "^1.1.3"
     esutils "^2.0.2"
     js-tokens "^3.0.2"
+
+babel-eslint@10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.1.0.tgz#6968e568a910b78fb3779cdd8b6ac2f479943232"
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    "@babel/parser" "^7.7.0"
+    "@babel/traverse" "^7.7.0"
+    "@babel/types" "^7.7.0"
+    eslint-visitor-keys "^1.0.0"
+    resolve "^1.12.0"
 
 babel-helper-call-delegate@^6.24.1:
   version "6.24.1"
@@ -4806,6 +4845,10 @@ cssstyle@^2.0.0:
   dependencies:
     cssom "~0.3.6"
 
+csstype@^2.2.0:
+  version "2.6.14"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.14.tgz#004822a4050345b55ad4dcc00be1d9cf2f4296de"
+
 csstype@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.3.tgz#2b410bbeba38ba9633353aff34b05d9755d065f8"
@@ -5148,7 +5191,7 @@ eslint-config-prettier@^6.0.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-plugin-react@^7.21.5:
+eslint-plugin-react@7.21.5:
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.5.tgz#50b21a412b9574bfe05b21db176e8b7b3b15bff3"
   dependencies:
@@ -5177,7 +5220,7 @@ eslint-utils@^2.1.0:
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
+eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
 
@@ -5185,7 +5228,7 @@ eslint-visitor-keys@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
 
-eslint@^7.15.0:
+eslint@7.15.0:
   version "7.15.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.15.0.tgz#eb155fb8ed0865fcf5d903f76be2e5b6cd7e0bc7"
   dependencies:
@@ -6664,7 +6707,7 @@ jest-environment-node@^25.5.0:
     jest-util "^25.5.0"
     semver "^6.3.0"
 
-jest-expo@~39.0.0:
+jest-expo@39.0.0:
   version "39.0.0"
   resolved "https://registry.yarnpkg.com/jest-expo/-/jest-expo-39.0.0.tgz#c25b6c8e48eda435a3568bf68cf26df2c7447475"
   dependencies:
@@ -8743,7 +8786,7 @@ react-native-easy-grid@0.2.2:
   dependencies:
     lodash "^4.17.15"
 
-react-native-gesture-handler@~1.7.0:
+react-native-gesture-handler@1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.7.0.tgz#0ef74a5ba836832e497dc49eb1ce58baa6c617e5"
   dependencies:
@@ -8807,9 +8850,9 @@ react-native-parsed-text@0.0.22:
   dependencies:
     prop-types "^15.7.x"
 
-react-native-reanimated@~1.13.0:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.2.tgz#1ae5457b24b4913d173a5a064bb28eae7783d293"
+react-native-reanimated@1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.0.tgz#1ee5d27d34bd2cee7dfad4ae9a3673300872c917"
   dependencies:
     fbjs "^1.0.0"
 
@@ -8823,7 +8866,7 @@ react-native-safe-area-view@^0.14.9:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
-react-native-screens@~2.10.1:
+react-native-screens@2.10.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.10.1.tgz#06d22fae87ef0ce51c616c34a199726db1403b95"
 
@@ -8839,7 +8882,7 @@ react-native-vector-icons@^6.6.0:
     prop-types "^15.7.2"
     yargs "^15.0.2"
 
-react-native-web@^0.14.9:
+react-native-web@0.14.9:
   version "0.14.9"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.14.9.tgz#ac968dd98e577ee655e0d270a858d6667fb8ce63"
   dependencies:
@@ -9146,7 +9189,7 @@ resolve@^1.10.0, resolve@^1.17.0, resolve@^1.3.2, resolve@^1.4.0, resolve@^1.5.0
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.18.1:
+resolve@^1.12.0, resolve@^1.18.1:
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.19.0.tgz#1af5bf630409734a067cae29318aac7fa29a267c"
   dependencies:
@@ -9985,9 +10028,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@~3.9.5:
-  version "3.9.7"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+typescript@3.9.5:
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.5.tgz#586f0dba300cde8be52dd1ac4f7e1009c1b13f36"
 
 ua-parser-js@^0.7.18:
   version "0.7.22"

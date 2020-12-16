@@ -1,15 +1,6 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  Modal,
-  ScrollView,
-  Alert,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, Modal, ScrollView } from "react-native";
 import { Button } from "react-native-paper";
-import ModalButtons from "../components/ModalButtons";
 
 const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
   return (
@@ -29,7 +20,7 @@ const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
             <View style={styles.chipsContainer}>
               <Text style={styles.profileName}>Hello</Text>
               <Text style={styles.info}>
-                I'm just a really sweet girl next door type. Dont worry about
+                I am just a really sweet girl next door type. Dont worry about
                 taking me out somplace really really fancy, my daddy is poor
               </Text>
               <Text style={styles.info}>
@@ -44,7 +35,7 @@ const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
             <View style={styles.chipsContainer}>
               <Text style={styles.profileName}>Hello</Text>
               <Text style={styles.info}>
-                I'm just a really sweet girl next door type. Dont worry about
+                I am just a really sweet girl next door type. Dont worry about
                 taking me out somplace really really fancy, my daddy is poor
               </Text>
               <Text style={styles.info}>
@@ -59,7 +50,7 @@ const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
             <View style={styles.chipsContainer}>
               <Text style={styles.profileName}>Hello</Text>
               <Text style={styles.info}>
-                I'm just a really sweet girl next door type. Dont worry about
+                I am just a really sweet girl next door type. Dont worry about
                 taking me out somplace really really fancy, my daddy is poor
               </Text>
               <Text style={styles.info}>
@@ -74,7 +65,7 @@ const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
             <View style={styles.chipsContainer}>
               <Text style={styles.profileName}>Hello</Text>
               <Text style={styles.info}>
-                I'm just a really sweet girl next door type. Dont worry about
+                I am just a really sweet girl next door type. Dont worry about
                 taking me out somplace really really fancy, my daddy is poor
               </Text>
               <Text style={styles.info}>
