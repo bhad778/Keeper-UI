@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
-import Icon from "react-native-vector-icons/Feather";
+import { Icon } from "native-base";
 import { useColorScheme, StyleSheet } from "react-native";
 import EmployerDiscover from "../screens/employer/EmployerDiscover/EmployerDiscover";
 import Profile from "../screens/profile/Profile";
@@ -43,7 +43,7 @@ export default function BottomTabNavigator() {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon style={styles.tabs} name="user" size={30} color={color} />
+            <Icon style={styles.tabs} name="home" fontSize={30} color={color} />
           ),
         }}
       />
@@ -52,7 +52,7 @@ export default function BottomTabNavigator() {
         component={EmployerDiscover}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon style={styles.tabs} name="search" size={30} color={color} />
+            <Icon style={styles.tabs} name="home" fontSize={30} color={color} />
           ),
         }}
       />
@@ -61,12 +61,7 @@ export default function BottomTabNavigator() {
         component={Matches}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon
-              style={styles.tabs}
-              name="file-text"
-              size={30}
-              color={color}
-            />
+            <Icon style={styles.tabs} name="home" fontSize={30} color={color} />
           ),
         }}
       />

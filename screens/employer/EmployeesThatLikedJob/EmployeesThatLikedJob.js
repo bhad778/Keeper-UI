@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import Icon from "react-native-vector-icons/Feather";
+import { Icon } from "native-base";
 import ProfileView from "../../../modals/ProfileView";
 
 const EmployeesThatLikedJob = ({ navigation }) => {
@@ -36,7 +36,7 @@ const EmployeesThatLikedJob = ({ navigation }) => {
       />
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={onPress}>
-          <Icon color="#808080" name="chevron-left" size={30} />
+          <Icon color="#808080" name="md-beer" fontSize={30} />
         </TouchableOpacity>
       </View>
       <View style={styles.scrollViewContainer}>

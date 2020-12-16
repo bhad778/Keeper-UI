@@ -4,7 +4,7 @@ import { Avatar } from "react-native-paper";
 import Settings from "../../modals/Settings";
 import ProfileEdit from "../../modals/ProfileEdit";
 import ProfileView from "../../modals/ProfileView";
-import Icon from "react-native-vector-icons/Feather";
+import { Icon } from "native-base";
 
 const Profile = () => {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
@@ -30,7 +30,7 @@ const Profile = () => {
           onPress={() => setSettingsModalVisible(true)}
           style={styles.settingsButton}
         >
-          <Icon name="settings" size={30} color="black" />
+          <Icon name="settings" fontSize={30} color="black" />
         </TouchableOpacity>
       </View>
       <View style={styles.profileSection}>
@@ -54,7 +54,7 @@ const Profile = () => {
             style={styles.editModalButton}
             onPress={() => setProfileEditModalVisible(true)}
           >
-            <Icon name="settings" size={40} color="black" />
+            <Icon name="settings" fontSize={40} color="black" />
           </TouchableOpacity>
         </View>
         <Text style={styles.profileImageText}>Tap to edit profile</Text>

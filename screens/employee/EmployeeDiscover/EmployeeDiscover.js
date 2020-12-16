@@ -4,7 +4,7 @@ import { Button } from "react-native-paper";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
-import Icon from "react-native-vector-icons/Feather";
+import { Icon } from "native-base";
 
 export default class Example extends Component {
   constructor(props) {
@@ -105,7 +105,7 @@ export default class Example extends Component {
         <View style={styles.headerContainer}>
           <View style={styles.peopleWhoLikeYou}>
             <Button mode="text" style={styles.newMatchButton} color="black">
-              <Icon name="inbox" size={25} />
+              <Icon name="md-beer" fontSize={25} />
             </Button>
           </View>
           <View style={styles.headerTextContainer}>
@@ -118,7 +118,7 @@ export default class Example extends Component {
               color="black"
               onPress={() => this.filtersModalOn(true)}
             >
-              <Icon name="edit-2" size={25} />
+              <Icon name="md-beer" fontSize={25} />
             </Button>
           </View>
         </View>

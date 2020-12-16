@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
+import { Icon } from "native-base";
 
 const AddJob = ({ navigation }) => {
   const goBack = () => {
@@ -10,7 +10,7 @@ const AddJob = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={goBack}>
-          <Icon color="#808080" name="chevron-left" size={30} />
+          <Icon color="#808080" name="md-beer" fontSize={30} />
         </TouchableOpacity>
       </View>
       <View style={styles.inputContainer}>
