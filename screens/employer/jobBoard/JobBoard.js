@@ -6,13 +6,13 @@ import JobsService from '../../../services/JobsService';
 const JobBoard = ({ navigation }) => {
   const [, setJobs] = useState();
 
-  // useEffect(() => {
-  //   JobsService.getJobs().then((data) => {
-  //     setJobs(data);
-  //     console.log(data);
-  //     console.log(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    JobsService.getJobs().then((data) => {
+      setJobs(data);
+      console.log(data);
+      console.log(data);
+    });
+  }, []);
 
   const [typesOfJobs] = useState({
     jobs: [

@@ -1,6 +1,9 @@
+import getEnvVars from '../environment';
+const { apiUrl } = getEnvVars();
+
 const JobsService = {
   getJobs: (payload) => {
-    return fetch('https://example.com/profile', {
+    return fetch(`${apiUrl}/getJobs`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -17,16 +20,13 @@ const JobsService = {
   },
 
   addJob: (payload) => {
-    return fetch(
-      'https://mzl4y00fba.execute-api.us-east-1.amazonaws.com/dev/addJob',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      }
-    )
+    return fetch(`${apiUrl}/addJob`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
       .then((response) => response.json())
       .then((data) => {
         return data;
