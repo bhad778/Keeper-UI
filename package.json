@@ -45,6 +45,7 @@
     "react-native-web": "0.14.9"
   },
   "devDependencies": {
+    "@aws-amplify/cli": "^4.40.0",
     "@babel/core": "7.9.0",
     "@types/react": "16.9.35",
     "@types/react-native": "0.63.2",

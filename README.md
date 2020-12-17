@@ -5,7 +5,7 @@
 Clone into repo and then
 
 ```bash
-yarn install
+npm install
 ```
 
 and then
@@ -17,9 +17,16 @@ expo install
 Once that is done run
 
 ```bash
+npm install -g @aws-amplify/cli
+```
+
+For this next step you will need to have logged in to your aws account, get your admin to give you one now
+
+```bash
 amplify pull
 ```
 
+When it asks to make a profile, make one, it will remmember you access keys and all your choices here.
 This will add the necessary amplify files like aws-exports.js. You will
 be asked a few questions-
 
@@ -34,6 +41,14 @@ Distribution Directory Path: /
 Build Command: npm.cmd run-script build
 Start Command: npm.cmd run-script start
 Do you plan on modifying this backend? Yes
+
+you must add secret key and access key when making profile, if you mess up youll have to take this link to download aws cli https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html then do
+
+```bash
+aws configure
+```
+
+to reconfigure your profile
 
 Once that has completed add the eslint extension (the first one you see after searing eslint made by Dirk Baeumer ) to vscode and then run
 
