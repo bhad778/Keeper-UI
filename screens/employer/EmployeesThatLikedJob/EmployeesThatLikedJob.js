@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
   Image,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
-import { Icon } from "native-base";
-import ProfileView from "../../../modals/ProfileView";
+import { FontAwesome } from '@expo/vector-icons';
+import ProfileView from '../../../modals/ProfileView';
 
 const EmployeesThatLikedJob = ({ navigation }) => {
   const [profileViewModalVisible, setProfileViewModalVisible] = useState(false);
   const [peopleWhoLikedJob] = useState({
     people: [
-      "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
-      "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
-      "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
-      "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
-      "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
-      "https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg",
+      'https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg',
+      'https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg',
+      'https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg',
+      'https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg',
+      'https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg',
+      'https://www.niagarafallsreporter.com/Stories/2014/DEC09/Images/Obese.jpg',
     ],
   });
   const onPress = () => {
@@ -36,7 +36,7 @@ const EmployeesThatLikedJob = ({ navigation }) => {
       />
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={onPress}>
-          <Icon color="#808080" name="md-beer" fontSize={30} />
+          <FontAwesome color="#808080" name="glass" size={30} />
         </TouchableOpacity>
       </View>
       <View style={styles.scrollViewContainer}>
@@ -58,9 +58,9 @@ const EmployeesThatLikedJob = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { flex: 1, justifyContent: "center" },
+  header: { flex: 1, justifyContent: 'center' },
   scrollViewContainer: { flex: 5 },
   images: { height: 100, width: 100, margin: 10, borderRadius: 20 },
-  imagesContainer: { justifyContent: "center" },
+  imagesContainer: { justifyContent: 'center' },
 });
 export default EmployeesThatLikedJob;
