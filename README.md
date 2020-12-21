@@ -56,6 +56,14 @@ Once that has completed add the eslint extension (the first one you see after se
 npm install eslint -g
 ```
 
+If you do not see an aws.exports file run this
+
+```bash
+amplify init
+```
+
+use existing environment
+
 After this, restart vscode and the project is ready
 
 ## Errors
