@@ -15,6 +15,7 @@ import JobBoard from "../screens/employer/jobBoard/JobBoard";
 import SignUp from "../screens/login/SignUp";
 import AddJob from "../screens/employer/addJob/AddJob";
 import EmployeesThatLikedJob from "../screens/employer/employeesThatLikedJob/EmployeesThatLikedJob";
+import Resume from "../screens/employee/resume/Resume";
 
 export default function Navigation({ ColorSchemeName }) {
   return (
@@ -32,6 +33,11 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Resume"
+        component={Resume}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="JobBoard"
         component={JobBoard}
