@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Button } from 'react-native-paper';
-import { ActivityIndicator } from 'react-native-paper';
-import JobsService from '../../../services/JobsService';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Button } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
+import JobsService from "../../../services/JobsService";
 
 const JobBoard = ({ navigation }) => {
   const [jobs, setJobs] = useState();
@@ -18,10 +18,10 @@ const JobBoard = ({ navigation }) => {
   }, []);
 
   const goToFutureEmployees = () => {
-    navigation.navigate('RootEmployer', { message: false });
+    navigation.navigate("RootEmployer", { message: false });
   };
   const goToAddJobScreen = () => {
-    navigation.navigate('AddJob');
+    navigation.navigate("AddJob");
   };
 
   return (
@@ -61,31 +61,31 @@ const JobBoard = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'white' },
+  container: { flex: 1, backgroundColor: "white" },
   header: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   headerText: { fontSize: 20 },
   jobOptionsSection: { flex: 6 },
   flexDirectionRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
 
   jobButtons: {
-    flexDirection: 'column',
+    flexDirection: "column",
     borderRadius: 20,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 1,
     margin: 15,
-    width: '30%',
+    width: "30%",
   },
   buttonTextContainer: {},
-  headerButton: { position: 'relative', top: 30 },
+  headerButton: { position: "relative", top: 30 },
 });
 
 export default JobBoard;

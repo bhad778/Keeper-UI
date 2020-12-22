@@ -1,12 +1,12 @@
-import getEnvVars from '../environment';
+import getEnvVars from "../environment";
 const { apiUrl } = getEnvVars();
 
 const JobsService = {
   getJobs: (payload) => {
     return fetch(`${apiUrl}/getJobs`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     })
@@ -15,15 +15,15 @@ const JobsService = {
         return data;
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   },
 
   addJob: (payload) => {
     return fetch(`${apiUrl}/addJob`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     })
@@ -32,7 +32,7 @@ const JobsService = {
         return data;
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   },
 };

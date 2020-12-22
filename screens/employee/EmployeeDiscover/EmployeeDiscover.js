@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Swiper from 'react-native-deck-swiper';
-import { Button } from 'react-native-paper';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import Filters from '../../../modals/Filters';
-import EmployeeInfoModal from '../../../modals/EmployeeInfoModal';
-import { FontAwesome } from '@expo/vector-icons';
+import React, { Component } from "react";
+import Swiper from "react-native-deck-swiper";
+import { Button } from "react-native-paper";
+import { StyleSheet, Text, View, Image } from "react-native";
+import Filters from "../../../modals/Filters";
+import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default class Example extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Example extends Component {
       employeeInfoModal: false,
       cards: this.hotGirls,
       swipedAllCards: false,
-      swipeDirection: '',
+      swipeDirection: "",
       cardIndex: 0,
     };
   }
@@ -22,43 +22,43 @@ export default class Example extends Component {
   hotGirls = [
     {
       img:
-        'https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*',
-      name: 'Britney',
+        "https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*",
+      name: "Britney",
     },
     {
       img:
-        'https://cdn.bulbagarden.net/upload/thumb/f/fb/Misty_SM.png/150px-Misty_SM.png',
-      name: 'Misty',
+        "https://cdn.bulbagarden.net/upload/thumb/f/fb/Misty_SM.png/150px-Misty_SM.png",
+      name: "Misty",
     },
     {
       img:
-        'https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg',
-      name: 'Mary Jane',
+        "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+      name: "Mary Jane",
     },
     {
       img:
-        'https://www.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/38686/1522693188-9742-0876/url_large.png',
-      name: 'Wendy',
+        "https://www.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/38686/1522693188-9742-0876/url_large.png",
+      name: "Wendy",
     },
     {
       img:
-        'https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631',
-      name: 'Padme',
+        "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631",
+      name: "Padme",
     },
     {
       img:
-        'https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg',
-      name: 'Underworld',
+        "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+      name: "Underworld",
     },
     {
       img:
-        'https://i.pinimg.com/originals/c3/19/31/c3193181716088d176907ecf1f4d0ca8.jpg',
-      name: 'Kairi',
+        "https://i.pinimg.com/originals/c3/19/31/c3193181716088d176907ecf1f4d0ca8.jpg",
+      name: "Kairi",
     },
     {
       img:
-        'https://cdn.flickeringmyth.com/wp-content/uploads/2018/12/Rust-Creek-1-1-600x316.jpg',
-      name: 'Rust Creek',
+        "https://cdn.flickeringmyth.com/wp-content/uploads/2018/12/Rust-Creek-1-1-600x316.jpg",
+      name: "Rust Creek",
     },
   ];
   renderCard = (card) => {
@@ -127,9 +127,9 @@ export default class Example extends Component {
           ref={(swiper) => {
             this.swiper = swiper;
           }}
-          onSwipedLeft={() => this.onSwiped('left')}
+          onSwipedLeft={() => this.onSwiped("left")}
           onTapCardDeadZone={200}
-          onSwipedRight={() => this.swipeRight('Matched')}
+          onSwipedRight={() => this.swipeRight("Matched")}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={81}
@@ -143,36 +143,36 @@ export default class Example extends Component {
           backgroundColor="white"
           overlayLabels={{
             left: {
-              title: 'NOPE',
+              title: "NOPE",
               style: {
                 label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
                   borderWidth: 1,
                 },
                 wrapper: {
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                  justifyContent: 'flex-start',
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  justifyContent: "flex-start",
                   marginTop: 30,
                   marginLeft: -30,
                 },
               },
             },
             right: {
-              title: 'LIKE',
+              title: "LIKE",
               style: {
                 label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
                   borderWidth: 1,
                 },
                 wrapper: {
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
                   marginTop: 30,
                   marginLeft: 30,
                 },
@@ -193,51 +193,51 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    height: '12%',
+    height: "12%",
     zIndex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
   peopleWhoLikeYou: {
-    position: 'relative',
+    position: "relative",
     bottom: 2,
-    width: '32%',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
+    width: "32%",
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
   },
 
   headerTextContainer: {
-    position: 'relative',
+    position: "relative",
     bottom: 7,
-    width: '32%',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    width: "32%",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   headerFilterButtonContainer: {
-    position: 'relative',
+    position: "relative",
     bottom: 2,
-    width: '32%',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    width: "32%",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   filterButton: {},
 
   headerText: {
-    color: 'black',
+    color: "black",
     fontSize: 28,
   },
   card: {
     zIndex: 444,
     flex: 2,
     borderWidth: 2,
-    borderColor: '#E8E8E8',
-    backgroundColor: 'white',
+    borderColor: "#E8E8E8",
+    backgroundColor: "white",
     borderRadius: 20,
   },
   images: {
     flex: 1,
     height: 401,
-    width: '100%',
+    width: "100%",
     borderRadius: 20,
   },
 });
