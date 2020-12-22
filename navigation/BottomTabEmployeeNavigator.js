@@ -1,38 +1,38 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
-import { useColorScheme, StyleSheet } from 'react-native';
-import EmployeeDiscover from '../screens/employee/EmployeeDiscover/EmployeeDiscover';
-import Profile from '../screens/profile/Profile';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import * as React from "react";
+import { FontAwesome } from "@expo/vector-icons";
+import { useColorScheme, StyleSheet } from "react-native";
+import EmployeeDiscover from "../screens/employee/employeeDiscover/EmployeeDiscover";
+import Profile from "../screens/profile/Profile";
 
-import Matches from '../screens/matches/Matches';
+import Matches from "../screens/matches/Matches";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  const tintColorLight = '#fb5b5a';
-  const tintColorDark = '#fff';
+  const tintColorLight = "#fb5b5a";
+  const tintColorDark = "#fff";
   const Colors = {
     light: {
-      text: '#000',
-      background: '#fff',
+      text: "#000",
+      background: "#fff",
       tint: tintColorLight,
-      tabIconDefault: '#ccc',
+      tabIconDefault: "#ccc",
       tabIconSelected: tintColorLight,
     },
     dark: {
-      text: '#fff',
-      background: '#000',
+      text: "#fff",
+      background: "#000",
       tint: tintColorDark,
-      tabIconDefault: '#ccc',
+      tabIconDefault: "#ccc",
       tabIconSelected: tintColorDark,
     },
   };
 
   return (
     <Tab.Navigator
-      initialRouteName={'  '}
+      initialRouteName={"  "}
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
         style: { borderTopWidth: 0, height: 75 },
@@ -85,7 +85,7 @@ export default function BottomTabNavigator() {
 }
 
 const styles = StyleSheet.create({
-  tabs: { position: 'relative', top: 5 },
+  tabs: { position: "relative", top: 5 },
 });
 
 // Each tab has its own navigation stack, you can read more about this pattern here:

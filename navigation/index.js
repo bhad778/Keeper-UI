@@ -14,7 +14,7 @@ import Matched from "../screens/matches/Matched";
 import JobBoard from "../screens/employer/jobBoard/JobBoard";
 import SignUp from "../screens/login/SignUp";
 import AddJob from "../screens/employer/addJob/AddJob";
-import EmployeesThatLikedJob from "../screens/employer/EmployeesThatLikedJob/EmployeesThatLikedJob";
+import EmployeesThatLikedJob from "../screens/employer/employeesThatLikedJob/EmployeesThatLikedJob";
 
 export default function Navigation({ ColorSchemeName }) {
   return (
