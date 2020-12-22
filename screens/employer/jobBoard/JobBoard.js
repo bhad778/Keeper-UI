@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import JobsService from '../../../services/JobsService';
 
 const JobBoard = ({ navigation }) => {
