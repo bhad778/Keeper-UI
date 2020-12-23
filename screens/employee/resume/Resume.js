@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
-import { Text } from "react-native-paper";
+import Header from "../../../components/header/Header";
+// import { Text } from "react-native-paper";
 
 const Resume = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
+      <Header screenTitle="Design Director" />
       <Image
         style={styles.profileImage}
         source={{
@@ -18,10 +19,6 @@ const Resume = () => {
 };
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: {
-    height: 100,
-    width: "100%",
-  },
   profileImage: {
     width: "100%",
     height: 500,

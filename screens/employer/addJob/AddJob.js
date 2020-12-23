@@ -10,7 +10,7 @@ const AddJob = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={goBack}>
-          <FontAwesome color="#808080" name="glass" fontSize={30} />
+          <FontAwesome color="#808080" name="arrow-left" fontSize={30} />
         </TouchableOpacity>
       </View>
       <View style={styles.inputContainer}>
