@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
-import { Appbar, Button, Text } from "react-native-paper";
+import { Appbar, Text } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 
 const Resume = ({ screenTitle, children, navigation }) => {
