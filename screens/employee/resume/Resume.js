@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Header from "../../../components/header/Header";
 import { Title, Subheading, Paragraph } from "react-native-paper";
-import { abs } from "react-native-reanimated";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Resume = () => {
   const [pastJobs] = useState([
@@ -120,8 +120,10 @@ const Resume = () => {
                         : styles.verticalLineSection
                     }
                   >
-                    <View style={styles.innerCircle}></View>
-                    <View style={styles.outerCircle}></View>
+                    <View style={styles.circlesContainer}>
+                      <View style={styles.innerCircle}></View>
+                      <View style={styles.outerCircle}></View>
+                    </View>
                     <View
                       style={
                         i === 0
@@ -132,11 +134,29 @@ const Resume = () => {
                       }
                     ></View>
                   </View>
-                  <View style={styles.jobDetailsSection}>
+                  <View
+                    style={
+                      i === pastJobs.length - 1
+                        ? styles.lastJobDetailsSection
+                        : styles.jobDetailsSection
+                    }
+                  >
                     <Subheading style={styles.monthsText}>
                       {item.months}
                     </Subheading>
-                    <Title style={styles.jobTitleText}>{item.jobTitle}</Title>
+                    <View style={styles.jobTitleContainer}>
+                      <Title style={styles.jobTitleText}>{item.jobTitle}</Title>
+                      <FontAwesome
+                        style={styles.angleDownIcon}
+                        color="black"
+                        name={
+                          activeAccordions.includes(i)
+                            ? "angle-up"
+                            : "angle-down"
+                        }
+                        size={30}
+                      />
+                    </View>
                     <Subheading style={styles.companyNameText}>
                       {item.company}
                     </Subheading>
@@ -213,11 +233,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  pastJobsSection: {
+    paddingTop: 30,
+  },
   specificPastJob: {
     display: "flex",
     flexDirection: "row",
   },
-
   firstVerticalLineSection: {
     paddingTop: 7,
     height: "100%",
@@ -239,51 +262,67 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 7,
   },
-  innerCircle: {
+  circlesContainer: {
     position: "absolute",
-    zIndex: 2,
-    top: 24,
+    top: 33,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  innerCircle: {
+    zIndex: 3,
     width: 17,
     height: 17,
     backgroundColor: "black",
     borderRadius: 50,
+    position: "absolute",
   },
   outerCircle: {
-    position: "absolute",
-    zIndex: 1,
-    top: 21,
+    zIndex: 2,
     width: 23,
     height: 23,
     backgroundColor: "#ffbc07",
     borderRadius: 50,
+    position: "absolute",
   },
   firstVerticalLine: {
     borderTopLeftRadius: 99,
     borderTopRightRadius: 99,
     flex: 1,
     width: 5,
-    backgroundColor: "white",
+    backgroundColor: "#fcf6dd",
+    zIndex: 1,
   },
   verticalLine: {
     flex: 1,
     width: 5,
-    backgroundColor: "white",
+    backgroundColor: "#fcf6dd",
+    zIndex: 1,
   },
   lastVerticalLine: {
     borderBottomLeftRadius: 99,
     borderBottomRightRadius: 99,
     flex: 1,
     width: 5,
-    backgroundColor: "white",
+    backgroundColor: "#fcf6dd",
+    zIndex: 1,
   },
+
   jobDetailsSection: {
     flex: 1,
     display: "flex",
     borderBottomWidth: 1,
     borderBottomColor: "black",
+    marginRight: 25,
+  },
+  lastJobDetailsSection: {
+    flex: 1,
+    display: "flex",
+    marginRight: 25,
   },
   jobDetailsOpened: {
     display: "flex",
+    paddingBottom: 15,
   },
   jobDetailsClosed: {
     display: "none",
@@ -292,10 +331,18 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
   },
+  jobTitleContainer: {
+    display: "flex",
+  },
   jobTitleText: {
     marginTop: 0,
     marginBottom: 0,
     lineHeight: 20,
+  },
+  angleDownIcon: {
+    position: "absolute",
+    top: -8,
+    alignSelf: "flex-end",
   },
   companyNameText: {
     marginTop: 0,
