@@ -52,16 +52,16 @@ const Resume = () => {
   ]);
   const [activeAccordions, setActiveAccordions] = useState([]);
   const [skills] = useState([
-    "Illustration",
-    "Graphic Design",
-    "Branding",
-    "UI/UX Design",
-    "Web Design",
-    "Web Development",
-    "Photography",
-    "Creative Direction",
-    "Advertising",
-    "Layout",
+    "ILLUSTRATION",
+    "GRAPHIC DESIGN",
+    "BRANDING",
+    "UI/UX DESIGN",
+    "WEB DESIGN",
+    "WEB DEVELOPMENT",
+    "PHOTOGRAPHY",
+    "CREATIVE DIRECTION",
+    "ADVERTISING",
+    "LAYOUT",
   ]);
 
   const onAccordionClick = (i) => {
@@ -112,12 +112,18 @@ const Resume = () => {
         <View style={styles.experienceDetailsSection}>
           <View style={styles.experienceAndAvailabilitySection}>
             <View style={styles.yearsOfExperienceSection}>
-              <Title style={styles.name}>8 YRS</Title>
-              <Subheading style={styles.jobTitle}>EXPERIENCE</Subheading>
+              <Title style={styles.name}>
+                8 <Text style={{ fontSize: 20 }}>YRS</Text>
+              </Title>
+              <Subheading style={styles.experienceAndAvailabilitySubtitles}>
+                EXPERIENCE
+              </Subheading>
             </View>
             <View style={styles.availabilitySection}>
-              <Title style={styles.name}>NOW</Title>
-              <Subheading style={styles.jobTitle}>AVAILABILITY</Subheading>
+              <Title style={styles.name}>Now</Title>
+              <Subheading style={styles.experienceAndAvailabilitySubtitles}>
+                AVAILABILITY
+              </Subheading>
             </View>
           </View>
           <View style={styles.pastJobsSection}>
@@ -170,14 +176,14 @@ const Resume = () => {
                         size={30}
                       />
                     </View>
-                    <Subheading style={styles.companyNameText}>
+                    <Subheading style={styles.subtitleText}>
                       {item.company}
                     </Subheading>
                     <Paragraph
                       style={
                         activeAccordions.includes(i)
                           ? styles.jobDetailsOpened
-                          : styles.jobDetailsClosed
+                          : styles.hidden
                       }
                     >
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -201,19 +207,76 @@ const Resume = () => {
                 ></Image> */}
               </View>
               <View style={styles.focusedSkillsSection}>
-                <Title style={styles.focusedSkill}>Illustration</Title>
-                <Title style={styles.focusedSkill}>Graphic Design</Title>
-                <Title style={styles.focusedSkill}>Branding</Title>
+                <View style={styles.focusedSkillContainer}>
+                  <Title style={styles.focusedSkill}>Illustration</Title>
+                </View>
+                <View style={styles.focusedSkillContainer}>
+                  <Title style={styles.focusedSkill}>Graphic Design</Title>
+                </View>
+                <View style={styles.focusedSkillContainer}>
+                  <Title style={styles.focusedSkill}>Branding</Title>
+                </View>
               </View>
             </View>
             <View style={styles.skillsListSection}>
               {skills.map((skill, i) => (
                 <View key={i} style={styles.skillContainer}>
-                  <Text>{skill}</Text>
-                  <Text style={styles.bulletPoint}>&bull;</Text>
+                  <Text style={styles.skillText}>{skill}</Text>
+                  <Text
+                    style={
+                      i === skills.length - 1
+                        ? styles.hidden
+                        : styles.bulletPoint
+                    }
+                  ></Text>
                 </View>
               ))}
             </View>
+          </View>
+          <View style={styles.educationSection}>
+            <Title style={styles.educationTitle}>EDUCATION</Title>
+            <View style={styles.educationItemContainer}>
+              <View style={styles.degreeTypeAcronymContainer}>
+                <Text style={styles.degreeTypeAcronym}>BFA</Text>
+              </View>
+              <View style={styles.educationDetails}>
+                <Subheading style={styles.monthsText}>2010 -2014</Subheading>
+                <Title>University of Georgia</Title>
+                <Subheading
+                  style={[styles.subtitleText, styles.degreeTypeText]}
+                >
+                  Bachelor of Fine Arts
+                </Subheading>
+              </View>
+            </View>
+            <View style={styles.educationItemContainer}>
+              <View style={styles.degreeTypeAcronymContainer}>
+                <Text style={styles.degreeTypeAcronym}>MFA</Text>
+              </View>
+              <View style={styles.educationDetails}>
+                <Subheading style={styles.monthsText}>2010 -2014</Subheading>
+                <Title>University of Georgia</Title>
+                <Subheading
+                  style={[styles.subtitleText, styles.degreeTypeText]}
+                >
+                  Masters of Fine Arts
+                </Subheading>
+              </View>
+            </View>
+          </View>
+          <View style={styles.bottomDescriptionText}>
+            <Paragraph style={styles.descriptionText}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </Paragraph>
+            <Paragraph style={styles.descriptionText}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </Paragraph>
           </View>
         </View>
       </View>
@@ -243,8 +306,9 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "bold",
     paddingBottom: 20,
+    lineHeight: 30,
   },
 
   experienceDetailsSection: {
@@ -268,6 +332,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  experienceAndAvailabilitySubtitles: {
+    fontSize: 15,
+    fontWeight: "bold",
   },
 
   pastJobsSection: {
@@ -365,12 +433,13 @@ const styles = StyleSheet.create({
     display: "flex",
     paddingBottom: 15,
   },
-  jobDetailsClosed: {
+  hidden: {
     display: "none",
   },
   monthsText: {
     marginTop: 0,
     marginBottom: 0,
+    paddingTop: 15,
   },
   jobTitleContainer: {
     display: "flex",
@@ -394,7 +463,7 @@ const styles = StyleSheet.create({
     display: "flex",
     borderBottomWidth: 1,
     borderBottomColor: "black",
-    paddingTop: 40,
+    paddingBottom: 40,
   },
   numberOfSkillsAndFocusedSkillsSection: {
     display: "flex",
@@ -403,21 +472,97 @@ const styles = StyleSheet.create({
   },
   numberOfSkillsContainer: {
     flex: 1,
-    backgroundColor: "red",
   },
   focusedSkillsSection: {
     flex: 1,
-    backgroundColor: "blue",
+    justifyContent: "center",
   },
-  bulletPoint: {},
+  focusedSkillContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+    paddingTop: 7,
+    paddingBottom: 7,
+  },
+  focusedSkill: {},
+  bulletPoint: {
+    width: 5,
+    height: 5,
+    backgroundColor: "black",
+    borderRadius: 50,
+    marginRight: 8,
+    marginLeft: 8,
+  },
   skillsListSection: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingRight: 20,
+    paddingLeft: 20,
   },
   skillContainer: {
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     flexDirection: "row",
+  },
+  skillText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    lineHeight: 20,
+    letterSpacing: 0.5,
+  },
+
+  educationSection: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 50,
+  },
+  educationTitle: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  educationItemContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    minHeight: 100,
+  },
+  degreeTypeAcronymContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+  },
+  degreeTypeAcronym: {
+    fontWeight: "bold",
+    fontSize: 26,
+  },
+  educationDetails: {
+    display: "flex",
+    justifyContent: "center",
+    flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+    marginRight: 20,
+  },
+  subtitleText: {
+    marginTop: 0,
+    paddingBottom: 15,
+    lineHeight: 20,
+  },
+  degreeTypeText: {
+    paddingBottom: 20,
+  },
+  bottomDescriptionText: {
+    backgroundColor: "#add9d9",
+    padding: 15,
+    paddingTop: 40,
   },
 });
 export default Resume;
