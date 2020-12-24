@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
   },
   circlesContainer: {
     position: "absolute",
-    top: 33,
+    top: 47,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
