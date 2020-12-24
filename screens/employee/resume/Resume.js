@@ -6,8 +6,8 @@ import { Title, Subheading, Paragraph } from "react-native-paper";
 const Resume = () => {
   const [pastJobs] = useState([
     {
-      months: "SEPTEMBER 2013 - APRIL 2015",
-      jobTitle: "Senior Web Developer",
+      months: "FIRST",
+      jobTitle: "FIRST",
       company: "Snapchat Inc.",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -33,8 +33,8 @@ const Resume = () => {
       nisi ut aliquip ex ea commodo consequat.`,
     },
     {
-      months: "SEPTEMBER 2013 - APRIL 2015",
-      jobTitle: "Senior Web Developer",
+      months: "LAST",
+      jobTitle: "LAST",
       company: "Snapchat Inc.",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -85,11 +85,10 @@ const Resume = () => {
               <Subheading style={styles.jobTitle}>AVAILABILITY</Subheading>
             </View>
           </View>
-          {/* hard code first and last job because of the white line */}
           <View style={styles.pastJobsSection}>
             <View style={styles.specificPastJob}>
               <View style={styles.firstVerticalLineSection}>
-                <View style={styles.lastVerticalLine}></View>
+                <View style={styles.firstVerticalLine}></View>
               </View>
               <View style={styles.jobDetailsSection}>
                 <Subheading style={styles.monthsText}>
@@ -196,12 +195,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
+
   firstVerticalLineSection: {
-    height: "100%",
+    minHeight: 100,
     width: 70,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
+    textAlign: "center",
+    position: "relative",
   },
   verticalLineSection: {
     height: "100%",
@@ -214,19 +214,19 @@ const styles = StyleSheet.create({
     width: 70,
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-start",
   },
   firstVerticalLine: {
-    height: "50%",
+    minHeight: 100,
     width: 5,
     backgroundColor: "white",
     borderRadius: 99,
+    alignSelf: "center",
+    bottom: 0,
   },
   verticalLine: {
-    height: "100%",
+    flex: 1,
     width: 5,
     backgroundColor: "white",
-    borderRadius: 99,
   },
   lastVerticalLine: {
     height: "50%",
@@ -234,6 +234,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 99,
   },
+
   jobDetailsSection: {
     flex: 1,
     display: "flex",
