@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Text,
 } from "react-native";
 import Header from "../../../components/header/Header";
 import { Title, Subheading, Paragraph } from "react-native-paper";
@@ -50,6 +51,18 @@ const Resume = () => {
     },
   ]);
   const [activeAccordions, setActiveAccordions] = useState([]);
+  const [skills] = useState([
+    "Illustration",
+    "Graphic Design",
+    "Branding",
+    "UI/UX Design",
+    "Web Design",
+    "Web Development",
+    "Photography",
+    "Creative Direction",
+    "Advertising",
+    "Layout",
+  ]);
 
   const onAccordionClick = (i) => {
     // if already been clicked, remove from array else, add it in
@@ -177,6 +190,31 @@ const Resume = () => {
               </TouchableOpacity>
             ))}
           </View>
+          <View style={styles.skillsSection}>
+            <View style={styles.numberOfSkillsAndFocusedSkillsSection}>
+              <View style={styles.numberOfSkillsContainer}>
+                {/* <Image
+                  style={styles.profileImage}
+                  source={{
+                    uri: "https://imgur.com/a/YY0Bs2z",
+                  }}
+                ></Image> */}
+              </View>
+              <View style={styles.focusedSkillsSection}>
+                <Title style={styles.focusedSkill}>Illustration</Title>
+                <Title style={styles.focusedSkill}>Graphic Design</Title>
+                <Title style={styles.focusedSkill}>Branding</Title>
+              </View>
+            </View>
+            <View style={styles.skillsListSection}>
+              {skills.map((skill, i) => (
+                <View key={i} style={styles.skillContainer}>
+                  <Text>{skill}</Text>
+                  <Text style={styles.bulletPoint}>&bull;</Text>
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -208,16 +246,14 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     paddingBottom: 20,
   },
+
   experienceDetailsSection: {
     backgroundColor: "#ffbc07",
-    minHeight: 500,
   },
   experienceAndAvailabilitySection: {
     display: "flex",
     flexDirection: "row",
     height: 120,
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
   },
   yearsOfExperienceSection: {
     display: "flex",
@@ -236,6 +272,11 @@ const styles = StyleSheet.create({
 
   pastJobsSection: {
     paddingTop: 30,
+    paddingBottom: 30,
+    borderTopWidth: 1,
+    borderTopColor: "black",
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   },
   specificPastJob: {
     display: "flex",
@@ -262,29 +303,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 7,
   },
-  circlesContainer: {
-    position: "absolute",
-    top: 33,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  innerCircle: {
-    zIndex: 3,
-    width: 17,
-    height: 17,
-    backgroundColor: "black",
-    borderRadius: 50,
-    position: "absolute",
-  },
-  outerCircle: {
-    zIndex: 2,
-    width: 23,
-    height: 23,
-    backgroundColor: "#ffbc07",
-    borderRadius: 50,
-    position: "absolute",
-  },
   firstVerticalLine: {
     borderTopLeftRadius: 99,
     borderTopRightRadius: 99,
@@ -297,7 +315,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 5,
     backgroundColor: "#fcf6dd",
-    zIndex: 1,
   },
   lastVerticalLine: {
     borderBottomLeftRadius: 99,
@@ -306,6 +323,30 @@ const styles = StyleSheet.create({
     width: 5,
     backgroundColor: "#fcf6dd",
     zIndex: 1,
+  },
+  circlesContainer: {
+    position: "absolute",
+    top: 33,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2,
+  },
+  innerCircle: {
+    zIndex: 5,
+    width: 17,
+    height: 17,
+    backgroundColor: "black",
+    borderRadius: 50,
+    position: "absolute",
+  },
+  outerCircle: {
+    zIndex: 4,
+    width: 23,
+    height: 23,
+    backgroundColor: "#ffbc07",
+    borderRadius: 50,
+    position: "absolute",
   },
 
   jobDetailsSection: {
@@ -347,6 +388,36 @@ const styles = StyleSheet.create({
   companyNameText: {
     marginTop: 0,
     lineHeight: 20,
+  },
+
+  skillsSection: {
+    display: "flex",
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+    paddingTop: 40,
+  },
+  numberOfSkillsAndFocusedSkillsSection: {
+    display: "flex",
+    flexDirection: "row",
+    minHeight: 200,
+  },
+  numberOfSkillsContainer: {
+    flex: 1,
+    backgroundColor: "red",
+  },
+  focusedSkillsSection: {
+    flex: 1,
+    backgroundColor: "blue",
+  },
+  bulletPoint: {},
+  skillsListSection: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  skillContainer: {
+    display: "flex",
+    flexDirection: "row",
   },
 });
 export default Resume;
