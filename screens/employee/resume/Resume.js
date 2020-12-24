@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Header from "../../../components/header/Header";
 import { Title, Subheading, Paragraph } from "react-native-paper";
+import { abs } from "react-native-reanimated";
 
 const Resume = () => {
   const [pastJobs] = useState([
@@ -119,6 +120,8 @@ const Resume = () => {
                         : styles.verticalLineSection
                     }
                   >
+                    <View style={styles.innerCircle}></View>
+                    <View style={styles.outerCircle}></View>
                     <View
                       style={
                         i === 0
@@ -216,6 +219,7 @@ const styles = StyleSheet.create({
   },
 
   firstVerticalLineSection: {
+    paddingTop: 7,
     height: "100%",
     width: 70,
     display: "flex",
@@ -226,17 +230,39 @@ const styles = StyleSheet.create({
     width: 70,
     display: "flex",
     alignItems: "center",
+    position: "relative",
   },
   lastVerticalLineSection: {
     height: "100%",
     width: 70,
     display: "flex",
     alignItems: "center",
+    paddingBottom: 7,
+  },
+  innerCircle: {
+    position: "absolute",
+    zIndex: 2,
+    top: 24,
+    width: 17,
+    height: 17,
+    backgroundColor: "black",
+    borderRadius: 50,
+  },
+  outerCircle: {
+    position: "absolute",
+    zIndex: 1,
+    top: 21,
+    width: 23,
+    height: 23,
+    backgroundColor: "#ffbc07",
+    borderRadius: 50,
   },
   firstVerticalLine: {
+    borderTopLeftRadius: 99,
+    borderTopRightRadius: 99,
+    flex: 1,
     width: 5,
     backgroundColor: "white",
-    borderRadius: 99,
   },
   verticalLine: {
     flex: 1,
@@ -244,10 +270,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   lastVerticalLine: {
-    height: "50%",
+    borderBottomLeftRadius: 99,
+    borderBottomRightRadius: 99,
+    flex: 1,
     width: 5,
     backgroundColor: "white",
-    borderRadius: 99,
   },
   jobDetailsSection: {
     flex: 1,
@@ -261,7 +288,10 @@ const styles = StyleSheet.create({
   jobDetailsClosed: {
     display: "none",
   },
-  monthsText: {},
+  monthsText: {
+    marginTop: 0,
+    marginBottom: 0,
+  },
   jobTitleText: {
     marginTop: 0,
     marginBottom: 0,
