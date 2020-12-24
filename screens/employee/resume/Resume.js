@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Header from "../../../components/header/Header";
 import { Title, Subheading, Paragraph } from "react-native-paper";
 
@@ -42,6 +48,21 @@ const Resume = () => {
       nisi ut aliquip ex ea commodo consequat.`,
     },
   ]);
+  const [activeAccordions, setActiveAccordions] = useState([]);
+
+  const onAccordionClick = (i) => {
+    // if already been clicked, remove from array else, add it in
+    if (activeAccordions.includes(i)) {
+      const index = activeAccordions.indexOf(i);
+      if (index > -1) {
+        const activeAccordionsCopy = activeAccordions;
+        activeAccordionsCopy.splice(index, 1);
+        setActiveAccordions([...activeAccordionsCopy]);
+      }
+    } else {
+      setActiveAccordions([...activeAccordions, i]);
+    }
+  };
 
   return (
     <ScrollView style={styles.peopleWhoLikedYou}>
@@ -86,54 +107,52 @@ const Resume = () => {
             </View>
           </View>
           <View style={styles.pastJobsSection}>
-            <View style={styles.specificPastJob}>
-              <View style={styles.firstVerticalLineSection}>
-                <View style={styles.firstVerticalLine}></View>
-              </View>
-              <View style={styles.jobDetailsSection}>
-                <Subheading style={styles.monthsText}>
-                  {pastJobs[0].months}
-                </Subheading>
-                <Title style={styles.jobTitleText}>
-                  {pastJobs[0].jobTitle}
-                </Title>
-                <Subheading style={styles.companyNameText}>
-                  {pastJobs[0].company}
-                </Subheading>
-              </View>
-            </View>
             {pastJobs.map((item, i) => (
-              <View style={styles.specificPastJob} key={i}>
-                <View style={styles.verticalLineSection}>
-                  <View style={styles.verticalLine}></View>
+              <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
+                <View style={styles.specificPastJob}>
+                  <View
+                    style={
+                      i === 0
+                        ? styles.firstVerticalLineSection
+                        : i === pastJobs.length - 1
+                        ? styles.lastVerticalLineSection
+                        : styles.verticalLineSection
+                    }
+                  >
+                    <View
+                      style={
+                        i === 0
+                          ? styles.firstVerticalLine
+                          : i === pastJobs.length - 1
+                          ? styles.lastVerticalLine
+                          : styles.verticalLine
+                      }
+                    ></View>
+                  </View>
+                  <View style={styles.jobDetailsSection}>
+                    <Subheading style={styles.monthsText}>
+                      {item.months}
+                    </Subheading>
+                    <Title style={styles.jobTitleText}>{item.jobTitle}</Title>
+                    <Subheading style={styles.companyNameText}>
+                      {item.company}
+                    </Subheading>
+                    <Paragraph
+                      style={
+                        activeAccordions.includes(i)
+                          ? styles.jobDetailsOpened
+                          : styles.jobDetailsClosed
+                      }
+                    >
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </Paragraph>
+                  </View>
                 </View>
-                <View style={styles.jobDetailsSection}>
-                  <Subheading style={styles.monthsText}>
-                    {item.months}
-                  </Subheading>
-                  <Title style={styles.jobTitleText}>{item.jobTitle}</Title>
-                  <Subheading style={styles.companyNameText}>
-                    {item.company}
-                  </Subheading>
-                </View>
-              </View>
+              </TouchableOpacity>
             ))}
-            <View style={styles.specificPastJob}>
-              <View style={styles.lastVerticalLineSection}>
-                <View style={styles.lastVerticalLine}></View>
-              </View>
-              <View style={styles.jobDetailsSection}>
-                <Subheading style={styles.monthsText}>
-                  {pastJobs[pastJobs.length - 1].months}
-                </Subheading>
-                <Title style={styles.jobTitleText}>
-                  {pastJobs[pastJobs.length - 1].jobTitle}
-                </Title>
-                <Subheading style={styles.companyNameText}>
-                  {pastJobs[pastJobs.length - 1].company}
-                </Subheading>
-              </View>
-            </View>
           </View>
         </View>
       </View>
@@ -197,11 +216,10 @@ const styles = StyleSheet.create({
   },
 
   firstVerticalLineSection: {
-    minHeight: 100,
+    height: "100%",
     width: 70,
     display: "flex",
-    textAlign: "center",
-    position: "relative",
+    alignItems: "center",
   },
   verticalLineSection: {
     height: "100%",
@@ -216,12 +234,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   firstVerticalLine: {
-    minHeight: 100,
     width: 5,
     backgroundColor: "white",
     borderRadius: 99,
-    alignSelf: "center",
-    bottom: 0,
   },
   verticalLine: {
     flex: 1,
@@ -234,12 +249,17 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 99,
   },
-
   jobDetailsSection: {
     flex: 1,
     display: "flex",
     borderBottomWidth: 1,
     borderBottomColor: "black",
+  },
+  jobDetailsOpened: {
+    display: "flex",
+  },
+  jobDetailsClosed: {
+    display: "none",
   },
   monthsText: {},
   jobTitleText: {
