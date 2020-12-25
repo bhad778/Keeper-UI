@@ -199,12 +199,17 @@ const Resume = () => {
           <View style={styles.skillsSection}>
             <View style={styles.numberOfSkillsAndFocusedSkillsSection}>
               <View style={styles.numberOfSkillsContainer}>
-                {/* <Image
-                  style={styles.profileImage}
-                  source={{
-                    uri: "https://imgur.com/a/YY0Bs2z",
-                  }}
-                ></Image> */}
+                <View style={styles.imageAndTextContainer}>
+                  <Text style={styles.skillCircleNumber}>12</Text>
+                  <Text style={styles.skillCircleImageSubtext}>Skills</Text>
+                  <Image
+                    style={styles.skillCircleImage}
+                    source={{
+                      uri:
+                        "https://rileymann.com/wp-content/uploads/2020/12/pare_skills-circle.png",
+                    }}
+                  ></Image>
+                </View>
               </View>
               <View style={styles.focusedSkillsSection}>
                 <View style={styles.focusedSkillContainer}>
@@ -472,6 +477,32 @@ const styles = StyleSheet.create({
   },
   numberOfSkillsContainer: {
     flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imageAndTextContainer: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  skillCircleNumber: {
+    position: "absolute",
+    right: 54,
+    top: 52,
+    fontSize: 60,
+  },
+  skillCircleImageSubtext: {
+    position: "absolute",
+    top: 110,
+    right: 48,
+    fontWeight: "500",
+    fontSize: 30,
+  },
+  skillCircleImage: {
+    height: 160,
+    width: 156,
   },
   focusedSkillsSection: {
     flex: 1,
