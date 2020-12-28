@@ -42,6 +42,7 @@ const JobBoard = ({ navigation }) => {
             {jobs &&
               jobs.map((item, i) => (
                 <Card
+                  key={i}
                   style={{
                     position: "relative",
                     backgroundColor: item.color,
@@ -54,9 +55,7 @@ const JobBoard = ({ navigation }) => {
                   }}
                   onPress={() => goToFutureEmployees(i)}
                 >
-                  <Title style={{ fontSize: 40 }}>
-                    <strong>{item.title}</strong>
-                  </Title>
+                  <Title style={{ fontSize: 40 }}>{item.title}</Title>
                 </Card>
               ))}
             <FAB style={styles.fab} icon="plus" onPress={goToAddJobScreen} />
