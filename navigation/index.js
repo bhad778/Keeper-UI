@@ -34,15 +34,16 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Resume"
-        component={Resume}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="JobBoard"
         component={JobBoard}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="Resume"
+        component={Resume}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="RootEmployee"
