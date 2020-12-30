@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Card, Title, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
-import Resume from "../../../components/header/Header";
+import Header from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
   const [jobs, setJobs] = useState();
 
@@ -19,6 +19,7 @@ const JobBoard = ({ navigation }) => {
       distance: 100000,
     }).then((data) => {
       setJobs(data);
+      console.log(jobs);
     });
   }, []);
 
@@ -31,9 +32,7 @@ const JobBoard = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Resume screenTitle="Job Board" />
-      </View>
+      <Header screenTitle="Job Board" />
 
       <View style={styles.jobOptionsSection}>
         <ScrollView style={styles.scrollView}>
@@ -57,7 +56,7 @@ const JobBoard = ({ navigation }) => {
                   onPress={() => goToFutureEmployees(i)}
                 >
                   <Card.Content>
-                    <Title style={{ fontSize: 40 }}>
+                    <Title style={{ fontSize: 40, lineHeight: 50 }}>
                       <strong>{item.title}</strong>
                     </Title>
                   </Card.Content>
@@ -73,13 +72,8 @@ const JobBoard = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
-  headerContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
 
-  jobOptionsSection: { flex: 3, marginTop: 50 },
+  jobOptionsSection: { flex: 6, marginTop: 50 },
   flexDirectionRow: {
     position: "absolute",
     flexDirection: "row",
