@@ -1,38 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { Avatar } from "react-native-paper";
+import ChatService from "../../services/ChatService";
 
 const Messages = ({ route, navigation }) => {
   const { pic, title } = route.params;
   const onPress = () => {
     navigation.goBack();
   };
-  const [messages, setMessages] = useState([
-    /**
-     * Mock message data
-     */
-    // example of system message
-    {
-      _id: 0,
-      text: "New room created.",
-      createdAt: new Date().getTime(),
-      system: true,
-    },
-    // example of chat message
-    {
-      _id: 1,
-      text: "Henlo!",
-      createdAt: new Date().getTime(),
-      user: {
-        _id: 2,
-        name: "Test User",
-        avatar: " ",
-      },
-    },
-  ]);
+  const [messages, setMessages] = useState();
+
+  useEffect(() => {
+    ChatService.getConversationMessages({
+      conversationId: "5feb67c795a11711d901e214",
+    }).then((data) => {
+      data.sort(function(a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setMessages(data);
+    });
+  }, []);
+
   const handleSend = (newMessage = []) => {
+    newMessage[0].conversationId = "5feb67c795a11711d901e214";
+    delete newMessage[0]._id;
+    ChatService.addMessage({
+      text: "Yo you here yet?",
+      createdAt: "2020-12-30T03:54:34.828Z",
+      conversationId: "5feb67c795a11711d901e214",
+      user: { _id: "ssss@fffff.com" },
+    });
     setMessages(GiftedChat.append(messages, newMessage));
   };
 
@@ -58,7 +59,39 @@ const Messages = ({ route, navigation }) => {
         <GiftedChat
           messages={messages}
           onSend={(newMessage) => handleSend(newMessage)}
-          user={{ _id: 1 }}
+          user={{ _id: "ssss@fffff.com" }}
+          renderBubble={(props) => {
+            return (
+              <Bubble
+                {...props}
+                textStyle={{
+                  left: {
+                    color: "black",
+                    fontWeight: "600",
+                    display: "flex",
+                    marginLeft: 6,
+                    marginRight: 6,
+                  },
+                  right: {
+                    color: "white",
+                    fontWeight: "600",
+                    display: "flex",
+                    marginLeft: 6,
+                    marginRight: 6,
+                  },
+                }}
+                wrapperStyle={{
+                  left: {
+                    backgroundColor: "#add9d9",
+                    left: -40,
+                  },
+                  right: {
+                    backgroundColor: "#016568",
+                  },
+                }}
+              />
+            );
+          }}
         />
       </View>
     </View>
