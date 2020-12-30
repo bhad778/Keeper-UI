@@ -61,11 +61,6 @@ function RootNavigator() {
         name="Matched"
         component={Matched}
       />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Messages"
-        component={Messages}
-      />
       <Stack.Screen name="AddJob" component={AddJob} />
       <Stack.Screen
         name="EmployeesThatLikedJob"

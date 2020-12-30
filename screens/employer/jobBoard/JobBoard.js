@@ -6,7 +6,7 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import { Button, Card, Title, FAB } from "react-native-paper";
+import { Card, Title, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import Resume from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
@@ -19,7 +19,6 @@ const JobBoard = ({ navigation }) => {
       distance: 100000,
     }).then((data) => {
       setJobs(data);
-      console.log(data);
     });
   }, []);
 
@@ -43,6 +42,7 @@ const JobBoard = ({ navigation }) => {
             {jobs &&
               jobs.map((item, i) => (
                 <Card
+                  key={i}
                   style={{
                     position: "relative",
                     backgroundColor: item.color,
