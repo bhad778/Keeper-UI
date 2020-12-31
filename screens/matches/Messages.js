@@ -38,6 +38,7 @@ const Messages = ({ navigation }) => {
         screenTitle="Megan Kelly"
         navigation={navigation}
         type="outlined"
+        withBackButton
       ></Header>
       <View style={styles.chatContainer}>
         <GiftedChat
