@@ -45,15 +45,11 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
-        name="Messages"
-        component={Messages}
-      />
-      <Stack.Screen
         name="Resume"
         component={Resume}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="RootEmployee"

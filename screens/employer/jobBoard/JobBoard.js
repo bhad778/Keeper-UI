@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Card, Title, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
-
+import Header from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
   const [jobs, setJobs] = useState();
 
@@ -19,6 +19,7 @@ const JobBoard = ({ navigation }) => {
       distance: 100000,
     }).then((data) => {
       setJobs(data);
+      console.log(jobs);
     });
   }, []);
 
@@ -31,9 +32,8 @@ const JobBoard = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Job Board</Text>
-      </View>
+      <Header screenTitle="Job Board" />
+
       <View style={styles.jobOptionsSection}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.flexDirectionRow}>
@@ -48,13 +48,18 @@ const JobBoard = ({ navigation }) => {
                     borderRadius: 20,
                     borderColor: "black",
                     borderWidth: 1,
+                    alignItems: "center",
                     margin: 15,
                     height: 200,
                     width: "40%",
                   }}
                   onPress={() => goToFutureEmployees(i)}
                 >
-                  <Title style={{ fontSize: 40 }}>{item.title}</Title>
+                  <Card.Content>
+                    <Title style={{ fontSize: 40, lineHeight: 50 }}>
+                      <strong>{item.title}</strong>
+                    </Title>
+                  </Card.Content>
                 </Card>
               ))}
             <FAB style={styles.fab} icon="plus" onPress={goToAddJobScreen} />
@@ -67,23 +72,18 @@ const JobBoard = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
-  header: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  scrollView: { flex: 6 },
-  headerText: { fontSize: 20 },
-  jobOptionsSection: { flex: 6 },
+
+  jobOptionsSection: { flex: 6, marginTop: 50 },
   flexDirectionRow: {
     position: "absolute",
     flexDirection: "row",
     flexWrap: "wrap",
+    height: "100%",
     justifyContent: "center",
   },
   fab: {
     position: "absolute",
-    top: 600,
+    bottom: -800,
     backgroundColor: "black",
   },
 
