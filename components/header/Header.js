@@ -4,7 +4,13 @@ import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 
-const Header = ({ screenTitle, children, navigation, type }) => {
+const Header = ({
+  screenTitle,
+  children,
+  navigation,
+  type,
+  withBackButton,
+}) => {
   const goBack = () => {
     navigation.goBack();
   };
@@ -27,9 +33,11 @@ const Header = ({ screenTitle, children, navigation, type }) => {
       </View>
       {!children && (
         <View style={styles.rightSection}>
-          <TouchableOpacity style={styles.backButton} onPress={goBack}>
-            <FontAwesome color="black" name="arrow-left" size={30} />
-          </TouchableOpacity>
+          {withBackButton && (
+            <TouchableOpacity style={styles.backButton} onPress={goBack}>
+              <FontAwesome color="black" name="arrow-left" size={30} />
+            </TouchableOpacity>
+          )}
         </View>
       )}
       {children && children}
