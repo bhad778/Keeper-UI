@@ -37,6 +37,7 @@ const Resume = ({ screenTitle, children, navigation }) => {
 const styles = StyleSheet.create({
   appBar: {
     backgroundColor: "#add9d9",
+    elevation: 0,
   },
   leftSection: {
     height: "100%",
