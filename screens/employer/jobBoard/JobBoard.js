@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-} from "react-native";
-import { Card, Title, FAB } from "react-native-paper";
+import { ActivityIndicator, StyleSheet, View, ScrollView } from "react-native";
+import { Card, Title, Text, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import Header from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
@@ -57,7 +51,7 @@ const JobBoard = ({ navigation }) => {
                 >
                   <Card.Content>
                     <Title style={{ fontSize: 40, lineHeight: 50 }}>
-                      <strong>{item.title}</strong>
+                      {item.title}
                     </Title>
                   </Card.Content>
                 </Card>
