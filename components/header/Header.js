@@ -4,13 +4,15 @@ import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 
-const Resume = ({ screenTitle, children, navigation }) => {
+const Header = ({ screenTitle, children, navigation, type }) => {
   const goBack = () => {
     navigation.goBack();
   };
 
   return (
-    <Appbar.Header style={styles.appBar}>
+    <Appbar.Header
+      style={type === "outlined" ? styles.outlinedAppBar : styles.filledAppBar}
+    >
       <View style={styles.leftSection}>
         <Image
           source={{
@@ -35,9 +37,16 @@ const Resume = ({ screenTitle, children, navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  appBar: {
+  filledAppBar: {
     backgroundColor: "#add9d9",
     elevation: 0,
+    height: 80,
+  },
+  outlinedAppBar: {
+    backgroundColor: "white",
+    elevation: 0,
+    borderBottomWidth: 1,
+    height: 80,
   },
   leftSection: {
     height: "100%",
@@ -71,4 +80,4 @@ const styles = StyleSheet.create({
     overflow: "visible",
   },
 });
-export default Resume;
+export default Header;

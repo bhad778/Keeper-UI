@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { StyleSheet, View } from "react-native";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { Avatar } from "react-native-paper";
 import ChatService from "../../services/ChatService";
+import Header from "../../components/header/Header";
 
-const Messages = ({ route, navigation }) => {
-  const { pic, title } = route.params;
-  const onPress = () => {
-    navigation.goBack();
-  };
+const Messages = ({ navigation }) => {
   const [messages, setMessages] = useState();
 
   useEffect(() => {
@@ -39,22 +34,11 @@ const Messages = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={onPress}>
-          <FontAwesome color="#808080" size={30} />
-        </TouchableOpacity>
-        <View style={styles.avatarImage}>
-          <Avatar.Image
-            size={40}
-            source={{
-              uri: pic,
-            }}
-          />
-        </View>
-        <View>
-          <Text style={styles.titleText}>{title}</Text>
-        </View>
-      </View>
+      <Header
+        screenTitle="Megan Kelly"
+        navigation={navigation}
+        type="outlined"
+      ></Header>
       <View style={styles.chatContainer}>
         <GiftedChat
           messages={messages}
