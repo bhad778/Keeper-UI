@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, View, ScrollView } from "react-native";
-import { Card, Title, Text, FAB } from "react-native-paper";
+import { Card, Title, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import Header from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
