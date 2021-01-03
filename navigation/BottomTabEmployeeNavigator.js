@@ -34,8 +34,10 @@ export default function BottomTabNavigator() {
     <Tab.Navigator
       initialRouteName={"  "}
       tabBarOptions={{
-        activeTintColor: Colors[colorScheme].tint,
-        style: { borderTopWidth: 0, height: 75 },
+        style: {
+          borderTopWidth: 0,
+        },
+        activeTintColor: "#acd9d9",
       }}
     >
       <Tab.Screen

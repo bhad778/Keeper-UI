@@ -2,7 +2,7 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Appbar, Text } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const Header = ({
   screenTitle,
@@ -35,7 +35,7 @@ const Header = ({
         <View style={styles.rightSection}>
           {withBackButton && (
             <TouchableOpacity style={styles.backButton} onPress={goBack}>
-              <FontAwesome color="black" name="arrow-left" size={30} />
+              <Icon name="arrow-back" size={40} />
             </TouchableOpacity>
           )}
         </View>

@@ -1,11 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
-import { FontAwesome } from "@expo/vector-icons";
 import { useColorScheme, StyleSheet } from "react-native";
 import EmployerDiscover from "../screens/employer/employerDiscover/EmployerDiscover";
 import Profile from "../screens/profile/Profile";
-
 import Matches from "../screens/matches/Matches";
+import Icon from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,8 +33,10 @@ export default function BottomTabNavigator() {
     <Tab.Navigator
       initialRouteName={"  "}
       tabBarOptions={{
-        activeTintColor: Colors[colorScheme].tint,
-        style: { borderTopWidth: 0, height: 75 },
+        style: {
+          borderTopWidth: 0,
+        },
+        activeTintColor: "#acd9d9",
       }}
     >
       <Tab.Screen
@@ -43,12 +44,7 @@ export default function BottomTabNavigator() {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome
-              style={styles.tabs}
-              name="glass"
-              size={30}
-              color={color}
-            />
+            <Icon name="sliders" size={30} color={color} />
           ),
         }}
       />
@@ -57,12 +53,7 @@ export default function BottomTabNavigator() {
         component={EmployerDiscover}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome
-              style={styles.tabs}
-              name="glass"
-              size={30}
-              color={color}
-            />
+            <Icon style={styles.tabs} name="search" size={30} color={color} />
           ),
         }}
       />
@@ -71,9 +62,9 @@ export default function BottomTabNavigator() {
         component={Matches}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome
+            <Icon
               style={styles.tabs}
-              name="home"
+              name="message-square"
               size={30}
               color={color}
             />
