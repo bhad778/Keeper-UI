@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import Header from "../../components/header/Header";
 import Settings from "../../modals/Settings";
 import ProfileEdit from "../../modals/ProfileEdit";
 import ProfileView from "../../modals/ProfileView";
-import { FontAwesome } from "@expo/vector-icons";
 
 const Profile = () => {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
@@ -25,14 +26,7 @@ const Profile = () => {
         profileViewModalVisible={profileViewModalVisible}
         setProfileViewModalVisible={setProfileViewModalVisible}
       />
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => setSettingsModalVisible(true)}
-          style={styles.settingsButton}
-        >
-          <FontAwesome name="glass" fontSize={30} color="black" />
-        </TouchableOpacity>
-      </View>
+      <Header screenTitle="Design Director" withEditButton />
       <View style={styles.profileSection}>
         <View style={styles.imageContainer}>
           <TouchableOpacity
@@ -54,7 +48,7 @@ const Profile = () => {
             style={styles.editModalButton}
             onPress={() => setProfileEditModalVisible(true)}
           >
-            <FontAwesome name="glass" fontSize={40} color="black" />
+            <Icon name="create" size={30} />
           </TouchableOpacity>
         </View>
         <Text style={styles.profileImageText}>Tap to edit profile</Text>
@@ -70,14 +64,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
   },
-
-  header: {
-    flex: 1,
-    justifyContent: "flex-end",
-    width: "90%",
-    alignItems: "flex-start",
-  },
-
   editModalButtonContainer: {
     width: 60,
     height: 60,

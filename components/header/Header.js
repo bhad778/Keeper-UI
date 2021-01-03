@@ -10,6 +10,7 @@ const Header = ({
   navigation,
   type,
   withBackButton,
+  withEditButton,
 }) => {
   const goBack = () => {
     navigation.goBack();
@@ -34,13 +35,20 @@ const Header = ({
       {!children && (
         <View style={styles.rightSection}>
           {withBackButton && (
-            <TouchableOpacity style={styles.backButton} onPress={goBack}>
+            <TouchableOpacity onPress={goBack}>
               <Icon name="arrow-back" size={40} />
+            </TouchableOpacity>
+          )}
+          {withEditButton && (
+            <TouchableOpacity onPress={goBack}>
+              <Icon name="create" size={40} />
             </TouchableOpacity>
           )}
         </View>
       )}
-      {children && children}
+      {children && (
+        <View style={styles.rightHeaderIconContainer}>{children}</View>
+      )}
     </Appbar.Header>
   );
 };
@@ -49,12 +57,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#add9d9",
     elevation: 0,
     height: 80,
+    width: "100%",
   },
   outlinedAppBar: {
     backgroundColor: "white",
     elevation: 0,
     borderBottomWidth: 1,
     height: 80,
+    width: "100%",
   },
   leftSection: {
     height: "100%",
@@ -79,6 +89,9 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 30,
+  },
+  rightHeaderIconContainer: {
+    paddingRight: 10,
   },
   logoButton: {
     height: 50,
