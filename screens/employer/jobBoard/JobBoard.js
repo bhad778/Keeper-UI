@@ -13,7 +13,6 @@ const JobBoard = ({ navigation }) => {
       distance: 100000,
     }).then((data) => {
       setJobs(data);
-      console.log(jobs);
     });
   }, []);
 
