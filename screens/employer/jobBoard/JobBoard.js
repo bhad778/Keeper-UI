@@ -26,57 +26,59 @@ const JobBoard = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header screenTitle="Job Board" />
-
-      <View style={styles.jobOptionsSection}>
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.flexDirectionRow}>
-            {!jobs && <ActivityIndicator size="large" />}
-            {jobs &&
-              jobs.map((item, i) => (
-                <Card
-                  key={i}
-                  style={{
-                    position: "relative",
-                    backgroundColor: item.color,
-                    borderRadius: 20,
-                    borderColor: "black",
-                    borderWidth: 1,
-                    alignItems: "center",
-                    margin: 15,
-                    height: 200,
-                    width: "40%",
-                  }}
-                  onPress={() => goToFutureEmployees(i)}
-                >
-                  <Card.Content>
-                    <Title style={{ fontSize: 40, lineHeight: 50 }}>
-                      {item.title}
-                    </Title>
-                  </Card.Content>
-                </Card>
-              ))}
-            <FAB style={styles.fab} icon="plus" onPress={goToAddJobScreen} />
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        {!jobs && <ActivityIndicator size="large" />}
+        {jobs &&
+          jobs.map((item, i) => (
+            <Card
+              key={i}
+              style={{
+                position: "relative",
+                backgroundColor: item.color,
+                borderRadius: 20,
+                borderColor: "black",
+                borderWidth: 1,
+                alignItems: "center",
+                height: 200,
+                margin: 10,
+                width: "45%",
+              }}
+              onPress={() => goToFutureEmployees(i)}
+            >
+              <Card.Content>
+                <Title style={{ fontSize: 35, lineHeight: 50 }}>
+                  {item.title}
+                </Title>
+              </Card.Content>
+            </Card>
+          ))}
+        <View style={styles.fabContainer}>
+          <FAB style={styles.fab} icon="plus" onPress={goToAddJobScreen} />
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white" },
-
-  jobOptionsSection: { flex: 6, marginTop: 50 },
-  flexDirectionRow: {
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  scrollView: {
     position: "absolute",
     flexDirection: "row",
     flexWrap: "wrap",
     height: "100%",
-    justifyContent: "center",
+    alignItems: "flex-end",
+  },
+  fabContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   fab: {
     position: "absolute",
-    bottom: -800,
     backgroundColor: "black",
   },
 
