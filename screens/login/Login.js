@@ -12,7 +12,7 @@ import { Auth } from "aws-amplify";
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [user, setUser] = useState();
   // TODO sign in works now just need to take token and use it
   // also need to navigate to correct page
   // once signIn to aws is done then we must
@@ -22,6 +22,10 @@ const Login = ({ navigation }) => {
     try {
       let signInResponse = await Auth.signIn(email, password);
       console.log(signInResponse);
+      localStorage.setItem(
+        "secretToken",
+        signInResponse.signInUserSession.accessToken.jwtToken
+      );
     } catch (error) {
       console.log("error signing in", error);
     }

@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import Swiper from "react-native-deck-swiper";
-import { Button } from "react-native-paper";
-import { StyleSheet, Text, View, Image } from "react-native";
-import Filters from "../../../modals/Filters";
-import { FontAwesome } from "@expo/vector-icons";
 
+import { StyleSheet, View, Image } from "react-native";
+import Filters from "../../../modals/Filters";
+import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
+
+import Header from "../../../components/header/Header";
 export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filtersModal: false,
+      employeeInfoModal: false,
       cards: this.hotGirls,
       swipedAllCards: false,
       swipeDirection: "",
@@ -19,57 +21,50 @@ export default class Example extends Component {
 
   hotGirls = [
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc1",
+      img:
+        "https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*",
+      name: "Britney",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc2",
+      img:
+        "https://cdn.bulbagarden.net/upload/thumb/f/fb/Misty_SM.png/150px-Misty_SM.png",
+      name: "Misty",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc3",
+      img:
+        "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+      name: "Mary Jane",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc4",
+      img:
+        "https://www.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/38686/1522693188-9742-0876/url_large.png",
+      name: "Wendy",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc5",
+      img:
+        "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631",
+      name: "Padme",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc6",
+      img:
+        "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+      name: "Underworld",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc7",
+      img:
+        "https://i.pinimg.com/originals/c3/19/31/c3193181716088d176907ecf1f4d0ca8.jpg",
+      name: "Kairi",
     },
     {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc8",
-    },
-    {
-      img: "https://upload.wikimedia.org/wikipedia/en/1/1b/NPC_wojak_meme.png",
-      name: "npc10",
+      img:
+        "https://cdn.flickeringmyth.com/wp-content/uploads/2018/12/Rust-Creek-1-1-600x316.jpg",
+      name: "Rust Creek",
     },
   ];
   renderCard = (card) => {
     return (
       <View style={styles.card}>
         <Image style={styles.images} source={{ uri: card.img }} />
-        <View style={styles.chipsContainer}>
-          <Text style={styles.profileName}>{card.name}</Text>
-          <Text style={styles.infoOne}>
-            Somteimes I think about hoofing, but then again I could just
-            doof...or poof.
-          </Text>
-          <Text style={styles.infoTwo}>I said "hey"...no response.</Text>
-          <Text style={styles.infoThree}>
-            I just want you to sit on my lap, not asking for much.
-          </Text>
-        </View>
       </View>
     );
   };
@@ -93,6 +88,9 @@ export default class Example extends Component {
   filtersModalOn = (visible) => {
     this.setState({ filtersModal: visible });
   };
+  employeeInfoModalOn = (visible) => {
+    this.setState({ employeeInfoModal: visible });
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -100,50 +98,28 @@ export default class Example extends Component {
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
         />
-        <View style={styles.headerContainer}>
-          <View style={styles.discoverHeader}>
-            <View style={styles.headerNewMatchesButtonContainer}>
-              <Button
-                mode="text"
-                style={styles.newMatchButton}
-                onPress={() => {
-                  this.props.navigation.navigate("EmployeesThatLikedJob");
-                }}
-                color="black"
-              >
-                <FontAwesome name="glass" size={25} />
-              </Button>
-            </View>
-            <View style={styles.headerTextContainer}>
-              <Text style={styles.headerText}>Edge</Text>
-            </View>
-            <View style={styles.headerFilterButtonContainer}>
-              <Button
-                style={styles.filterButton}
-                mode="text"
-                color="black"
-                onPress={() => this.filtersModalOn(true)}
-              >
-                <FontAwesome size={25} />
-              </Button>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.swiper}>
+        <EmployeeInfoModal
+          employeeInfoModal={this.state.employeeInfoModal}
+          employeeInfoModalOn={this.employeeInfoModalOn}
+        />
+        <Header style={styles.header} />
+        <View style={styles.swiperContainer}>
           <Swiper
+            style={styles.swiper}
             ref={(swiper) => {
               this.swiper = swiper;
             }}
-            onSwiped={() => this.onSwiped("general")}
             onSwipedLeft={() => this.onSwiped("left")}
+            onTapCardDeadZone={200}
             onSwipedRight={() => this.swipeRight("Matched")}
             cards={this.state.cards}
             cardIndex={this.state.cardIndex}
-            cardVerticalMargin={80}
+            overlayOpacityHorizontalThreshold={0.5}
             renderCard={this.renderCard}
             onSwipedAll={this.onSwipedAllCards}
-            stackSize={3}
+            onTapCard={() => this.employeeInfoModalOn(true)}
+            verticalSwipe={false}
+            cardVerticalMargin={10}
             stackSeparation={0}
             backgroundColor="white"
             overlayLabels={{
@@ -185,7 +161,7 @@ export default class Example extends Component {
               },
             }}
             animateOverlayLabelsOpacity
-            animateCardOpacity
+            animateCardOpacity={false}
             swipeBackCard
           ></Swiper>
         </View>
@@ -198,44 +174,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  headerContainer: {
-    position: "absolute",
-    zIndex: 1,
-    width: "100%",
-    height: "13%",
-    alignItems: "center",
-  },
-  discoverHeader: {
-    flex: 1,
-    width: "90%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    backgroundColor: "white",
-  },
-  swiper: { flex: 5 },
-  headerNewMatchesButtonContainer: {
-    flex: 1,
+
+  peopleWhoLikeYou: {
+    position: "relative",
+    bottom: 2,
+    width: "32%",
     alignItems: "flex-start",
     justifyContent: "flex-end",
   },
-  newMatchButton: { alignItems: "flex-start" },
-  headerTextContainer: {
-    height: "50%",
-    flex: 2,
-    alignItems: "center",
-  },
-  headerFilterButtonContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
-  filterButton: { alignItems: "flex-end" },
-
-  headerText: {
-    color: "black",
-    fontSize: 25,
-  },
-
   card: {
     flex: 1,
     borderWidth: 2,
@@ -243,29 +189,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
   },
-
   images: {
     flex: 1,
+    width: "100%",
     borderRadius: 20,
   },
-  profileName: {
-    position: "relative",
-    left: 5,
-    margin: 10,
-    color: "black",
-    fontSize: 40,
+  swiper: {
+    paddingTop: 0,
   },
-  chipsContainer: {
-    position: "absolute",
-    left: 8,
-    bottom: 8,
-    backgroundColor: "white",
-    borderRadius: 20,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    width: "95%",
+  swiperContainer: {
+    display: "flex",
+    flex: 1,
   },
-  infoOne: { margin: 10 },
-  infoTwo: { margin: 10 },
-  infoThree: { margin: 10 },
 });

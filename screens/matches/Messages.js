@@ -4,7 +4,7 @@ import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import ChatService from "../../services/ChatService";
 import Header from "../../components/header/Header";
 
-const Messages = ({ navigation }) => {
+const Messages = ({ navigation, route }) => {
   const [messages, setMessages] = useState();
 
   useEffect(() => {
@@ -31,11 +31,11 @@ const Messages = ({ navigation }) => {
     });
     setMessages(GiftedChat.append(messages, newMessage));
   };
-
+  const { title } = route.params;
   return (
     <View style={styles.container}>
       <Header
-        screenTitle="Megan Kelly"
+        screenTitle={title}
         navigation={navigation}
         type="outlined"
         withBackButton

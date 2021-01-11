@@ -11,19 +11,19 @@ import { Title } from "react-native-paper";
 
 const SignUp = () => {
   let [user, setUser] = useState();
-  let [email, setEmail] = useState("bhad778@gmail.com");
-  let [, setPassword] = useState("Ululavit#8");
+  let [email, setEmail] = useState();
+  let [password, setPassword] = useState();
   let [confirmationCode, setConfirmationCode] = useState();
 
   const signUp = async () => {
     try {
       let signUpResponse = await Auth.signUp({
-        username: "bhad778@gmail.com",
-        password: "Ululavit#8",
+        username: email,
+        password: password,
         attributes: {
           phone_number: "+17708802074",
-          name: "Bryan",
-          family_name: "Hadaway",
+          name: "Joel",
+          family_name: "Gaeta",
           "custom:custom:accountType": "employer",
           "custom:custom:companyName": "Marietta Pizza Co.",
         },

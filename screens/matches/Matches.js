@@ -4,10 +4,10 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
-import { Avatar } from "react-native-paper";
-
+import { Avatar, Button } from "react-native-paper";
+import Header from "../../components/header/Header";
 const Matches = ({ navigation }) => {
   const [matches] = useState([
     {
@@ -61,7 +61,7 @@ const Matches = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header} />
+      <Header screenTitle="Placeholder" />
       <View style={styles.matchesSection}>
         <ScrollView
           contentContainerStyle={{ alignItems: "center" }}
@@ -73,7 +73,7 @@ const Matches = ({ navigation }) => {
           </View>
 
           {matches.map((item, i) => (
-            <TouchableHighlight
+            <TouchableOpacity
               key={i}
               style={styles.matchButton}
               underlayColor="#D3D3D3"
@@ -83,14 +83,31 @@ const Matches = ({ navigation }) => {
             >
               <View style={styles.avatarImageContainer}>
                 <Avatar.Image
-                  size={40}
+                  size={95}
                   source={{ uri: item.img }}
                   style={styles.images}
                 />
+                <View style={styles.matchTextContainer}>
+                  <View style={styles.notificationButtonContainer}>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Button
+                      style={styles.notificationButton}
+                      labelStyle={{ fontSize: 12 }}
+                      mode="contained"
+                      dark
+                      color="#ff8365"
+                      uppercase={false}
+                    >
+                      New Message
+                    </Button>
+                  </View>
 
-                <Text style={styles.name}>{item.name}</Text>
+                  <Text numberOfLines={1} style={styles.nameInfo}>
+                    eeny meeny miny moe i choose kelly
+                  </Text>
+                </View>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
@@ -110,8 +127,14 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
   },
-  scrollViewHeaderTextContainer: { alignItems: "flex-start", width: "85%" },
-  scrollViewHeaderText: { fontSize: 35 },
+  scrollViewHeaderTextContainer: {
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
+    width: "90%",
+    height: "12%",
+    marginBottom: 10,
+  },
+  scrollViewHeaderText: { fontSize: 50 },
   matchesSection: {
     flex: 8,
     backgroundColor: "white",
@@ -120,10 +143,15 @@ const styles = StyleSheet.create({
 
   matchButton: {
     height: "15%",
-    width: "85%",
-    borderBottomColor: "#ccc",
+    width: "90%",
     backgroundColor: "white",
+  },
+  matchTextContainer: {
     borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+    height: "100%",
+    width: "72%",
+    justifyContent: "center",
   },
   avatarImageContainer: {
     flexDirection: "row",
@@ -132,8 +160,22 @@ const styles = StyleSheet.create({
   },
   images: { marginRight: 20 },
   name: {
-    fontSize: 20,
+    fontSize: 25,
   },
+  notificationButtonContainer: {
+    flexDirection: "row",
+    marginBottom: 5,
+    width: "90%",
+    justifyContent: "space-between",
+  },
+  notificationButton: {
+    width: "50%",
+    fontSize: 10,
+    borderRadius: 20,
+    position: "relative",
+    left: 30,
+  },
+  nameInfo: { color: "#b1b1b1", fontSize: 18, width: "95%" },
 });
 
 export default Matches;
