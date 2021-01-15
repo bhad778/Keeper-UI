@@ -132,6 +132,7 @@ export default class Example extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   headerContainer: {
     height: "12%",
