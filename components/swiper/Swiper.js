@@ -1,244 +1,377 @@
-// @flow
-import React, { Component } from "react";
-import { SafeAreaView, StyleSheet, View, Dimensions } from "react-native";
-import { Feather as Icon } from "@expo/vector-icons";
-import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  Animated,
+  PanResponder,
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
-import Card from "./Card";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function runSpring(clock, value, dest) {
-  const state = {
-    finished: new Value(0),
-    velocity: new Value(0),
-    position: new Value(0),
-    time: new Value(0),
-  };
+const Users = [
+  {
+    id: "1",
+    uri:
+      "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+  },
+  {
+    id: "2",
+    uri:
+      "https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*",
+  },
+  {
+    id: "3",
+    uri:
+      "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631",
+  },
+  {
+    id: "4",
+    uri:
+      "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+  },
+  {
+    id: "5",
+    uri:
+      "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+  },
+  {
+    id: "6",
+    uri:
+      "https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*",
+  },
+  {
+    id: "7",
+    uri:
+      "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631",
+  },
+  {
+    id: "8",
+    uri:
+      "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+  },
+  {
+    id: "9",
+    uri:
+      "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+  },
+  {
+    id: "10",
+    uri:
+      "https://hips.hearstapps.com/sev.h-cdn.co/assets/cm/15/09/54ed45cf7f0c9_-_1998-l-busacca-lgn.jpg?fill=320:426&resize=480:*",
+  },
+  {
+    id: "11",
+    uri:
+      "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631",
+  },
+  {
+    id: "12",
+    uri:
+      "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+  },
+];
 
-  const config = {
-    damping: 20,
-    mass: 1,
-    stiffness: 100,
-    overshootClamping: false,
-    restSpeedThreshold: 1,
-    restDisplacementThreshold: 0.5,
-    toValue: new Value(0),
-  };
+export default class App extends React.Component {
+  constructor() {
+    super();
 
-  return [
-    cond(clockRunning(clock), 0, [
-      set(state.finished, 0),
-      set(state.velocity, 0),
-      set(state.position, value),
-      set(config.toValue, dest),
-      startClock(clock),
-    ]),
-    spring(clock, state, config),
-    cond(state.finished, stopClock(clock)),
-    state.position,
-  ];
-}
+    this.position = new Animated.ValueXY();
+    this.state = {
+      currentIndex: 0,
+    };
 
-const { width, height } = Dimensions.get("window");
-const toRadians = (angle) => angle * (Math.PI / 180);
-const rotatedWidth =
-  width * Math.sin(toRadians(90 - 15)) + height * Math.sin(toRadians(15));
-const {
-  add,
-  multiply,
-  neq,
-  spring,
-  cond,
-  eq,
-  event,
-  lessThan,
-  greaterThan,
-  and,
-  call,
-  set,
-  clockRunning,
-  startClock,
-  stopClock,
-  Clock,
-  Value,
-  concat,
-  interpolate,
-  Extrapolate,
-} = Animated;
+    this.rotate = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: ["-10deg", "0deg", "10deg"],
+      extrapolate: "clamp",
+    });
 
-export default class Profiles extends Component {
-  constructor(props) {
-    super(props);
-    const { profiles } = props;
-    this.state = { profiles };
-    this.translationX = new Value(0);
-    this.translationY = new Value(0);
-    this.velocityX = new Value(0);
-    this.offsetY = new Value(0);
-    this.offsetX = new Value(0);
-    this.gestureState = new Value(State.UNDETERMINED);
-    this.onGestureEvent = event(
-      [
+    this.rotateAndTranslate = {
+      transform: [
         {
-          nativeEvent: {
-            translationX: this.translationX,
-            translationY: this.translationY,
-            velocityX: this.velocityX,
-            state: this.gestureState,
-          },
+          rotate: this.rotate,
         },
+        ...this.position.getTranslateTransform(),
       ],
-      { useNativeDriver: true }
-    );
-    this.init();
+    };
+
+    this.likeOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: [0, 0, 1],
+      extrapolate: "clamp",
+    });
+    this.dislikeOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: [1, 0, 0],
+      extrapolate: "clamp",
+    });
+
+    this.nextCardOpacity = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: [1, 0, 1],
+      extrapolate: "clamp",
+    });
+    this.nextCardScale = this.position.x.interpolate({
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: [1, 0.8, 1],
+      extrapolate: "clamp",
+    });
+
+    this.PanResponder = PanResponder.create({
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        return Math.abs(gestureState.dx) > Math.abs(gestureState.dy);
+      },
+      onPanResponderMove: (evt, gestureState) => {
+        this.position.setValue({ x: gestureState.dx, y: 0 });
+      },
+      onPanResponderRelease: (evt, gestureState) => {
+        if (gestureState.dx > 120) {
+          Animated.spring(this.position, {
+            toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy },
+          }).start(() => {
+            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
+              this.position.setValue({ x: 0, y: 0 });
+            });
+          });
+        } else if (gestureState.dx < -120) {
+          Animated.spring(this.position, {
+            toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy },
+          }).start(() => {
+            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
+              this.position.setValue({ x: 0, y: 0 });
+            });
+          });
+        } else {
+          Animated.spring(this.position, {
+            toValue: { x: 0, y: 0 },
+            friction: 4,
+          }).start();
+        }
+      },
+    });
   }
 
-  init = () => {
-    const clockX = new Clock();
-    const clockY = new Clock();
-    const {
-      translationX,
-      translationY,
-      velocityX,
-      gestureState,
-      offsetY,
-      offsetX,
-    } = this;
-    gestureState.setValue(State.UNDETERMINED);
-    translationX.setValue(0);
-    translationY.setValue(0);
-    velocityX.setValue(0);
-    offsetY.setValue(0);
-    offsetX.setValue(0);
+  renderUsers = () => {
+    return Users.map((item, i) => {
+      if (i < this.state.currentIndex) {
+        return null;
+      } else if (i == this.state.currentIndex) {
+        return (
+          <Animated.View
+            {...this.PanResponder.panHandlers}
+            key={item.id}
+            style={[
+              this.rotateAndTranslate,
+              {
+                height: SCREEN_HEIGHT - 180,
+                width: SCREEN_WIDTH,
+                padding: 10,
+                position: "absolute",
+              },
+            ]}
+            useNativeDriver={true}
+          >
+            <Animated.View
+              style={{
+                opacity: this.likeOpacity,
+                transform: [{ rotate: "-30deg" }],
+                position: "absolute",
+                top: 50,
+                left: 40,
+                zIndex: 1000,
+              }}
+              useNativeDriver={true}
+            >
+              <Text
+                style={{
+                  borderWidth: 1,
+                  borderColor: "green",
+                  color: "green",
+                  fontSize: 32,
+                  fontWeight: "800",
+                  padding: 10,
+                }}
+              >
+                LIKE
+              </Text>
+            </Animated.View>
 
-    const finalTranslateX = add(translationX, multiply(0.2, velocityX));
-    const translationThreshold = width / 4;
-    const snapPoint = cond(
-      lessThan(finalTranslateX, -translationThreshold),
-      -rotatedWidth,
-      cond(greaterThan(finalTranslateX, translationThreshold), rotatedWidth, 0)
-    );
-    // TODO: handle case where the user drags the card again before the spring animation finished
-    this.translateY = cond(
-      eq(gestureState, State.END),
-      [
-        set(translationY, runSpring(clockY, translationY, 0)),
-        set(offsetY, translationY),
-        translationY,
-      ],
-      cond(
-        eq(gestureState, State.BEGAN),
-        [stopClock(clockY), translationY],
-        translationY
-      )
-    );
-    this.translateX = cond(
-      eq(gestureState, State.END),
-      [
-        set(translationX, runSpring(clockX, translationX, snapPoint)),
-        set(offsetX, translationX),
-        cond(and(eq(clockRunning(clockX), 0), neq(translationX, 0)), [
-          call([translationX], this.swipped),
-        ]),
-        translationX,
-      ],
-      cond(
-        eq(gestureState, State.BEGAN),
-        [stopClock(clockX), translationX],
-        translationX
-      )
-    );
+            <Animated.View
+              style={{
+                opacity: this.dislikeOpacity,
+                transform: [{ rotate: "30deg" }],
+                position: "absolute",
+                top: 50,
+                right: 40,
+                zIndex: 1000,
+              }}
+              useNativeDriver={true}
+            >
+              <Text
+                style={{
+                  borderWidth: 1,
+                  borderColor: "red",
+                  color: "red",
+                  fontSize: 32,
+                  fontWeight: "800",
+                  padding: 10,
+                }}
+              >
+                NOPE
+              </Text>
+            </Animated.View>
+
+            <ScrollView
+              style={{
+                flex: 1,
+                height: null,
+                width: SCREEN_WIDTH - 20,
+                resizeMode: "cover",
+                borderRadius: 20,
+              }}
+              showsVerticalScrollIndicator={false}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  height: 900,
+                  width: "100%",
+                  resizeMode: "cover",
+                  borderRadius: 20,
+                }}
+                source={{ uri: item.uri }}
+              />
+              <Image
+                style={{
+                  flex: 1,
+                  height: 900,
+                  width: "100%",
+                  resizeMode: "cover",
+                  borderRadius: 20,
+                }}
+                source={{ uri: item.uri }}
+              />
+            </ScrollView>
+          </Animated.View>
+        );
+      } else {
+        return (
+          <Animated.View
+            key={item.id}
+            style={[
+              {
+                opacity: this.nextCardOpacity,
+                transform: [{ scale: this.nextCardScale }],
+                height: SCREEN_HEIGHT - 120,
+                width: SCREEN_WIDTH,
+                padding: 10,
+                position: "absolute",
+              },
+            ]}
+            useNativeDriver={true}
+          >
+            <Animated.View
+              style={{
+                opacity: 0,
+                transform: [{ rotate: "-30deg" }],
+                position: "absolute",
+                top: 50,
+                left: 40,
+                zIndex: 1000,
+              }}
+              useNativeDriver={true}
+            >
+              <Text
+                style={{
+                  borderWidth: 1,
+                  borderColor: "green",
+                  color: "green",
+                  fontSize: 32,
+                  fontWeight: "800",
+                  padding: 10,
+                }}
+              >
+                LIKE
+              </Text>
+            </Animated.View>
+
+            <Animated.View
+              style={{
+                opacity: 0,
+                transform: [{ rotate: "30deg" }],
+                position: "absolute",
+                top: 50,
+                right: 40,
+                zIndex: 1000,
+              }}
+              useNativeDriver={true}
+            >
+              <Text
+                style={{
+                  borderWidth: 1,
+                  borderColor: "red",
+                  color: "red",
+                  fontSize: 32,
+                  fontWeight: "800",
+                  padding: 10,
+                }}
+              >
+                NOPE
+              </Text>
+            </Animated.View>
+
+            <ScrollView
+              style={{
+                flex: 1,
+                height: null,
+                width: SCREEN_WIDTH - 20,
+                resizeMode: "cover",
+                borderRadius: 20,
+              }}
+              showsVerticalScrollIndicator={false}
+            >
+              <Image
+                style={{
+                  flex: 1,
+                  height: 900,
+                  width: "100%",
+                  resizeMode: "cover",
+                  borderRadius: 20,
+                }}
+                source={{ uri: item.uri }}
+              />
+              <Image
+                style={{
+                  flex: 1,
+                  height: 900,
+                  width: "100%",
+                  resizeMode: "cover",
+                  borderRadius: 20,
+                }}
+                source={{ uri: item.uri }}
+              />
+            </ScrollView>
+          </Animated.View>
+        );
+      }
+    }).reverse();
   };
 
   render() {
-    const { onGestureEvent, translateX, translateY } = this;
-    const {
-      profiles: [lastProfile, ...profiles],
-    } = this.state;
-    const rotateZ = concat(
-      interpolate(translateX, {
-        inputRange: [-width / 2, width / 2],
-        outputRange: [15, -15],
-        extrapolate: Extrapolate.CLAMP,
-      }),
-      "deg"
-    );
-    const likeOpacity = interpolate(translateX, {
-      inputRange: [0, width / 4],
-      outputRange: [0, 1],
-    });
-    const nopeOpacity = interpolate(translateX, {
-      inputRange: [-width / 4, 0],
-      outputRange: [1, 0],
-    });
-    const style = {
-      ...StyleSheet.absoluteFillObject,
-      zIndex: 900,
-      transform: [{ translateX }, { translateY }, { rotateZ }],
-    };
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <Icon name="user" size={32} color="gray" />
-          <Icon name="message-circle" size={32} color="gray" />
-        </View>
-        <View style={styles.cards}>
-          {profiles.reverse().map((profile) => (
-            <Card key={profile.id} {...{ profile }} />
-          ))}
-          <PanGestureHandler
-            onHandlerStateChange={onGestureEvent}
-            {...{ onGestureEvent }}
-          >
-            <Animated.View {...{ style }}>
-              <Card profile={lastProfile} {...{ likeOpacity, nopeOpacity }} />
-            </Animated.View>
-          </PanGestureHandler>
-        </View>
-        <View style={styles.footer}>
-          <View style={styles.circle}>
-            <Icon name="x" size={32} color="#ec5288" />
-          </View>
-          <View style={styles.circle}>
-            <Icon name="heart" size={32} color="#6ee3b4" />
-          </View>
-        </View>
-      </SafeAreaView>
+      <View style={styles.swiperScreenContainer}>
+        <View style={styles.swiperContainer}>{this.renderUsers()}</View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fbfaff",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 16,
-  },
-  cards: {
-    flex: 1,
-    margin: 8,
-    zIndex: 100,
-  },
-  footer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    padding: 16,
-  },
-  circle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    padding: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-    shadowColor: "gray",
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.18,
-    shadowRadius: 2,
-  },
+  swiperScreenContainer: {},
+  swiperContainer: {},
 });
