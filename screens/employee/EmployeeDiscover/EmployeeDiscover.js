@@ -4,7 +4,7 @@ import { Button } from "react-native-paper";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
-import { FontAwesome } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/Feather";
 
 export default class Example extends Component {
   constructor(props) {
@@ -105,7 +105,7 @@ export default class Example extends Component {
         <View style={styles.headerContainer}>
           <View style={styles.peopleWhoLikeYou}>
             <Button mode="text" style={styles.newMatchButton} color="black">
-              <FontAwesome name="glass" fontSize={25} />
+              <Icon name="sliders" size={25} />
             </Button>
           </View>
           <View style={styles.headerTextContainer}>
@@ -118,12 +118,12 @@ export default class Example extends Component {
               color="black"
               onPress={() => this.filtersModalOn(true)}
             >
-              <FontAwesome name="glass" fontSize={25} />
+              <Icon name="sliders" size={25} />
             </Button>
           </View>
         </View>
 
-        <Swiper></Swiper>
+        <Swiper />
       </View>
     );
   }

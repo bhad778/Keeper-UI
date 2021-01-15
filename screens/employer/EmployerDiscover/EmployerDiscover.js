@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import Swiper from "react-native-deck-swiper";
+import Swiper from "../../../components/swiper/Swiper";
 
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
+import { Button } from "react-native-paper";
+
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
+import Icon from "react-native-vector-icons/Feather";
 
-import Header from "../../../components/header/Header";
 export default class Example extends Component {
   constructor(props) {
     super(props);
@@ -102,68 +104,28 @@ export default class Example extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
-        <Header style={styles.header} />
+        <View style={styles.headerContainer}>
+          <View style={styles.peopleWhoLikeYou}>
+            <Button mode="text" style={styles.newMatchButton} color="black">
+              <Icon name="sliders" size={25} />
+            </Button>
+          </View>
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>Leen</Text>
+          </View>
+          <View style={styles.headerFilterButtonContainer}>
+            <Button
+              style={styles.filterButton}
+              mode="text"
+              color="black"
+              onPress={() => this.filtersModalOn(true)}
+            >
+              <Icon name="sliders" size={25} />
+            </Button>
+          </View>
+        </View>
         <View style={styles.swiperContainer}>
-          <Swiper
-            style={styles.swiper}
-            ref={(swiper) => {
-              this.swiper = swiper;
-            }}
-            onSwipedLeft={() => this.onSwiped("left")}
-            onTapCardDeadZone={200}
-            onSwipedRight={() => this.swipeRight("Matched")}
-            cards={this.state.cards}
-            cardIndex={this.state.cardIndex}
-            overlayOpacityHorizontalThreshold={0.5}
-            renderCard={this.renderCard}
-            onSwipedAll={this.onSwipedAllCards}
-            onTapCard={() => this.employeeInfoModalOn(true)}
-            verticalSwipe={false}
-            cardVerticalMargin={10}
-            stackSeparation={0}
-            backgroundColor="white"
-            overlayLabels={{
-              left: {
-                title: "NOPE",
-                style: {
-                  label: {
-                    backgroundColor: "black",
-                    borderColor: "black",
-                    color: "white",
-                    borderWidth: 1,
-                  },
-                  wrapper: {
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                    justifyContent: "flex-start",
-                    marginTop: 30,
-                    marginLeft: -30,
-                  },
-                },
-              },
-              right: {
-                title: "LIKE",
-                style: {
-                  label: {
-                    backgroundColor: "black",
-                    borderColor: "black",
-                    color: "white",
-                    borderWidth: 1,
-                  },
-                  wrapper: {
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    justifyContent: "flex-start",
-                    marginTop: 30,
-                    marginLeft: 30,
-                  },
-                },
-              },
-            }}
-            animateOverlayLabelsOpacity
-            animateCardOpacity={false}
-            swipeBackCard
-          ></Swiper>
+          <Swiper />
         </View>
       </View>
     );
@@ -173,8 +135,14 @@ export default class Example extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
-
+  headerContainer: {
+    height: "12%",
+    zIndex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   peopleWhoLikeYou: {
     position: "relative",
     bottom: 2,
@@ -182,8 +150,30 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-end",
   },
+
+  headerTextContainer: {
+    position: "relative",
+    bottom: 7,
+    width: "32%",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  headerFilterButtonContainer: {
+    position: "relative",
+    bottom: 2,
+    width: "32%",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  filterButton: {},
+
+  headerText: {
+    color: "black",
+    fontSize: 28,
+  },
   card: {
-    flex: 1,
+    zIndex: 444,
+    flex: 2,
     borderWidth: 2,
     borderColor: "#E8E8E8",
     backgroundColor: "white",
@@ -191,14 +181,8 @@ const styles = StyleSheet.create({
   },
   images: {
     flex: 1,
+    height: 401,
     width: "100%",
     borderRadius: 20,
-  },
-  swiper: {
-    paddingTop: 0,
-  },
-  swiperContainer: {
-    display: "flex",
-    flex: 1,
   },
 });

@@ -17,7 +17,6 @@ import AddJob from "../screens/employer/addJob/AddJob";
 import EmployeesThatLikedJob from "../screens/employer/employeesThatLikedJob/EmployeesThatLikedJob";
 import Resume from "../screens/employee/resume/Resume";
 import JobDetails from "../screens/jobDetails/JobDetails";
-import TestSwiper from "../components/swiper/Swiper";
 
 export default function Navigation({ ColorSchemeName }) {
   return (
@@ -36,13 +35,13 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="RootEmployee"
-        component={BottomTabEmployeeNavigator}
+        name="RootEmployer"
+        component={BottomTabEmployerNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="TestSwiper"
-        component={TestSwiper}
+        name="RootEmployee"
+        component={BottomTabEmployeeNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Login" component={Login} />
@@ -67,11 +66,6 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen
-        name="RootEmployer"
-        component={BottomTabEmployerNavigator}
-        options={{ headerShown: false }}
-      />
       <Stack.Screen
         options={{ headerShown: false }}
         name="Matched"
