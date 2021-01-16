@@ -86,7 +86,7 @@ const Resume = () => {
           style={styles.profileImage}
           source={{
             uri:
-              "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+              "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
           }}
         ></Image>
         <View style={styles.personalDescriptionSection}>
