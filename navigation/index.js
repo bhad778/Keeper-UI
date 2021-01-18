@@ -17,6 +17,7 @@ import AddJob from "../screens/employer/addJob/AddJob";
 import EmployeesThatLikedJob from "../screens/employer/EmployeesThatLikedJob/EmployeesThatLikedJob";
 import Resume from "../screens/employee/resume/Resume";
 import JobDetails from "../screens/jobDetails/JobDetails";
+import TestSwiper from "../components/swiper/Swiper";
 
 export default function Navigation({ ColorSchemeName }) {
   return (
@@ -34,6 +35,17 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="RootEmployee"
+        component={BottomTabEmployeeNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TestSwiper"
+        component={TestSwiper}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="JobBoard"
         component={JobBoard}
@@ -54,12 +66,6 @@ function RootNavigator() {
       <Stack.Screen
         name="Messages"
         component={Messages}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="RootEmployee"
-        component={BottomTabEmployeeNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="SignUp" component={SignUp} />

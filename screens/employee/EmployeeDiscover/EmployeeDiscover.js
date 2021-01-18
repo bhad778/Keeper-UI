@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Swiper from "react-native-deck-swiper";
+import Swiper from "../../../components/swiper/Swiper";
 import { Button } from "react-native-paper";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Filters from "../../../modals/Filters";
@@ -123,66 +123,7 @@ export default class Example extends Component {
           </View>
         </View>
 
-        <Swiper
-          ref={(swiper) => {
-            this.swiper = swiper;
-          }}
-          onSwipedLeft={() => this.onSwiped("left")}
-          onTapCardDeadZone={200}
-          onSwipedRight={() => this.swipeRight("Matched")}
-          cards={this.state.cards}
-          cardIndex={this.state.cardIndex}
-          cardVerticalMargin={81}
-          overlayOpacityHorizontalThreshold={0.5}
-          renderCard={this.renderCard}
-          onSwipedAll={this.onSwipedAllCards}
-          stackSize={3}
-          onTapCard={() => this.employeeInfoModalOn(true)}
-          verticalSwipe={false}
-          stackSeparation={0}
-          backgroundColor="white"
-          overlayLabels={{
-            left: {
-              title: "NOPE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  justifyContent: "flex-start",
-                  marginTop: 30,
-                  marginLeft: -30,
-                },
-              },
-            },
-            right: {
-              title: "LIKE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  marginTop: 30,
-                  marginLeft: 30,
-                },
-              },
-            },
-          }}
-          animateOverlayLabelsOpacity
-          animateCardOpacity={false}
-          swipeBackCard
-        ></Swiper>
+        <Swiper></Swiper>
       </View>
     );
   }
@@ -191,6 +132,7 @@ export default class Example extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   headerContainer: {
     height: "12%",

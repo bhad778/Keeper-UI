@@ -4,32 +4,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useColorScheme, StyleSheet } from "react-native";
 import EmployeeDiscover from "../screens/employee/EmployeeDiscover/EmployeeDiscover";
 import Profile from "../screens/profile/Profile";
-
 import Matches from "../screens/matches/Matches";
+import Icon from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-  const tintColorLight = "#fb5b5a";
-  const tintColorDark = "#fff";
-  const Colors = {
-    light: {
-      text: "#000",
-      background: "#fff",
-      tint: tintColorLight,
-      tabIconDefault: "#ccc",
-      tabIconSelected: tintColorLight,
-    },
-    dark: {
-      text: "#fff",
-      background: "#000",
-      tint: tintColorDark,
-      tabIconDefault: "#ccc",
-      tabIconSelected: tintColorDark,
-    },
-  };
-
   return (
     <Tab.Navigator
       initialRouteName={"  "}
@@ -45,12 +25,7 @@ export default function BottomTabNavigator() {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome
-              style={styles.tabs}
-              name="glass"
-              size={30}
-              color={color}
-            />
+            <Icon name="sliders" size={30} color={color} />
           ),
         }}
       />
@@ -59,12 +34,7 @@ export default function BottomTabNavigator() {
         component={EmployeeDiscover}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome
-              style={styles.tabs}
-              name="glass"
-              size={30}
-              color={color}
-            />
+            <Icon style={styles.tabs} name="search" size={30} color={color} />
           ),
         }}
       />
@@ -73,9 +43,9 @@ export default function BottomTabNavigator() {
         component={Matches}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome
+            <Icon
               style={styles.tabs}
-              name="glass"
+              name="message-square"
               size={30}
               color={color}
             />
