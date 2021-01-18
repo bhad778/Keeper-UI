@@ -38,13 +38,12 @@ const Profile = () => {
             style={styles.images}
           />
 
-          <TouchableOpacity
-            style={styles.editModalButtonContainer}
-            onPress={() => setProfileEditModalVisible(true)}
-          >
-            <Icon style={styles.editModalButton} name="create" size={30} />
-            <Text style={styles.profileImageText}>Tap to edit profile</Text>
-          </TouchableOpacity>
+          <View style={styles.editModalButtonContainer}>
+            <TouchableOpacity onPress={() => setProfileEditModalVisible(true)}>
+              <Icon style={styles.editModalButton} name="create" size={30} />
+              <Text style={styles.profileImageText}>Tap to edit profile</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View>
@@ -106,7 +105,11 @@ const styles = StyleSheet.create({
     top: 30,
   },
   button: { width: "40%", borderRadius: 20 },
-  profileSection: { flex: 8, justifyContent: "center", width: "100%" },
+  profileSection: {
+    flex: 8,
+    justifyContent: "center",
+    width: "100%",
+  },
   imageSection: { alignItems: "center" },
   imageContainer: {
     position: "relative",

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import EmployerDiscover from "../screens/employer/employerDiscover/EmployerDiscover";
+import { useColorScheme, StyleSheet } from "react-native";
+import EmployerDiscover from "../screens/employer/EmployerDiscover/EmployerDiscover";
 import Profile from "../screens/profile/Profile";
 import Matches from "../screens/matches/Matches";
 import Icon from "react-native-vector-icons/Feather";

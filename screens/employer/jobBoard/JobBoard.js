@@ -39,14 +39,14 @@ const JobBoard = ({ navigation }) => {
                 borderColor: "black",
                 borderWidth: 1,
                 alignItems: "center",
-                height: 200,
-                margin: 10,
-                width: "45%",
+                height: 140,
+                margin: 5.6,
+                width: "47%",
               }}
               onPress={() => goToFutureEmployees(i)}
             >
               <Card.Content>
-                <Title style={{ fontSize: 35, lineHeight: 50 }}>
+                <Title style={{ fontSize: 30, lineHeight: 30 }}>
                   {item.title}
                 </Title>
               </Card.Content>
@@ -66,16 +66,24 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   scrollView: {
+    flex: 1,
     position: "absolute",
     flexDirection: "row",
     flexWrap: "wrap",
-    height: "100%",
-    alignItems: "flex-end",
+    justifyContent: "flex-start",
+  },
+  scrollViewInteriorContainer: {
+    flex: 1,
+    position: "absolute",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
   },
   fabContainer: {
     width: "100%",
+    height: 100,
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
   },
   fab: {
     position: "absolute",
