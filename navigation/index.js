@@ -51,7 +51,6 @@ function RootNavigator() {
         component={JobBoard}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Login" component={Login} />
 
       <Stack.Screen
         name="JobDetails"
