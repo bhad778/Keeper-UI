@@ -13,6 +13,7 @@ const JobBoard = ({ navigation }) => {
       distance: 100000,
     }).then((data) => {
       setJobs(data);
+      console.log(data);
     });
   }, []);
 
@@ -39,14 +40,15 @@ const JobBoard = ({ navigation }) => {
                 borderColor: "black",
                 borderWidth: 1,
                 alignItems: "center",
-                height: 140,
+                height: "35%",
                 margin: 5.6,
-                width: "47%",
+                width: "45%",
+                // backgroundColor: jobs.length - 1 == i ? "black" : item.color,
               }}
               onPress={() => goToFutureEmployees(i)}
             >
               <Card.Content>
-                <Title style={{ fontSize: 30, lineHeight: 30 }}>
+                <Title style={{ fontSize: 25, lineHeight: 30 }}>
                   {item.title}
                 </Title>
               </Card.Content>
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    justifyContent: "center",
   },
   scrollViewInteriorContainer: {
     flex: 1,

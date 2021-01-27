@@ -61,7 +61,7 @@ const Matches = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header screenTitle="Placeholder" />
+      <Header screenTitle="Matches" />
       <View style={styles.matchesSection}>
         <ScrollView
           contentContainerStyle={{ alignItems: "center" }}
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   images: { marginRight: 20 },
   name: {
-    fontSize: 25,
+    fontSize: 20,
   },
   notificationButtonContainer: {
     flexDirection: "row",
@@ -172,8 +172,6 @@ const styles = StyleSheet.create({
     width: "50%",
     fontSize: 10,
     borderRadius: 20,
-    position: "relative",
-    left: 30,
   },
   nameInfo: { color: "#b1b1b1", fontSize: 18, width: "95%" },
 });
