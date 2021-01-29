@@ -4,13 +4,46 @@ import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import ChatService from "../../services/ChatService";
 import Header from "../../components/header/Header";
 
+// when you match with someone it hits the addConversation api call and creates the conversation, which makes a mongoDB ID automatically and that
+// will be the conversationId that lives in each message object in the messages table. These conversationIds will also live on each user object
+// so that they can be easily pulled for each user.
 const Messages = ({ navigation, route }) => {
   const [messages, setMessages] = useState();
+  const [connectionId, setConnectionId] = useState();
+
+  const [webSocket, setWs] = useState(
+    new WebSocket(
+      // "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev/?conversationId=5feb5edaa13b6b1097df6957&email=ssss@fffff.com"
+      "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev?conversationId=5feb5edaa13b6b1097df6957&email=ssss@fffff.com"
+    )
+  );
+  const user = { _id: "ssss@fffff.com" };
+  const { title } = route.params;
 
   useEffect(() => {
+    webSocket.onopen = () => {
+      // on connecting, do nothing but log it to the console
+      console.log("connected");
+    };
+
+    webSocket.onmessage = (event) => {
+      // on receiving a message, add it to the list of messages
+      const message = event.data;
+      handleReceiveMessage(message);
+    };
+
+    webSocket.onclose = () => {
+      console.log("disconnected");
+      // automatically try to reconnect on connection loss
+      setWs(new WebSocket(URL));
+    };
+
     ChatService.getConversationMessages({
-      conversationId: "5feb67c795a11711d901e214",
+      // when you click on a conversation from the matches page, what the user clicked on
+      // will have the conversationId and pass it in to here
+      conversationId: "5feb5edaa13b6b1097df6957",
     }).then((data) => {
+      // we have to manually put the messages in order
       data.sort(function(a, b) {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
@@ -18,20 +51,36 @@ const Messages = ({ navigation, route }) => {
       });
       setMessages(data);
     });
+
+    // doing this call just to get connectionId to test websockets, will probably
+    // get this from user call in future
+    ChatService.getConversation({
+      conversationId: "5feb5edaa13b6b1097df6957",
+    }).then((data) => {
+      setConnectionId(data[0].participants[0].connectionId);
+    });
   }, []);
 
-  const handleSend = (newMessage = []) => {
-    newMessage[0].conversationId = "5feb67c795a11711d901e214";
-    delete newMessage[0]._id;
+  const handleReceiveMessage = (newMessage) => {
     ChatService.addMessage({
-      text: "Yo you here yet?",
+      text: "new message",
       createdAt: "2020-12-30T03:54:34.828Z",
-      conversationId: "5feb67c795a11711d901e214",
-      user: { _id: "ssss@fffff.com" },
+      conversationId: "5feb5edaa13b6b1097df6957",
+      user: { _id: "asdf@asdf.com" },
     });
     setMessages(GiftedChat.append(messages, newMessage));
   };
-  const { title } = route.params;
+
+  const handleSendMessage = (newMessage = {}) => {
+    newMessage.conversationId = "5feb5edaa13b6b1097df6957";
+    delete newMessage._id;
+    ChatService.wsSendMessage({
+      connectionId: connectionId,
+      message: newMessage,
+    });
+    ChatService.addMessage(newMessage);
+    setMessages(GiftedChat.append(messages, newMessage));
+  };
   return (
     <View style={styles.container}>
       <Header
@@ -43,8 +92,8 @@ const Messages = ({ navigation, route }) => {
       <View style={styles.chatContainer}>
         <GiftedChat
           messages={messages}
-          onSend={(newMessage) => handleSend(newMessage)}
-          user={{ _id: "ssss@fffff.com" }}
+          onSend={(newMessage) => handleSendMessage(newMessage[0])}
+          user={user}
           renderBubble={(props) => {
             return (
               <Bubble
