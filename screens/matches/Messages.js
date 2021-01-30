@@ -14,10 +14,10 @@ const Messages = ({ navigation, route }) => {
   const [webSocket, setWs] = useState(
     new WebSocket(
       // "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev/?conversationId=5feb5edaa13b6b1097df6957&email=ssss@fffff.com"
-      "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev?conversationId=5feb5edaa13b6b1097df6957&email=ssss@fffff.com"
+      "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev?conversationId=5feb5edaa13b6b1097df6957&email=asdf@asdf.com"
     )
   );
-  const user = { _id: "ssss@fffff.com" };
+  const user = { _id: "asdf@asdf.com" };
   const { title } = route.params;
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Messages = ({ navigation, route }) => {
       text: "new message",
       createdAt: "2020-12-30T03:54:34.828Z",
       conversationId: "5feb5edaa13b6b1097df6957",
-      user: { _id: "asdf@asdf.com" },
+      user: { _id: "ssss@fffff.com" },
     });
     setMessages(GiftedChat.append(messages, newMessage));
   };
