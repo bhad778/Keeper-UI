@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   scrollView: { width: "100%" },
 
   matchButton: {
-    height: "15%",
+    height: 112,
     width: "90%",
     backgroundColor: "white",
   },
