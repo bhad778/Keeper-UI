@@ -31,9 +31,11 @@ const JobBoard = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header type="outlined" />
-
       <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={{ width: "100%" }}>
+          <Header type="noBorder" />
+        </View>
+
         <View
           style={{
             justifyContent: "space-evenly",
@@ -130,8 +132,7 @@ const styles = StyleSheet.create({
   fab: {
     backgroundColor: "black",
   },
-
-  headerButton: { position: "relative", top: 30 },
+  header: { width: 300 },
 });
 
 export default JobBoard;

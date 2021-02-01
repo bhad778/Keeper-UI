@@ -18,7 +18,13 @@ const Header = ({
 
   return (
     <Appbar.Header
-      style={type === "outlined" ? styles.outlinedAppBar : styles.filledAppBar}
+      style={
+        type === "outlined"
+          ? styles.outlinedAppBar
+          : type === "noBorder"
+          ? styles.noBorderAppBar
+          : styles.filledAppBar
+      }
     >
       <View style={styles.leftSection}>
         <Image
@@ -66,6 +72,13 @@ const styles = StyleSheet.create({
     height: 80,
     width: "100%",
   },
+  noBorderAppBar: {
+    backgroundColor: "white",
+    elevation: 0,
+    height: 80,
+    width: "100%",
+  },
+
   leftSection: {
     height: "100%",
     width: 60,
