@@ -10,33 +10,19 @@ import Header from "../../components/header/Header";
 const Messages = ({ navigation, route }) => {
   const [messages, setMessages] = useState();
   const [connectionId, setConnectionId] = useState();
+  const [webSocket, setWebSocket] = useState();
 
-  const [webSocket, setWs] = useState(
-    new WebSocket(
-      // "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev/?conversationId=5feb5edaa13b6b1097df6957&email=ssss@fffff.com"
-      "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev?conversationId=5feb5edaa13b6b1097df6957&email=asdf@asdf.com"
-    )
-  );
   const user = { _id: "asdf@asdf.com" };
   const { title } = route.params;
 
   useEffect(() => {
-    webSocket.onopen = () => {
-      // on connecting, do nothing but log it to the console
-      console.log("connected");
-    };
-
-    webSocket.onmessage = (event) => {
-      // on receiving a message, add it to the list of messages
-      const message = event.data;
-      handleReceiveMessage(message);
-    };
-
-    webSocket.onclose = () => {
-      console.log("disconnected");
-      // automatically try to reconnect on connection loss
-      setWs(new WebSocket(URL));
-    };
+    if (!webSocket) {
+      setWebSocket(
+        new WebSocket(
+          "wss://i4l2b5zpn9.execute-api.us-east-1.amazonaws.com/dev?conversationId=5feb5edaa13b6b1097df6957&email=asdf@asdf.com"
+        )
+      );
+    }
 
     ChatService.getConversationMessages({
       // when you click on a conversation from the matches page, what the user clicked on
@@ -61,26 +47,58 @@ const Messages = ({ navigation, route }) => {
     });
   }, []);
 
-  const handleReceiveMessage = (newMessage) => {
-    ChatService.addMessage({
-      text: "new message",
-      createdAt: "2020-12-30T03:54:34.828Z",
-      conversationId: "5feb5edaa13b6b1097df6957",
-      user: { _id: "ssss@fffff.com" },
-    });
-    setMessages(GiftedChat.append(messages, newMessage));
-  };
+  useEffect(() => {
+    if (webSocket) {
+      webSocket.onopen = () => {
+        // on connecting, do nothing but log it to the console
+        console.log("connected");
+      };
 
-  const handleSendMessage = (newMessage = {}) => {
+      webSocket.onmessage = (event) => {
+        // on receiving a message, add it to the list of messages
+        const message = event.data;
+        handleReceiveMessage(message);
+      };
+
+      webSocket.onclose = () => {
+        console.log("disconnected");
+        // automatically try to reconnect on connection loss
+        //setWs(new WebSocket(URL));
+      };
+    }
+  }, [webSocket]);
+
+  const handleSendMessage = async (newMessage = {}) => {
     newMessage.conversationId = "5feb5edaa13b6b1097df6957";
     delete newMessage._id;
-    ChatService.wsSendMessage({
-      connectionId: connectionId,
-      message: newMessage,
-    });
+    webSocket.send(
+      JSON.stringify({
+        action: "onMessage",
+        message: JSON.stringify(newMessage),
+      })
+    );
+    // ChatService.wsSendMessage({
+    //   connectionId: connectionId,
+    //   message: newMessage,
+    // });
     ChatService.addMessage(newMessage);
-    setMessages(GiftedChat.append(messages, newMessage));
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, newMessage)
+    );
   };
+
+  const handleReceiveMessage = (newMessage) => {
+    const messageObject = JSON.parse(newMessage);
+    messageObject.user = "ssss@fffff.com";
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messageObject)
+    );
+    // just uncomment this when we actually setup messages working
+    // setMessages((previousMessages) =>
+    //   GiftedChat.append(previousMessages, JSON.parse(newMessage))
+    // );
+  };
+
   return (
     <View style={styles.container}>
       <Header
