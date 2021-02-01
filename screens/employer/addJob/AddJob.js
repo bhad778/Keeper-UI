@@ -66,7 +66,7 @@ const AddJob = ({ navigation }) => {
             color="#ff8365"
             onPress={() => console.log("Button with adjusted color pressed")}
           >
-            Get Pare Pro
+            Add Job
           </Button>
         </View>
       </View>

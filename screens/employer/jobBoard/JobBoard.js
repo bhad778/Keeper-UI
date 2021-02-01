@@ -38,7 +38,7 @@ const JobBoard = ({ navigation }) => {
           style={{
             width: "80%",
             justifyContent: "space-evenly",
-            marginLeft: 30,
+            marginLeft: 24,
           }}
         >
           <Text style={{ fontSize: 50, marginBottom: 20 }}>Job Board</Text>
@@ -60,21 +60,21 @@ const JobBoard = ({ navigation }) => {
               style={{
                 backgroundColor: item.color,
                 borderRadius: 15,
-                marginLeft: 25,
+                marginLeft: 20,
                 marginBottom: 15,
-                height: 120,
-                width: "40%",
+                height: 125,
+                width: "42%",
 
                 // backgroundColor: jobs.length - 1 == i ? "black" : item.color,
               }}
               onPress={() => goToFutureEmployees(i)}
             >
               <Card.Content
-                style={{ height: "100%", justifyContent: "center" }}
+                style={{ height: "100%", justifyContent: "space-around" }}
               >
                 <Text
                   style={{
-                    fontSize: 15,
+                    fontSize: 18,
                   }}
                 >
                   {item.title}
@@ -82,7 +82,7 @@ const JobBoard = ({ navigation }) => {
 
                 <Text
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                   }}
                 >
                   {item.companyName.toUpperCase()}
