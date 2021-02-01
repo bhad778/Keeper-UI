@@ -243,7 +243,8 @@ export default class App extends React.Component {
                   height: 400,
                   width: "100%",
                   resizeMode: "cover",
-                  // borderRadius: 20,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
                 }}
                 source={{ uri: item.uri }}
               />
@@ -330,10 +331,11 @@ export default class App extends React.Component {
               <Image
                 style={{
                   flex: 1,
-                  height: 900,
+                  height: 400,
                   width: "100%",
                   resizeMode: "cover",
-                  borderRadius: 20,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
                 }}
                 source={{ uri: item.uri }}
               />

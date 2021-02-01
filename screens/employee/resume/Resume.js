@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import Header from "../../../components/header/Header";
 import { Title, Subheading, Paragraph } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -81,14 +80,6 @@ const Resume = () => {
   return (
     <ScrollView style={styles.peopleWhoLikedYou}>
       <View style={styles.container}>
-        {/* <Header screenTitle="Design Director" />
-        <Image
-          style={styles.profileImage}
-          source={{
-            uri:
-              "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
-          }}
-        ></Image> */}
         <View style={styles.personalDescriptionSection}>
           <View style={styles.nameAndJobTitleSection}>
             <Title style={styles.name}>Megan Kelly</Title>
@@ -296,6 +287,7 @@ const styles = StyleSheet.create({
   },
   personalDescriptionSection: {
     padding: 20,
+    backgroundColor: "#add9d9",
   },
   nameAndJobTitleSection: {
     paddingTop: 25,
@@ -318,6 +310,8 @@ const styles = StyleSheet.create({
 
   experienceDetailsSection: {
     backgroundColor: "#ffbc07",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   experienceAndAvailabilitySection: {
     display: "flex",
@@ -342,7 +336,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
-
   pastJobsSection: {
     paddingTop: 30,
     paddingBottom: 30,
@@ -594,6 +587,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#add9d9",
     padding: 15,
     paddingTop: 40,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 });
 export default Resume;
