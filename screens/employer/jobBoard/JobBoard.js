@@ -36,7 +36,6 @@ const JobBoard = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View
           style={{
-            width: "80%",
             justifyContent: "space-evenly",
             marginLeft: 24,
           }}
@@ -58,14 +57,11 @@ const JobBoard = ({ navigation }) => {
             <Card
               key={i}
               style={{
-                backgroundColor: item.color,
                 borderRadius: 15,
-                marginLeft: 20,
-                marginBottom: 15,
-                height: 125,
-                width: "42%",
 
-                // backgroundColor: jobs.length - 1 == i ? "black" : item.color,
+                height: 145,
+                margin: 6,
+                width: "45%",
               }}
               onPress={() => goToFutureEmployees(i)}
             >
@@ -109,14 +105,13 @@ const JobBoard = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: "white",
     alignItems: "center",
   },
   scrollView: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    justifyContent: "center",
   },
 
   fab: {
