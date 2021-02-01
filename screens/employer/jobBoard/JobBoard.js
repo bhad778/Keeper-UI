@@ -37,7 +37,8 @@ const JobBoard = ({ navigation }) => {
         <View
           style={{
             justifyContent: "space-evenly",
-            marginLeft: 24,
+            paddingLeft: 10,
+            paddingRight: 10,
           }}
         >
           <Text style={{ fontSize: 50, marginBottom: 20 }}>Job Board</Text>
@@ -58,7 +59,7 @@ const JobBoard = ({ navigation }) => {
               key={i}
               style={{
                 borderRadius: 15,
-
+                backgroundColor: item.color,
                 height: 145,
                 margin: 6,
                 width: "45%",
@@ -70,7 +71,7 @@ const JobBoard = ({ navigation }) => {
               >
                 <Text
                   style={{
-                    fontSize: 18,
+                    fontSize: 25,
                   }}
                 >
                   {item.title}
@@ -78,7 +79,7 @@ const JobBoard = ({ navigation }) => {
 
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: 14,
                   }}
                 >
                   {item.companyName.toUpperCase()}
@@ -86,6 +87,18 @@ const JobBoard = ({ navigation }) => {
               </Card.Content>
             </Card>
           ))}
+        {jobs && !jobs.length % 2 == 0 && (
+          <Card
+            style={{
+              borderRadius: 15,
+              backgroundColor: "transparant",
+              color: "transparant",
+              height: 145,
+              margin: 6,
+              width: "45%",
+            }}
+          ></Card>
+        )}
 
         <View
           style={{
