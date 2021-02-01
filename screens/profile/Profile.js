@@ -30,7 +30,7 @@ const Profile = () => {
       <View style={styles.profileSection}>
         <View style={styles.imageSection}>
           <Avatar.Image
-            size={200}
+            size={150}
             source={{
               uri:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiVdszvNlg3PRHDEPCs6tRus26-XeBh0a5lQ&usqp=CAU",
@@ -46,7 +46,7 @@ const Profile = () => {
           </View>
         </View>
 
-        <View>
+        <View style={styles.optionsSection}>
           <View style={styles.row}>
             <Text style={styles.text}>Preferences</Text>
             <Icon name="create" color="#b1b1b1" size={30} />
@@ -101,29 +101,17 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: "center",
     width: "100%",
-    position: "relative",
-    top: 30,
+    height: "15%",
   },
   button: { width: "40%", borderRadius: 20 },
   profileSection: {
-    flex: 8,
+    flex: 1,
     justifyContent: "center",
     width: "100%",
   },
-  imageSection: { alignItems: "center" },
-  imageContainer: {
-    position: "relative",
-    top: 15,
-    backgroundColor: "white",
-    height: 175,
-    width: 175,
-    borderRadius: 175 / 2,
+  imageSection: { alignItems: "center", flex: 1, marginTop: 25 },
+  optionsSection: { flex: 1, justifyContent: "center" },
 
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-    marginLeft: 10,
-  },
   row: {
     flexDirection: "row",
     alignItems: "center",

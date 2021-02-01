@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View, ScrollView } from "react-native";
-import { Card, Title, FAB } from "react-native-paper";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+} from "react-native";
+import { Card, Title, FAB, Paragraph } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import Header from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
@@ -25,34 +31,83 @@ const JobBoard = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header screenTitle="Job Board" />
+      <Header type="outlined" />
+
       <ScrollView contentContainerStyle={styles.scrollView}>
+        <View
+          style={{
+            justifyContent: "space-evenly",
+            paddingLeft: 10,
+            paddingRight: 10,
+          }}
+        >
+          <Text style={{ fontSize: 50, marginBottom: 20 }}>Job Board</Text>
+          <Text style={{ fontSize: 20, marginBottom: 40 }}>
+            You treat me like I was your ocean, you swim in my blood when it's
+            warm. My cycles of circular motion, protect you and keep you from
+            harm. You live in a world of illusion, where everything's peaches
+            and cream. We all face a scarlet conclusion but we spend our time in
+            a dream.
+          </Text>
+        </View>
+
         {!jobs && <ActivityIndicator size="large" />}
+
         {jobs &&
           jobs.map((item, i) => (
             <Card
               key={i}
               style={{
-                position: "relative",
+                borderRadius: 15,
                 backgroundColor: item.color,
-                borderRadius: 20,
-                borderColor: "black",
-                borderWidth: 1,
-                alignItems: "center",
-                height: 140,
-                margin: 5.6,
-                width: "47%",
+                height: 145,
+                margin: 6,
+                width: "45%",
               }}
               onPress={() => goToFutureEmployees(i)}
             >
-              <Card.Content>
-                <Title style={{ fontSize: 30, lineHeight: 30 }}>
+              <Card.Content
+                style={{ height: "100%", justifyContent: "space-around" }}
+              >
+                <Text
+                  style={{
+                    fontSize: 25,
+                  }}
+                >
                   {item.title}
-                </Title>
+                </Text>
+
+                <Text
+                  style={{
+                    fontSize: 14,
+                  }}
+                >
+                  {item.companyName.toUpperCase()}
+                </Text>
               </Card.Content>
             </Card>
           ))}
-        <View style={styles.fabContainer}>
+        {jobs && !jobs.length % 2 == 0 && (
+          <Card
+            style={{
+              borderRadius: 15,
+              backgroundColor: "transparant",
+              color: "transparant",
+              height: 145,
+              margin: 6,
+              width: "45%",
+            }}
+          ></Card>
+        )}
+
+        <View
+          style={{
+            width: "100%",
+            height: 100,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <FAB style={styles.fab} icon="plus" onPress={goToAddJobScreen} />
         </View>
       </ScrollView>
@@ -64,29 +119,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    alignItems: "center",
   },
   scrollView: {
-    flex: 1,
-    position: "absolute",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
-  },
-  scrollViewInteriorContainer: {
-    flex: 1,
-    position: "absolute",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-  },
-  fabContainer: {
-    width: "100%",
-    height: 100,
-    alignItems: "center",
     justifyContent: "center",
   },
+
   fab: {
-    position: "absolute",
     backgroundColor: "black",
   },
 

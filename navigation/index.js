@@ -71,7 +71,11 @@ function RootNavigator() {
         name="Matched"
         component={Matched}
       />
-      <Stack.Screen name="AddJob" component={AddJob} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="AddJob"
+        component={AddJob}
+      />
       <Stack.Screen
         name="EmployeesThatLikedJob"
         component={EmployeesThatLikedJob}
