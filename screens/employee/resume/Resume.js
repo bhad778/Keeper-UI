@@ -81,14 +81,14 @@ const Resume = () => {
   return (
     <ScrollView style={styles.peopleWhoLikedYou}>
       <View style={styles.container}>
-        <Header screenTitle="Design Director" />
+        {/* <Header screenTitle="Design Director" />
         <Image
           style={styles.profileImage}
           source={{
             uri:
               "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
           }}
-        ></Image>
+        ></Image> */}
         <View style={styles.personalDescriptionSection}>
           <View style={styles.nameAndJobTitleSection}>
             <Title style={styles.name}>Megan Kelly</Title>

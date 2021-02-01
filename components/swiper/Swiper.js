@@ -9,6 +9,7 @@ import {
   PanResponder,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import Resume from "../../screens/employee/resume/Resume";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -239,23 +240,14 @@ export default class App extends React.Component {
               <Image
                 style={{
                   flex: 1,
-                  height: 900,
+                  height: 400,
                   width: "100%",
                   resizeMode: "cover",
-                  borderRadius: 20,
+                  // borderRadius: 20,
                 }}
                 source={{ uri: item.uri }}
               />
-              <Image
-                style={{
-                  flex: 1,
-                  height: 900,
-                  width: "100%",
-                  resizeMode: "cover",
-                  borderRadius: 20,
-                }}
-                source={{ uri: item.uri }}
-              />
+              <Resume />
             </ScrollView>
           </Animated.View>
         );
@@ -345,16 +337,7 @@ export default class App extends React.Component {
                 }}
                 source={{ uri: item.uri }}
               />
-              <Image
-                style={{
-                  flex: 1,
-                  height: 900,
-                  width: "100%",
-                  resizeMode: "cover",
-                  borderRadius: 20,
-                }}
-                source={{ uri: item.uri }}
-              />
+              <Resume />
             </ScrollView>
           </Animated.View>
         );
