@@ -111,12 +111,6 @@ export default class App extends React.Component {
       outputRange: [1, 0, 0],
       extrapolate: "clamp",
     });
-
-    this.nextCardOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0, 1],
-      extrapolate: "clamp",
-    });
     this.nextCardScale = this.position.x.interpolate({
       inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
       outputRange: [1, 0.8, 1],
@@ -258,9 +252,8 @@ export default class App extends React.Component {
             key={item.id}
             style={[
               {
-                opacity: this.nextCardOpacity,
                 transform: [{ scale: this.nextCardScale }],
-                height: SCREEN_HEIGHT - 120,
+                height: SCREEN_HEIGHT - 180,
                 width: SCREEN_WIDTH,
                 padding: 10,
                 position: "absolute",
