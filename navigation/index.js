@@ -8,6 +8,7 @@ import * as React from "react";
 import Login from "../screens/login/Login";
 import BottomTabEmployeeNavigator from "./BottomTabEmployeeNavigator";
 import BottomTabEmployerNavigator from "./BottomTabEmployerNavigator";
+import OptimizedEmployerNavigator from "./OptimizedEmployerNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Messages from "../screens/matches/Messages";
 import Matched from "../screens/matches/Matched";
@@ -41,7 +42,7 @@ function RootNavigator() {
       />
       <Stack.Screen
         name="RootEmployer"
-        component={BottomTabEmployerNavigator}
+        component={OptimizedEmployerNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

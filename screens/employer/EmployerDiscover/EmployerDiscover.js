@@ -111,7 +111,7 @@ export default class Example extends Component {
             </Button>
           </View>
           <View style={styles.headerTextContainer}>
-            <Text style={styles.headerText}>Leen</Text>
+            <Text style={styles.headerText}>Pare</Text>
           </View>
           <View style={styles.headerFilterButtonContainer}>
             <Button

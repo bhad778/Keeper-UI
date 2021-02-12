@@ -6,7 +6,7 @@ import {
   ScrollView,
   Text,
 } from "react-native";
-import { Card, Title, FAB, Paragraph } from "react-native-paper";
+import { Card, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import Header from "../../../components/header/Header";
 const JobBoard = ({ navigation }) => {
@@ -45,11 +45,8 @@ const JobBoard = ({ navigation }) => {
         >
           <Text style={{ fontSize: 50, marginBottom: 20 }}>Job Board</Text>
           <Text style={{ fontSize: 20, marginBottom: 40 }}>
-            You treat me like I was your ocean, you swim in my blood when it's
-            warm. My cycles of circular motion, protect you and keep you from
-            harm. You live in a world of illusion, where everything's peaches
-            and cream. We all face a scarlet conclusion but we spend our time in
-            a dream.
+            Here is list of the jobs you have created. Tap on one of the jobs to
+            start looking at potential employees and view job details.
           </Text>
         </View>
 
@@ -89,6 +86,7 @@ const JobBoard = ({ navigation }) => {
               </Card.Content>
             </Card>
           ))}
+        {/* if theres an odd number of jobs the last job needs to be left aligned */}
         {jobs && !jobs.length % 2 == 0 && (
           <Card
             style={{
