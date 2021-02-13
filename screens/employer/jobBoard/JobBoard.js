@@ -9,7 +9,11 @@ import {
 import { Card, FAB } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import Header from "../../../components/header/Header";
-const JobBoard = ({ navigation }) => {
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { updateSelectedJob } from "../../../redux/actions/JobActions";
+
+const JobBoard = ({ navigation, updateSelectedJob }) => {
   const [jobs, setJobs] = useState();
 
   useEffect(() => {
@@ -22,7 +26,8 @@ const JobBoard = ({ navigation }) => {
     });
   }, []);
 
-  const goToFutureEmployees = () => {
+  const selectJob = (selectedJob) => {
+    updateSelectedJob(selectedJob);
     navigation.navigate("RootEmployer", { message: false });
   };
   const goToAddJobScreen = () => {
@@ -53,17 +58,17 @@ const JobBoard = ({ navigation }) => {
         {!jobs && <ActivityIndicator size="large" />}
 
         {jobs &&
-          jobs.map((item, i) => (
+          jobs.map((job, i) => (
             <Card
               key={i}
               style={{
                 borderRadius: 15,
-                backgroundColor: item.color,
+                backgroundColor: job.color,
                 height: 145,
                 margin: 6,
                 width: "45%",
               }}
-              onPress={() => goToFutureEmployees(i)}
+              onPress={() => selectJob(job)}
             >
               <Card.Content
                 style={{ height: "100%", justifyContent: "space-around" }}
@@ -73,7 +78,7 @@ const JobBoard = ({ navigation }) => {
                     fontSize: 25,
                   }}
                 >
-                  {item.title}
+                  {job.title}
                 </Text>
 
                 <Text
@@ -81,7 +86,7 @@ const JobBoard = ({ navigation }) => {
                     fontSize: 14,
                   }}
                 >
-                  {item.companyName.toUpperCase()}
+                  {job.companyName.toUpperCase()}
                 </Text>
               </Card.Content>
             </Card>
@@ -133,4 +138,17 @@ const styles = StyleSheet.create({
   header: { width: 300 },
 });
 
-export default JobBoard;
+const mapStateToProps = (state) => {
+  const { selectedJob } = state;
+  return { selectedJob };
+};
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      updateSelectedJob,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobBoard);

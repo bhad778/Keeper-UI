@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { connect } from "react-redux";
 
 const Header = ({
   screenTitle,
@@ -11,6 +12,7 @@ const Header = ({
   type,
   withBackButton,
   withEditButton,
+  selectedJob,
 }) => {
   const goBack = () => {
     navigation.goBack();
@@ -18,13 +20,14 @@ const Header = ({
 
   return (
     <Appbar.Header
-      style={
-        type === "outlined"
-          ? styles.outlinedAppBar
-          : type === "noBorder"
-          ? styles.noBorderAppBar
-          : styles.filledAppBar
-      }
+      // style={
+      //   type === "outlined"
+      //     ? styles.outlinedAppBar
+      //     : type === "noBorder"
+      //     ? styles.noBorderAppBar
+      //     : styles.filledAppBar
+      // }
+      style={{ backgroundColor: selectedJob.color }}
     >
       <View style={styles.leftSection}>
         <Image
@@ -60,7 +63,7 @@ const Header = ({
 };
 const styles = StyleSheet.create({
   filledAppBar: {
-    backgroundColor: "#add9d9",
+    backgroundColor: "white",
     elevation: 0,
     height: 80,
     width: "100%",
@@ -114,4 +117,10 @@ const styles = StyleSheet.create({
     overflow: "visible",
   },
 });
-export default Header;
+
+const mapStateToProps = (state) => {
+  const { selectedJob } = state;
+  return { selectedJob };
+};
+
+export default connect(mapStateToProps)(Header);
