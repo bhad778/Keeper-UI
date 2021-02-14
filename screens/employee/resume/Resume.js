@@ -5,10 +5,15 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
   Text,
 } from "react-native";
 import { Title, Subheading, Paragraph } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
+// import { Button } from "react-native-paper";
+
+const SCREEN_HEIGHT = Dimensions.get("screen").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = () => {
   const [pastJobs] = useState([
@@ -78,205 +83,236 @@ const Resume = () => {
   };
 
   return (
-    <ScrollView style={styles.peopleWhoLikedYou}>
-      <View style={styles.container}>
-        <View style={styles.personalDescriptionSection}>
-          <View style={styles.nameAndJobTitleSection}>
-            <Title style={styles.name}>Megan Kelly</Title>
-            <Subheading style={styles.jobTitle}>DESIGN DIRECTOR</Subheading>
-          </View>
-          <View style={styles.descriptionTextSection}>
-            <Paragraph style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Paragraph>
-            <Paragraph style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Paragraph>
-          </View>
-        </View>
-        <View style={styles.experienceDetailsSection}>
-          <View style={styles.experienceAndAvailabilitySection}>
-            <View style={styles.yearsOfExperienceSection}>
-              <Title style={styles.name}>
-                8 <Text style={{ fontSize: 20 }}>YRS</Text>
-              </Title>
-              <Subheading style={styles.experienceAndAvailabilitySubtitles}>
-                EXPERIENCE
-              </Subheading>
+    <View>
+      <ScrollView style={styles.peopleWhoLikedYou}>
+        <View style={styles.container}>
+          <Image
+            style={{
+              flex: 1,
+              height: 400,
+              width: "100%",
+              resizeMode: "cover",
+            }}
+            source={{
+              uri:
+                "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+            }}
+          />
+          <View style={styles.personalDescriptionSection}>
+            <View style={styles.nameAndJobTitleSection}>
+              <Title style={styles.name}>Megan Kelly</Title>
+              <Subheading style={styles.jobTitle}>DESIGN DIRECTOR</Subheading>
             </View>
-            <View style={styles.availabilitySection}>
-              <Title style={styles.name}>Now</Title>
-              <Subheading style={styles.experienceAndAvailabilitySubtitles}>
-                AVAILABILITY
-              </Subheading>
+            <View style={styles.descriptionTextSection}>
+              <Paragraph style={styles.descriptionText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </Paragraph>
+              <Paragraph style={styles.descriptionText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </Paragraph>
             </View>
           </View>
-          <View style={styles.pastJobsSection}>
-            {pastJobs.map((item, i) => (
-              <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
-                <View style={styles.specificPastJob}>
-                  <View
-                    style={
-                      i === 0
-                        ? styles.firstVerticalLineSection
-                        : i === pastJobs.length - 1
-                        ? styles.lastVerticalLineSection
-                        : styles.verticalLineSection
-                    }
-                  >
-                    <View style={styles.circlesContainer}>
-                      <View style={styles.innerCircle}></View>
-                      <View style={styles.outerCircle}></View>
-                    </View>
+          <View style={styles.experienceDetailsSection}>
+            <View style={styles.experienceAndAvailabilitySection}>
+              <View style={styles.yearsOfExperienceSection}>
+                <Title style={styles.name}>
+                  8 <Text style={{ fontSize: 20 }}>YRS</Text>
+                </Title>
+                <Subheading style={styles.experienceAndAvailabilitySubtitles}>
+                  EXPERIENCE
+                </Subheading>
+              </View>
+              <View style={styles.availabilitySection}>
+                <Title style={styles.name}>Now</Title>
+                <Subheading style={styles.experienceAndAvailabilitySubtitles}>
+                  AVAILABILITY
+                </Subheading>
+              </View>
+            </View>
+            <View style={styles.pastJobsSection}>
+              {pastJobs.map((item, i) => (
+                <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
+                  <View style={styles.specificPastJob}>
                     <View
                       style={
                         i === 0
-                          ? styles.firstVerticalLine
+                          ? styles.firstVerticalLineSection
                           : i === pastJobs.length - 1
-                          ? styles.lastVerticalLine
-                          : styles.verticalLine
-                      }
-                    ></View>
-                  </View>
-                  <View
-                    style={
-                      i === pastJobs.length - 1
-                        ? styles.lastJobDetailsSection
-                        : styles.jobDetailsSection
-                    }
-                  >
-                    <Subheading style={styles.monthsText}>
-                      {item.months}
-                    </Subheading>
-                    <View style={styles.jobTitleContainer}>
-                      <Title style={styles.jobTitleText}>{item.jobTitle}</Title>
-                      <FontAwesome
-                        style={styles.angleDownIcon}
-                        color="black"
-                        name={
-                          activeAccordions.includes(i)
-                            ? "angle-up"
-                            : "angle-down"
-                        }
-                        size={30}
-                      />
-                    </View>
-                    <Subheading style={styles.subtitleText}>
-                      {item.company}
-                    </Subheading>
-                    <Paragraph
-                      style={
-                        activeAccordions.includes(i)
-                          ? styles.jobDetailsOpened
-                          : styles.hidden
+                          ? styles.lastVerticalLineSection
+                          : styles.verticalLineSection
                       }
                     >
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </Paragraph>
+                      <View style={styles.circlesContainer}>
+                        <View style={styles.innerCircle}></View>
+                        <View style={styles.outerCircle}></View>
+                      </View>
+                      <View
+                        style={
+                          i === 0
+                            ? styles.firstVerticalLine
+                            : i === pastJobs.length - 1
+                            ? styles.lastVerticalLine
+                            : styles.verticalLine
+                        }
+                      ></View>
+                    </View>
+                    <View
+                      style={
+                        i === pastJobs.length - 1
+                          ? styles.lastJobDetailsSection
+                          : styles.jobDetailsSection
+                      }
+                    >
+                      <Subheading style={styles.monthsText}>
+                        {item.months}
+                      </Subheading>
+                      <View style={styles.jobTitleContainer}>
+                        <Title style={styles.jobTitleText}>
+                          {item.jobTitle}
+                        </Title>
+                        <FontAwesome
+                          style={styles.angleDownIcon}
+                          color="black"
+                          name={
+                            activeAccordions.includes(i)
+                              ? "angle-up"
+                              : "angle-down"
+                          }
+                          size={30}
+                        />
+                      </View>
+                      <Subheading style={styles.subtitleText}>
+                        {item.company}
+                      </Subheading>
+                      <Paragraph
+                        style={
+                          activeAccordions.includes(i)
+                            ? styles.jobDetailsOpened
+                            : styles.hidden
+                        }
+                      >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                      </Paragraph>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-          <View style={styles.skillsSection}>
-            <View style={styles.numberOfSkillsAndFocusedSkillsSection}>
-              <View style={styles.numberOfSkillsContainer}>
-                <View style={styles.imageAndTextContainer}>
-                  <Text style={styles.skillCircleNumber}>12</Text>
-                  <Text style={styles.skillCircleImageSubtext}>Skills</Text>
-                  <Image
-                    style={styles.skillCircleImage}
-                    source={{
-                      uri:
-                        "https://rileymann.com/wp-content/uploads/2020/12/pare_skills-circle.png",
-                    }}
-                  ></Image>
-                </View>
-              </View>
-              <View style={styles.focusedSkillsSection}>
-                <View style={styles.focusedSkillContainer}>
-                  <Title style={styles.focusedSkill}>Illustration</Title>
-                </View>
-                <View style={styles.focusedSkillContainer}>
-                  <Title style={styles.focusedSkill}>Graphic Design</Title>
-                </View>
-                <View style={styles.focusedSkillContainer}>
-                  <Title style={styles.focusedSkill}>Branding</Title>
-                </View>
-              </View>
-            </View>
-            <View style={styles.skillsListSection}>
-              {skills.map((skill, i) => (
-                <View key={i} style={styles.skillContainer}>
-                  <Text style={styles.skillText}>{skill}</Text>
-                  <Text
-                    style={
-                      i === skills.length - 1
-                        ? styles.hidden
-                        : styles.bulletPoint
-                    }
-                  ></Text>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
-          </View>
-          <View style={styles.educationSection}>
-            <Title style={styles.educationTitle}>EDUCATION</Title>
-            <View style={styles.educationItemContainer}>
-              <View style={styles.degreeTypeAcronymContainer}>
-                <Text style={styles.degreeTypeAcronym}>BFA</Text>
+            <View style={styles.skillsSection}>
+              <View style={styles.numberOfSkillsAndFocusedSkillsSection}>
+                <View style={styles.numberOfSkillsContainer}>
+                  <View style={styles.imageAndTextContainer}>
+                    <Text style={styles.skillCircleNumber}>12</Text>
+                    <Text style={styles.skillCircleImageSubtext}>Skills</Text>
+                    <Image
+                      style={styles.skillCircleImage}
+                      source={{
+                        uri:
+                          "https://rileymann.com/wp-content/uploads/2020/12/pare_skills-circle.png",
+                      }}
+                    ></Image>
+                  </View>
+                </View>
+                <View style={styles.focusedSkillsSection}>
+                  <View style={styles.focusedSkillContainer}>
+                    <Title style={styles.focusedSkill}>Illustration</Title>
+                  </View>
+                  <View style={styles.focusedSkillContainer}>
+                    <Title style={styles.focusedSkill}>Graphic Design</Title>
+                  </View>
+                  <View style={styles.focusedSkillContainer}>
+                    <Title style={styles.focusedSkill}>Branding</Title>
+                  </View>
+                </View>
               </View>
-              <View style={styles.educationDetails}>
-                <Subheading style={styles.monthsText}>2010 -2014</Subheading>
-                <Title>University of Georgia</Title>
-                <Subheading
-                  style={[styles.subtitleText, styles.degreeTypeText]}
-                >
-                  Bachelor of Fine Arts
-                </Subheading>
+              <View style={styles.skillsListSection}>
+                {skills.map((skill, i) => (
+                  <View key={i} style={styles.skillContainer}>
+                    <Text style={styles.skillText}>{skill}</Text>
+                    <Text
+                      style={
+                        i === skills.length - 1
+                          ? styles.hidden
+                          : styles.bulletPoint
+                      }
+                    ></Text>
+                  </View>
+                ))}
               </View>
             </View>
-            <View style={styles.educationItemContainer}>
-              <View style={styles.degreeTypeAcronymContainer}>
-                <Text style={styles.degreeTypeAcronym}>MFA</Text>
+            <View style={styles.educationSection}>
+              <Title style={styles.educationTitle}>EDUCATION</Title>
+              <View style={styles.educationItemContainer}>
+                <View style={styles.degreeTypeAcronymContainer}>
+                  <Text style={styles.degreeTypeAcronym}>BFA</Text>
+                </View>
+                <View style={styles.educationDetails}>
+                  <Subheading style={styles.monthsText}>2010 -2014</Subheading>
+                  <Title>University of Georgia</Title>
+                  <Subheading
+                    style={[styles.subtitleText, styles.degreeTypeText]}
+                  >
+                    Bachelor of Fine Arts
+                  </Subheading>
+                </View>
               </View>
-              <View style={styles.educationDetails}>
-                <Subheading style={styles.monthsText}>2010 -2014</Subheading>
-                <Title>University of Georgia</Title>
-                <Subheading
-                  style={[styles.subtitleText, styles.degreeTypeText]}
-                >
-                  Masters of Fine Arts
-                </Subheading>
+              <View style={styles.educationItemContainer}>
+                <View style={styles.degreeTypeAcronymContainer}>
+                  <Text style={styles.degreeTypeAcronym}>MFA</Text>
+                </View>
+                <View style={styles.educationDetails}>
+                  <Subheading style={styles.monthsText}>2010 -2014</Subheading>
+                  <Title>University of Georgia</Title>
+                  <Subheading
+                    style={[styles.subtitleText, styles.degreeTypeText]}
+                  >
+                    Masters of Fine Arts
+                  </Subheading>
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.bottomDescriptionText}>
-            <Paragraph style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Paragraph>
-            <Paragraph style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Paragraph>
+            <View style={styles.bottomDescriptionText}>
+              <Paragraph style={styles.descriptionText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </Paragraph>
+              <Paragraph style={styles.descriptionText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </Paragraph>
+            </View>
           </View>
         </View>
+      </ScrollView>
+      <View style={styles.likeAndDislikeButtonsContainer}>
+        <TouchableOpacity
+          //onPress={buttonClickedHandler}
+          style={styles.likeButton}
+        >
+          <FontAwesome name="close" color="white" size={30} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          //onPress={buttonClickedHandler}
+          style={styles.dislikeButton}
+        >
+          <FontAwesome name="heart" color="white" size={30} />
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -287,7 +323,7 @@ const styles = StyleSheet.create({
   },
   personalDescriptionSection: {
     padding: 20,
-    backgroundColor: "#add9d9",
+    backgroundColor: "white",
   },
   nameAndJobTitleSection: {
     paddingTop: 25,
@@ -589,6 +625,34 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+  },
+  likeAndDislikeButtonsContainer: {
+    height: 100,
+    position: "absolute",
+    width: 250,
+    top: SCREEN_HEIGHT - 300,
+    left: (SCREEN_WIDTH - 250) / 2,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  likeButton: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 100,
+    backgroundColor: "red",
+  },
+  dislikeButton: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 100,
+    backgroundColor: "green",
   },
 });
 export default Resume;

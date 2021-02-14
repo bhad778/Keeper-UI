@@ -9,7 +9,7 @@ const Header = ({
   screenTitle,
   children,
   navigation,
-  type,
+  // type,
   withBackButton,
   withEditButton,
   selectedJob,

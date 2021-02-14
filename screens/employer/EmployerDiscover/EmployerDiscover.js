@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import Swiper from "../../../components/swiper/Swiper";
+// import Swiper from "../../../components/swiper/Swiper";
 
-import { StyleSheet, View, Image, Text } from "react-native";
-import { Button } from "react-native-paper";
+import { StyleSheet, View, Image } from "react-native";
+// import { Button } from "react-native-paper";
 
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
-import Icon from "react-native-vector-icons/Feather";
+// import Icon from "react-native-vector-icons/Feather";
+import Header from "../../../components/header/Header";
+import Resume from "../../employee/resume/Resume";
 
 export default class Example extends Component {
   constructor(props) {
@@ -96,6 +98,7 @@ export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header screenTitle="Matches" />
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -104,7 +107,7 @@ export default class Example extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
-        <View style={styles.headerContainer}>
+        {/* <View style={styles.headerContainer}>
           <View style={styles.peopleWhoLikeYou}>
             <Button mode="text" style={styles.newMatchButton} color="black">
               <Icon name="sliders" size={25} />
@@ -123,9 +126,9 @@ export default class Example extends Component {
               <Icon name="sliders" size={25} />
             </Button>
           </View>
-        </View>
+        </View> */}
         <View style={styles.swiperContainer}>
-          <Swiper />
+          <Resume />
         </View>
       </View>
     );
