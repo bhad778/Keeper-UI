@@ -137,7 +137,7 @@ export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header />
+        <Header navigation={this.props.navigation} />
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}

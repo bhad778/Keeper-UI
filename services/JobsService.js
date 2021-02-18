@@ -19,6 +19,23 @@ const JobsService = {
       });
   },
 
+  getEmployersJobs: (payload) => {
+    return fetch(`${apiUrl}/getEmployersJobs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  },
+
   addJob: (payload) => {
     return fetch(`${apiUrl}/addJob`, {
       method: "POST",

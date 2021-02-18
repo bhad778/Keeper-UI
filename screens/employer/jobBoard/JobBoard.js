@@ -28,10 +28,8 @@ const JobBoard = ({
   const [jobs, setJobs] = useState();
 
   useEffect(() => {
-    JobsService.getJobs({
-      lng: -84.73555943153565,
-      lat: 33.96886433181504,
-      distance: 100000,
+    JobsService.getEmployersJobs({
+      email: "employer123@gmail.com",
     }).then((data) => {
       setJobs(data);
     });
