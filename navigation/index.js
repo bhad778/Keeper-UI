@@ -12,7 +12,6 @@ import BottomTabEmployerNavigator from "./BottomTabEmployerNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Messages from "../screens/matches/Messages";
 import Matched from "../screens/matches/Matched";
-import JobBoard from "../screens/employer/jobBoard/JobBoard";
 import SignUp from "../screens/login/SignUp";
 import AddJob from "../screens/employer/addJob/AddJob";
 import EmployeesThatLikedJob from "../screens/employer/employeesThatLikedJob/EmployeesThatLikedJob";
@@ -38,11 +37,6 @@ function RootNavigator() {
       <Stack.Screen
         name="RootEmployer"
         component={BottomTabEmployerNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="JobBoard"
-        component={JobBoard}
         options={{ headerShown: false }}
       />
       <Stack.Screen

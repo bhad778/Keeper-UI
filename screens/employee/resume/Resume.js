@@ -15,7 +15,7 @@ import { FontAwesome } from "@expo/vector-icons";
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const Resume = () => {
+const Resume = (props) => {
   const [pastJobs] = useState([
     {
       months: "FIRST",
@@ -300,14 +300,14 @@ const Resume = () => {
       </ScrollView>
       <View style={styles.likeAndDislikeButtonsContainer}>
         <TouchableOpacity
-          //onPress={buttonClickedHandler}
-          style={styles.likeButton}
+          onPress={props.pressDislikeButton}
+          style={styles.dislikeButton}
         >
           <FontAwesome name="close" color="white" size={30} />
         </TouchableOpacity>
         <TouchableOpacity
-          //onPress={buttonClickedHandler}
-          style={styles.dislikeButton}
+          onPress={props.pressLikeButton}
+          style={styles.likeButton}
         >
           <FontAwesome name="heart" color="white" size={30} />
         </TouchableOpacity>
@@ -343,7 +343,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     lineHeight: 30,
   },
-
   experienceDetailsSection: {
     backgroundColor: "#ffbc07",
     borderBottomLeftRadius: 20,
@@ -643,7 +642,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderRadius: 100,
-    backgroundColor: "red",
+    backgroundColor: "green",
   },
   dislikeButton: {
     width: 100,
@@ -652,7 +651,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderRadius: 100,
-    backgroundColor: "green",
+    backgroundColor: "red",
   },
 });
 export default Resume;

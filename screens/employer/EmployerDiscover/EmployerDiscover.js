@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 // import Swiper from "../../../components/swiper/Swiper";
 
-import { StyleSheet, View, Image } from "react-native";
+import {
+  ActivityIndicator,
+  Animated,
+  StyleSheet,
+  View,
+  Image,
+} from "react-native";
 // import { Button } from "react-native-paper";
 
 import Filters from "../../../modals/Filters";
@@ -15,11 +21,14 @@ export default class Example extends Component {
     super(props);
     this.state = {
       filtersModal: false,
+      jobBoardModalOpen: false,
       employeeInfoModal: false,
       cards: this.hotGirls,
       swipedAllCards: false,
       swipeDirection: "",
       cardIndex: 0,
+      isLoading: false,
+      slideUpValue: new Animated.Value(0),
     };
   }
 
@@ -65,6 +74,19 @@ export default class Example extends Component {
       name: "Rust Creek",
     },
   ];
+
+  runSlideUpAnimation = () => {
+    Animated.timing(this.state.slideUpValue, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  componentDidMount() {
+    this.runSlideUpAnimation();
+  }
+
   renderCard = (card) => {
     return (
       <View style={styles.card}>
@@ -73,32 +95,49 @@ export default class Example extends Component {
     );
   };
 
-  onSwiped = (type) => {
-    console.log(`on swiped ${type}`);
-  };
+  // onSwiped = (type) => {
+  //   console.log(`on swiped ${type}`);
+  // };
 
-  onSwipedAllCards = () => {
-    this.setState({
-      swipedAllCards: true,
-    });
-  };
-  swipeRight = (goTo) => {
-    this.props.navigation.navigate(goTo);
-  };
+  // onSwipedAllCards = () => {
+  //   this.setState({
+  //     swipedAllCards: true,
+  //   });
+  // };
+  // swipeRight = (goTo) => {
+  //   this.props.navigation.navigate(goTo);
+  // };
 
-  swipeLeft = () => {
-    this.swiper.swipeLeft();
+  // swipeLeft = () => {
+  //   this.swiper.swipeLeft();
+  // };
+  toggleJobBoardModal = () => {
+    this.setState({ jobBoardModalOpen: !this.state.jobBoardModalOpen });
   };
   filtersModalOn = (visible) => {
     this.setState({ filtersModal: visible });
   };
-  employeeInfoModalOn = (visible) => {
-    this.setState({ employeeInfoModal: visible });
+  pressLikeButton = () => {
+    this.setState({ isLoading: true }, () => {
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+        this.runSlideUpAnimation();
+      }, 500);
+    });
   };
+  pressDislikeButton = () => {
+    this.setState({ isLoading: true }, () => {
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+        this.runSlideUpAnimation();
+      }, 500);
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Header screenTitle="Matches" />
+        <Header />
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -128,7 +167,27 @@ export default class Example extends Component {
           </View>
         </View> */}
         <View style={styles.swiperContainer}>
-          <Resume />
+          {this.state.isLoading && <ActivityIndicator size="large" />}
+          {!this.state.isLoading && (
+            <Animated.View
+              style={{
+                transform: [
+                  {
+                    translateY: this.state.slideUpValue.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [400, 0],
+                    }),
+                  },
+                ],
+              }}
+            >
+              <Resume
+                pressLikeButton={this.pressLikeButton}
+                pressDislikeButton={this.pressDislikeButton}
+              />
+              {/* <Text>slide up</Text> */}
+            </Animated.View>
+          )}
         </View>
       </View>
     );
@@ -142,7 +201,6 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     height: "12%",
-    zIndex: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -175,7 +233,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   card: {
-    zIndex: 444,
     flex: 2,
     borderWidth: 2,
     borderColor: "#E8E8E8",

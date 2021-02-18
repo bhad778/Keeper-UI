@@ -1,12 +1,22 @@
 /* eslint-disable no-undef */
-import React from "react";
-import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+  Modal,
+} from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
+import JobBoard from "../../screens/employer/jobBoard/JobBoard";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Header = ({
-  screenTitle,
+  //screenTitle,
   children,
   navigation,
   // type,
@@ -17,6 +27,9 @@ const Header = ({
   const goBack = () => {
     navigation.goBack();
   };
+  const [jobBoardModalOpen, setJobBoardModalOpen] = useState(
+    selectedJob.title ? false : true
+  );
 
   return (
     <Appbar.Header
@@ -27,37 +40,49 @@ const Header = ({
       //     ? styles.noBorderAppBar
       //     : styles.filledAppBar
       // }
-      style={{ backgroundColor: selectedJob.color }}
+      style={{
+        backgroundColor: selectedJob.color,
+      }}
     >
-      <View style={styles.leftSection}>
-        <Image
-          source={{
-            uri:
-              "https://rileymann.com/wp-content/uploads/2020/12/pare_logo.png",
-          }}
-          style={{ width: 25, height: 39 }}
-        />
-      </View>
-      <View style={styles.middleSection}>
-        <Text style={styles.titleText}>{screenTitle}</Text>
-      </View>
-      {!children && (
-        <View style={styles.rightSection}>
-          {withBackButton && (
-            <TouchableOpacity onPress={goBack}>
-              <Icon name="arrow-back" size={40} />
-            </TouchableOpacity>
-          )}
-          {withEditButton && (
-            <TouchableOpacity onPress={goBack}>
-              <Icon name="create" size={40} />
-            </TouchableOpacity>
-          )}
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <JobBoard
+          jobBoardModalOpen={jobBoardModalOpen}
+          setJobBoardModalOpen={setJobBoardModalOpen}
+        ></JobBoard>
+        <View style={styles.leftSection}>
+          <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
+            <Image
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
+              }}
+              style={{ width: 30, height: 26 }}
+            />
+          </TouchableOpacity>
         </View>
-      )}
-      {children && (
-        <View style={styles.rightHeaderIconContainer}>{children}</View>
-      )}
+        <View style={styles.middleSection}>
+          <Text style={styles.titleText}>
+            {selectedJob.title ? selectedJob.title : " "}
+          </Text>
+        </View>
+        {!children && (
+          <View style={styles.rightSection}>
+            {withBackButton && (
+              <TouchableOpacity onPress={goBack}>
+                <Icon name="arrow-back" size={40} />
+              </TouchableOpacity>
+            )}
+            {withEditButton && (
+              <TouchableOpacity onPress={goBack}>
+                <Icon name="create" size={40} />
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
+        {children && (
+          <View style={styles.rightHeaderIconContainer}>{children}</View>
+        )}
+      </View>
     </Appbar.Header>
   );
 };
@@ -66,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 0,
     height: 80,
-    width: "100%",
+    width: SCREEN_WIDTH,
   },
   outlinedAppBar: {
     backgroundColor: "white",
