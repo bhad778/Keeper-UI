@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text,
   TextInput as NativeTextInput,
+  Modal,
 } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
@@ -12,7 +13,7 @@ import Header from "../../../components/header/Header";
 import Icon from "react-native-vector-icons/Feather";
 import { skipPartiallyEmittedExpressions } from "typescript";
 import JobsService from "../../../services/JobsService";
-const AddJob = ({ navigation }) => {
+const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
   const [text, setText] = React.useState({
     jobTitle: "",
     companyName: "",
@@ -23,7 +24,7 @@ const AddJob = ({ navigation }) => {
   });
 
   const goBack = () => {
-    navigation.goBack();
+    setAddJobModalVisible(false);
   };
 
   const postJob = () => {
@@ -39,7 +40,7 @@ const AddJob = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Modal visible={addJobModalVisible} style={styles.container}>
       <View
         style={{
           flexDirection: "row",
@@ -207,7 +208,7 @@ const AddJob = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </Modal>
   );
 };
 const styles = StyleSheet.create({

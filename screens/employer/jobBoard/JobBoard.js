@@ -15,17 +15,18 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateSelectedJob } from "../../../redux/actions/JobActions";
 import Icon from "react-native-vector-icons/Feather";
+import AddJob from "../addJob/AddJob";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const JobBoard = ({
-  navigation,
   updateSelectedJob,
   jobBoardModalOpen,
   setJobBoardModalOpen,
 }) => {
   const [jobs, setJobs] = useState();
+  const [addJobModalVisible, setAddJobModalVisible] = useState(false);
 
   useEffect(() => {
     JobsService.getEmployersJobs({
@@ -36,11 +37,8 @@ const JobBoard = ({
   }, []);
 
   const selectJob = (selectedJob) => {
-    updateSelectedJob(selectedJob);
     setJobBoardModalOpen(false);
-  };
-  const goToAddJobScreen = () => {
-    navigation.navigate("AddJob");
+    updateSelectedJob(selectedJob);
   };
 
   return (
@@ -50,6 +48,10 @@ const JobBoard = ({
       style={styles.jobBoardModal}
     >
       <View style={styles.container}>
+        <AddJob
+          addJobModalVisible={addJobModalVisible}
+          setAddJobModalVisible={setAddJobModalVisible}
+        />
         <Appbar.Header style={styles.outlinedAppBar}>
           <View
             style={{ display: "flex", width: "100%", flexDirection: "row" }}
@@ -59,7 +61,7 @@ const JobBoard = ({
               <Text style={styles.titleText}>Job Board</Text>
             </View>
             <View style={styles.rightSection}>
-              <TouchableOpacity onPress={goToAddJobScreen}>
+              <TouchableOpacity onPress={() => setAddJobModalVisible(true)}>
                 <Icon name="plus" size={40} />
               </TouchableOpacity>
             </View>
@@ -116,17 +118,6 @@ const JobBoard = ({
                 }}
               ></Card>
             )}
-
-            <View
-              style={{
-                width: "100%",
-                height: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FAB style={styles.fab} icon="plus" onPress={goToAddJobScreen} />
-            </View>
           </ScrollView>
         </View>
       </View>
