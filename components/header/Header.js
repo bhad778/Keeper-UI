@@ -46,6 +46,7 @@ const Header = ({
     >
       <View style={{ display: "flex", flexDirection: "row" }}>
         <JobBoard
+          navigation={navigation}
           jobBoardModalOpen={jobBoardModalOpen}
           setJobBoardModalOpen={setJobBoardModalOpen}
         ></JobBoard>
