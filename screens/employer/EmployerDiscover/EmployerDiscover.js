@@ -130,7 +130,7 @@ export default class Example extends Component {
       setTimeout(() => {
         this.setState({ isLoading: false });
         this.runSlideUpAnimation();
-      }, 500);
+      }, 200);
     });
   };
 
