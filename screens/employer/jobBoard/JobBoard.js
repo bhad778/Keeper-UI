@@ -9,7 +9,7 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
-import { Card, FAB, Appbar } from "react-native-paper";
+import { Card, Appbar } from "react-native-paper";
 import JobsService from "../../../services/JobsService";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
