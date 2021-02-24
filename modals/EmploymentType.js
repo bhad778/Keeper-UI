@@ -1,65 +1,101 @@
-import React from "react";
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Text,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
-import { Button } from "react-native-paper";
+import React, { useState } from "react";
+import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 const EmploymentType = ({
   employmentTypeModalVisible,
   setEmploymentTypeModalVisible,
 }) => {
+  const [buttonPressed, setButtonPressed] = useState("");
+  const [buttonTextPressed, setButtonTextPressed] = useState("");
+
+  const onButtonClick = (clickedButton) => {
+    setButtonPressed(clickedButton);
+    setButtonTextPressed(clickedButton);
+  };
   const goBack = () => {
     setEmploymentTypeModalVisible(false);
   };
   return (
     <Modal visible={employmentTypeModalVisible}>
       <View style={styles.header}>
-        <Button color="black" onPress={goBack} uppercase={false}>
+        <TouchableOpacity color="black" onPress={goBack}>
           <Text style={{ color: "black" }}>Cancel</Text>
-        </Button>
+        </TouchableOpacity>
         <Text style={{ fontSize: 30 }}>Employment</Text>
-        <Button uppercase={false}>
+        <TouchableOpacity>
           <Text style={{ color: "black" }}>Add</Text>
-        </Button>
+        </TouchableOpacity>
       </View>
       <View style={styles.buttonSection}>
-        <Button
-          onPress={() => console.log("hey")}
-          dark={false}
-          color="white"
-          style={styles.buttons}
-          mode="contained"
+        <TouchableOpacity
+          onPress={() => onButtonClick("fullTime")}
+          style={
+            buttonPressed === "fullTime"
+              ? styles.buttonsPressed
+              : styles.buttons
+          }
         >
-          <Text>Full Time</Text>
-        </Button>
-        <Button
-          style={styles.buttons}
-          color="white"
-          dark={false}
-          mode="contained"
+          <Text
+            style={
+              buttonTextPressed === "fullTime"
+                ? styles.buttonTextPressed
+                : styles.buttonText
+            }
+          >
+            Full Time
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onButtonClick("partTime")}
+          style={
+            buttonTextPressed === "partTime"
+              ? styles.buttonsPressed
+              : styles.buttons
+          }
         >
-          <Text>Part Time</Text>
-        </Button>
-        <Button
-          style={styles.buttons}
-          color="white"
-          dark={false}
-          mode="contained"
+          <Text
+            style={
+              buttonTextPressed === "partTime"
+                ? styles.buttonTextPressed
+                : styles.buttonText
+            }
+          >
+            Part Time
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onButtonClick("contract")}
+          style={
+            buttonTextPressed === "contract"
+              ? styles.buttonsPressed
+              : styles.buttons
+          }
         >
-          <Text>Contract</Text>
-        </Button>
-        <Button
-          style={styles.buttons}
-          color="white"
-          dark={false}
-          mode="contained"
+          <Text
+            style={
+              buttonTextPressed === "contract"
+                ? styles.buttonTextPressed
+                : styles.buttonText
+            }
+          >
+            Contract
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => onButtonClick("hourly")}
+          style={
+            buttonPressed === "hourly" ? styles.buttonsPressed : styles.buttons
+          }
         >
-          <Text>Hourly</Text>
-        </Button>
+          <Text
+            style={
+              buttonPressed === "hourly"
+                ? styles.buttonTextPressed
+                : styles.buttonText
+            }
+          >
+            Hourly
+          </Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -68,7 +104,7 @@ const EmploymentType = ({
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
     height: "15%",
     backgroundColor: "#add9da",
@@ -88,7 +124,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     marginBottom: 10,
+
     justifyContent: "center",
+    alignItems: "center",
   },
+  buttonsPressed: {
+    borderRadius: 30,
+    width: "45%",
+    height: 50,
+    margin: 5,
+    borderWidth: 1,
+    borderColor: "black",
+    marginBottom: 10,
+    backgroundColor: "#016568",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: { color: "black" },
+  buttonTextPressed: { color: "white" },
 });
 export default EmploymentType;
