@@ -8,20 +8,20 @@ import {
   Modal,
 } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
-import Header from "../../../components/header/Header";
 import Icon from "react-native-vector-icons/Feather";
-import { skipPartiallyEmittedExpressions } from "typescript";
 import JobsService from "../../../services/JobsService";
+import EmploymentType from "../../../modals/EmploymentType";
 const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
-  const [text, setText] = React.useState({
+  const [text, setText] = useState({
     jobTitle: "",
     companyName: "",
-    overview: "",
+    whoWeAre: "",
     keyResponsibilities: "",
-    qualifications: "",
-    levelOfAttractiveness: "",
+    overview: "",
   });
+  const [employmentTypeModalVisible, setEmploymentTypeModalVisible] = useState(
+    false
+  );
 
   const goBack = () => {
     setAddJobModalVisible(false);
@@ -41,6 +41,10 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
 
   return (
     <Modal visible={addJobModalVisible} style={styles.container}>
+      <EmploymentType
+        employmentTypeModalVisible={employmentTypeModalVisible}
+        setEmploymentTypeModalVisible={setEmploymentTypeModalVisible}
+      />
       <View
         style={{
           flexDirection: "row",
@@ -88,6 +92,10 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
           />
         </View>
         <View style={styles.inputContainer2}>
+          <View style={{ alignItems: "flex-start", width: "90%" }}>
+            <Text style={{ color: "rgba(0, 0, 0, 0.26)" }}>Company Info</Text>
+          </View>
+
           <Button
             style={styles.buttons}
             contentStyle={{
@@ -98,7 +106,7 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
             uppercase={false}
           >
             <View style={styles.buttonsInnerContent}>
-              <Text style={styles.buttonTextColor}>Company Logo</Text>
+              <Text style={styles.buttonTextColor}>Logo</Text>
               <Icon
                 name="chevron-right"
                 color="rgba(0, 0, 0, 0.26)"
@@ -108,10 +116,7 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
           </Button>
           <Button
             style={styles.buttons}
-            contentStyle={{
-              borderBottomWidth: 1,
-              borderBottomColor: "rgba(0, 0, 0, 0.26)",
-            }}
+            contentStyle={{}}
             mode="text"
             uppercase={false}
           >
@@ -124,6 +129,30 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
               />
             </View>
           </Button>
+          <View
+            style={{
+              width: "95%",
+              alignItems: "center",
+
+              borderWidth: 1,
+              marginBottom: 60,
+              borderRadius: 20,
+              borderColor: "rgba(0, 0, 0, 0.26)",
+            }}
+          >
+            <Text style={styles.textAreaLabel}>Who We Are</Text>
+            <NativeTextInput
+              style={styles.textAreas}
+              value={text.overview}
+              name="overview"
+              onChange={(event) => handleChange(event, "whoWeAre")}
+              multiline={true}
+              mode="flat"
+            />
+          </View>
+          <View style={{ width: "90%", alignItems: "flex-start" }}>
+            <Text style={{ color: "rgba(0, 0, 0, 0.26)" }}>Job Info</Text>
+          </View>
           <Button
             style={styles.buttons}
             contentStyle={{
@@ -160,6 +189,40 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
               />
             </View>
           </Button>
+          <Button
+            style={styles.buttons}
+            contentStyle={{
+              borderBottomWidth: 1,
+              borderBottomColor: "rgba(0, 0, 0, 0.26)",
+            }}
+            onPress={() => setEmploymentTypeModalVisible(true)}
+            mode="text"
+            uppercase={false}
+          >
+            <View style={styles.buttonsInnerContent}>
+              <Text style={styles.buttonTextColor}>Employment</Text>
+              <Icon
+                name="chevron-right"
+                color="rgba(0, 0, 0, 0.26)"
+                size={25}
+              />
+            </View>
+          </Button>
+          <Button
+            style={styles.buttons}
+            contentStyle={{}}
+            mode="text"
+            uppercase={false}
+          >
+            <View style={styles.buttonsInnerContent}>
+              <Text style={styles.buttonTextColor}>Responsibility</Text>
+              <Icon
+                name="chevron-right"
+                color="rgba(0, 0, 0, 0.26)"
+                size={25}
+              />
+            </View>
+          </Button>
         </View>
         <View style={styles.inputContainer3}>
           <View style={styles.textAreaContainer}>
@@ -169,39 +232,6 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
               value={text.overview}
               name="overview"
               onChange={(event) => handleChange(event, "overview")}
-              multiline={true}
-              mode="flat"
-            />
-          </View>
-          <View style={styles.textAreaContainer}>
-            <Text style={styles.textAreaLabel}>Key Responsibilities</Text>
-            <NativeTextInput
-              style={styles.textAreas}
-              value={text.keyResponsibilities}
-              name="keyResponsibilities"
-              onChange={(event) => handleChange(event, "keyResponsibilities")}
-              multiline={true}
-              mode="flat"
-            />
-          </View>
-          <View style={styles.textAreaContainer}>
-            <Text style={styles.textAreaLabel}>Qualifications</Text>
-            <NativeTextInput
-              style={styles.textAreas}
-              value={text.qualifications}
-              name="qualifications"
-              onChange={(event) => handleChange(event, "qualifications")}
-              multiline={true}
-              mode="flat"
-            />
-          </View>
-          <View style={styles.textAreaContainer}>
-            <Text style={styles.textAreaLabel}>Level Of Attractivness</Text>
-            <NativeTextInput
-              style={styles.textAreas}
-              value={text.levelOfAttractiveness}
-              name="levelOfAttractivness"
-              onChange={(event) => handleChange(event, "levelOfAttractivness")}
               multiline={true}
               mode="flat"
             />
@@ -244,7 +274,7 @@ const styles = StyleSheet.create({
   },
   textAreas: {
     width: "90%",
-    height: 200,
+    height: 100,
     backgroundColor: "white",
     borderRadius: 20,
 
