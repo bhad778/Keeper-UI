@@ -11,7 +11,8 @@ import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
 import EmploymentType from "../../../modals/EmploymentType";
-const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
+import SalarySlider from "../../../modals/SalarySlider";
+const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [text, setText] = useState({
     jobTitle: "",
     companyName: "",
@@ -22,7 +23,9 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
   const [employmentTypeModalVisible, setEmploymentTypeModalVisible] = useState(
     false
   );
-
+  const [salarySliderModalVisible, setSalarySliderModalVisible] = useState(
+    false
+  );
   const goBack = () => {
     setAddJobModalVisible(false);
   };
@@ -45,6 +48,10 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
         employmentTypeModalVisible={employmentTypeModalVisible}
         setEmploymentTypeModalVisible={setEmploymentTypeModalVisible}
       />
+      <SalarySlider
+        salarySliderModalVisible={salarySliderModalVisible}
+        setSalarySliderModalVisible={setSalarySliderModalVisible}
+      />
       <View
         style={{
           flexDirection: "row",
@@ -56,7 +63,7 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
         <Button color="black" onPress={goBack} uppercase={false}>
           <Text style={{ color: "black" }}>Cancel</Text>
         </Button>
-        <Text style={{ fontSize: 30 }}>Edit</Text>
+        <Text style={{ fontSize: 30 }}>Add Job</Text>
         <Button onPress={postJob} uppercase={false}>
           <Text style={{ color: "black" }}>Done</Text>
         </Button>
@@ -172,6 +179,7 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
             </View>
           </Button>
           <Button
+            onPress={() => setSalarySliderModalVisible(true)}
             style={styles.buttons}
             contentStyle={{
               borderBottomWidth: 1,
@@ -181,7 +189,7 @@ const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
             uppercase={false}
           >
             <View style={styles.buttonsInnerContent}>
-              <Text style={styles.buttonTextColor}>Salary</Text>
+              <Text style={styles.buttonTextColor}>Compensation</Text>
               <Icon
                 name="chevron-right"
                 color="rgba(0, 0, 0, 0.26)"
