@@ -6,6 +6,7 @@ import {
   Animated,
   StyleSheet,
   View,
+  Dimensions,
   Image,
 } from "react-native";
 // import { Button } from "react-native-paper";
@@ -15,6 +16,9 @@ import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 // import Icon from "react-native-vector-icons/Feather";
 import Header from "../../../components/header/Header";
 import Resume from "../../employee/resume/Resume";
+
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 export default class Example extends Component {
   constructor(props) {
@@ -29,6 +33,12 @@ export default class Example extends Component {
       cardIndex: 0,
       isLoading: false,
       slideUpValue: new Animated.Value(0),
+      wholeSwiperFadeAnim: new Animated.Value(1),
+      xIconFadeAnim: new Animated.Value(0),
+      xIconScaleXValue: new Animated.Value(0.5),
+      xIconScaleYValue: new Animated.Value(0.5),
+      xIconTranslateYValue: new Animated.Value(0),
+      wholeSwiperTranslateY: new Animated.Value(0),
     };
   }
 
@@ -95,22 +105,6 @@ export default class Example extends Component {
     );
   };
 
-  // onSwiped = (type) => {
-  //   console.log(`on swiped ${type}`);
-  // };
-
-  // onSwipedAllCards = () => {
-  //   this.setState({
-  //     swipedAllCards: true,
-  //   });
-  // };
-  // swipeRight = (goTo) => {
-  //   this.props.navigation.navigate(goTo);
-  // };
-
-  // swipeLeft = () => {
-  //   this.swiper.swipeLeft();
-  // };
   toggleJobBoardModal = () => {
     this.setState({ jobBoardModalOpen: !this.state.jobBoardModalOpen });
   };
@@ -126,12 +120,87 @@ export default class Example extends Component {
     });
   };
   pressDislikeButton = () => {
-    this.setState({ isLoading: true }, () => {
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-        this.runSlideUpAnimation();
-      }, 200);
-    });
+    Animated.parallel([
+      Animated.timing(this.state.wholeSwiperFadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start(() => {
+        Animated.timing(this.state.wholeSwiperTranslateY, {
+          toValue: 1,
+          duration: 1,
+          useNativeDriver: true,
+        }).start();
+      }),
+
+      // X icon fade in
+      Animated.timing(this.state.xIconFadeAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start(),
+
+      // X icon slide up
+      Animated.timing(this.state.xIconTranslateYValue, {
+        toValue: -100,
+        duration: 400,
+        useNativeDriver: true,
+      }).start(() => {
+        Animated.parallel([
+          Animated.timing(this.state.wholeSwiperFadeAnim, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: true,
+          }).start(),
+          // slide swiper back up
+          Animated.timing(this.state.wholeSwiperTranslateY, {
+            toValue: 0,
+            duration: 400,
+            useNativeDriver: true,
+          }).start(),
+
+          //X icon fade out
+          Animated.timing(this.state.xIconFadeAnim, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true,
+          }).start(() => {
+            // revert y value for next swipe
+            Animated.timing(this.state.xIconTranslateYValue, {
+              toValue: 0,
+              duration: 1,
+              useNativeDriver: true,
+            }).start();
+            // revert width for next swipe
+            Animated.timing(this.state.xIconScaleXValue, {
+              toValue: 0.5,
+              duration: 1,
+              useNativeDriver: true,
+            }).start(),
+              // revert height for next swipe
+              Animated.timing(this.state.xIconScaleYValue, {
+                toValue: 0.5,
+                duration: 1,
+                useNativeDriver: true,
+              }).start(() => {});
+          }),
+        ]).start(() => {});
+      }),
+
+      // X icon grow width
+      Animated.timing(this.state.xIconScaleXValue, {
+        toValue: 2,
+        duration: 500,
+        useNativeDriver: true,
+      }).start(),
+
+      // X icon grow height
+      Animated.timing(this.state.xIconScaleYValue, {
+        toValue: 2,
+        duration: 500,
+        useNativeDriver: true,
+      }).start(() => {}),
+    ]).start(() => {});
   };
 
   render() {
@@ -146,40 +215,53 @@ export default class Example extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
-        {/* <View style={styles.headerContainer}>
-          <View style={styles.peopleWhoLikeYou}>
-            <Button mode="text" style={styles.newMatchButton} color="black">
-              <Icon name="sliders" size={25} />
-            </Button>
-          </View>
-          <View style={styles.headerTextContainer}>
-            <Text style={styles.headerText}>Pare</Text>
-          </View>
-          <View style={styles.headerFilterButtonContainer}>
-            <Button
-              style={styles.filterButton}
-              mode="text"
-              color="black"
-              onPress={() => this.filtersModalOn(true)}
-            >
-              <Icon name="sliders" size={25} />
-            </Button>
-          </View>
-        </View> */}
+        <Animated.Image
+          source={{
+            uri:
+              "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
+          }}
+          style={[
+            styles.xIcon,
+            {
+              opacity: this.state.xIconFadeAnim, // Bind opacity to animated value
+              transform: [
+                { scaleX: this.state.xIconScaleXValue },
+                { scaleY: this.state.xIconScaleYValue },
+                {
+                  translateY: this.state.xIconTranslateYValue,
+                },
+              ],
+            },
+          ]}
+        ></Animated.Image>
         <View style={styles.swiperContainer}>
           {this.state.isLoading && <ActivityIndicator size="large" />}
           {!this.state.isLoading && (
             <Animated.View
-              style={{
-                transform: [
-                  {
-                    translateY: this.state.slideUpValue.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [400, 0],
-                    }),
-                  },
-                ],
-              }}
+              // style={{
+              //   transform: [
+              //     {
+              //       translateY: this.state.slideUpValue.interpolate({
+              //         inputRange: [0, 1],
+              //         outputRange: [400, 0],
+              //       }),
+              //     },
+              //   ],
+              // }}
+              style={[
+                styles.resumeContainer,
+                {
+                  opacity: this.state.wholeSwiperFadeAnim,
+                  transform: [
+                    {
+                      translateY: this.state.wholeSwiperTranslateY.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, SCREEN_HEIGHT],
+                      }),
+                    },
+                  ],
+                },
+              ]}
             >
               <Resume
                 pressLikeButton={this.pressLikeButton}
@@ -198,6 +280,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+  },
+  resumeContainer: {},
+  xIcon: {
+    width: 30,
+    height: 26,
+    position: "absolute",
+    left: SCREEN_WIDTH / 2 - 15,
+    top: SCREEN_HEIGHT / 2 - 13,
+    zIndex: 1,
   },
   headerContainer: {
     height: "12%",
