@@ -19,6 +19,7 @@ import Resume from "../../employee/resume/Resume";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
+// const ANIMATION_SPEED = 400;
 
 export default class Example extends Component {
   constructor(props) {
@@ -121,37 +122,55 @@ export default class Example extends Component {
   };
   pressDislikeButton = () => {
     Animated.parallel([
+      // swiper fades out
       Animated.timing(this.state.wholeSwiperFadeAnim, {
         toValue: 0,
         duration: 200,
         useNativeDriver: true,
       }).start(() => {
+        // instantly after fade send swiper down below screen so it can slide back up later
         Animated.timing(this.state.wholeSwiperTranslateY, {
           toValue: 1,
           duration: 1,
           useNativeDriver: true,
-        }).start();
+        }).start(() => {
+          // instantly fade back in or slide up later
+          Animated.timing(this.state.wholeSwiperFadeAnim, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: true,
+          }).start();
+        });
       }),
 
       // X icon fade in
       Animated.timing(this.state.xIconFadeAnim, {
         toValue: 1,
-        duration: 500,
+        duration: 350,
         useNativeDriver: true,
       }).start(),
 
+      // X icon grow width
+      Animated.timing(this.state.xIconScaleXValue, {
+        toValue: 2,
+        duration: 350,
+        useNativeDriver: true,
+      }).start(),
+
+      // X icon grow height
+      Animated.timing(this.state.xIconScaleYValue, {
+        toValue: 2,
+        duration: 350,
+        useNativeDriver: true,
+      }).start(() => {}),
+
       // X icon slide up
       Animated.timing(this.state.xIconTranslateYValue, {
-        toValue: -100,
-        duration: 400,
+        toValue: -125,
+        duration: 250,
         useNativeDriver: true,
       }).start(() => {
         Animated.parallel([
-          Animated.timing(this.state.wholeSwiperFadeAnim, {
-            toValue: 1,
-            duration: 1,
-            useNativeDriver: true,
-          }).start(),
           // slide swiper back up
           Animated.timing(this.state.wholeSwiperTranslateY, {
             toValue: 0,
@@ -159,10 +178,10 @@ export default class Example extends Component {
             useNativeDriver: true,
           }).start(),
 
-          //X icon fade out
+          //X icon height shrink
           Animated.timing(this.state.xIconFadeAnim, {
             toValue: 0,
-            duration: 300,
+            duration: 400,
             useNativeDriver: true,
           }).start(() => {
             // revert y value for next swipe
@@ -186,20 +205,6 @@ export default class Example extends Component {
           }),
         ]).start(() => {});
       }),
-
-      // X icon grow width
-      Animated.timing(this.state.xIconScaleXValue, {
-        toValue: 2,
-        duration: 500,
-        useNativeDriver: true,
-      }).start(),
-
-      // X icon grow height
-      Animated.timing(this.state.xIconScaleYValue, {
-        toValue: 2,
-        duration: 500,
-        useNativeDriver: true,
-      }).start(() => {}),
     ]).start(() => {});
   };
 
