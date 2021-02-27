@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   nameAndJobTitleSection: {
-    paddingTop: 25,
+    paddingTop: 5,
     paddingBottom: 30,
   },
   name: {
