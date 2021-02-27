@@ -314,10 +314,10 @@ const Resume = (props) => {
 const styles = StyleSheet.create({
   profileImage: {
     flex: 1,
-    height: 350,
-    width: "90%",
+    height: SCREEN_WIDTH - 30,
+    width: SCREEN_WIDTH - 30,
     resizeMode: "cover",
-    borderRadius: 300,
+    borderRadius: 4000,
     marginTop: 30,
   },
   nameAndJobTitleSection: {
@@ -490,7 +490,6 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     letterSpacing: 0.5,
   },
-
   educationSection: {
     display: "flex",
     justifyContent: "center",
@@ -552,6 +551,14 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  bulletPoint: {
+    width: 5,
+    height: 5,
+    backgroundColor: "black",
+    borderRadius: 50,
+    marginRight: 8,
+    marginLeft: 8,
   },
   likeButton: {
     width: 100,
