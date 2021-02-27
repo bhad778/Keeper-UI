@@ -5,18 +5,25 @@ import EmployerDiscover from "../screens/employer/employerDiscover/EmployerDisco
 import Profile from "../screens/profile/Profile";
 import Matches from "../screens/matches/Matches";
 import Icon from "react-native-vector-icons/Feather";
+import { connect } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator() {
+function BottomTabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouteName={"  "}
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
+          height: 80,
         },
-        activeTintColor: "#acd9d9",
+        safeAreaInsets: {
+          bottom: 0,
+        },
+        activeTintColor: "black",
+        inactiveBackgroundColor: props.selectedJob.color,
+        activeBackgroundColor: props.selectedJob.color,
       }}
     >
       <Tab.Screen
@@ -59,5 +66,9 @@ const styles = StyleSheet.create({
   tabs: { position: "relative", top: 5 },
 });
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
+const mapStateToProps = (state) => {
+  const { selectedJob } = state;
+  return { selectedJob };
+};
+
+export default connect(mapStateToProps)(BottomTabNavigator);

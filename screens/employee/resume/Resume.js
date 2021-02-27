@@ -10,7 +10,8 @@ import {
 } from "react-native";
 import { Title, Subheading, Paragraph } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
-// import { Button } from "react-native-paper";
+import Header from "../../../components/header/Header";
+import { connect } from "react-redux";
 
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -83,22 +84,34 @@ const Resume = (props) => {
   };
 
   return (
-    <View>
+    <View
+      style={{
+        backgroundColor: props.selectedJob.color,
+      }}
+    >
       <ScrollView style={styles.peopleWhoLikedYou}>
-        <View style={styles.container}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: props.selectedJob.color,
+            flex: 1,
+            alignItems: "center",
+          }}
+        >
           <Image
-            style={{
-              flex: 1,
-              height: 400,
-              width: "100%",
-              resizeMode: "cover",
-            }}
+            style={styles.profileImage}
             source={{
               uri:
                 "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
             }}
           />
-          <View style={styles.personalDescriptionSection}>
+          <View
+            style={{
+              backgroundColor: props.selectedJob.color,
+              flex: 1,
+              padding: 20,
+            }}
+          >
             <View style={styles.nameAndJobTitleSection}>
               <Title style={styles.name}>Megan Kelly</Title>
               <Subheading style={styles.jobTitle}>DESIGN DIRECTOR</Subheading>
@@ -139,29 +152,6 @@ const Resume = (props) => {
               {pastJobs.map((item, i) => (
                 <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
                   <View style={styles.specificPastJob}>
-                    <View
-                      style={
-                        i === 0
-                          ? styles.firstVerticalLineSection
-                          : i === pastJobs.length - 1
-                          ? styles.lastVerticalLineSection
-                          : styles.verticalLineSection
-                      }
-                    >
-                      <View style={styles.circlesContainer}>
-                        <View style={styles.innerCircle}></View>
-                        <View style={styles.outerCircle}></View>
-                      </View>
-                      <View
-                        style={
-                          i === 0
-                            ? styles.firstVerticalLine
-                            : i === pastJobs.length - 1
-                            ? styles.lastVerticalLine
-                            : styles.verticalLine
-                        }
-                      ></View>
-                    </View>
                     <View
                       style={
                         i === pastJobs.length - 1
@@ -281,20 +271,26 @@ const Resume = (props) => {
                 </View>
               </View>
             </View>
-            <View style={styles.bottomDescriptionText}>
-              <Paragraph style={styles.descriptionText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </Paragraph>
-              <Paragraph style={styles.descriptionText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </Paragraph>
-            </View>
+          </View>
+          <View
+            style={{
+              backgroundColor: props.selectedJob.color,
+              flex: 1,
+              padding: 20,
+            }}
+          >
+            <Paragraph style={styles.descriptionText}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </Paragraph>
+            <Paragraph style={styles.descriptionText}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </Paragraph>
           </View>
         </View>
       </ScrollView>
@@ -316,14 +312,13 @@ const Resume = (props) => {
   );
 };
 const styles = StyleSheet.create({
-  container: { flex: 1 },
   profileImage: {
-    width: "100%",
-    height: 500,
-  },
-  personalDescriptionSection: {
-    padding: 20,
-    backgroundColor: "white",
+    flex: 1,
+    height: 350,
+    width: "90%",
+    resizeMode: "cover",
+    borderRadius: 300,
+    marginTop: 30,
   },
   nameAndJobTitleSection: {
     paddingTop: 25,
@@ -344,9 +339,11 @@ const styles = StyleSheet.create({
     lineHeight: 30,
   },
   experienceDetailsSection: {
-    backgroundColor: "#ffbc07",
+    backgroundColor: "white",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    width: "90%",
+    borderRadius: 30,
   },
   experienceAndAvailabilitySection: {
     display: "flex",
@@ -372,8 +369,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   pastJobsSection: {
-    paddingTop: 30,
-    paddingBottom: 30,
+    padding: 30,
     borderTopWidth: 1,
     borderTopColor: "black",
     borderBottomWidth: 1,
@@ -383,84 +379,15 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
-  firstVerticalLineSection: {
-    paddingTop: 7,
-    height: "100%",
-    width: 70,
-    display: "flex",
-    alignItems: "center",
-  },
-  verticalLineSection: {
-    height: "100%",
-    width: 70,
-    display: "flex",
-    alignItems: "center",
-    position: "relative",
-  },
-  lastVerticalLineSection: {
-    height: "100%",
-    width: 70,
-    display: "flex",
-    alignItems: "center",
-    paddingBottom: 7,
-  },
-  firstVerticalLine: {
-    borderTopLeftRadius: 99,
-    borderTopRightRadius: 99,
-    flex: 1,
-    width: 5,
-    backgroundColor: "#fcf6dd",
-    zIndex: 1,
-  },
-  verticalLine: {
-    flex: 1,
-    width: 5,
-    backgroundColor: "#fcf6dd",
-  },
-  lastVerticalLine: {
-    borderBottomLeftRadius: 99,
-    borderBottomRightRadius: 99,
-    flex: 1,
-    width: 5,
-    backgroundColor: "#fcf6dd",
-    zIndex: 1,
-  },
-  circlesContainer: {
-    position: "absolute",
-    top: 47,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 2,
-  },
-  innerCircle: {
-    zIndex: 5,
-    width: 17,
-    height: 17,
-    backgroundColor: "black",
-    borderRadius: 50,
-    position: "absolute",
-  },
-  outerCircle: {
-    zIndex: 4,
-    width: 23,
-    height: 23,
-    backgroundColor: "#ffbc07",
-    borderRadius: 50,
-    position: "absolute",
-  },
-
   jobDetailsSection: {
     flex: 1,
     display: "flex",
     borderBottomWidth: 1,
     borderBottomColor: "black",
-    marginRight: 25,
   },
   lastJobDetailsSection: {
     flex: 1,
     display: "flex",
-    marginRight: 25,
   },
   jobDetailsOpened: {
     display: "flex",
@@ -542,15 +469,6 @@ const styles = StyleSheet.create({
     paddingTop: 7,
     paddingBottom: 7,
   },
-  focusedSkill: {},
-  bulletPoint: {
-    width: 5,
-    height: 5,
-    backgroundColor: "black",
-    borderRadius: 50,
-    marginRight: 8,
-    marginLeft: 8,
-  },
   skillsListSection: {
     display: "flex",
     flexDirection: "row",
@@ -629,7 +547,7 @@ const styles = StyleSheet.create({
     height: 100,
     position: "absolute",
     width: 250,
-    top: SCREEN_HEIGHT - 300,
+    top: SCREEN_HEIGHT - 200,
     left: (SCREEN_WIDTH - 250) / 2,
     display: "flex",
     flexDirection: "row",
@@ -654,4 +572,10 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
 });
-export default Resume;
+
+const mapStateToProps = (state) => {
+  const { selectedJob } = state;
+  return { selectedJob };
+};
+
+export default connect(mapStateToProps)(Resume);
