@@ -12,6 +12,7 @@ import { Title, Subheading, Paragraph } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
+import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
 
 const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -89,7 +90,10 @@ const Resume = (props) => {
         backgroundColor: props.selectedJob.color,
       }}
     >
-      <ScrollView style={styles.peopleWhoLikedYou}>
+      <HideBottomNavScrollView
+        style={styles.peopleWhoLikedYou}
+        navigation={props.navigation}
+      >
         <Header />
         <View
           style={{
@@ -293,19 +297,27 @@ const Resume = (props) => {
             </Paragraph>
           </View>
         </View>
-      </ScrollView>
+      </HideBottomNavScrollView>
       <View style={styles.likeAndDislikeButtonsContainer}>
-        <TouchableOpacity
-          onPress={props.pressDislikeButton}
-          style={styles.dislikeButton}
-        >
-          <FontAwesome name="close" color="white" size={30} />
+        <TouchableOpacity onPress={props.pressDislikeButton}>
+          <Image
+            // style={styles.skillCircleImage}
+            style={styles.dislikeButton}
+            source={{
+              uri:
+                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+            }}
+          ></Image>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={props.pressLikeButton}
-          style={styles.likeButton}
-        >
-          <FontAwesome name="heart" color="white" size={30} />
+        <TouchableOpacity onPress={props.pressLikeButton}>
+          <Image
+            // style={styles.skillCircleImage}
+            style={styles.likeButton}
+            source={{
+              uri:
+                "https://rileymann.com/wp-content/uploads/2021/02/keeper-like.png",
+            }}
+          ></Image>
         </TouchableOpacity>
       </View>
     </View>
@@ -552,14 +564,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  bulletPoint: {
-    width: 5,
-    height: 5,
-    backgroundColor: "black",
-    borderRadius: 50,
-    marginRight: 8,
-    marginLeft: 8,
-  },
   likeButton: {
     width: 100,
     height: 100,
@@ -567,7 +571,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderRadius: 100,
-    backgroundColor: "green",
   },
   dislikeButton: {
     width: 100,
@@ -576,7 +579,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderRadius: 100,
-    backgroundColor: "red",
+  },
+  bulletPoint: {
+    width: 5,
+    height: 5,
+    backgroundColor: "black",
+    borderRadius: 50,
+    marginRight: 8,
+    marginLeft: 8,
   },
 });
 

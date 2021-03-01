@@ -271,6 +271,7 @@ export default class Example extends Component {
               <Resume
                 pressLikeButton={this.pressLikeButton}
                 pressDislikeButton={this.pressDislikeButton}
+                navigation={this.props.navigation}
               />
               {/* <Text>slide up</Text> */}
             </Animated.View>
