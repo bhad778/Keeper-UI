@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
-const SalarySlider = ({
-  salarySliderModalVisible,
-  setSalarySliderModalVisible,
+const Compensation = ({
+  compensationModalVisible,
+  setCompensationModalVisible,
+  setCompensation,
 }) => {
   const goBack = () => {
-    setSalarySliderModalVisible(false);
+    setCompensationModalVisible(false);
   };
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
@@ -20,13 +21,15 @@ const SalarySlider = ({
     18,
     60,
   ]);
+
   const [buttonPressed, setButtonPressed] = useState("annually");
   const [buttonTextPressed, setButtonTextPressed] = useState("annually");
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   return (
-    <Modal visible={salarySliderModalVisible}>
+    <Modal visible={compensationModalVisible}>
       <View style={styles.header}>
         <TouchableOpacity color="black" onPress={goBack}>
           <Text style={{ color: "black" }}>Cancel</Text>
@@ -34,7 +37,13 @@ const SalarySlider = ({
 
         <Text style={{ fontSize: 30 }}>Compensation</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            buttonPressed === "annually"
+              ? setCompensation(multiSliderValueAnnual)
+              : setCompensation(multiSliderValueHourly);
+          }}
+        >
           <Text style={{ color: "black" }}>Add</Text>
         </TouchableOpacity>
       </View>
@@ -163,4 +172,4 @@ const styles = StyleSheet.create({
   buttonText: { color: "black" },
   buttonTextPressed: { color: "white" },
 });
-export default SalarySlider;
+export default Compensation;

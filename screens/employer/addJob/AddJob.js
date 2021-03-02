@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -10,47 +10,51 @@ import {
 import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
-import EmploymentType from "../../../modals/EmploymentType";
-import SalarySlider from "../../../modals/SalarySlider";
+import Compensation from "../../../modals/Compensation";
+import ResponsibilitiesModal from "../../../modals/ResponsibilitiesModal";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
-  const [text, setText] = useState({
-    jobTitle: "",
-    companyName: "",
-    whoWeAre: "",
-    keyResponsibilities: "",
-    overview: "",
-  });
-  const [employmentTypeModalVisible, setEmploymentTypeModalVisible] = useState(
+  const [jobTitle, setJobTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [whoWeAre, setWhoWeAre] = useState("");
+  const [overview, setOverview] = useState("");
+  const [compensationType, setCompensationType] = useState([]);
+
+  const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
   );
-  const [salarySliderModalVisible, setSalarySliderModalVisible] = useState(
-    false
-  );
+  const [
+    responsibilitiesModalVisible,
+    setResponsibilitiesModalVisible,
+  ] = useState(false);
   const goBack = () => {
     setAddJobModalVisible(false);
   };
 
   const postJob = () => {
-    JobsService.addJob(text);
+    JobsService.addJob(data);
   };
 
-  const handleChange = (event, name) => {
-    const value = event.target.value;
-    setText({
-      ...text,
-      [name]: value,
-    });
+  const setCompensation = (compensationValue) => {
+    setCompensationType(compensationValue);
+  };
+  const data = {
+    jobTitle: jobTitle,
+    companyName: companyName,
+    whoWeAre: whoWeAre,
+    overview: overview,
+    compensationType: compensationType,
   };
 
   return (
     <Modal visible={addJobModalVisible} style={styles.container}>
-      <EmploymentType
-        employmentTypeModalVisible={employmentTypeModalVisible}
-        setEmploymentTypeModalVisible={setEmploymentTypeModalVisible}
+      <ResponsibilitiesModal
+        responsibilitiesModalVisible={responsibilitiesModalVisible}
+        setResponsibilitiesModalVisible={setResponsibilitiesModalVisible}
       />
-      <SalarySlider
-        salarySliderModalVisible={salarySliderModalVisible}
-        setSalarySliderModalVisible={setSalarySliderModalVisible}
+      <Compensation
+        setCompensation={setCompensation}
+        compensationModalVisible={compensationModalVisible}
+        setCompensationModalVisible={setCompensationModalVisible}
       />
       <View
         style={{
@@ -76,10 +80,11 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               width: "95%",
               backgroundColor: "white",
             }}
+            theme={{ colors: { primary: "black" } }}
             selectionColor="black"
+            value={jobTitle}
             name="jobTitle"
-            value={text.jobTitle}
-            onChange={(event) => handleChange(event, "jobTitle")}
+            onChangeText={(value) => setJobTitle(value)}
             label="Job Title"
             mode="flat"
           />
@@ -91,10 +96,11 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               backgroundColor: "white",
             }}
             selectionColor="black"
+            theme={{ colors: { primary: "black" } }}
+            value={companyName}
             name="companyName"
-            value={text.companyName}
             label="Company Name"
-            onChange={(event) => handleChange(event, "companyName")}
+            onChangeText={(value) => setCompanyName(value)}
             mode="flat"
           />
         </View>
@@ -140,7 +146,6 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             style={{
               width: "95%",
               alignItems: "center",
-
               borderWidth: 1,
               marginBottom: 60,
               borderRadius: 20,
@@ -150,9 +155,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             <Text style={styles.textAreaLabel}>Who We Are</Text>
             <NativeTextInput
               style={styles.textAreas}
-              value={text.overview}
-              name="overview"
-              onChange={(event) => handleChange(event, "whoWeAre")}
+              value={data.whoWeAre}
+              name="whoWeAre"
+              onChangeText={(value) => setWhoWeAre(value)}
               multiline={true}
               mode="flat"
             />
@@ -179,7 +184,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </View>
           </Button>
           <Button
-            onPress={() => setSalarySliderModalVisible(true)}
+            onPress={() => setCompensationModalVisible(true)}
             style={styles.buttons}
             contentStyle={{
               borderBottomWidth: 1,
@@ -197,28 +202,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               />
             </View>
           </Button>
+
           <Button
             style={styles.buttons}
-            contentStyle={{
-              borderBottomWidth: 1,
-              borderBottomColor: "rgba(0, 0, 0, 0.26)",
-            }}
-            onPress={() => setEmploymentTypeModalVisible(true)}
-            mode="text"
-            uppercase={false}
-          >
-            <View style={styles.buttonsInnerContent}>
-              <Text style={styles.buttonTextColor}>Employment</Text>
-              <Icon
-                name="chevron-right"
-                color="rgba(0, 0, 0, 0.26)"
-                size={25}
-              />
-            </View>
-          </Button>
-          <Button
-            style={styles.buttons}
-            contentStyle={{}}
+            onPress={() => setResponsibilitiesModalVisible(true)}
             mode="text"
             uppercase={false}
           >
@@ -237,9 +224,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             <Text style={styles.textAreaLabel}>Overview</Text>
             <NativeTextInput
               style={styles.textAreas}
-              value={text.overview}
+              value={overview}
               name="overview"
-              onChange={(event) => handleChange(event, "overview")}
+              onChangeText={(value) => setOverview(value)}
               multiline={true}
               mode="flat"
             />
