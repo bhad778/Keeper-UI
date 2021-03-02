@@ -51,14 +51,49 @@ const Header = ({
           jobBoardModalOpen={jobBoardModalOpen}
           setJobBoardModalOpen={setJobBoardModalOpen}
         ></JobBoard>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.jobBoardButton}
           onPress={() => setJobBoardModalOpen(true)}
         >
           <View>
             <Text>Select New Job</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View style={styles.jobBoardButton}>
+          <View style={styles.leftSection}>
+            <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
+              <Image
+                source={{
+                  uri:
+                    "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
+                }}
+                style={{ width: 30, height: 26 }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.middleSection}>
+            <Text style={styles.titleText}>
+              {selectedJob.title ? selectedJob.title : " "}
+            </Text>
+          </View>
+          {!children && (
+            <View style={styles.rightSection}>
+              {withBackButton && (
+                <TouchableOpacity onPress={goBack}>
+                  <Icon name="arrow-back" size={40} />
+                </TouchableOpacity>
+              )}
+              {withEditButton && (
+                <TouchableOpacity onPress={goBack}>
+                  <Icon name="create" size={40} />
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
+          {children && (
+            <View style={styles.rightHeaderIconContainer}>{children}</View>
+          )}
+        </View>
       </View>
     </Appbar.Header>
   );
