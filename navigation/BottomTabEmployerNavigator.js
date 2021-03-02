@@ -26,7 +26,7 @@ function BottomTabNavigator(props) {
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
-          height: 80,
+          height: props.bottomNavBarHeight,
         },
         safeAreaInsets: {
           bottom: 0,
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, bottomNavBarHeight } = state;
+  return { selectedJob, bottomNavBarHeight };
 };
 
 export default connect(mapStateToProps)(BottomTabNavigator);

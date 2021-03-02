@@ -2,7 +2,7 @@
 import React from "react";
 import { ScrollView } from "react-native";
 // import { CommonActions } from "@react-navigation/native";
-// import UpdateBottomTabNavHeight from "../../redux/actions/NavigationActions";
+import { updateBottomNavBarHeight } from "../../redux/actions/NavigationActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -18,14 +18,19 @@ const HideBottomNavScrollView = (props) => {
       //     tabBarVisible: true,
       //   })
       // );
-      // props.updateBottomTabNavHeight(40);
+      props.updateBottomNavBarHeight(80);
     } else {
       // props.navigation.dispatch(
       //   CommonActions.setParams({
       //     tabBarVisible: false,
       //   })
       // );
-      // props.updateBottomTabNavHeight(40);
+      // if (dif < 80) {
+      //   props.updateBottomNavBarHeight(dif);
+      // } else {
+      //   props.updateBottomNavBarHeight(80);
+      // }
+      props.updateBottomNavBarHeight(0);
     }
 
     offset = currentOffset;
@@ -41,13 +46,12 @@ const HideBottomNavScrollView = (props) => {
   );
 };
 
-// const mapDispatchToProps = (dispatch) =>
-//   bindActionCreators(
-//     {
-//       UpdateBottomTabNavHeight,
-//     },
-//     dispatch
-//   );
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      updateBottomNavBarHeight,
+    },
+    dispatch
+  );
 
-// export default connect(mapDispatchToProps)(HideBottomNavScrollView);
-export default HideBottomNavScrollView;
+export default connect(null, mapDispatchToProps)(HideBottomNavScrollView);
