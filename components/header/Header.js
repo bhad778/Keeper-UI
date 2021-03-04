@@ -111,6 +111,33 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+  },
+  leftSection: {
+    height: "100%",
+    width: 60,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRightColor: "black",
+    borderRightWidth: 1,
+  },
+  middleSection: {
+    height: "100%",
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  rightSection: {
+    height: "100%",
+    width: 60,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderLeftColor: "black",
+    borderLeftWidth: 1,
   },
 });
 
