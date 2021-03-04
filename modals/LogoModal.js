@@ -52,7 +52,12 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible }) => {
   };
   return (
     <Modal visible={logoModalVisible}>
-      <Header title="Logo" dontShowJobBoardModal={true} />
+      <Header
+        title="Logo"
+        outlined={true}
+        withBackButton={true}
+        dontShowJobBoardModal={true}
+      />
       <View style={styles.imageSelectorSection}>
         <TouchableOpacity>
           <Avatar.Image

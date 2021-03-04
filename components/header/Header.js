@@ -24,6 +24,7 @@ const Header = ({
   withEditButton,
   selectedJob,
   dontShowJobBoardModal,
+  outlined,
 }) => {
   const goBack = () => {
     navigation.goBack();
@@ -44,6 +45,7 @@ const Header = ({
       style={{
         backgroundColor: selectedJob.color,
         width: SCREEN_WIDTH,
+        elevation: 0,
       }}
     >
       <View style={styles.headerContents}>
@@ -60,16 +62,34 @@ const Header = ({
             <Text>Select New Job</Text>
           </View>
         </TouchableOpacity> */}
-        <View style={styles.jobBoardButton}>
+        <View
+          style={{
+            backgroundColor: "white",
+            width: "80%",
+            height: 45,
+            borderRadius: 30,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "row",
+            borderWidth: outlined ? 1 : 0,
+            borderColor: "black",
+          }}
+        >
           <View style={styles.leftSection}>
             <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
-              <Image
+              {/* <Image
                 source={{
                   uri:
                     "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
                 }}
                 style={{ width: 30, height: 26 }}
-              />
+              /> */}
+              {withBackButton && (
+                <TouchableOpacity onPress={goBack}>
+                  <Icon name="arrow-back" size={40} />
+                </TouchableOpacity>
+              )}
             </TouchableOpacity>
           </View>
           <View style={styles.middleSection}>
@@ -79,11 +99,6 @@ const Header = ({
           </View>
           {!children && (
             <View style={styles.rightSection}>
-              {withBackButton && (
-                <TouchableOpacity onPress={goBack}>
-                  <Icon name="arrow-back" size={40} />
-                </TouchableOpacity>
-              )}
               {withEditButton && (
                 <TouchableOpacity onPress={goBack}>
                   <Icon name="create" size={40} />
@@ -121,8 +136,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRightColor: "black",
-    borderRightWidth: 1,
   },
   middleSection: {
     height: "100%",
@@ -137,8 +150,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderLeftColor: "black",
-    borderLeftWidth: 1,
   },
 });
 
