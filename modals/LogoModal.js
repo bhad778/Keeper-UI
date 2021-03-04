@@ -52,12 +52,7 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible }) => {
   };
   return (
     <Modal visible={logoModalVisible}>
-      {/* <Header /> */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={goBack}>
-          <Text>Cancel</Text>
-        </TouchableOpacity>
-      </View>
+      <Header title="Logo" dontShowJobBoardModal={true} />
       <View style={styles.imageSelectorSection}>
         <TouchableOpacity>
           <Avatar.Image

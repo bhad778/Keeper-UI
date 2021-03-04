@@ -23,12 +23,13 @@ const Header = ({
   withBackButton,
   withEditButton,
   selectedJob,
+  dontShowJobBoardModal,
 }) => {
   const goBack = () => {
     navigation.goBack();
   };
   const [jobBoardModalOpen, setJobBoardModalOpen] = useState(
-    selectedJob.title ? false : true
+    selectedJob.title || dontShowJobBoardModal ? false : true
   );
 
   return (
