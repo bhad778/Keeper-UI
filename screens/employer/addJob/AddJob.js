@@ -6,26 +6,33 @@ import {
   Text,
   TextInput as NativeTextInput,
   Modal,
+  Image,
+  Platform,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
 import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
 import Compensation from "../../../modals/Compensation";
 import ResponsibilitiesModal from "../../../modals/ResponsibilitiesModal";
+import LogoModal from "../../../modals/LogoModal";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [whoWeAre, setWhoWeAre] = useState("");
   const [overview, setOverview] = useState("");
   const [compensationType, setCompensationType] = useState([]);
-
+  const [storedResponsibilities, setStoredResponsibilities] = useState([]);
   const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
   );
+  const [image, setImage] = useState(null);
   const [
     responsibilitiesModalVisible,
     setResponsibilitiesModalVisible,
   ] = useState(false);
+
   const goBack = () => {
     setAddJobModalVisible(false);
   };
@@ -33,7 +40,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const postJob = () => {
     JobsService.addJob(data);
   };
-
+  const saveResponsibility = (newResponsibility) => {
+    setStoredResponsibilities(newResponsibility);
+  };
   const setCompensation = (compensationValue) => {
     setCompensationType(compensationValue);
   };
@@ -43,19 +52,51 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     whoWeAre: whoWeAre,
     overview: overview,
     compensationType: compensationType,
+    storedResponsibilities: storedResponsibilities,
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
   };
 
   return (
     <Modal visible={addJobModalVisible} style={styles.container}>
       <ResponsibilitiesModal
+        saveResponsibility={saveResponsibility}
         responsibilitiesModalVisible={responsibilitiesModalVisible}
         setResponsibilitiesModalVisible={setResponsibilitiesModalVisible}
+        storedResponsibilities={storedResponsibilities}
       />
       <Compensation
         setCompensation={setCompensation}
         compensationModalVisible={compensationModalVisible}
         setCompensationModalVisible={setCompensationModalVisible}
       />
+      <LogoModal />
       <View
         style={{
           flexDirection: "row",
@@ -110,6 +151,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
           </View>
 
           <Button
+            onPress={pickImage}
             style={styles.buttons}
             contentStyle={{
               borderBottomWidth: 1,
@@ -119,6 +161,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             uppercase={false}
           >
             <View style={styles.buttonsInnerContent}>
+              {image && (
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: 200, height: 200 }}
+                />
+              )}
               <Text style={styles.buttonTextColor}>Logo</Text>
               <Icon
                 name="chevron-right"
@@ -272,7 +320,6 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: "white",
     borderRadius: 20,
-
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
   },

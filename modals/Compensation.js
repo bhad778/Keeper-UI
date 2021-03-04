@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
+// import MultiSlider from "@ptomasroos/react-native-multi-slider";
+
 const Compensation = ({
   compensationModalVisible,
   setCompensationModalVisible,
@@ -98,8 +99,8 @@ const Compensation = ({
             </Text>
           </View>
 
-          <MultiSlider
-            markerStyle={{ backgroundColor: "black" }}
+          {/*<MultiSlider 
+             markerStyle={{ backgroundColor: "black" }} 
             trackStyle={{ backgroundColor: "#b6b6b6", width: 1 }}
             selectedStyle={{ backgroundColor: "black" }}
             values={
@@ -118,7 +119,7 @@ const Compensation = ({
             step={buttonPressed === "annually" ? 1000 : 2}
             allowOverlap
             snapped
-          />
+          />*/}
         </View>
       </View>
       <View style={{ width: "90%", alignItems: "flex-start" }}></View>
