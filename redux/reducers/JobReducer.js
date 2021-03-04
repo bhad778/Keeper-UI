@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 const inititalState = {
   title: null,
   color: "white",
@@ -14,6 +12,4 @@ const jobReducer = (state = inititalState, action) => {
   }
 };
 
-export default combineReducers({
-  selectedJob: jobReducer,
-});
+export default jobReducer;

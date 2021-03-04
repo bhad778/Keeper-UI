@@ -6,11 +6,11 @@ import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import JobReducer from "./redux/reducers/JobReducer";
+import RootReducer from "./redux/reducers/RootReducer";
 
 Amplify.configure(awsconfig);
 
-const store = createStore(JobReducer);
+const store = createStore(RootReducer);
 
 export default function App() {
   return (

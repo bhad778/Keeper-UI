@@ -5,18 +5,35 @@ import EmployerDiscover from "../screens/employer/employerDiscover/EmployerDisco
 import Profile from "../screens/profile/Profile";
 import Matches from "../screens/matches/Matches";
 import Icon from "react-native-vector-icons/Feather";
+import { connect } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator() {
+const isTabBarVisible = (route) => {
+  const params = route.params;
+  if (params) {
+    if (params.tabBarVisible === false) {
+      return false;
+    }
+  }
+  return true;
+};
+
+function BottomTabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouteName={"  "}
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
+          height: props.bottomNavBarHeight,
         },
-        activeTintColor: "#acd9d9",
+        safeAreaInsets: {
+          bottom: 0,
+        },
+        activeTintColor: "black",
+        inactiveBackgroundColor: props.selectedJob.color,
+        activeBackgroundColor: props.selectedJob.color,
       }}
     >
       <Tab.Screen
@@ -26,16 +43,17 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => (
             <Icon name="sliders" size={25} color={color} />
           ),
+          tabBarBadge: 3,
         }}
       />
       <Tab.Screen
         name="  "
         component={EmployerDiscover}
-        options={{
+        options={({ route }) => ({
           tabBarIcon: ({ color }) => (
             <Icon style={styles.tabs} name="search" size={30} color={color} />
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name="   "
@@ -59,5 +77,9 @@ const styles = StyleSheet.create({
   tabs: { position: "relative", top: 5 },
 });
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
+const mapStateToProps = (state) => {
+  const { selectedJob, bottomNavBarHeight } = state;
+  return { selectedJob, bottomNavBarHeight };
+};
+
+export default connect(mapStateToProps)(BottomTabNavigator);
