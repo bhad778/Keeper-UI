@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,17 +6,15 @@ import {
   Text,
   TextInput as NativeTextInput,
   Modal,
-  Image,
-  Platform,
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import Constants from "expo-constants";
+
 import { Button, TextInput } from "react-native-paper";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
 import Compensation from "../../../modals/Compensation";
 import ResponsibilitiesModal from "../../../modals/ResponsibilitiesModal";
 import LogoModal from "../../../modals/LogoModal";
+
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -27,11 +25,13 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
   );
-  const [image, setImage] = useState(null);
+
   const [
     responsibilitiesModalVisible,
     setResponsibilitiesModalVisible,
   ] = useState(false);
+
+  const [logoModalVisible, setLogoModalVisible] = useState(false);
 
   const goBack = () => {
     setAddJobModalVisible(false);
@@ -55,34 +55,6 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     storedResponsibilities: storedResponsibilities,
   };
 
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const {
-          status,
-        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
-  }, []);
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
-
   return (
     <Modal visible={addJobModalVisible} style={styles.container}>
       <ResponsibilitiesModal
@@ -96,7 +68,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         compensationModalVisible={compensationModalVisible}
         setCompensationModalVisible={setCompensationModalVisible}
       />
-      <LogoModal />
+      <LogoModal
+        logoModalVisible={logoModalVisible}
+        setLogoModalVisible={setLogoModalVisible}
+      />
       <View
         style={{
           flexDirection: "row",
@@ -151,7 +126,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
           </View>
 
           <Button
-            onPress={pickImage}
+            onPress={() => setLogoModalVisible(true)}
             style={styles.buttons}
             contentStyle={{
               borderBottomWidth: 1,
@@ -161,12 +136,6 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             uppercase={false}
           >
             <View style={styles.buttonsInnerContent}>
-              {image && (
-                <Image
-                  source={{ uri: image }}
-                  style={{ width: 200, height: 200 }}
-                />
-              )}
               <Text style={styles.buttonTextColor}>Logo</Text>
               <Icon
                 name="chevron-right"

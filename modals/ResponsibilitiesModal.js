@@ -10,7 +10,7 @@ import {
   Button,
 } from "react-native";
 
-// import Header from "../components/header/Header";
+import Header from "../components/header/Header";
 const ResponsibilitiesModal = ({
   responsibilitiesModalVisible,
   setResponsibilitiesModalVisible,
