@@ -16,7 +16,10 @@ function BottomTabNavigator(props) {
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
-          height: props.bottomNavBarHeight,
+          height: 80,
+          bottom: props.bottomNavBarHeight - 80,
+          backgroundColor: "black",
+          position: "absolute",
         },
         safeAreaInsets: {
           bottom: 0,
