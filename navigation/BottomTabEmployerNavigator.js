@@ -9,16 +9,6 @@ import { connect } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-const isTabBarVisible = (route) => {
-  const params = route.params;
-  if (params) {
-    if (params.tabBarVisible === false) {
-      return false;
-    }
-  }
-  return true;
-};
-
 function BottomTabNavigator(props) {
   return (
     <Tab.Navigator
@@ -26,7 +16,10 @@ function BottomTabNavigator(props) {
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
-          height: props.bottomNavBarHeight,
+          height: 80,
+          bottom: props.bottomNavBarHeight - 80,
+          backgroundColor: "black",
+          position: "absolute",
         },
         safeAreaInsets: {
           bottom: 0,
@@ -49,7 +42,7 @@ function BottomTabNavigator(props) {
       <Tab.Screen
         name="  "
         component={EmployerDiscover}
-        options={({ route }) => ({
+        options={() => ({
           tabBarIcon: ({ color }) => (
             <Icon style={styles.tabs} name="search" size={30} color={color} />
           ),
