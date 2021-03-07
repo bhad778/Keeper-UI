@@ -82,14 +82,10 @@ const HideBottomNavScrollView = (props) => {
   // one at a time to look like its sliding up and down vs dissapearing and reappearing at full width
   let onScrollEndDrag = () => {
     if (currentNavBarHeight > 40) {
-      for (i = currentNavBarHeight; i < 80; i += 1) {
-        props.updateBottomNavBarHeight(i);
-      }
+      props.updateBottomNavBarHeight(80);
       currentNavBarHeight = 80;
     } else {
-      for (i = currentNavBarHeight; i > 0; i -= 1) {
-        props.updateBottomNavBarHeight(i);
-      }
+      props.updateBottomNavBarHeight(0);
       currentNavBarHeight = 0;
     }
   };

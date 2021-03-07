@@ -7,19 +7,16 @@ import {
   StyleSheet,
   View,
   Dimensions,
+  TouchableOpacity,
   Image,
 } from "react-native";
-// import { Button } from "react-native-paper";
 
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
-// import Icon from "react-native-vector-icons/Feather";
-import Header from "../../../components/header/Header";
 import Resume from "../../employee/resume/Resume";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
-// const ANIMATION_SPEED = 400;
 
 export default class Example extends Component {
   constructor(props) {
@@ -211,7 +208,6 @@ export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Header navigation={this.props.navigation} /> */}
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -220,6 +216,27 @@ export default class Example extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
+        {/* <View
+          style={{
+            height: 100,
+            width: 100,
+            position: "absolute",
+            zIndex: 999999999,
+            // top: 0,
+            // left: 20,
+          }}
+        >
+          <TouchableOpacity onPress={this.pressDislikeButton}>
+            <Image
+              // style={styles.skillCircleImage}
+              style={styles.dislikeButton}
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+              }}
+            ></Image>
+          </TouchableOpacity>
+        </View> */}
         <Animated.Image
           source={{
             uri:
@@ -243,16 +260,6 @@ export default class Example extends Component {
           {this.state.isLoading && <ActivityIndicator size="large" />}
           {!this.state.isLoading && (
             <Animated.View
-              // style={{
-              //   transform: [
-              //     {
-              //       translateY: this.state.slideUpValue.interpolate({
-              //         inputRange: [0, 1],
-              //         outputRange: [400, 0],
-              //       }),
-              //     },
-              //   ],
-              // }}
               style={[
                 styles.resumeContainer,
                 {
@@ -269,9 +276,8 @@ export default class Example extends Component {
               ]}
             >
               <Resume
-                pressLikeButton={this.pressLikeButton}
-                pressDislikeButton={this.pressDislikeButton}
                 navigation={this.props.navigation}
+                pressDislikeButton={this.pressDislikeButton}
               />
               {/* <Text>slide up</Text> */}
             </Animated.View>

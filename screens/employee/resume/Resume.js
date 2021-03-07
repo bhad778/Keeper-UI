@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Image,
-  ScrollView,
   TouchableOpacity,
   Dimensions,
   Text,
@@ -18,6 +17,7 @@ const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
+  let lastPress = 0;
   const [pastJobs] = useState([
     {
       months: "FIRST",
@@ -84,11 +84,23 @@ const Resume = (props) => {
     }
   };
 
+  const onDoublePress = () => {
+    const time = new Date().getTime();
+    const delta = time - lastPress;
+
+    const DOUBLE_PRESS_DELAY = 400;
+    if (delta < DOUBLE_PRESS_DELAY) {
+      props.pressDislikeButton();
+    }
+    lastPress = time;
+  };
+
   return (
     <View
       style={{
         backgroundColor: props.selectedJob.color,
       }}
+      onStartShouldSetResponder={onDoublePress}
     >
       <HideBottomNavScrollView
         style={styles.peopleWhoLikedYou}
@@ -298,28 +310,6 @@ const Resume = (props) => {
           </View>
         </View>
       </HideBottomNavScrollView>
-      <View style={styles.likeAndDislikeButtonsContainer}>
-        <TouchableOpacity onPress={props.pressDislikeButton}>
-          <Image
-            // style={styles.skillCircleImage}
-            style={styles.dislikeButton}
-            source={{
-              uri:
-                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
-            }}
-          ></Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={props.pressLikeButton}>
-          <Image
-            // style={styles.skillCircleImage}
-            style={styles.likeButton}
-            source={{
-              uri:
-                "https://rileymann.com/wp-content/uploads/2021/02/keeper-like.png",
-            }}
-          ></Image>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -554,23 +544,12 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
-  likeAndDislikeButtonsContainer: {
+  dislikeButtonsContainer: {
     height: 100,
     position: "absolute",
     width: 250,
     top: SCREEN_HEIGHT - 200,
     left: (SCREEN_WIDTH - 250) / 2,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  likeButton: {
-    width: 100,
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 100,
   },
   dislikeButton: {
     width: 100,
