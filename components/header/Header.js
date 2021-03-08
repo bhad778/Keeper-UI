@@ -1,25 +1,18 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-  Modal,
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
 import { Appbar, Text } from "react-native-paper";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import JobBoard from "../../screens/employer/jobBoard/JobBoard";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Header = ({
-  //screenTitle,
+  screenTitle,
   children,
   navigation,
-  // type,
   withBackButton,
   withEditButton,
   selectedJob,
@@ -33,13 +26,6 @@ const Header = ({
 
   return (
     <Appbar.Header
-      // style={
-      //   type === "outlined"
-      //     ? styles.outlinedAppBar
-      //     : type === "noBorder"
-      //     ? styles.noBorderAppBar
-      //     : styles.filledAppBar
-      // }
       style={{
         backgroundColor: selectedJob.color,
         width: SCREEN_WIDTH,
@@ -51,33 +37,32 @@ const Header = ({
           jobBoardModalOpen={jobBoardModalOpen}
           setJobBoardModalOpen={setJobBoardModalOpen}
         ></JobBoard>
-        {/* <TouchableOpacity
-          style={styles.jobBoardButton}
-          onPress={() => setJobBoardModalOpen(true)}
-        >
-          <View>
-            <Text>Select New Job</Text>
-          </View>
-        </TouchableOpacity> */}
-        <View style={styles.jobBoardButton}>
+        <View style={styles.headerPill}>
           <View style={styles.leftSection}></View>
           <View style={styles.middleSection}>
             <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
               <Text style={styles.titleText}>
-                {selectedJob.title ? selectedJob.title : " "}
+                {screenTitle
+                  ? screenTitle
+                  : selectedJob.title
+                  ? selectedJob.title
+                  : " "}
               </Text>
             </TouchableOpacity>
           </View>
           {!children && (
             <View style={styles.rightSection}>
+              <TouchableOpacity onPress={goBack}>
+                <EntypoIcon name="chevron-small-down" size={40} />
+              </TouchableOpacity>
               {withBackButton && (
                 <TouchableOpacity onPress={goBack}>
-                  <Icon name="arrow-back" size={40} />
+                  <MaterialIcon name="" size={40} />
                 </TouchableOpacity>
               )}
               {withEditButton && (
                 <TouchableOpacity onPress={goBack}>
-                  <Icon name="create" size={40} />
+                  <MaterialIcon name="create" size={40} />
                 </TouchableOpacity>
               )}
             </View>
@@ -96,10 +81,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  jobBoardButton: {
+  headerPill: {
     backgroundColor: "white",
-    width: "80%",
-    height: 45,
+    width: "90%",
+    height: 60,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -126,6 +111,9 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  titleText: {
+    fontSize: 24,
   },
 });
 
