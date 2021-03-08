@@ -1,24 +1,23 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { ScrollView, Dimensions } from "react-native";
-// import { CommonActions } from "@react-navigation/native";
 import { updateBottomNavBarHeight } from "../../redux/actions/NavigationActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const HideBottomNavScrollView = (props) => {
-  let offset = 0;
-  let currentNavBarHeight = 80;
+let offset = 0;
+let currentNavBarHeight = 80;
 
+const HideBottomNavScrollView = (props) => {
   let onScrollBeginDrag = (event) => {
     offset = event.nativeEvent.contentOffset.y;
   };
 
   // basics: if user scrolls down shrink navbar, but dont let it go below 0
   // if user scrolls up, navbar grows but doesnt let it get above 80
-  let onScroll = (event) => {
+  let onScroll = async (event) => {
     let currentOffset = event.nativeEvent.contentOffset.y;
     let height = event.nativeEvent.contentSize.height;
     let dif = 0;
@@ -67,14 +66,6 @@ const HideBottomNavScrollView = (props) => {
       currentNavBarHeight = 80;
     }
 
-    // at the end of every run, set offset to the global variable,
-    // so next run we get the dif based on what the last runs y offset was
-    if (currentOffset < 0) {
-      currentOffset = 0;
-    }
-    // if (SCREEN_HEIGHT + currentOffset >= height) {
-    //   currentOffset = SCREEN_HEIGHT + currentOffset;
-    // }
     offset = currentOffset;
   };
 
@@ -82,11 +73,11 @@ const HideBottomNavScrollView = (props) => {
   // one at a time to look like its sliding up and down vs dissapearing and reappearing at full width
   let onScrollEndDrag = () => {
     if (currentNavBarHeight > 40) {
-      props.updateBottomNavBarHeight(80);
       currentNavBarHeight = 80;
+      props.updateBottomNavBarHeight(currentNavBarHeight);
     } else {
-      props.updateBottomNavBarHeight(0);
       currentNavBarHeight = 0;
+      props.updateBottomNavBarHeight(currentNavBarHeight);
     }
   };
 

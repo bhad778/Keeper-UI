@@ -60,21 +60,13 @@ const Header = ({
           </View>
         </TouchableOpacity> */}
         <View style={styles.jobBoardButton}>
-          <View style={styles.leftSection}>
-            <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
-              <Image
-                source={{
-                  uri:
-                    "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
-                }}
-                style={{ width: 30, height: 26 }}
-              />
-            </TouchableOpacity>
-          </View>
+          <View style={styles.leftSection}></View>
           <View style={styles.middleSection}>
-            <Text style={styles.titleText}>
-              {selectedJob.title ? selectedJob.title : " "}
-            </Text>
+            <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
+              <Text style={styles.titleText}>
+                {selectedJob.title ? selectedJob.title : " "}
+              </Text>
+            </TouchableOpacity>
           </View>
           {!children && (
             <View style={styles.rightSection}>
@@ -120,8 +112,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRightColor: "black",
-    borderRightWidth: 1,
   },
   middleSection: {
     height: "100%",
@@ -136,8 +126,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderLeftColor: "black",
-    borderLeftWidth: 1,
   },
 });
 

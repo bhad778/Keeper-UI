@@ -18,6 +18,7 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
   let lastPress = 0;
+
   const [pastJobs] = useState([
     {
       months: "FIRST",
@@ -310,6 +311,26 @@ const Resume = (props) => {
           </View>
         </View>
       </HideBottomNavScrollView>
+      <View
+        style={{
+          height: 100,
+          width: 100,
+          position: "absolute",
+          bottom: props.bottomNavBarHeight + 20,
+          left: 20,
+        }}
+      >
+        <TouchableOpacity onPress={props.pressDislikeButton}>
+          <Image
+            // style={styles.skillCircleImage}
+            style={styles.dislikeButton}
+            source={{
+              uri:
+                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+            }}
+          ></Image>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -570,8 +591,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, bottomNavBarHeight } = state;
+  return { selectedJob, bottomNavBarHeight };
 };
 
 export default connect(mapStateToProps)(Resume);
