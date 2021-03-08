@@ -19,6 +19,9 @@ const HideBottomNavScrollView = (props) => {
   // if user scrolls up, navbar grows but doesnt let it get above 80
   let onScroll = async (event) => {
     let currentOffset = event.nativeEvent.contentOffset.y;
+    if (currentOffset < 0) {
+      currentOffset = 0;
+    }
     let height = event.nativeEvent.contentSize.height;
     let dif = 0;
 
