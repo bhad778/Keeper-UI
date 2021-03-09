@@ -37,6 +37,25 @@ export default class Example extends Component {
       xIconScaleYValue: new Animated.Value(0.5),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
+      employeeData: [
+        "Jasmine",
+        "Rider",
+        "Caroline",
+        "Melissa",
+        "Sora",
+        "Daphne",
+        "Otto",
+        "Liandra",
+        "Carissa",
+        "Pikachu",
+        "Blastoise",
+        "Charizard",
+        "Venasaur",
+        "Ash",
+        "Red",
+        "Brooke",
+        "Blue",
+      ],
     };
   }
 
@@ -103,10 +122,6 @@ export default class Example extends Component {
     );
   };
 
-  scrollResumeToTop = () => {
-    this.resumeScrollViewRef.scrollTo({ x: 0, y: 0, animated: true });
-  };
-
   toggleJobBoardModal = () => {
     this.setState({ jobBoardModalOpen: !this.state.jobBoardModalOpen });
   };
@@ -122,13 +137,16 @@ export default class Example extends Component {
     });
   };
   pressDislikeButton = () => {
-    Animated.parallel([
-      // swiper fades out
+    let tempEmployeeArray = this.state.employeeData;
+    tempEmployeeArray.shift();
+    this.setState({ employeeData: tempEmployeeArray }, () => {
       Animated.timing(this.state.wholeSwiperFadeAnim, {
         toValue: 0,
         duration: 200,
         useNativeDriver: true,
-      }).start(() => {
+      });
+      Animated.parallel([
+        // swiper fades out
         // instantly after fade send swiper down below screen so it can slide back up later
         Animated.timing(this.state.wholeSwiperTranslateY, {
           toValue: 1,
@@ -141,73 +159,74 @@ export default class Example extends Component {
             duration: 1,
             useNativeDriver: true,
           }).start();
-        });
-        this.scrollResumeToTop();
-      }),
+        }),
 
-      // X icon fade in
-      Animated.timing(this.state.xIconFadeAnim, {
-        toValue: 1,
-        duration: 350,
-        useNativeDriver: true,
-      }).start(),
+        // X icon fade in
+        Animated.timing(this.state.xIconFadeAnim, {
+          toValue: 1,
+          duration: 350,
+          useNativeDriver: true,
+        }).start(),
 
-      // X icon grow width
-      Animated.timing(this.state.xIconScaleXValue, {
-        toValue: 2,
-        duration: 350,
-        useNativeDriver: true,
-      }).start(),
+        // X icon grow width
+        Animated.timing(this.state.xIconScaleXValue, {
+          toValue: 2,
+          duration: 350,
+          useNativeDriver: true,
+        }).start(),
 
-      // X icon grow height
-      Animated.timing(this.state.xIconScaleYValue, {
-        toValue: 2,
-        duration: 350,
-        useNativeDriver: true,
-      }).start(() => {}),
+        // X icon grow height
+        Animated.timing(this.state.xIconScaleYValue, {
+          toValue: 2,
+          duration: 350,
+          useNativeDriver: true,
+        }).start(() => {}),
 
-      // X icon slide up
-      Animated.timing(this.state.xIconTranslateYValue, {
-        toValue: -125,
-        duration: 250,
-        useNativeDriver: true,
-      }).start(() => {
-        Animated.parallel([
-          // slide swiper back up
-          Animated.timing(this.state.wholeSwiperTranslateY, {
-            toValue: 0,
-            duration: 400,
-            useNativeDriver: true,
-          }).start(),
-
-          //X icon height shrink
-          Animated.timing(this.state.xIconFadeAnim, {
-            toValue: 0,
-            duration: 400,
-            useNativeDriver: true,
-          }).start(() => {
-            // revert y value for next swipe
-            Animated.timing(this.state.xIconTranslateYValue, {
+        // X icon slide up
+        Animated.timing(this.state.xIconTranslateYValue, {
+          toValue: -125,
+          duration: 250,
+          useNativeDriver: true,
+        }).start(() => {
+          Animated.parallel([
+            // slide swiper back up
+            Animated.timing(this.state.wholeSwiperTranslateY, {
               toValue: 0,
-              duration: 1,
-              useNativeDriver: true,
-            }).start();
-            // revert width for next swipe
-            Animated.timing(this.state.xIconScaleXValue, {
-              toValue: 0.5,
-              duration: 1,
+              delay: 200,
+              duration: 400,
               useNativeDriver: true,
             }).start(),
-              // revert height for next swipe
-              Animated.timing(this.state.xIconScaleYValue, {
+
+            //X icon height shrink
+            Animated.timing(this.state.xIconFadeAnim, {
+              toValue: 0,
+              delay: 200,
+              duration: 400,
+              useNativeDriver: true,
+            }).start(() => {
+              // revert y value for next swipe
+              Animated.timing(this.state.xIconTranslateYValue, {
+                toValue: 0,
+                duration: 1,
+                useNativeDriver: true,
+              }).start();
+              // revert width for next swipe
+              Animated.timing(this.state.xIconScaleXValue, {
                 toValue: 0.5,
                 duration: 1,
                 useNativeDriver: true,
-              }).start(() => {});
-          }),
-        ]).start(() => {});
-      }),
-    ]).start(() => {});
+              }).start(),
+                // revert height for next swipe
+                Animated.timing(this.state.xIconScaleYValue, {
+                  toValue: 0.5,
+                  duration: 1,
+                  useNativeDriver: true,
+                }).start(() => {});
+            }),
+          ]).start(() => {});
+        }),
+      ]).start(() => {});
+    });
   };
 
   render() {
@@ -284,6 +303,7 @@ export default class Example extends Component {
                 navigation={this.props.navigation}
                 pressDislikeButton={this.pressDislikeButton}
                 resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
+                currentEmployee={this.state.employeeData[0]}
               />
             </Animated.View>
           )}

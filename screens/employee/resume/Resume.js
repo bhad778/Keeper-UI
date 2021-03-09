@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -18,6 +18,16 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
   let lastPress = 0;
+  const resumeScrollViewRef = useRef(null);
+
+  const scrollResumeToTop = () => {
+    resumeScrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+  };
+
+  useEffect(() => {
+    scrollResumeToTop();
+    console.log(props.currentEmployee);
+  }, [props.employeeData]);
 
   const [pastJobs] = useState([
     {
@@ -106,7 +116,7 @@ const Resume = (props) => {
       <HideBottomNavScrollView
         style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
-        resumeScrollViewRef={props.resumeScrollViewRef}
+        forwardedRef={resumeScrollViewRef}
       >
         <Header />
         <View
@@ -131,7 +141,7 @@ const Resume = (props) => {
             }}
           >
             <View style={styles.nameAndJobTitleSection}>
-              <Title style={styles.name}>Megan Kelly</Title>
+              <Title style={styles.name}>{props.currentEmployee}</Title>
               <Subheading style={styles.jobTitle}>DESIGN DIRECTOR</Subheading>
             </View>
             <View style={styles.descriptionTextSection}>

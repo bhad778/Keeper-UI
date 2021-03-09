@@ -19,57 +19,60 @@ const HideBottomNavScrollView = (props) => {
   // if user scrolls up, navbar grows but doesnt let it get above 80
   let onScroll = async (event) => {
     let currentOffset = event.nativeEvent.contentOffset.y;
-    if (currentOffset < 0) {
-      currentOffset = 0;
-    }
-    let height = event.nativeEvent.contentSize.height;
-    let dif = 0;
 
-    let isScrollingUp = () => currentOffset - offset < 0;
+    if (currentOffset != -456) {
+      if (currentOffset < 0) {
+        currentOffset = 0;
+      }
+      let height = event.nativeEvent.contentSize.height;
+      let dif = 0;
 
-    // if currentNavBarHeight is 0 and user is still scrolling down dont do anything
-    if (currentNavBarHeight == 0 && !isScrollingUp()) {
-      // not doing anything
-    }
-    // if currentNavBarHeight is 80 and user is scrolling up dont do anything
-    else if (currentNavBarHeight == 80 && isScrollingUp()) {
-      // not doing anything
-    } // if scrolling up and we hit the top, dont do anything
-    else if (offset == 0 && isScrollingUp()) {
-      // not doing anything
-    } else if (SCREEN_HEIGHT + currentOffset >= height) {
-      // not doing anything
-    } else {
-      dif = currentOffset - offset;
-      currentNavBarHeight = currentNavBarHeight - dif;
-      if (currentNavBarHeight > 80) {
+      let isScrollingUp = () => currentOffset - offset < 0;
+
+      // if currentNavBarHeight is 0 and user is still scrolling down dont do anything
+      if (currentNavBarHeight == 0 && !isScrollingUp()) {
+        // not doing anything
+      }
+      // if currentNavBarHeight is 80 and user is scrolling up dont do anything
+      else if (currentNavBarHeight == 80 && isScrollingUp()) {
+        // not doing anything
+      } // if scrolling up and we hit the top, dont do anything
+      else if (offset == 0 && isScrollingUp()) {
+        // not doing anything
+      } else if (SCREEN_HEIGHT + currentOffset >= height) {
+        // not doing anything
+      } else {
+        dif = currentOffset - offset;
+        currentNavBarHeight = currentNavBarHeight - dif;
+        if (currentNavBarHeight > 80) {
+          currentNavBarHeight = 80;
+        }
+        if (currentNavBarHeight < 0) {
+          currentNavBarHeight = 0;
+        }
+      }
+
+      if (dif < 0) {
+        props.updateBottomNavBarHeight(currentNavBarHeight);
+      } else {
+        if (dif) {
+          props.updateBottomNavBarHeight(currentNavBarHeight);
+        }
+      }
+
+      // dont let it get below 0
+      if (currentNavBarHeight <= 0) {
+        currentNavBarHeight = 0;
+        offset = currentOffset;
+      }
+
+      //dont let it get above 80
+      if (currentNavBarHeight >= 80) {
         currentNavBarHeight = 80;
       }
-      if (currentNavBarHeight < 0) {
-        currentNavBarHeight = 0;
-      }
-    }
 
-    if (dif < 0) {
-      props.updateBottomNavBarHeight(currentNavBarHeight);
-    } else {
-      if (dif) {
-        props.updateBottomNavBarHeight(currentNavBarHeight);
-      }
-    }
-
-    // dont let it get below 0
-    if (currentNavBarHeight <= 0) {
-      currentNavBarHeight = 0;
       offset = currentOffset;
     }
-
-    //dont let it get above 80
-    if (currentNavBarHeight >= 80) {
-      currentNavBarHeight = 80;
-    }
-
-    offset = currentOffset;
   };
 
   // at the letting go of the drag, run for loop to set height of nav bar
@@ -91,7 +94,7 @@ const HideBottomNavScrollView = (props) => {
       onScrollBeginDrag={(e) => onScrollBeginDrag(e)}
       onScroll={(e) => onScroll(e)}
       onScrollEndDrag={() => onScrollEndDrag()}
-      ref={props.resumeScrollViewRef}
+      ref={props.forwardedRef}
     >
       {props.children}
     </ScrollView>
