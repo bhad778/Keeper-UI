@@ -91,6 +91,7 @@ const HideBottomNavScrollView = (props) => {
       onScrollBeginDrag={(e) => onScrollBeginDrag(e)}
       onScroll={(e) => onScroll(e)}
       onScrollEndDrag={() => onScrollEndDrag()}
+      ref={props.resumeScrollViewRef}
     >
       {props.children}
     </ScrollView>

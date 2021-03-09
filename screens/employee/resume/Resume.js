@@ -106,6 +106,7 @@ const Resume = (props) => {
       <HideBottomNavScrollView
         style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
+        resumeScrollViewRef={props.resumeScrollViewRef}
       >
         <Header />
         <View

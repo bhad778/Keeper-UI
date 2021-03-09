@@ -103,6 +103,10 @@ export default class Example extends Component {
     );
   };
 
+  scrollResumeToTop = () => {
+    this.resumeScrollViewRef.scrollTo({ x: 0, y: 0, animated: true });
+  };
+
   toggleJobBoardModal = () => {
     this.setState({ jobBoardModalOpen: !this.state.jobBoardModalOpen });
   };
@@ -131,13 +135,14 @@ export default class Example extends Component {
           duration: 1,
           useNativeDriver: true,
         }).start(() => {
-          // instantly fade back in or slide up later
+          // instantly fade back in for slide up later
           Animated.timing(this.state.wholeSwiperFadeAnim, {
             toValue: 1,
             duration: 1,
             useNativeDriver: true,
           }).start();
         });
+        this.scrollResumeToTop();
       }),
 
       // X icon fade in
@@ -240,7 +245,7 @@ export default class Example extends Component {
         <Animated.Image
           source={{
             uri:
-              "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
+              "https://rileymann.com/wp-content/uploads/2021/03/keeper_logo_black.png",
           }}
           style={[
             styles.xIcon,
@@ -278,8 +283,8 @@ export default class Example extends Component {
               <Resume
                 navigation={this.props.navigation}
                 pressDislikeButton={this.pressDislikeButton}
+                resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
               />
-              {/* <Text>slide up</Text> */}
             </Animated.View>
           )}
         </View>

@@ -29,6 +29,7 @@ const Header = ({
       style={{
         backgroundColor: selectedJob.color,
         width: SCREEN_WIDTH,
+        height: 80,
       }}
     >
       <View style={styles.headerContents}>
@@ -39,37 +40,38 @@ const Header = ({
         ></JobBoard>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}></View>
-          <View style={styles.middleSection}>
-            <TouchableOpacity onPress={() => setJobBoardModalOpen(true)}>
-              <Text style={styles.titleText}>
-                {screenTitle
-                  ? screenTitle
-                  : selectedJob.title
-                  ? selectedJob.title
-                  : " "}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {!children && (
-            <View style={styles.rightSection}>
-              <TouchableOpacity onPress={goBack}>
-                <EntypoIcon name="chevron-small-down" size={40} />
-              </TouchableOpacity>
-              {withBackButton && (
+          <TouchableOpacity
+            style={styles.openJobBoardSection}
+            onPress={() => setJobBoardModalOpen(true)}
+          >
+            <Text style={styles.titleText}>
+              {screenTitle
+                ? screenTitle
+                : selectedJob.title
+                ? selectedJob.title
+                : " "}
+            </Text>
+            {!children && (
+              <View style={styles.rightSection}>
                 <TouchableOpacity onPress={goBack}>
-                  <MaterialIcon name="" size={40} />
+                  <EntypoIcon name="chevron-small-down" size={40} />
                 </TouchableOpacity>
-              )}
-              {withEditButton && (
-                <TouchableOpacity onPress={goBack}>
-                  <MaterialIcon name="create" size={40} />
-                </TouchableOpacity>
-              )}
-            </View>
-          )}
-          {children && (
-            <View style={styles.rightHeaderIconContainer}>{children}</View>
-          )}
+                {withBackButton && (
+                  <TouchableOpacity onPress={goBack}>
+                    <MaterialIcon name="" size={40} />
+                  </TouchableOpacity>
+                )}
+                {withEditButton && (
+                  <TouchableOpacity onPress={goBack}>
+                    <MaterialIcon name="create" size={40} />
+                  </TouchableOpacity>
+                )}
+              </View>
+            )}
+            {children && (
+              <View style={styles.rightHeaderIconContainer}>{children}</View>
+            )}
+          </TouchableOpacity>
         </View>
       </View>
     </Appbar.Header>
@@ -95,6 +97,14 @@ const styles = StyleSheet.create({
     height: "100%",
     width: 60,
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  openJobBoardSection: {
+    height: "100%",
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
