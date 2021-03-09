@@ -18,16 +18,6 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
   let lastPress = 0;
-  const resumeScrollViewRef = useRef(null);
-
-  const scrollResumeToTop = () => {
-    resumeScrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
-  };
-
-  useEffect(() => {
-    scrollResumeToTop();
-    console.log(props.currentEmployee);
-  }, [props.employeeData]);
 
   const [pastJobs] = useState([
     {
@@ -116,7 +106,8 @@ const Resume = (props) => {
       <HideBottomNavScrollView
         style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
-        forwardedRef={resumeScrollViewRef}
+        // forwardedRef={resumeScrollViewRef}
+        currentEmployee={props.currentEmployee}
       >
         <Header />
         <View
@@ -322,26 +313,6 @@ const Resume = (props) => {
           </View>
         </View>
       </HideBottomNavScrollView>
-      <View
-        style={{
-          height: 100,
-          width: 100,
-          position: "absolute",
-          bottom: props.bottomNavBarHeight + 20,
-          left: 20,
-        }}
-      >
-        <TouchableOpacity onPress={props.pressDislikeButton}>
-          <Image
-            // style={styles.skillCircleImage}
-            style={styles.dislikeButton}
-            source={{
-              uri:
-                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
-            }}
-          ></Image>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -575,21 +546,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-  },
-  dislikeButtonsContainer: {
-    height: 100,
-    position: "absolute",
-    width: 250,
-    top: SCREEN_HEIGHT - 200,
-    left: (SCREEN_WIDTH - 250) / 2,
-  },
-  dislikeButton: {
-    width: 100,
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 100,
   },
   bulletPoint: {
     width: 5,

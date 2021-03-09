@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { connect } from "react-redux";
 
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
@@ -18,7 +19,7 @@ import Resume from "../../employee/resume/Resume";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-export default class Example extends Component {
+class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -142,6 +143,7 @@ export default class Example extends Component {
     this.setState({ employeeData: tempEmployeeArray }, () => {
       Animated.timing(this.state.wholeSwiperFadeAnim, {
         toValue: 0,
+        delay: 1,
         duration: 200,
         useNativeDriver: true,
       });
@@ -308,6 +310,29 @@ export default class Example extends Component {
             </Animated.View>
           )}
         </View>
+        <View
+          style={{
+            height: 100,
+            width: 100,
+            position: "absolute",
+            bottom: this.props.bottomNavBarHeight + 20,
+            left: 20,
+          }}
+        >
+          <TouchableOpacity
+            onPress={this.pressDislikeButton}
+            style={styles.dislikeButtonTouchableOpacity}
+          >
+            <Image
+              // style={styles.skillCircleImage}
+              style={styles.dislikeButton}
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+              }}
+            ></Image>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -373,4 +398,26 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
   },
+  dislikeButtonTouchableOpacity: {
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOpacity: 1,
+    elevation: 6,
+    shadowRadius: 30,
+    shadowOffset: { width: 1, height: 13 },
+  },
+  dislikeButton: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 100,
+  },
 });
+
+const mapStateToProps = (state) => {
+  const { bottomNavBarHeight } = state;
+  return { bottomNavBarHeight };
+};
+
+export default connect(mapStateToProps)(Example);
