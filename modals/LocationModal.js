@@ -8,7 +8,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-
+import Header from "../components/header/Header";
 const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
   const [locationText, setLocationText] = useState("");
   const [data, setData] = useState();
@@ -20,11 +20,12 @@ const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
   }, [locationText]);
   return (
     <Modal visible={locationModalVisible}>
-      <View style={styles.header}>
+      {/*<View style={styles.header}>
         <TouchableOpacity onPress={() => setLocationModalVisible(false)}>
           <Text style={{ fontSize: 30 }}>Cancel</Text>
         </TouchableOpacity>
-      </View>
+  </View>*/}
+      <Header title="location" />
       <View style={styles.searchContainer}>
         <View style={styles.textInputContainer}>
           <TextInput
