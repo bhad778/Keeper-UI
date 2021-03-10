@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Image,
-  ScrollView,
   TouchableOpacity,
   Dimensions,
   Text,
@@ -14,10 +13,11 @@ import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
 
-const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
+  let lastPress = 0;
+
   const [pastJobs] = useState([
     {
       months: "FIRST",
@@ -84,15 +84,29 @@ const Resume = (props) => {
     }
   };
 
+  const onDoublePress = () => {
+    const time = new Date().getTime();
+    const delta = time - lastPress;
+
+    const DOUBLE_PRESS_DELAY = 400;
+    if (delta < DOUBLE_PRESS_DELAY) {
+      props.pressDislikeButton();
+    }
+    lastPress = time;
+  };
+
   return (
     <View
       style={{
         backgroundColor: props.selectedJob.color,
       }}
+      onStartShouldSetResponder={onDoublePress}
     >
       <HideBottomNavScrollView
         style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
+        // forwardedRef={resumeScrollViewRef}
+        currentEmployee={props.currentEmployee}
       >
         <Header />
         <View
@@ -117,7 +131,7 @@ const Resume = (props) => {
             }}
           >
             <View style={styles.nameAndJobTitleSection}>
-              <Title style={styles.name}>Megan Kelly</Title>
+              <Title style={styles.name}>{props.currentEmployee}</Title>
               <Subheading style={styles.jobTitle}>DESIGN DIRECTOR</Subheading>
             </View>
             <View style={styles.descriptionTextSection}>
@@ -281,6 +295,7 @@ const Resume = (props) => {
               backgroundColor: props.selectedJob.color,
               flex: 1,
               padding: 20,
+              paddingBottom: 100,
             }}
           >
             <Paragraph style={styles.descriptionText}>
@@ -298,28 +313,6 @@ const Resume = (props) => {
           </View>
         </View>
       </HideBottomNavScrollView>
-      <View style={styles.likeAndDislikeButtonsContainer}>
-        <TouchableOpacity onPress={props.pressDislikeButton}>
-          <Image
-            // style={styles.skillCircleImage}
-            style={styles.dislikeButton}
-            source={{
-              uri:
-                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
-            }}
-          ></Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={props.pressLikeButton}>
-          <Image
-            // style={styles.skillCircleImage}
-            style={styles.likeButton}
-            source={{
-              uri:
-                "https://rileymann.com/wp-content/uploads/2021/02/keeper-like.png",
-            }}
-          ></Image>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -551,34 +544,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#add9d9",
     padding: 15,
     paddingTop: 40,
+    paddingBottom: 100,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-  },
-  likeAndDislikeButtonsContainer: {
-    height: 100,
-    position: "absolute",
-    width: 250,
-    top: SCREEN_HEIGHT - 200,
-    left: (SCREEN_WIDTH - 250) / 2,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  likeButton: {
-    width: 100,
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 100,
-  },
-  dislikeButton: {
-    width: 100,
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    borderRadius: 100,
   },
   bulletPoint: {
     width: 5,
@@ -591,8 +559,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, bottomNavBarHeight } = state;
+  return { selectedJob, bottomNavBarHeight };
 };
 
 export default connect(mapStateToProps)(Resume);
