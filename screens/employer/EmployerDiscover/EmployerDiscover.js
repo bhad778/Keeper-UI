@@ -19,7 +19,7 @@ import Resume from "../../employee/resume/Resume";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-class Example extends Component {
+class EmployerDiscover extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -312,11 +312,11 @@ class Example extends Component {
         </View>
         <View
           style={{
-            height: 100,
-            width: 100,
+            height: 70,
+            width: 70,
             position: "absolute",
-            bottom: this.props.bottomNavBarHeight + 20,
-            left: 20,
+            bottom: this.props.bottomNavBarHeight + 10,
+            left: 10,
           }}
         >
           <TouchableOpacity
@@ -406,11 +406,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 13 },
   },
   dislikeButton: {
-    width: 100,
-    height: 100,
+    width: 70,
+    height: 70,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
     borderRadius: 100,
   },
 });
@@ -420,4 +419,4 @@ const mapStateToProps = (state) => {
   return { bottomNavBarHeight };
 };
 
-export default connect(mapStateToProps)(Example);
+export default connect(mapStateToProps)(EmployerDiscover);

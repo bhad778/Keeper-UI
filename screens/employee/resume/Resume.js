@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -13,7 +13,6 @@ import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
 
-const SCREEN_HEIGHT = Dimensions.get("screen").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
@@ -296,6 +295,7 @@ const Resume = (props) => {
               backgroundColor: props.selectedJob.color,
               flex: 1,
               padding: 20,
+              paddingBottom: 100,
             }}
           >
             <Paragraph style={styles.descriptionText}>
@@ -544,6 +544,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#add9d9",
     padding: 15,
     paddingTop: 40,
+    paddingBottom: 100,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
