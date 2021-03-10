@@ -14,6 +14,7 @@ import JobsService from "../../../services/JobsService";
 import Compensation from "../../../modals/Compensation";
 import ResponsibilitiesModal from "../../../modals/ResponsibilitiesModal";
 import LogoModal from "../../../modals/LogoModal";
+import LocationModal from "../../../modals/LocationModal";
 
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
@@ -21,11 +22,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [whoWeAre, setWhoWeAre] = useState("");
   const [overview, setOverview] = useState("");
   const [compensationType, setCompensationType] = useState([]);
-  const [storedResponsibilities, setStoredResponsibilities] = useState([]);
+
   const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
   );
 
+  const [locationModalVisible, setLocationModalVisible] = useState(false);
   const [
     responsibilitiesModalVisible,
     setResponsibilitiesModalVisible,
@@ -40,9 +42,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const postJob = () => {
     JobsService.addJob(data);
   };
-  const saveResponsibility = (newResponsibility) => {
-    setStoredResponsibilities(newResponsibility);
-  };
+
   const setCompensation = (compensationValue) => {
     setCompensationType(compensationValue);
   };
@@ -52,16 +52,17 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     whoWeAre: whoWeAre,
     overview: overview,
     compensationType: compensationType,
-    storedResponsibilities: storedResponsibilities,
   };
 
   return (
     <Modal visible={addJobModalVisible} style={styles.container}>
+      <LocationModal
+        locationModalVisible={locationModalVisible}
+        setLocationModalVisible={setLocationModalVisible}
+      />
       <ResponsibilitiesModal
-        saveResponsibility={saveResponsibility}
         responsibilitiesModalVisible={responsibilitiesModalVisible}
         setResponsibilitiesModalVisible={setResponsibilitiesModalVisible}
-        storedResponsibilities={storedResponsibilities}
       />
       <Compensation
         setCompensation={setCompensation}
@@ -145,6 +146,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </View>
           </Button>
           <Button
+            onPress={() => setLocationModalVisible(true)}
             style={styles.buttons}
             contentStyle={{}}
             mode="text"
