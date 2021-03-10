@@ -7,21 +7,19 @@ import {
   StyleSheet,
   View,
   Dimensions,
+  TouchableOpacity,
   Image,
 } from "react-native";
-// import { Button } from "react-native-paper";
+import { connect } from "react-redux";
 
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
-// import Icon from "react-native-vector-icons/Feather";
-import Header from "../../../components/header/Header";
 import Resume from "../../employee/resume/Resume";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
-// const ANIMATION_SPEED = 400;
 
-export default class Example extends Component {
+class EmployerDiscover extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +38,25 @@ export default class Example extends Component {
       xIconScaleYValue: new Animated.Value(0.5),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
+      employeeData: [
+        "Jasmine",
+        "Rider",
+        "Caroline",
+        "Melissa",
+        "Sora",
+        "Daphne",
+        "Otto",
+        "Liandra",
+        "Carissa",
+        "Pikachu",
+        "Blastoise",
+        "Charizard",
+        "Venasaur",
+        "Ash",
+        "Red",
+        "Brooke",
+        "Blue",
+      ],
     };
   }
 
@@ -121,97 +138,102 @@ export default class Example extends Component {
     });
   };
   pressDislikeButton = () => {
-    Animated.parallel([
-      // swiper fades out
+    let tempEmployeeArray = this.state.employeeData;
+    tempEmployeeArray.shift();
+    this.setState({ employeeData: tempEmployeeArray }, () => {
       Animated.timing(this.state.wholeSwiperFadeAnim, {
         toValue: 0,
+        delay: 1,
         duration: 200,
         useNativeDriver: true,
-      }).start(() => {
+      });
+      Animated.parallel([
+        // swiper fades out
         // instantly after fade send swiper down below screen so it can slide back up later
         Animated.timing(this.state.wholeSwiperTranslateY, {
           toValue: 1,
           duration: 1,
           useNativeDriver: true,
         }).start(() => {
-          // instantly fade back in or slide up later
+          // instantly fade back in for slide up later
           Animated.timing(this.state.wholeSwiperFadeAnim, {
             toValue: 1,
             duration: 1,
             useNativeDriver: true,
           }).start();
-        });
-      }),
+        }),
 
-      // X icon fade in
-      Animated.timing(this.state.xIconFadeAnim, {
-        toValue: 1,
-        duration: 350,
-        useNativeDriver: true,
-      }).start(),
+        // X icon fade in
+        Animated.timing(this.state.xIconFadeAnim, {
+          toValue: 1,
+          duration: 350,
+          useNativeDriver: true,
+        }).start(),
 
-      // X icon grow width
-      Animated.timing(this.state.xIconScaleXValue, {
-        toValue: 2,
-        duration: 350,
-        useNativeDriver: true,
-      }).start(),
+        // X icon grow width
+        Animated.timing(this.state.xIconScaleXValue, {
+          toValue: 2,
+          duration: 350,
+          useNativeDriver: true,
+        }).start(),
 
-      // X icon grow height
-      Animated.timing(this.state.xIconScaleYValue, {
-        toValue: 2,
-        duration: 350,
-        useNativeDriver: true,
-      }).start(() => {}),
+        // X icon grow height
+        Animated.timing(this.state.xIconScaleYValue, {
+          toValue: 2,
+          duration: 350,
+          useNativeDriver: true,
+        }).start(() => {}),
 
-      // X icon slide up
-      Animated.timing(this.state.xIconTranslateYValue, {
-        toValue: -125,
-        duration: 250,
-        useNativeDriver: true,
-      }).start(() => {
-        Animated.parallel([
-          // slide swiper back up
-          Animated.timing(this.state.wholeSwiperTranslateY, {
-            toValue: 0,
-            duration: 400,
-            useNativeDriver: true,
-          }).start(),
-
-          //X icon height shrink
-          Animated.timing(this.state.xIconFadeAnim, {
-            toValue: 0,
-            duration: 400,
-            useNativeDriver: true,
-          }).start(() => {
-            // revert y value for next swipe
-            Animated.timing(this.state.xIconTranslateYValue, {
+        // X icon slide up
+        Animated.timing(this.state.xIconTranslateYValue, {
+          toValue: -125,
+          duration: 250,
+          useNativeDriver: true,
+        }).start(() => {
+          Animated.parallel([
+            // slide swiper back up
+            Animated.timing(this.state.wholeSwiperTranslateY, {
               toValue: 0,
-              duration: 1,
-              useNativeDriver: true,
-            }).start();
-            // revert width for next swipe
-            Animated.timing(this.state.xIconScaleXValue, {
-              toValue: 0.5,
-              duration: 1,
+              delay: 200,
+              duration: 400,
               useNativeDriver: true,
             }).start(),
-              // revert height for next swipe
-              Animated.timing(this.state.xIconScaleYValue, {
+
+            //X icon height shrink
+            Animated.timing(this.state.xIconFadeAnim, {
+              toValue: 0,
+              delay: 200,
+              duration: 400,
+              useNativeDriver: true,
+            }).start(() => {
+              // revert y value for next swipe
+              Animated.timing(this.state.xIconTranslateYValue, {
+                toValue: 0,
+                duration: 1,
+                useNativeDriver: true,
+              }).start();
+              // revert width for next swipe
+              Animated.timing(this.state.xIconScaleXValue, {
                 toValue: 0.5,
                 duration: 1,
                 useNativeDriver: true,
-              }).start(() => {});
-          }),
-        ]).start(() => {});
-      }),
-    ]).start(() => {});
+              }).start(),
+                // revert height for next swipe
+                Animated.timing(this.state.xIconScaleYValue, {
+                  toValue: 0.5,
+                  duration: 1,
+                  useNativeDriver: true,
+                }).start(() => {});
+            }),
+          ]).start(() => {});
+        }),
+      ]).start(() => {});
+    });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        {/* <Header navigation={this.props.navigation} /> */}
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -220,10 +242,31 @@ export default class Example extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
+        {/* <View
+          style={{
+            height: 100,
+            width: 100,
+            position: "absolute",
+            zIndex: 999999999,
+            // top: 0,
+            // left: 20,
+          }}
+        >
+          <TouchableOpacity onPress={this.pressDislikeButton}>
+            <Image
+              // style={styles.skillCircleImage}
+              style={styles.dislikeButton}
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+              }}
+            ></Image>
+          </TouchableOpacity>
+        </View> */}
         <Animated.Image
           source={{
             uri:
-              "https://rileymann.com/wp-content/uploads/2021/02/home-icon-fill.png",
+              "https://rileymann.com/wp-content/uploads/2021/03/keeper_logo_black.png",
           }}
           style={[
             styles.xIcon,
@@ -243,16 +286,6 @@ export default class Example extends Component {
           {this.state.isLoading && <ActivityIndicator size="large" />}
           {!this.state.isLoading && (
             <Animated.View
-              // style={{
-              //   transform: [
-              //     {
-              //       translateY: this.state.slideUpValue.interpolate({
-              //         inputRange: [0, 1],
-              //         outputRange: [400, 0],
-              //       }),
-              //     },
-              //   ],
-              // }}
               style={[
                 styles.resumeContainer,
                 {
@@ -269,13 +302,36 @@ export default class Example extends Component {
               ]}
             >
               <Resume
-                pressLikeButton={this.pressLikeButton}
-                pressDislikeButton={this.pressDislikeButton}
                 navigation={this.props.navigation}
+                pressDislikeButton={this.pressDislikeButton}
+                resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
+                currentEmployee={this.state.employeeData[0]}
               />
-              {/* <Text>slide up</Text> */}
             </Animated.View>
           )}
+        </View>
+        <View
+          style={{
+            height: 70,
+            width: 70,
+            position: "absolute",
+            bottom: this.props.bottomNavBarHeight + 10,
+            left: 10,
+          }}
+        >
+          <TouchableOpacity
+            onPress={this.pressDislikeButton}
+            style={styles.dislikeButtonTouchableOpacity}
+          >
+            <Image
+              // style={styles.skillCircleImage}
+              style={styles.dislikeButton}
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+              }}
+            ></Image>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -342,4 +398,25 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
   },
+  dislikeButtonTouchableOpacity: {
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOpacity: 1,
+    elevation: 6,
+    shadowRadius: 30,
+    shadowOffset: { width: 1, height: 13 },
+  },
+  dislikeButton: {
+    width: 70,
+    height: 70,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+  },
 });
+
+const mapStateToProps = (state) => {
+  const { bottomNavBarHeight } = state;
+  return { bottomNavBarHeight };
+};
+
+export default connect(mapStateToProps)(EmployerDiscover);
