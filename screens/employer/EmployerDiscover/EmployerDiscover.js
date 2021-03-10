@@ -9,6 +9,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
+  Easing,
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -194,10 +195,11 @@ class EmployerDiscover extends Component {
             // slide swiper back up
             Animated.timing(this.state.wholeSwiperTranslateY, {
               toValue: 0,
-              delay: 200,
-              duration: 400,
+              delay: 400,
+              duration: 600,
               useNativeDriver: true,
-            }).start(),
+              easing: Easing.bezier(0.07, 1, 0.33, 0.89),
+            }),
 
             //X icon height shrink
             Animated.timing(this.state.xIconFadeAnim, {
