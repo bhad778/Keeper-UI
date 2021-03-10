@@ -11,13 +11,12 @@ import {
 
 const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
   const [locationText, setLocationText] = useState("");
+  const [data, setData] = useState();
 
   useEffect(() => {
-    fetch(
-      `/v1/geo/cities?limit=5&offset=0&namePrefix=${locationText}&sort=name,countryCode`
-    )
-      .then((response) => response)
-      .then((data) => console.log(data));
+    fetch(`http://www.omdbapi.com/?t=${locationText}&apikey=42c21425`)
+      .then((response) => response.json())
+      .then((response) => setData(response));
   }, [locationText]);
   return (
     <Modal visible={locationModalVisible}>
@@ -35,6 +34,20 @@ const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
+        {data && (
+          <View style={styles.cityOptionsButtonsContainer}>
+            <View style={styles.pointerTip} />
+            <TouchableOpacity style={styles.cityOptionsButton}>
+              <Text style={styles.cityOptionsButtonText}>{data.Title}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cityOptionsButton}>
+              <Text style={styles.cityOptionsButtonText}>{data.Released}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.lastCityOptionsButton}>
+              <Text style={styles.cityOptionsButtonText}>{data.Genre}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </Modal>
   );
@@ -55,7 +68,46 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: 30,
     borderBottomWidth: 1,
+    borderBottomColor: "#aeaeae",
     alignItems: "center",
+  },
+  cityOptionsButtonsContainer: {
+    backgroundColor: "#f0f0f0",
+    width: "85%",
+    alignItems: "center",
+    zIndex: 1,
+    marginTop: 25,
+    height: 200,
+    borderRadius: 20,
+  },
+  cityOptionsButton: {
+    zIndex: 1,
+    borderBottomWidth: 2,
+    width: "80%",
+    height: "33%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomColor: "#dbdbdb",
+  },
+  lastCityOptionsButton: {
+    zIndex: 1,
+    width: "80%",
+    height: "33%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cityOptionsButtonText: {
+    color: "#b3b3b3",
+    fontSize: 20,
+  },
+  pointerTip: {
+    height: 30,
+    width: 30,
+    position: "absolute",
+    bottom: 180,
+    transform: [{ rotate: "45deg" }],
+    backgroundColor: "#f0f0f0",
+    zIndex: 2,
   },
 });
 export default LocationModal;
