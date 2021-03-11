@@ -13,6 +13,7 @@ import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
 
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
@@ -313,6 +314,29 @@ const Resume = (props) => {
           </View>
         </View>
       </HideBottomNavScrollView>
+      <View
+        style={{
+          height: 70,
+          width: 70,
+          position: "absolute",
+          bottom: props.bottomNavBarHeight + 10,
+          left: 10,
+        }}
+      >
+        <TouchableOpacity
+          onPress={props.pressDislikeButton}
+          style={styles.dislikeButtonTouchableOpacity}
+        >
+          <Image
+            // style={styles.skillCircleImage}
+            style={styles.dislikeButton}
+            source={{
+              uri:
+                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+            }}
+          ></Image>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -324,6 +348,20 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 4000,
     marginTop: 30,
+  },
+  dislikeButtonTouchableOpacity: {
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOpacity: 1,
+    elevation: 6,
+    shadowRadius: 30,
+    shadowOffset: { width: 1, height: 13 },
+  },
+  dislikeButton: {
+    width: 70,
+    height: 70,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
   },
   nameAndJobTitleSection: {
     paddingTop: 5,

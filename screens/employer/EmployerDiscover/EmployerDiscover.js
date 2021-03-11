@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
+import { bindActionCreators } from "redux";
+import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -35,8 +37,7 @@ class EmployerDiscover extends Component {
       slideUpValue: new Animated.Value(0),
       wholeSwiperFadeAnim: new Animated.Value(1),
       xIconFadeAnim: new Animated.Value(0),
-      xIconScaleXValue: new Animated.Value(0.5),
-      xIconScaleYValue: new Animated.Value(0.5),
+      xIconScale: new Animated.Value(0),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
       employeeData: [
@@ -139,6 +140,7 @@ class EmployerDiscover extends Component {
     });
   };
   pressDislikeButton = () => {
+    this.props.updateBottomNavBarHeight(0);
     let tempEmployeeArray = this.state.employeeData;
     tempEmployeeArray.shift();
     this.setState({ employeeData: tempEmployeeArray }, () => {
@@ -171,23 +173,18 @@ class EmployerDiscover extends Component {
           useNativeDriver: true,
         }).start(),
 
-        // X icon grow width
-        Animated.timing(this.state.xIconScaleXValue, {
-          toValue: 2,
-          duration: 350,
+        // X icon grow
+        Animated.timing(this.state.xIconScale, {
+          toValue: 1,
+          duration: 700,
           useNativeDriver: true,
+          // cubic-bezier(.34,.21,0,.99)
+          easing: Easing.bezier(0.34, 0.21, 0, 0.99),
         }).start(),
-
-        // X icon grow height
-        Animated.timing(this.state.xIconScaleYValue, {
-          toValue: 2,
-          duration: 350,
-          useNativeDriver: true,
-        }).start(() => {}),
 
         // X icon slide up
         Animated.timing(this.state.xIconTranslateYValue, {
-          toValue: -125,
+          toValue: 0,
           duration: 250,
           useNativeDriver: true,
         }).start(() => {
@@ -198,11 +195,12 @@ class EmployerDiscover extends Component {
               delay: 400,
               duration: 600,
               useNativeDriver: true,
-              easing: Easing.bezier(0.07, 1, 0.33, 0.89),
+              // cubic-bezier(.25,1.07,.91,.99)
+              easing: Easing.bezier(0.25, 1.07, 0.91, 0.99),
             }),
 
-            //X icon height shrink
-            Animated.timing(this.state.xIconFadeAnim, {
+            //X icon fade
+            Animated.timing(this.state.xIconScale, {
               toValue: 0,
               delay: 200,
               duration: 400,
@@ -210,22 +208,18 @@ class EmployerDiscover extends Component {
             }).start(() => {
               // revert y value for next swipe
               Animated.timing(this.state.xIconTranslateYValue, {
-                toValue: 0,
-                duration: 1,
-                useNativeDriver: true,
-              }).start();
-              // revert width for next swipe
-              Animated.timing(this.state.xIconScaleXValue, {
                 toValue: 0.5,
                 duration: 1,
                 useNativeDriver: true,
-              }).start(),
-                // revert height for next swipe
-                Animated.timing(this.state.xIconScaleYValue, {
-                  toValue: 0.5,
-                  duration: 1,
-                  useNativeDriver: true,
-                }).start(() => {});
+              }).start();
+              // revert X icon size for next swipe
+              Animated.timing(this.state.xIconScale, {
+                toValue: 0,
+                duration: 1,
+                useNativeDriver: true,
+              }).start(() => {
+                this.props.updateBottomNavBarHeight(80);
+              });
             }),
           ]).start(() => {});
         }),
@@ -275,8 +269,13 @@ class EmployerDiscover extends Component {
             {
               opacity: this.state.xIconFadeAnim, // Bind opacity to animated value
               transform: [
-                { scaleX: this.state.xIconScaleXValue },
-                { scaleY: this.state.xIconScaleYValue },
+                {
+                  scale: this.state.xIconScale.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 2.2],
+                  }),
+                },
+
                 {
                   translateY: this.state.xIconTranslateYValue,
                 },
@@ -312,29 +311,6 @@ class EmployerDiscover extends Component {
             </Animated.View>
           )}
         </View>
-        <View
-          style={{
-            height: 70,
-            width: 70,
-            position: "absolute",
-            bottom: this.props.bottomNavBarHeight + 10,
-            left: 10,
-          }}
-        >
-          <TouchableOpacity
-            onPress={this.pressDislikeButton}
-            style={styles.dislikeButtonTouchableOpacity}
-          >
-            <Image
-              // style={styles.skillCircleImage}
-              style={styles.dislikeButton}
-              source={{
-                uri:
-                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
-              }}
-            ></Image>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -345,15 +321,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  resumeContainer: {},
   xIcon: {
-    width: 30,
-    height: 26,
+    width: 45,
+    height: 39,
     position: "absolute",
-    left: SCREEN_WIDTH / 2 - 15,
-    top: SCREEN_HEIGHT / 2 - 13,
+    left: SCREEN_WIDTH / 2 - 45 / 2,
+    top: SCREEN_HEIGHT / 2 - 39 / 2 - 80,
     zIndex: 1,
   },
+  resumeContainer: {},
+
   headerContainer: {
     height: "12%",
     flexDirection: "row",
@@ -400,20 +377,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
   },
-  dislikeButtonTouchableOpacity: {
-    shadowColor: "rgba(0, 0, 0, 0.3)",
-    shadowOpacity: 1,
-    elevation: 6,
-    shadowRadius: 30,
-    shadowOffset: { width: 1, height: 13 },
-  },
-  dislikeButton: {
-    width: 70,
-    height: 70,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 100,
-  },
 });
 
 const mapStateToProps = (state) => {
@@ -421,4 +384,12 @@ const mapStateToProps = (state) => {
   return { bottomNavBarHeight };
 };
 
-export default connect(mapStateToProps)(EmployerDiscover);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      updateBottomNavBarHeight,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployerDiscover);
