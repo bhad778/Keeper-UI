@@ -59,7 +59,6 @@ function BottomTabNavigator(props) {
               color={color}
             />
           ),
-          tabBarBadge: 3,
         }}
       />
     </Tab.Navigator>

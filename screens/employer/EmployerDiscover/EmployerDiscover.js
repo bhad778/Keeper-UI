@@ -198,8 +198,8 @@ class EmployerDiscover extends Component {
           // slide swiper back up
           Animated.timing(this.state.wholeSwiperTranslateY, {
             toValue: 0,
-            delay: 400,
-            duration: 600,
+            delay: 200,
+            duration: 500,
             useNativeDriver: true,
             // cubic-bezier(.25,1.07,.91,.99)
             easing: Easing.bezier(0.25, 1.07, 0.91, 0.99),
@@ -208,7 +208,7 @@ class EmployerDiscover extends Component {
           //X icon shrink
           Animated.timing(this.state.xIconScale, {
             toValue: 0,
-            delay: 70,
+            delay: 30,
             duration: 400,
             useNativeDriver: true,
           }).start(() => {

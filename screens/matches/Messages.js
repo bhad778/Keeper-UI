@@ -3,11 +3,12 @@ import { StyleSheet, View } from "react-native";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import ChatService from "../../services/ChatService";
 import Header from "../../components/header/Header";
+import { connect } from "react-redux";
 
 // when you match with someone it hits the addConversation api call and creates the conversation, which makes a mongoDB ID automatically and that
 // will be the conversationId that lives in each message object in the messages table. These conversationIds will also live on each user object
 // so that they can be easily pulled for each user.
-const Messages = ({ navigation, route }) => {
+const Messages = ({ navigation, route, selectedJob }) => {
   const [messages, setMessages] = useState();
   const [connectionId, setConnectionId] = useState();
   const [webSocket, setWebSocket] = useState();
@@ -134,11 +135,11 @@ const Messages = ({ navigation, route }) => {
                 }}
                 wrapperStyle={{
                   left: {
-                    backgroundColor: "#add9d9",
+                    backgroundColor: "#f0f0f0",
                     left: -40,
                   },
                   right: {
-                    backgroundColor: "#016568",
+                    backgroundColor: selectedJob.color,
                   },
                 }}
               />
@@ -149,8 +150,6 @@ const Messages = ({ navigation, route }) => {
     </View>
   );
 };
-
-export default Messages;
 
 const styles = StyleSheet.create({
   container: {
@@ -174,3 +173,10 @@ const styles = StyleSheet.create({
   avatarImage: { width: "14%" },
   backButton: { marginLeft: 10, marginRight: 10 },
 });
+
+const mapStateToProps = (state) => {
+  const { selectedJob } = state;
+  return { selectedJob };
+};
+
+export default connect(mapStateToProps)(Messages);
