@@ -34,9 +34,8 @@ function BottomTabNavigator(props) {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="sliders" size={25} color={color} />
+            <Icon style={styles.tabs} name="sliders" size={30} color={color} />
           ),
-          tabBarBadge: 3,
         }}
       />
       <Tab.Screen
@@ -60,6 +59,7 @@ function BottomTabNavigator(props) {
               color={color}
             />
           ),
+          tabBarBadge: 3,
         }}
       />
     </Tab.Navigator>
