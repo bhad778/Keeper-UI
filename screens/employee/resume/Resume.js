@@ -316,8 +316,10 @@ const Resume = (props) => {
       </HideBottomNavScrollView>
       <View
         style={{
-          height: 70,
-          width: 70,
+          // height: 70,
+          // width: 70,
+          height: props.bottomNavBarHeight == -1 ? 0 : 70,
+          width: props.bottomNavBarHeight == -1 ? 0 : 70,
           position: "absolute",
           bottom: props.bottomNavBarHeight + 10,
           left: 10,

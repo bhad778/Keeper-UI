@@ -140,91 +140,96 @@ class EmployerDiscover extends Component {
     });
   };
   pressDislikeButton = () => {
-    this.props.updateBottomNavBarHeight(0);
-    let tempEmployeeArray = this.state.employeeData;
-    tempEmployeeArray.shift();
-    this.setState({ employeeData: tempEmployeeArray }, () => {
+    this.props.updateBottomNavBarHeight(-1);
+
+    let tempEmployeeArray = this.state.employeeData.slice(
+      1,
+      this.state.employeeData.length
+    );
+
+    Animated.parallel([
+      // swiper fades out
       Animated.timing(this.state.wholeSwiperFadeAnim, {
         toValue: 0,
-        delay: 1,
-        duration: 200,
+        duration: 1,
         useNativeDriver: true,
-      });
-      Animated.parallel([
-        // swiper fades out
-        // instantly after fade send swiper down below screen so it can slide back up later
-        Animated.timing(this.state.wholeSwiperTranslateY, {
-          toValue: 1,
-          duration: 1,
-          useNativeDriver: true,
-        }).start(() => {
-          // instantly fade back in for slide up later
+      }).start(() => {
+        Animated.parallel([
+          // instantly after fade send swiper down below screen so it can slide back up later
+          Animated.timing(this.state.wholeSwiperTranslateY, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: true,
+          }),
+          this.setState({ employeeData: tempEmployeeArray }, () => {}),
+          // after resume has faded, slide down out of view, and the state has been set,
+          // then fade back in for slide back up into view later
           Animated.timing(this.state.wholeSwiperFadeAnim, {
             toValue: 1,
             duration: 1,
             useNativeDriver: true,
-          }).start();
-        }),
+          }),
+        ]).start();
+      }),
 
-        // X icon fade in
-        Animated.timing(this.state.xIconFadeAnim, {
-          toValue: 1,
-          duration: 350,
-          useNativeDriver: true,
-        }).start(),
+      // X icon fade in
+      Animated.timing(this.state.xIconFadeAnim, {
+        toValue: 1,
+        duration: 350,
+        useNativeDriver: true,
+      }).start(),
 
-        // X icon grow
-        Animated.timing(this.state.xIconScale, {
-          toValue: 1,
-          duration: 700,
-          useNativeDriver: true,
-          // cubic-bezier(.34,.21,0,.99)
-          easing: Easing.bezier(0.34, 0.21, 0, 0.99),
-        }).start(),
+      // X icon grow
+      Animated.timing(this.state.xIconScale, {
+        toValue: 1,
+        duration: 700,
+        useNativeDriver: true,
+        // cubic-bezier(.34,.21,0,.99)
+        easing: Easing.bezier(0.34, 0.21, 0, 0.99),
+      }).start(),
 
-        // X icon slide up
-        Animated.timing(this.state.xIconTranslateYValue, {
-          toValue: 0,
-          duration: 250,
-          useNativeDriver: true,
-        }).start(() => {
-          Animated.parallel([
-            // slide swiper back up
-            Animated.timing(this.state.wholeSwiperTranslateY, {
-              toValue: 0,
-              delay: 400,
-              duration: 600,
+      // X icon slide up
+      Animated.timing(this.state.xIconTranslateYValue, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        Animated.parallel([
+          // slide swiper back up
+          Animated.timing(this.state.wholeSwiperTranslateY, {
+            toValue: 0,
+            delay: 400,
+            duration: 600,
+            useNativeDriver: true,
+            // cubic-bezier(.25,1.07,.91,.99)
+            easing: Easing.bezier(0.25, 1.07, 0.91, 0.99),
+          }),
+
+          //X icon shrink
+          Animated.timing(this.state.xIconScale, {
+            toValue: 0,
+            delay: 70,
+            duration: 400,
+            useNativeDriver: true,
+          }).start(() => {
+            // revert y value for next swipe
+            Animated.timing(this.state.xIconTranslateYValue, {
+              toValue: 0.5,
+              duration: 1,
               useNativeDriver: true,
-              // cubic-bezier(.25,1.07,.91,.99)
-              easing: Easing.bezier(0.25, 1.07, 0.91, 0.99),
-            }),
-
-            //X icon fade
+            }).start();
+            // revert X icon size for next swipe
             Animated.timing(this.state.xIconScale, {
               toValue: 0,
-              delay: 200,
-              duration: 400,
+              duration: 1,
               useNativeDriver: true,
             }).start(() => {
-              // revert y value for next swipe
-              Animated.timing(this.state.xIconTranslateYValue, {
-                toValue: 0.5,
-                duration: 1,
-                useNativeDriver: true,
-              }).start();
-              // revert X icon size for next swipe
-              Animated.timing(this.state.xIconScale, {
-                toValue: 0,
-                duration: 1,
-                useNativeDriver: true,
-              }).start(() => {
-                this.props.updateBottomNavBarHeight(80);
-              });
-            }),
-          ]).start(() => {});
-        }),
-      ]).start(() => {});
-    });
+              this.props.updateBottomNavBarHeight(80);
+            });
+          }),
+        ]).start(() => {});
+      }),
+    ]).start(() => {});
   };
 
   render() {
