@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Dimensions, TouchableOpacity } from "react-native";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import ChatService from "../../services/ChatService";
-import Header from "../../components/header/Header";
+import { Appbar, Text, Avatar } from "react-native-paper";
 import { connect } from "react-redux";
+
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 // when you match with someone it hits the addConversation api call and creates the conversation, which makes a mongoDB ID automatically and that
 // will be the conversationId that lives in each message object in the messages table. These conversationIds will also live on each user object
@@ -100,14 +103,39 @@ const Messages = ({ navigation, route, selectedJob }) => {
     // );
   };
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
-      <Header
-        screenTitle={title}
-        navigation={navigation}
-        type="outlined"
-        withBackButton
-      ></Header>
+      <Appbar.Header
+        style={{
+          backgroundColor: "white",
+          width: SCREEN_WIDTH,
+          height: 80,
+          elevation: 0,
+          borderBottomWidth: 1,
+        }}
+      >
+        <View style={styles.leftSection}>
+          <TouchableOpacity onPress={goBack}>
+            <MaterialIcon name="arrow-back" size={40} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.middleSection}>
+          <Text style={styles.title}>Megan Kelly</Text>
+        </View>
+        <View style={styles.rightSection}>
+          <Avatar.Image
+            source={{
+              uri:
+                "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+            }}
+            size={50}
+          />
+        </View>
+      </Appbar.Header>
       <View style={styles.chatContainer}>
         <GiftedChat
           messages={messages}
@@ -117,6 +145,10 @@ const Messages = ({ navigation, route, selectedJob }) => {
             return (
               <Bubble
                 {...props}
+                timeTextStyle={{
+                  left: { display: "none" },
+                  right: { display: "none" },
+                }}
                 textStyle={{
                   left: {
                     color: "black",
@@ -137,9 +169,11 @@ const Messages = ({ navigation, route, selectedJob }) => {
                   left: {
                     backgroundColor: "#f0f0f0",
                     left: -40,
+                    padding: 7,
                   },
                   right: {
                     backgroundColor: selectedJob.color,
+                    padding: 7,
                   },
                 }}
               />
@@ -165,6 +199,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 0.5,
     borderBottomColor: "#F0F0F0",
+  },
+  leftSection: {
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  middleSection: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  rightSection: {
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 30,
   },
   chatContainer: {
     flex: 9,

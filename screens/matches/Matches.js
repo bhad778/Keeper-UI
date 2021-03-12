@@ -72,7 +72,7 @@ const Matches = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header screenTitle="Matches" />
+      <Header />
       <View style={styles.matchesSection}>
         <ScrollView
           contentContainerStyle={{ alignItems: "center" }}

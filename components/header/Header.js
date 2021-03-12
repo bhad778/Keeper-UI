@@ -42,7 +42,7 @@ const Header = ({
           <View style={styles.leftSection}>
             {withBackButton && (
               <TouchableOpacity onPress={goBack}>
-                <MaterialIcon name="" size={40} />
+                <MaterialIcon name="arrow-back" size={40} />
               </TouchableOpacity>
             )}
           </View>
