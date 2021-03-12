@@ -61,9 +61,7 @@ const Header = ({
             </View>
 
             <View style={styles.rightButtonSection}>
-              <TouchableOpacity onPress={goBack}>
-                <EntypoIcon name="chevron-small-down" size={40} />
-              </TouchableOpacity>
+              <EntypoIcon name="chevron-small-down" size={40} />
             </View>
           </TouchableOpacity>
         </View>
