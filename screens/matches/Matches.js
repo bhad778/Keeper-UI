@@ -5,12 +5,16 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { Avatar, Button } from "react-native-paper";
 import Header from "../../components/header/Header";
-import EmployeeService from "../../services/EmployeeService";
+import EmployerService from "../../services/EmployerService";
+import { connect } from "react-redux";
 
-const Matches = ({ navigation }) => {
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+
+const Matches = ({ navigation, selectedJob }) => {
   const [matches, setMatches] = useState([]);
 
   // {
@@ -55,8 +59,8 @@ const Matches = ({ navigation }) => {
   // },
 
   useEffect(() => {
-    EmployeeService.getEmployee({
-      email: "employee@employee.com",
+    EmployerService.getEmployer({
+      email: "employer123@gmail.com",
     }).then((data) => {
       setMatches(data[0].matches);
     });
@@ -71,98 +75,94 @@ const Matches = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        backgroundColor: selectedJob.color,
+      }}
+    >
       <Header />
-      <View style={styles.matchesSection}>
-        <ScrollView
-          contentContainerStyle={{ alignItems: "center" }}
-          style={styles.scrollView}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.scrollViewHeaderTextContainer}>
-            <Text style={styles.scrollViewHeaderText}>Matches</Text>
-          </View>
+      <View style={styles.matchesPageContents}>
+        <View style={styles.matchesScrollViewContainer}>
+          <ScrollView
+            contentContainerStyle={{ alignItems: "center" }}
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.scrollViewHeaderTextContainer}>
+              <Text style={styles.scrollViewHeaderText}>Matches</Text>
+            </View>
 
-          {matches.map((item, i) => (
-            <TouchableOpacity
-              key={i}
-              style={styles.matchButton}
-              underlayColor="#D3D3D3"
-              onPress={() => {
-                switchScreen(item.profilePic, item.name, item.connectionId);
-              }}
-            >
-              <View style={styles.avatarImageContainer}>
-                <Avatar.Image
-                  size={95}
-                  source={{ uri: item.profilePic }}
-                  style={styles.images}
-                />
-                <View style={styles.matchTextContainer}>
-                  <View style={styles.notificationButtonContainer}>
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Button
-                      style={styles.notificationButton}
-                      labelStyle={{ fontSize: 12 }}
-                      mode="contained"
-                      dark
-                      color="#ff8365"
-                      uppercase={false}
-                    >
-                      New Message
-                    </Button>
+            {matches.map((item, i) => (
+              <TouchableOpacity
+                key={i}
+                style={styles.matchButton}
+                underlayColor="#D3D3D3"
+                onPress={() => {
+                  switchScreen(item.profilePic, item.name, item.connectionId);
+                }}
+              >
+                <View style={styles.avatarImageContainer}>
+                  <Avatar.Image
+                    size={85}
+                    source={{
+                      uri:
+                        "https://data.whicdn.com/images/83928957/original.jpg",
+                    }}
+                    style={styles.images}
+                  />
+                  <View style={styles.matchTextContainer}>
+                    <View style={styles.notificationButtonContainer}>
+                      <Text style={styles.name}>Seto Kaiba</Text>
+                    </View>
+
+                    <Text numberOfLines={1} style={styles.nameInfo}>
+                      Your pathetic grandpas deck has no cards yugi
+                    </Text>
                   </View>
-
-                  <Text numberOfLines={1} style={styles.nameInfo}>
-                    eeny meeny miny moe i choose kelly
-                  </Text>
                 </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-
-  header: {
-    flex: 1,
-    alignItems: "flex-end",
-    backgroundColor: "white",
-    justifyContent: "center",
-  },
   scrollViewHeaderTextContainer: {
     justifyContent: "flex-end",
     alignItems: "flex-start",
     width: "90%",
-    height: "12%",
+    height: 90,
     marginBottom: 10,
   },
   scrollViewHeaderText: { fontSize: 50 },
-  matchesSection: {
-    flex: 8,
-    backgroundColor: "white",
+  matchesPageContents: {
+    height: SCREEN_HEIGHT - 204,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  scrollView: { width: "100%" },
-
+  matchesScrollViewContainer: {
+    height: "95%",
+    width: "100%",
+    paddingRight: 15,
+    paddingLeft: 15,
+  },
+  scrollView: {
+    width: "100%",
+    backgroundColor: "white",
+    borderRadius: 35,
+  },
   matchButton: {
     height: 112,
     width: "90%",
     backgroundColor: "white",
   },
   matchTextContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
     height: "100%",
-    width: "72%",
-    justifyContent: "center",
+    width: "68%",
   },
   avatarImageContainer: {
     flexDirection: "row",
@@ -171,7 +171,11 @@ const styles = StyleSheet.create({
   },
   images: { marginRight: 20 },
   name: {
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: "bold",
+    alignSelf: "flex-start",
+    paddingTop: 22,
+    paddingBottom: 3,
   },
   notificationButtonContainer: {
     flexDirection: "row",
@@ -184,7 +188,16 @@ const styles = StyleSheet.create({
     fontSize: 10,
     borderRadius: 20,
   },
-  nameInfo: { color: "#b1b1b1", fontSize: 18, width: "95%" },
+  nameInfo: {
+    fontWeight: "400",
+    fontSize: 14,
+    width: "95%",
+  },
 });
 
-export default Matches;
+const mapStateToProps = (state) => {
+  const { selectedJob } = state;
+  return { selectedJob };
+};
+
+export default connect(mapStateToProps)(Matches);

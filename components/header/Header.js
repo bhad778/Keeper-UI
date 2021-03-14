@@ -30,6 +30,7 @@ const Header = ({
         backgroundColor: selectedJob.color,
         width: SCREEN_WIDTH,
         height: 80,
+        elevation: 0,
       }}
     >
       <View style={styles.headerContents}>
@@ -74,11 +75,12 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     justifyContent: "center",
     alignItems: "center",
-    paddingRight: 8,
+    paddingRight: 18,
+    paddingLeft: 10,
   },
   headerPill: {
     backgroundColor: "white",
-    width: "90%",
+    width: "100%",
     height: 78,
     borderRadius: 100,
     justifyContent: "center",

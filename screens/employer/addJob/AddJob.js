@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
-import Header from "../../../components/header/Header";
 import Icon from "react-native-vector-icons/Feather";
 import { skipPartiallyEmittedExpressions } from "typescript";
 import JobsService from "../../../services/JobsService";
+
 const AddJob = ({ navigation, addJobModalVisible, setAddJobModalVisible }) => {
   const [text, setText] = React.useState({
     jobTitle: "",
