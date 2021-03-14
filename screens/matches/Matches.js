@@ -17,47 +17,6 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const Matches = ({ navigation, selectedJob }) => {
   const [matches, setMatches] = useState([]);
 
-  // {
-  //   img:
-  //     "https://cdn.bulbagarden.net/upload/thumb/f/fb/Misty_SM.png/150px-Misty_SM.png",
-  //   name: "Misty",
-  // },
-  // {
-  //   img:
-  //     "https://64.media.tumblr.com/20a9b95f236651f0c994135829c9cd56/ae4f93d74fb55319-8e/s500x750/0f6c4e450f0981ab0fe0d960dfea76e3dd4f29ca.png",
-  //   name: "Britney",
-  // },
-  // {
-  //   img:
-  //     "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
-  //   name: "Mary Jane",
-  // },
-  // {
-  //   img:
-  //     "https://www.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/38686/1522693188-9742-0876/url_large.png",
-  //   name: "Wendy",
-  // },
-  // {
-  //   img:
-  //     "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest/top-crop/width/720/height/900?cb=20100423143631",
-  //   name: "Padme",
-  // },
-  // {
-  //   img:
-  //     "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
-  //   name: "Underworld",
-  // },
-  // {
-  //   img:
-  //     "https://i.pinimg.com/originals/c3/19/31/c3193181716088d176907ecf1f4d0ca8.jpg",
-  //   name: "Kairi",
-  // },
-  // {
-  //   img:
-  //     "https://cdn.flickeringmyth.com/wp-content/uploads/2018/12/Rust-Creek-1-1-600x316.jpg",
-  //   name: "Rust Creek",
-  // },
-
   useEffect(() => {
     EmployerService.getEmployer({
       email: "employer123@gmail.com",
@@ -134,10 +93,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "flex-start",
     width: "90%",
-    height: 90,
+    height: 85,
     marginBottom: 10,
   },
-  scrollViewHeaderText: { fontSize: 50 },
+  scrollViewHeaderText: { fontSize: 40 },
   matchesPageContents: {
     height: SCREEN_HEIGHT - 204,
     width: "100%",
@@ -156,7 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   matchButton: {
-    height: 112,
+    height: 105,
     width: "90%",
     backgroundColor: "white",
   },

@@ -115,6 +115,8 @@ const Resume = (props) => {
             backgroundColor: props.selectedJob.color,
             flex: 1,
             alignItems: "center",
+            paddingLeft: 16,
+            paddingRight: 16,
           }}
         >
           <Image
@@ -128,7 +130,7 @@ const Resume = (props) => {
             style={{
               backgroundColor: props.selectedJob.color,
               flex: 1,
-              padding: 20,
+              // padding: 15,
             }}
           >
             <View style={styles.nameAndJobTitleSection}>
@@ -295,7 +297,6 @@ const Resume = (props) => {
             style={{
               backgroundColor: props.selectedJob.color,
               flex: 1,
-              padding: 20,
               paddingBottom: 100,
             }}
           >
@@ -387,7 +388,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    width: "90%",
     borderRadius: 30,
   },
   experienceAndAvailabilitySection: {
@@ -582,7 +582,6 @@ const styles = StyleSheet.create({
   },
   bottomDescriptionText: {
     backgroundColor: "#add9d9",
-    padding: 15,
     paddingTop: 40,
     paddingBottom: 100,
     borderBottomLeftRadius: 20,

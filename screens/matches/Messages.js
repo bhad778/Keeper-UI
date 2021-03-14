@@ -124,13 +124,12 @@ const Messages = ({ navigation, route, selectedJob }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.middleSection}>
-          <Text style={styles.title}>Megan Kelly</Text>
+          <Text style={styles.title}>Seto</Text>
         </View>
         <View style={styles.rightSection}>
           <Avatar.Image
             source={{
-              uri:
-                "https://i.pinimg.com/originals/ea/5c/07/ea5c0756f5c2980e8acecf61f52a61fd.jpg",
+              uri: "https://data.whicdn.com/images/83928957/original.jpg",
             }}
             size={50}
           />
