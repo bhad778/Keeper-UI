@@ -24,6 +24,7 @@ const JobBoard = ({
   updateSelectedJob,
   jobBoardModalOpen,
   setJobBoardModalOpen,
+  selectedJob,
 }) => {
   const [jobs, setJobs] = useState();
   const [addJobModalVisible, setAddJobModalVisible] = useState(false);
@@ -43,7 +44,7 @@ const JobBoard = ({
 
   return (
     <Modal
-      animationType="slide"
+      animationType={selectedJob.title ? "slide" : "none"}
       visible={jobBoardModalOpen}
       style={styles.jobBoardModal}
     >
