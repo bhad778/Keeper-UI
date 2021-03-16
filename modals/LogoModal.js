@@ -14,7 +14,7 @@ import Constants from "expo-constants";
 import Header from "../components/header/Header";
 import Icon from "react-native-vector-icons/Feather";
 
-const LogoModal = ({ logoModalVisible, setLogoModalVisible }) => {
+const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -48,16 +48,19 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible }) => {
     setImage(null);
   };
   const goBack = () => {
+    setLogoValue(image);
     setLogoModalVisible(false);
   };
   return (
-    <Modal visible={logoModalVisible}>
-      <Header
-        title="Logo"
-        outlined={true}
-        withBackButton={true}
-        dontShowJobBoardModal={true}
-      />
+    <Modal animationType="slide" visible={logoModalVisible}>
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => goBack(false)}>
+            <Icon size={20} name="x" />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 20 }}>Logo</Text>
+        </View>
+      </View>
       <View style={styles.imageSelectorSection}>
         <TouchableOpacity>
           <Avatar.Image
@@ -79,11 +82,15 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
+  headerContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
   header: {
-    flex: 1,
-    backgroundColor: "red",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
+    flexDirection: "row",
+    width: "90%",
+    height: "50%",
+    borderWidth: 1,
+    borderRadius: 20,
   },
   imageSelectorSection: {
     flex: 6,

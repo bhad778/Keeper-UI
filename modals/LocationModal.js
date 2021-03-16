@@ -8,8 +8,13 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import Header from "../components/header/Header";
-const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
+import Icon from "react-native-vector-icons/Feather";
+
+const LocationModal = ({
+  locationModalVisible,
+  setLocationModalVisible,
+  setLocationValue,
+}) => {
   const [locationText, setLocationText] = useState("");
   const [data, setData] = useState();
 
@@ -18,14 +23,22 @@ const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
       .then((response) => response.json())
       .then((response) => setData(response));
   }, [locationText]);
+
+  const goBack = () => {
+    setLocationValue(data);
+    setLocationModalVisible(false);
+  };
   return (
-    <Modal visible={locationModalVisible}>
-      {/*<View style={styles.header}>
-        <TouchableOpacity onPress={() => setLocationModalVisible(false)}>
-          <Text style={{ fontSize: 30 }}>Cancel</Text>
-        </TouchableOpacity>
-  </View>*/}
-      <Header title="location" />
+    <Modal animationType="slide" visible={locationModalVisible}>
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => goBack()}>
+            <Icon size={20} name="x" />
+          </TouchableOpacity>
+          <Text style={{ fontSize: 20 }}>Location</Text>
+        </View>
+      </View>
+
       <View style={styles.searchContainer}>
         <View style={styles.textInputContainer}>
           <TextInput
@@ -54,7 +67,16 @@ const LocationModal = ({ locationModalVisible, setLocationModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
-  header: { flex: 1, backgroundColor: "blue", justifyContent: "center" },
+  headerContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
+  header: {
+    justifyContent: "space-around",
+    alignItems: "center",
+    flexDirection: "row",
+    width: "90%",
+    height: "50%",
+    borderWidth: 1,
+    borderRadius: 20,
+  },
   searchContainer: {
     flex: 6,
     alignItems: "center",

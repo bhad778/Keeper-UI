@@ -9,23 +9,26 @@ import {
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-
+import AddResponsibilityModal from "../modals/AddResponsibilityModal";
 const ResponsibilitiesModal = ({
   responsibilitiesModalVisible,
   setResponsibilitiesModalVisible,
-  editResponsibility,
+  setResponsibilitiesList,
 }) => {
   const [responsibilities, setResponsibilities] = useState([]);
-
+  const [
+    addResponsibilityModalVisible,
+    setAddResponsibilityModalVisible,
+  ] = useState(false);
   const removeTextBox = (index) => {
     const removeResponsibility = [...responsibilities];
     removeResponsibility.splice(index, 1);
     setResponsibilities(removeResponsibility);
   };
 
-  const addTextBox = () => {
+  const addTextBox = (text) => {
     const addResponsibility = [...responsibilities];
-    addResponsibility.push("");
+    addResponsibility.push(text);
     setResponsibilities(addResponsibility);
   };
 
@@ -55,9 +58,17 @@ const ResponsibilitiesModal = ({
       </View>
     );
   };
-
+  const goBack = () => {
+    setResponsibilitiesList(responsibilities);
+    setResponsibilitiesModalVisible(false);
+  };
   return (
     <Modal visible={responsibilitiesModalVisible}>
+      <AddResponsibilityModal
+        addResponsibilityModalVisible={addResponsibilityModalVisible}
+        setAddResponsibilityModalVisible={setAddResponsibilityModalVisible}
+        addTextBox={addTextBox}
+      />
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
@@ -66,14 +77,14 @@ const ResponsibilitiesModal = ({
         >
           <Text style={{ fontSize: 30 }}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => editResponsibility(responsibilities)}>
+        <TouchableOpacity onPress={() => goBack()}>
           <Text>Save</Text>
         </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableOpacity
-          onPress={addTextBox}
+          onPress={() => setAddResponsibilityModalVisible(true)}
           style={styles.addResponsibilityButton}
         >
           <Text style={{ fontSize: 20 }}>Add Responsibility</Text>
@@ -111,6 +122,7 @@ const styles = StyleSheet.create({
   },
   textAreasContainer: { width: "90%", marginBottom: 20 },
   textAreas: {
+    padding: 15,
     height: 100,
     backgroundColor: "white",
     borderRadius: 20,

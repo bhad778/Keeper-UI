@@ -15,25 +15,39 @@ import Compensation from "../../../modals/Compensation";
 import ResponsibilitiesModal from "../../../modals/ResponsibilitiesModal";
 import LogoModal from "../../../modals/LogoModal";
 import LocationModal from "../../../modals/LocationModal";
-
+import EmploymentModal from "../../../modals/EmploymentModal";
+import EducationModal from "../../../modals/EducationModal";
+import ExperienceModal from "../../../modals/ExperienceModal";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [whoWeAre, setWhoWeAre] = useState("");
   const [overview, setOverview] = useState("");
+  const [logo, setLogo] = useState();
+  const [location, setLocation] = useState();
   const [compensationType, setCompensationType] = useState([]);
-
+  const [experience, setExperience] = useState();
+  const [employment, setEmployment] = useState();
+  const [education, setEducation] = useState();
+  const [responsibilities, setResponsibilities] = useState();
   const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
   );
 
   const [locationModalVisible, setLocationModalVisible] = useState(false);
+
+  const [experienceModalVisible, setExperienceModalVisible] = useState(false);
+
+  const [employmentModalVisible, setEmploymentModalVisible] = useState(false);
+
   const [
     responsibilitiesModalVisible,
     setResponsibilitiesModalVisible,
   ] = useState(false);
 
   const [logoModalVisible, setLogoModalVisible] = useState(false);
+
+  const [educationModalVisible, setEducationModalVisible] = useState(false);
 
   const goBack = () => {
     setAddJobModalVisible(false);
@@ -46,21 +60,60 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const setCompensation = (compensationValue) => {
     setCompensationType(compensationValue);
   };
+  const setExperienceValue = (experienceValue) => {
+    setExperience(experienceValue);
+  };
+
+  const setEmploymentValue = (employmentType) => {
+    setEmployment(employmentType);
+  };
+
+  const setEducationValue = (educationLevel) => {
+    setEducation(educationLevel);
+  };
+  const setLogoValue = (logoValue) => {
+    setLogo(logoValue);
+  };
+
+  const setLocationValue = (locationValue) => {
+    setLocation(locationValue);
+  };
+
+  const setResponsibilitiesList = (responsibilities) => {};
   const data = {
     jobTitle: jobTitle,
     companyName: companyName,
     whoWeAre: whoWeAre,
     overview: overview,
+    logo: logo,
+    location: location,
     compensationType: compensationType,
+    experience: experience,
+    employment: employment,
+    education: education,
+    responsibilities: responsibilities,
   };
 
   return (
     <Modal visible={addJobModalVisible} style={styles.container}>
+      <ExperienceModal
+        setExperienceValue={setExperienceValue}
+        experienceModalVisible={experienceModalVisible}
+        setExperienceModalVisible={setExperienceModalVisible}
+      />
+
+      <EmploymentModal
+        setEmploymentValue={setEmploymentValue}
+        employmentModalVisible={employmentModalVisible}
+        setEmploymentModalVisible={setEmploymentModalVisible}
+      />
       <LocationModal
+        setLocationValue={setLocationValue}
         locationModalVisible={locationModalVisible}
         setLocationModalVisible={setLocationModalVisible}
       />
       <ResponsibilitiesModal
+        setResponsibilitiesList={setResponsibilitiesList}
         responsibilitiesModalVisible={responsibilitiesModalVisible}
         setResponsibilitiesModalVisible={setResponsibilitiesModalVisible}
       />
@@ -70,8 +123,15 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setCompensationModalVisible={setCompensationModalVisible}
       />
       <LogoModal
+        setLogoValue={setLogoValue}
         logoModalVisible={logoModalVisible}
         setLogoModalVisible={setLogoModalVisible}
+      />
+
+      <EducationModal
+        setEducationValue={setEducationValue}
+        educationModalVisible={educationModalVisible}
+        setEducationModalVisible={setEducationModalVisible}
       />
       <View
         style={{
@@ -185,6 +245,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             <Text style={{ color: "rgba(0, 0, 0, 0.26)" }}>Job Info</Text>
           </View>
           <Button
+            onPress={() => setExperienceModalVisible(true)}
             style={styles.buttons}
             contentStyle={{
               borderBottomWidth: 1,
@@ -214,6 +275,46 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
           >
             <View style={styles.buttonsInnerContent}>
               <Text style={styles.buttonTextColor}>Compensation</Text>
+              <Icon
+                name="chevron-right"
+                color="rgba(0, 0, 0, 0.26)"
+                size={25}
+              />
+            </View>
+          </Button>
+
+          <Button
+            onPress={() => setEmploymentModalVisible(true)}
+            style={styles.buttons}
+            contentStyle={{
+              borderBottomWidth: 1,
+              borderBottomColor: "rgba(0, 0, 0, 0.26)",
+            }}
+            mode="text"
+            uppercase={false}
+          >
+            <View style={styles.buttonsInnerContent}>
+              <Text style={styles.buttonTextColor}>Employment</Text>
+              <Icon
+                name="chevron-right"
+                color="rgba(0, 0, 0, 0.26)"
+                size={25}
+              />
+            </View>
+          </Button>
+
+          <Button
+            onPress={() => setEducationModalVisible(true)}
+            style={styles.buttons}
+            contentStyle={{
+              borderBottomWidth: 1,
+              borderBottomColor: "rgba(0, 0, 0, 0.26)",
+            }}
+            mode="text"
+            uppercase={false}
+          >
+            <View style={styles.buttonsInnerContent}>
+              <Text style={styles.buttonTextColor}>Education</Text>
               <Icon
                 name="chevron-right"
                 color="rgba(0, 0, 0, 0.26)"
