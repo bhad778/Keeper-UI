@@ -13,6 +13,7 @@ import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
 
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
@@ -114,6 +115,8 @@ const Resume = (props) => {
             backgroundColor: props.selectedJob.color,
             flex: 1,
             alignItems: "center",
+            paddingLeft: 16,
+            paddingRight: 16,
           }}
         >
           <Image
@@ -127,7 +130,7 @@ const Resume = (props) => {
             style={{
               backgroundColor: props.selectedJob.color,
               flex: 1,
-              padding: 20,
+              // padding: 15,
             }}
           >
             <View style={styles.nameAndJobTitleSection}>
@@ -294,7 +297,6 @@ const Resume = (props) => {
             style={{
               backgroundColor: props.selectedJob.color,
               flex: 1,
-              padding: 20,
               paddingBottom: 100,
             }}
           >
@@ -313,6 +315,31 @@ const Resume = (props) => {
           </View>
         </View>
       </HideBottomNavScrollView>
+      <View
+        style={{
+          // height: 70,
+          // width: 70,
+          height: props.bottomNavBarHeight == -1 ? 0 : 70,
+          width: props.bottomNavBarHeight == -1 ? 0 : 70,
+          position: "absolute",
+          bottom: props.bottomNavBarHeight + 10,
+          left: 10,
+        }}
+      >
+        <TouchableOpacity
+          onPress={props.pressDislikeButton}
+          style={styles.dislikeButtonTouchableOpacity}
+        >
+          <Image
+            // style={styles.skillCircleImage}
+            style={styles.dislikeButton}
+            source={{
+              uri:
+                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+            }}
+          ></Image>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -324,6 +351,20 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 4000,
     marginTop: 30,
+  },
+  dislikeButtonTouchableOpacity: {
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOpacity: 1,
+    elevation: 6,
+    shadowRadius: 30,
+    shadowOffset: { width: 1, height: 13 },
+  },
+  dislikeButton: {
+    width: 70,
+    height: 70,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
   },
   nameAndJobTitleSection: {
     paddingTop: 5,
@@ -347,7 +388,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    width: "90%",
     borderRadius: 30,
   },
   experienceAndAvailabilitySection: {
@@ -542,7 +582,6 @@ const styles = StyleSheet.create({
   },
   bottomDescriptionText: {
     backgroundColor: "#add9d9",
-    padding: 15,
     paddingTop: 40,
     paddingBottom: 100,
     borderBottomLeftRadius: 20,

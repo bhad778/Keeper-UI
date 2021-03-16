@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import { Button, TextInput } from "react-native-paper";
+import { FontAwesome } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
 import Compensation from "../../../modals/Compensation";
@@ -79,7 +80,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     setLocation(locationValue);
   };
 
-  const setResponsibilitiesList = (responsibilities) => {};
+  const setResponsibilitiesList = (responsibilities) => {
+    setResponsibilities(responsibilities);
+  };
   const data = {
     jobTitle: jobTitle,
     companyName: companyName,

@@ -32,6 +32,7 @@ const Header = ({
         backgroundColor: selectedJob.color,
         width: SCREEN_WIDTH,
         height: 80,
+        elevation: 0,
       }}
     >
       <View style={styles.headerContents}>
@@ -41,38 +42,30 @@ const Header = ({
           setJobBoardModalOpen={setJobBoardModalOpen}
         ></JobBoard>
         <View style={styles.headerPill}>
-          <View style={styles.leftSection}></View>
+          <View style={styles.leftSection}>
+            {withBackButton && (
+              <TouchableOpacity onPress={goBack}>
+                <MaterialIcon name="arrow-back" size={40} />
+              </TouchableOpacity>
+            )}
+          </View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
             onPress={() => setJobBoardModalOpen(true)}
           >
-            <Text style={styles.titleText}>
-              {screenTitle
-                ? screenTitle
-                : selectedJob.title
-                ? selectedJob.title
-                : " "}
-            </Text>
-            {!children && (
-              <View style={styles.rightSection}>
-                <TouchableOpacity onPress={goBack}>
-                  <EntypoIcon name="chevron-small-down" size={40} />
-                </TouchableOpacity>
-                {withBackButton && (
-                  <TouchableOpacity onPress={goBack}>
-                    <MaterialIcon name="" size={40} />
-                  </TouchableOpacity>
-                )}
-                {withEditButton && (
-                  <TouchableOpacity onPress={goBack}>
-                    <MaterialIcon name="create" size={40} />
-                  </TouchableOpacity>
-                )}
-              </View>
-            )}
-            {children && (
-              <View style={styles.rightHeaderIconContainer}>{children}</View>
-            )}
+            <View style={styles.titleSection}>
+              <Text style={styles.titleText}>
+                {screenTitle
+                  ? screenTitle
+                  : selectedJob.title
+                  ? selectedJob.title
+                  : " "}
+              </Text>
+            </View>
+
+            <View style={styles.rightButtonSection}>
+              <EntypoIcon name="chevron-small-down" size={40} />
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -84,12 +77,14 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     justifyContent: "center",
     alignItems: "center",
+    paddingRight: 18,
+    paddingLeft: 10,
   },
   headerPill: {
     backgroundColor: "white",
-    width: "90%",
-    height: 60,
-    borderRadius: 30,
+    width: "100%",
+    height: 78,
+    borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
@@ -110,19 +105,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  middleSection: {
+  titleSection: {
     height: "100%",
     flex: 1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
-  rightSection: {
+  rightButtonSection: {
     height: "100%",
     width: 60,
     display: "flex",
     justifyContent: "center",
+    alignSelf: "flex-end",
     alignItems: "center",
+    paddingRight: 10,
   },
   titleText: {
     fontSize: 24,
