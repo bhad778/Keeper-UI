@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./navigation";
@@ -19,6 +19,7 @@ export default function App() {
 
   const loadFont = async () => {
     Font.loadAsync({
+      // eslint-disable-next-line no-undef
       "app-font": require("./assets/fonts/sporting_grotesque_normal-webfont.ttf"),
     });
   };

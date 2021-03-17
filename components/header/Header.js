@@ -9,14 +9,7 @@ import JobBoard from "../../screens/employer/jobBoard/JobBoard";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const Header = ({
-  screenTitle,
-  children,
-  navigation,
-  withBackButton,
-  withEditButton,
-  selectedJob,
-}) => {
+const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
   const goBack = () => {
     navigation.goBack();
   };
