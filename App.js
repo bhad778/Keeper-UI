@@ -21,13 +21,7 @@ export default function App() {
     Font.loadAsync({
       "app-font": require("./assets/fonts/sporting_grotesque_normal-webfont.ttf"),
     });
-    this.setState({ fontsLoaded: true });
   };
-
-  useEffect(() => {
-    loadFont();
-    setFontLoaded(true);
-  }, []);
 
   if (!fontLoaded) {
     return (
