@@ -12,6 +12,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
+import AppHeaderText from "../../../components/AppHeaderText";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
