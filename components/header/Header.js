@@ -122,7 +122,9 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   titleText: {
-    fontSize: 24,
+    fontSize: 21,
+    paddingTop: 6,
+    fontFamily: "app-font",
   },
 });
 
