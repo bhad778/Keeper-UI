@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
-
+import Header from "../components/header/Header";
 const ExperienceModal = ({
   setExperienceValue,
   experienceModalVisible,
@@ -24,14 +24,7 @@ const ExperienceModal = ({
   };
   return (
     <Modal animationType="slide" visible={experienceModalVisible}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => setExperienceModalVisible(false)}>
-          <Text style={{ fontSize: 30 }}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => goBack()}>
-          <Text style={{ fontSize: 30 }}>Add</Text>
-        </TouchableOpacity>
-      </View>
+      <Header screenTitle="Experience" dontShowJobBoardModal withBackButton />
       <View style={styles.yrsExperienceContainer}>
         <View style={styles.pickerContainer}>
           <Picker

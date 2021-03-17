@@ -136,22 +136,27 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         educationModalVisible={educationModalVisible}
         setEducationModalVisible={setEducationModalVisible}
       />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "15%",
-        }}
-      >
-        <Button color="black" onPress={goBack} uppercase={false}>
-          <Text style={{ color: "black" }}>Cancel</Text>
-        </Button>
-        <Text style={{ fontSize: 30 }}>Add Job</Text>
-        <Button onPress={postJob} uppercase={false}>
-          <Text style={{ color: "black" }}>Done</Text>
-        </Button>
+      <View style={styles.headerContainer}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "80%",
+            width: "70%",
+            borderWidth: 1,
+          }}
+        >
+          <Button color="black" onPress={goBack} uppercase={false}>
+            <Text style={{ color: "black" }}>Cancel</Text>
+          </Button>
+          <Text style={{ fontSize: 30 }}>Add Job</Text>
+          <Button onPress={postJob} uppercase={false}>
+            <Text style={{ color: "black" }}>Done</Text>
+          </Button>
+        </View>
       </View>
+
       <ScrollView>
         <View style={styles.inputContainer1}>
           <TextInput
@@ -360,7 +365,13 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white" },
+  container: { flex: 1, backgroundColor: "pink" },
+  headerContainer: {
+    height: "15%",
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   header: { justifyContent: "center" },
   inputContainer1: {
     flex: 1,
