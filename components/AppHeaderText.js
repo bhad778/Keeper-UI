@@ -3,7 +3,7 @@ import { Text } from "react-native";
 
 const AppHeaderText = (props) => {
   return (
-    <Text style={{ fontSize: 20, fontStyle: "app-header-font" }}>
+    <Text style={[{ fontFamily: "app-header-font" }, props.style]}>
       {props.children}
     </Text>
   );

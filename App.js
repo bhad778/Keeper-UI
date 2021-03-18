@@ -19,10 +19,10 @@ export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   const loadFont = async () => {
-    Font.loadAsync({
-      "app-header-font": require("./assets/fonts/app-header-font.ttf"),
-      // "app-bold-font": require("./assets/fonts/sporting_grotesque_normal-webfont.ttf"),
-      // "app-default-font": require("./assets/fonts/sporting_grotesque_normal-webfont.ttf"),
+    await Font.loadAsync({
+      "app-header-font": require("./assets/fonts/app-header-text.ttf"),
+      "app-bold-font": require("./assets/fonts/app-bold-text.otf"),
+      "app-default-font": require("./assets/fonts/app-default-text.otf"),
     });
   };
 
