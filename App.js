@@ -10,6 +10,7 @@ import { createStore } from "redux";
 import RootReducer from "./redux/reducers/RootReducer";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 
 Amplify.configure(awsconfig);
 
@@ -23,7 +24,7 @@ export default function App() {
       "app-header-font": require("./assets/fonts/app-header-text.ttf"),
       "app-bold-font": require("./assets/fonts/app-bold-text.otf"),
       "app-default-font": require("./assets/fonts/app-default-text.otf"),
-    });
+    }).then(SplashScreen.hideAsync());
   };
 
   if (!fontLoaded) {

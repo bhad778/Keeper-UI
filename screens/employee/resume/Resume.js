@@ -12,6 +12,7 @@ import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
 import AppText from "../../../components/AppText";
+import AppParagraph from "../../../components/AppParagraph";
 import AppBoldText from "../../../components/AppBoldText";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -139,18 +140,18 @@ const Resume = (props) => {
               <AppBoldText style={styles.jobTitle}>DESIGN DIRECTOR</AppBoldText>
             </View>
             <View style={styles.descriptionTextSection}>
-              <AppText style={styles.descriptionText}>
+              <AppParagraph style={styles.descriptionText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
-              </AppText>
-              <AppText style={styles.descriptionText}>
+              </AppParagraph>
+              <AppParagraph style={styles.descriptionText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
-              </AppText>
+              </AppParagraph>
             </View>
           </View>
           <View style={styles.experienceDetailsSection}>
@@ -202,7 +203,7 @@ const Resume = (props) => {
                       <AppBoldText style={styles.subtitleText}>
                         {item.company}
                       </AppBoldText>
-                      <AppText
+                      <AppParagraph
                         style={
                           activeAccordions.includes(i)
                             ? styles.jobDetailsOpened
@@ -214,7 +215,7 @@ const Resume = (props) => {
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris nisi ut aliquip ex ea
                         commodo consequat.
-                      </AppText>
+                      </AppParagraph>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -311,18 +312,18 @@ const Resume = (props) => {
               paddingBottom: 100,
             }}
           >
-            <AppText style={styles.descriptionText}>
+            <AppParagraph style={styles.descriptionText}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
-            </AppText>
-            <AppText style={styles.descriptionText}>
+            </AppParagraph>
+            <AppParagraph style={styles.descriptionText}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
-            </AppText>
+            </AppParagraph>
           </View>
         </View>
       </HideBottomNavScrollView>
@@ -388,16 +389,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   descriptionText: {
-    fontSize: 18,
-    fontWeight: "bold",
     paddingBottom: 20,
-    lineHeight: 30,
   },
   experienceDetailsSection: {
     backgroundColor: "white",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    borderRadius: 30,
+    borderBottomLeftRadius: 45,
+    borderBottomRightRadius: 45,
+    borderRadius: 45,
   },
   experienceAndAvailabilitySection: {
     display: "flex",
