@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -19,8 +20,9 @@ export default function App() {
 
   const loadFont = async () => {
     Font.loadAsync({
-      // eslint-disable-next-line no-undef
-      "app-font": require("./assets/fonts/sporting_grotesque_normal-webfont.ttf"),
+      "app-header-font": require("./assets/fonts/app-header-text.ttf"),
+      "app-bold-font": require("./assets/fonts/app-bold-text.otf"),
+      "app-default-font": require("./assets/fonts/app-default-text.otf"),
     });
   };
 
