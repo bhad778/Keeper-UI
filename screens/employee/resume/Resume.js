@@ -7,13 +7,14 @@ import {
   Dimensions,
   Text,
 } from "react-native";
-import { Title, Subheading, Paragraph } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 import Header from "../../../components/header/Header";
 import { connect } from "react-redux";
 import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView/HideBottomNavScrollView";
+import AppText from "../../../components/AppText";
+import AppParagraph from "../../../components/AppParagraph";
+import AppBoldText from "../../../components/AppBoldText";
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
@@ -106,7 +107,6 @@ const Resume = (props) => {
       <HideBottomNavScrollView
         style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
-        // forwardedRef={resumeScrollViewRef}
         currentEmployee={props.currentEmployee}
       >
         <Header />
@@ -134,39 +134,41 @@ const Resume = (props) => {
             }}
           >
             <View style={styles.nameAndJobTitleSection}>
-              <Title style={styles.name}>{props.currentEmployee}</Title>
-              <Subheading style={styles.jobTitle}>DESIGN DIRECTOR</Subheading>
+              <AppBoldText style={styles.name}>
+                {props.currentEmployee}
+              </AppBoldText>
+              <AppBoldText style={styles.jobTitle}>DESIGN DIRECTOR</AppBoldText>
             </View>
             <View style={styles.descriptionTextSection}>
-              <Paragraph style={styles.descriptionText}>
+              <AppParagraph style={styles.descriptionText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
-              </Paragraph>
-              <Paragraph style={styles.descriptionText}>
+              </AppParagraph>
+              <AppParagraph style={styles.descriptionText}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
-              </Paragraph>
+              </AppParagraph>
             </View>
           </View>
           <View style={styles.experienceDetailsSection}>
             <View style={styles.experienceAndAvailabilitySection}>
               <View style={styles.yearsOfExperienceSection}>
-                <Title style={styles.name}>
+                <AppBoldText style={styles.name}>
                   8 <Text style={{ fontSize: 20 }}>YRS</Text>
-                </Title>
-                <Subheading style={styles.experienceAndAvailabilitySubtitles}>
+                </AppBoldText>
+                <AppBoldText style={styles.experienceAndAvailabilitySubtitles}>
                   EXPERIENCE
-                </Subheading>
+                </AppBoldText>
               </View>
               <View style={styles.availabilitySection}>
-                <Title style={styles.name}>Now</Title>
-                <Subheading style={styles.experienceAndAvailabilitySubtitles}>
+                <AppBoldText style={styles.name}>Now</AppBoldText>
+                <AppBoldText style={styles.experienceAndAvailabilitySubtitles}>
                   AVAILABILITY
-                </Subheading>
+                </AppBoldText>
               </View>
             </View>
             <View style={styles.pastJobsSection}>
@@ -180,13 +182,13 @@ const Resume = (props) => {
                           : styles.jobDetailsSection
                       }
                     >
-                      <Subheading style={styles.monthsText}>
+                      <AppBoldText style={styles.monthsText}>
                         {item.months}
-                      </Subheading>
+                      </AppBoldText>
                       <View style={styles.jobTitleContainer}>
-                        <Title style={styles.jobTitleText}>
+                        <AppBoldText style={styles.jobTitleText}>
                           {item.jobTitle}
-                        </Title>
+                        </AppBoldText>
                         <FontAwesome
                           style={styles.angleDownIcon}
                           color="black"
@@ -198,10 +200,10 @@ const Resume = (props) => {
                           size={30}
                         />
                       </View>
-                      <Subheading style={styles.subtitleText}>
+                      <AppBoldText style={styles.subtitleText}>
                         {item.company}
-                      </Subheading>
-                      <Paragraph
+                      </AppBoldText>
+                      <AppParagraph
                         style={
                           activeAccordions.includes(i)
                             ? styles.jobDetailsOpened
@@ -213,7 +215,7 @@ const Resume = (props) => {
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris nisi ut aliquip ex ea
                         commodo consequat.
-                      </Paragraph>
+                      </AppParagraph>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -236,13 +238,19 @@ const Resume = (props) => {
                 </View>
                 <View style={styles.focusedSkillsSection}>
                   <View style={styles.focusedSkillContainer}>
-                    <Title style={styles.focusedSkill}>Illustration</Title>
+                    <AppBoldText style={styles.focusedSkill}>
+                      Illustration
+                    </AppBoldText>
                   </View>
                   <View style={styles.focusedSkillContainer}>
-                    <Title style={styles.focusedSkill}>Graphic Design</Title>
+                    <AppBoldText style={styles.focusedSkill}>
+                      Graphic Design
+                    </AppBoldText>
                   </View>
                   <View style={styles.focusedSkillContainer}>
-                    <Title style={styles.focusedSkill}>Branding</Title>
+                    <AppBoldText style={styles.focusedSkill}>
+                      Branding
+                    </AppBoldText>
                   </View>
                 </View>
               </View>
@@ -262,19 +270,21 @@ const Resume = (props) => {
               </View>
             </View>
             <View style={styles.educationSection}>
-              <Title style={styles.educationTitle}>EDUCATION</Title>
+              <AppBoldText style={styles.educationTitle}>EDUCATION</AppBoldText>
               <View style={styles.educationItemContainer}>
                 <View style={styles.degreeTypeAcronymContainer}>
                   <Text style={styles.degreeTypeAcronym}>BFA</Text>
                 </View>
                 <View style={styles.educationDetails}>
-                  <Subheading style={styles.monthsText}>2010 -2014</Subheading>
-                  <Title>University of Georgia</Title>
-                  <Subheading
+                  <AppBoldText style={styles.monthsText}>
+                    2010 -2014
+                  </AppBoldText>
+                  <AppBoldText>University of Georgia</AppBoldText>
+                  <AppBoldText
                     style={[styles.subtitleText, styles.degreeTypeText]}
                   >
                     Bachelor of Fine Arts
-                  </Subheading>
+                  </AppBoldText>
                 </View>
               </View>
               <View style={styles.educationItemContainer}>
@@ -282,13 +292,15 @@ const Resume = (props) => {
                   <Text style={styles.degreeTypeAcronym}>MFA</Text>
                 </View>
                 <View style={styles.educationDetails}>
-                  <Subheading style={styles.monthsText}>2010 -2014</Subheading>
-                  <Title>University of Georgia</Title>
-                  <Subheading
+                  <AppBoldText style={styles.monthsText}>
+                    2010 -2014
+                  </AppBoldText>
+                  <AppBoldText>University of Georgia</AppBoldText>
+                  <AppBoldText
                     style={[styles.subtitleText, styles.degreeTypeText]}
                   >
                     Masters of Fine Arts
-                  </Subheading>
+                  </AppBoldText>
                 </View>
               </View>
             </View>
@@ -300,25 +312,23 @@ const Resume = (props) => {
               paddingBottom: 100,
             }}
           >
-            <Paragraph style={styles.descriptionText}>
+            <AppParagraph style={styles.descriptionText}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
-            </Paragraph>
-            <Paragraph style={styles.descriptionText}>
+            </AppParagraph>
+            <AppParagraph style={styles.descriptionText}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
-            </Paragraph>
+            </AppParagraph>
           </View>
         </View>
       </HideBottomNavScrollView>
       <View
         style={{
-          // height: 70,
-          // width: 70,
           height: props.bottomNavBarHeight == -1 ? 0 : 70,
           width: props.bottomNavBarHeight == -1 ? 0 : 70,
           position: "absolute",
@@ -379,16 +389,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   descriptionText: {
-    fontSize: 18,
-    fontWeight: "bold",
     paddingBottom: 20,
-    lineHeight: 30,
   },
   experienceDetailsSection: {
     backgroundColor: "white",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    borderRadius: 30,
+    borderBottomLeftRadius: 45,
+    borderBottomRightRadius: 45,
+    borderRadius: 45,
   },
   experienceAndAvailabilitySection: {
     display: "flex",
