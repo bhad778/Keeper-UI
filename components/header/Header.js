@@ -9,16 +9,7 @@ import JobBoard from "../../screens/employer/jobBoard/JobBoard";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const Header = ({
-  screenTitle,
-  children,
-  navigation,
-  withBackButton,
-  withEditButton,
-  selectedJob,
-  dontShowJobBoardModal,
-  outlined,
-}) => {
+const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
   const goBack = () => {
     navigation.goBack();
   };
@@ -124,7 +115,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 21,
     paddingTop: 6,
-    fontFamily: "app-font",
+    fontFamily: "app-header-font",
   },
 });
 
