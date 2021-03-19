@@ -9,12 +9,17 @@ import {
   ScrollView,
 } from "react-native";
 
-const WhoWeAreModal = ({ whoWeAreModalVisible, setWhoWeAreModalVisible }) => {
+const CompanyDescriptionModal = ({
+  companyDescriptionModalVisible,
+  setCompanyDescriptionModalVisible,
+}) => {
   const [text, setText] = useState("");
   return (
-    <Modal visible={whoWeAreModalVisible}>
+    <Modal visible={companyDescriptionModalVisible}>
       <View style={styles.Header}>
-        <TouchableOpacity onPress={() => setWhoWeAreModalVisible(false)}>
+        <TouchableOpacity
+          onPress={() => setCompanyDescriptionModalVisible(false)}
+        >
           <Text>cancel</Text>
         </TouchableOpacity>
       </View>
@@ -43,4 +48,4 @@ const styles = StyleSheet.create({
   textInput: { width: "90%", height: "90%" },
 });
 
-export default WhoWeAreModal;
+export default CompanyDescriptionModal;

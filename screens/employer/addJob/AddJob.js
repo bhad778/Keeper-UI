@@ -18,12 +18,11 @@ import LocationModal from "../../../modals/LocationModal";
 import EmploymentModal from "../../../modals/EmploymentModal";
 import EducationModal from "../../../modals/EducationModal";
 import ExperienceModal from "../../../modals/ExperienceModal";
-import WhoWeAreModal from "../../../modals/WhoWeAreModal";
+import CompanyDescriptionModal from "../../../modals/CompanyDescriptionModal";
+import JobOverviewModal from "../../../modals/JobOverviewModal";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [whoWeAre, setWhoWeAre] = useState("");
-  const [overview, setOverview] = useState("");
   const [logo, setLogo] = useState();
   const [location, setLocation] = useState();
   const [compensationType, setCompensationType] = useState([]);
@@ -49,7 +48,11 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [logoModalVisible, setLogoModalVisible] = useState(false);
 
   const [educationModalVisible, setEducationModalVisible] = useState(false);
-  const [whoWeAreModalVisible, setWhoWeAreModalVisible] = useState(false);
+  const [
+    companyDescriptionModalVisible,
+    setCompanyDescriptionModalVisible,
+  ] = useState(false);
+  const [jobOverviewModalVisible, setJobOverviewModalVisible] = useState(false);
 
   const goBack = () => {
     setAddJobModalVisible(false);
@@ -87,8 +90,6 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const data = {
     jobTitle: jobTitle,
     companyName: companyName,
-    whoWeAre: whoWeAre,
-    overview: overview,
     logo: logo,
     location: location,
     compensationType: compensationType,
@@ -100,10 +101,16 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
   return (
     <Modal animationType="slide" visible={addJobModalVisible}>
-      <WhoWeAreModal
-        whoWeAreModalVisible={whoWeAreModalVisible}
-        setWhoWeAreModalVisible={setWhoWeAreModalVisible}
+      <CompanyDescriptionModal
+        companyDescriptionModalVisible={companyDescriptionModalVisible}
+        setCompanyDescriptionModalVisible={setCompanyDescriptionModalVisible}
       />
+
+      <JobOverviewModal
+        jobOverviewModalVisible={jobOverviewModalVisible}
+        setJobOverviewModalVisible={setJobOverviewModalVisible}
+      />
+
       <ExperienceModal
         setExperienceValue={setExperienceValue}
         experienceModalVisible={experienceModalVisible}
@@ -143,32 +150,29 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
       />
 
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.headerContainer}>
-          <View style={styles.header}>
-            <View style={styles.leftSideHeader}>
-              <TouchableOpacity
-                color="black"
-                onPress={goBack}
-                uppercase={false}
-              >
-                <Text style={{ fontFamily: "app-font", color: "black" }}>
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View styles={styles.middleSectionHeader}>
-              <Text style={{ fontSize: 30 }}>Add Job</Text>
-            </View>
-            <View style={styles.rightSideHeader}>
-              <TouchableOpacity onPress={postJob} uppercase={false}>
-                <Text style={{ color: "black" }}>Done</Text>
-              </TouchableOpacity>
-            </View>
+        <View style={styles.header}>
+          <View style={styles.leftSideHeader}>
+            <TouchableOpacity color="black" onPress={goBack} uppercase={false}>
+              <Text style={{ fontFamily: "app-font", color: "black" }}>
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View styles={styles.middleSectionHeader}>
+            <Text style={{ fontSize: 30 }}>Add Job</Text>
+          </View>
+          <View style={styles.rightSideHeader}>
+            <TouchableOpacity onPress={postJob} uppercase={false}>
+              <Text style={{ color: "black" }}>Done</Text>
+            </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.addJobContainer}>
-          <View style={{ width: "95%", marginTop: 20 }}>
-            <Text style={{ fontFamily: "app-font" }}>Job Title</Text>
+          <View style={{ width: "100%", marginTop: 20 }}>
+            <Text style={{ fontFamily: "app-font", color: "#cacaca" }}>
+              Job Title
+            </Text>
           </View>
           <TextInput
             style={styles.jobTitleTextInput}
@@ -176,17 +180,19 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             name="jobTitle"
             onChangeText={(value) => setJobTitle(value)}
             placeholder="Enter Job Title"
-            placeholderTextColor="#cbcbcb"
+            placeholderTextColor="black"
           />
-          <View style={{ width: "95%" }}>
-            <Text style={{ fontFamily: "app-font" }}>Company name</Text>
+          <View style={{ width: "100%" }}>
+            <Text style={{ fontFamily: "app-font", color: "#cacaca" }}>
+              Company name
+            </Text>
           </View>
           <TextInput
             style={styles.companyNameTextInput}
             value={companyName}
             onChangeText={(value) => setCompanyName(value)}
             placeholder="Enter Company Name"
-            placeholderTextColor="#cbcbcb"
+            placeholderTextColor="black"
           />
 
           <View
@@ -201,39 +207,39 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               Company Info
             </Text>
           </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              onPress={() => setLogoModalVisible(true)}
-              style={styles.firstButtonCompanyInfo}
-            >
-              <Text style={styles.buttonTextColor}>Logo</Text>
-              <Icon
-                name="chevron-right"
-                color="rgba(0, 0, 0, 0.26)"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              onPress={() => setLocationModalVisible(true)}
-              style={styles.lastButton}
-            >
-              <Text style={styles.buttonTextColor}>Location</Text>
-              <Icon
-                name="chevron-right"
-                color="rgba(0, 0, 0, 0.26)"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
+
+          <TouchableOpacity
+            onPress={() => setLogoModalVisible(true)}
+            style={styles.firstButtonCompanyInfo}
+          >
+            <Text style={styles.buttonTextColor}>Logo</Text>
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setLocationModalVisible(true)}
+            style={styles.lastButton}
+          >
+            <Text style={styles.buttonTextColor}>Location</Text>
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
 
           <View style={styles.textAreaContainer}>
             <TouchableOpacity
-              onPress={() => setWhoWeAreModalVisible(true)}
+              onPress={() => setCompanyDescriptionModalVisible(true)}
               style={styles.textButton}
             >
-              <Text style={styles.textAreaLabel}>Who We Are</Text>
+              <Text style={styles.textAreaLabel}>Company Description</Text>
             </TouchableOpacity>
           </View>
           <View style={{ width: "98%", alignItems: "flex-start" }}>
@@ -241,76 +247,80 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               Job Info
             </Text>
           </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              onPress={() => setExperienceModalVisible(true)}
-              style={styles.buttons}
-            >
-              <Text style={styles.buttonTextColor}>Experience</Text>
 
-              <Icon name="chevron-right" color="#141414" size={25} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              onPress={() => setCompensationModalVisible(true)}
-              style={styles.buttons}
-            >
-              <Text style={styles.buttonTextColor}>Compensation</Text>
-              <Icon
-                style={styles.arrowIcons}
-                name="chevron-right"
-                color="#141414"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              onPress={() => setEmploymentModalVisible(true)}
-              style={styles.buttons}
-            >
-              <Text style={styles.buttonTextColor}>Employment</Text>
-              <Icon
-                style={styles.arrowIcons}
-                name="chevron-right"
-                color="#141414"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              onPress={() => setEducationModalVisible(true)}
-              style={styles.buttons}
-            >
-              <Text style={styles.buttonTextColor}>Education</Text>
-              <Icon
-                style={styles.arrowIcons}
-                name="chevron-right"
-                color="#141414"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              style={styles.lastButton}
-              onPress={() => setResponsibilitiesModalVisible(true)}
-            >
-              <Text style={styles.buttonTextColor}>Responsibility</Text>
-              <Icon
-                style={styles.arrowIcons}
-                name="chevron-right"
-                color="#141414"
-                size={25}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => setExperienceModalVisible(true)}
+            style={styles.buttons}
+          >
+            <Text style={styles.buttonTextColor}>Experience</Text>
+
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setCompensationModalVisible(true)}
+            style={styles.buttons}
+          >
+            <Text style={styles.buttonTextColor}>Compensation</Text>
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setEmploymentModalVisible(true)}
+            style={styles.buttons}
+          >
+            <Text style={styles.buttonTextColor}>Employment</Text>
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setEducationModalVisible(true)}
+            style={styles.buttons}
+          >
+            <Text style={styles.buttonTextColor}>Education</Text>
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.lastButton}
+            onPress={() => setResponsibilitiesModalVisible(true)}
+          >
+            <Text style={styles.buttonTextColor}>Responsibility</Text>
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+          </TouchableOpacity>
 
           <View style={styles.textAreaContainer}>
-            <Text style={styles.textAreaLabel}> Job Overview</Text>
-            <TouchableOpacity style={{ height: 50 }} />
+            <TouchableOpacity
+              onPress={() => setJobOverviewModalVisible(true)}
+              style={styles.textButton}
+            >
+              <Text style={styles.textAreaLabel}> Job Overview</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -318,83 +328,82 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
-  scrollView: { alignItems: "center", backgroundColor: "pink", height: 1130 },
-
-  headerContainer: {
-    height: "10%",
-    justifyContent: "center",
+  scrollView: { padding: 20, backgroundColor: "pink", height: 1150 },
+  addJobContainer: {
     alignItems: "center",
-    backgroundColor: "pink",
+    padding: 20,
+    backgroundColor: "white",
     width: "100%",
+    height: 980,
     borderRadius: 30,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "50%",
-    width: "90%",
+    height: 70,
+    marginTop: 20,
+    marginBottom: 30,
+    width: "100%",
     backgroundColor: "white",
     borderRadius: 30,
   },
   leftSideHeader: { width: "25%" },
   middleSectionHeader: { width: "40%" },
   rightSideHeader: { width: "30%" },
-  addJobContainer: {
-    alignItems: "center",
-    padding: 15,
-    backgroundColor: "white",
-    width: "90%",
-    height: 980,
-    borderRadius: 30,
-  },
+
   jobTitleTextInput: {
     fontSize: 20,
     height: 40,
     marginBottom: 20,
     borderBottomWidth: 1,
-    width: "95%",
+    width: "100%",
+    padding: 4,
     backgroundColor: "white",
   },
   companyNameTextInput: {
     alignItems: "flex-start",
     fontSize: 20,
-    width: "95%",
+    width: "100%",
     height: 40,
     justifyContent: "flex-end",
+    padding: 4,
     borderBottomWidth: 1,
   },
-  buttonsContainer: { width: "100%", alignItems: "center" },
+
   firstButtonCompanyInfo: {
-    width: "95%",
+    width: "100%",
     height: 40,
     justifyContent: "space-between",
-    alignItems: "flex-end",
+    alignItems: "center",
     flexDirection: "row",
+    padding: 4,
     borderBottomWidth: 1,
     borderBottomColor: "#808080",
   },
   buttons: {
-    width: "95%",
-    height: 55,
+    width: "100%",
+    height: 60,
     justifyContent: "space-between",
     alignItems: "center",
+    padding: 4,
     flexDirection: "row",
     borderBottomWidth: 1,
     borderBottomColor: "#808080",
   },
   lastButton: {
-    width: "95%",
-    height: 55,
+    width: "100%",
+    height: 60,
     justifyContent: "space-between",
     alignItems: "center",
+    padding: 4,
     flexDirection: "row",
   },
 
   buttonTextColor: { fontFamily: "app-font", color: "black" },
-  arrowIcons: { marginLeft: 15 },
+  arrowIcons: { position: "absolute", left: 279 },
   textAreaContainer: {
-    width: "95%",
+    width: "100%",
     alignItems: "center",
     borderWidth: 1,
     marginTop: 15,
@@ -404,7 +413,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     width: "100%",
-    height: 90,
+    height: 100,
     backgroundColor: "white",
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
@@ -417,7 +426,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 12,
     width: "85%",
-    fontSize: 23,
+    fontSize: 20,
   },
 
   button: { width: "60%" },
