@@ -31,23 +31,26 @@ const Compensation = ({
 
   return (
     <Modal visible={compensationModalVisible}>
-      <View style={styles.header}>
-        <TouchableOpacity color="black" onPress={goBack}>
-          <Text style={{ color: "black" }}>Cancel</Text>
-        </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
+          <TouchableOpacity color="black" onPress={goBack}>
+            <Text style={{ color: "black" }}>Cancel</Text>
+          </TouchableOpacity>
 
-        <Text style={{ fontSize: 30 }}>Compensation</Text>
+          <Text style={{ fontSize: 30 }}>Compensation</Text>
 
-        <TouchableOpacity
-          onPress={() => {
-            buttonPressed === "annually"
-              ? setCompensation(multiSliderValueAnnual)
-              : setCompensation(multiSliderValueHourly);
-          }}
-        >
-          <Text style={{ color: "black" }}>Add</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              buttonPressed === "annually"
+                ? setCompensation(multiSliderValueAnnual)
+                : setCompensation(multiSliderValueHourly);
+            }}
+          >
+            <Text style={{ color: "black" }}>Add</Text>
+          </TouchableOpacity>
+        </View>
       </View>
+
       <View style={styles.sliderSection}>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
@@ -127,13 +130,21 @@ const Compensation = ({
   );
 };
 const styles = StyleSheet.create({
+  headerContainer: {
+    height: 150,
+    marginBottom: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    flex: 1,
-    backgroundColor: "#add9da",
-    marginBottom: 35,
+    borderRadius: 30,
+    height: "40%",
+    width: "90%",
+
+    borderWidth: 1,
   },
   sliderSection: {
     flex: 6,
@@ -151,10 +162,8 @@ const styles = StyleSheet.create({
     width: "45%",
     height: 50,
     margin: 5,
-    borderWidth: 1,
-    borderColor: "black",
     marginBottom: 10,
-
+    backgroundColor: "#f0f0f0",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -163,10 +172,8 @@ const styles = StyleSheet.create({
     width: "45%",
     height: 50,
     margin: 5,
-    borderWidth: 1,
-    borderColor: "black",
     marginBottom: 10,
-    backgroundColor: "#016568",
+    backgroundColor: "#f6cffe",
     justifyContent: "center",
     alignItems: "center",
   },

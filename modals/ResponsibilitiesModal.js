@@ -58,9 +58,13 @@ const ResponsibilitiesModal = ({
       </View>
     );
   };
-  const goBack = () => {
+  const goBackAndSave = () => {
     setResponsibilitiesList(responsibilities);
     setResponsibilitiesModalVisible(false);
+  };
+  const goBackAndCancel = () => {
+    setResponsibilitiesModalVisible(false);
+    setResponsibilities([]);
   };
   return (
     <Modal visible={responsibilitiesModalVisible}>
@@ -72,12 +76,12 @@ const ResponsibilitiesModal = ({
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
-            setResponsibilitiesModalVisible(false);
+            goBackAndCancel();
           }}
         >
           <Text style={{ fontSize: 30 }}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => goBack()}>
+        <TouchableOpacity onPress={() => goBackAndSave()}>
           <Text>Save</Text>
         </TouchableOpacity>
       </View>

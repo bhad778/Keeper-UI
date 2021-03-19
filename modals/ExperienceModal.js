@@ -33,26 +33,26 @@ const ExperienceModal = ({
               setYearsOfExperience(itemValue)
             }
           >
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-            <Picker.Item label="10" value="10" />
-            <Picker.Item label="11" value="11" />
-            <Picker.Item label="12" value="12" />
-            <Picker.Item label="13" value="13" />
-            <Picker.Item label="14" value="14" />
-            <Picker.Item label="15" value="15" />
-            <Picker.Item label="16" value="16" />
-            <Picker.Item label="17" value="17" />
-            <Picker.Item label="18" value="18" />
-            <Picker.Item label="19" value="19" />
-            <Picker.Item label="20+" value="20+" />
+            <Picker.Item label="1 yr" value="1" />
+            <Picker.Item label="2 yrs" value="2" />
+            <Picker.Item label="3 yrs" value="3" />
+            <Picker.Item label="4 yrs" value="4" />
+            <Picker.Item label="5 yrs" value="5" />
+            <Picker.Item label="6 yrs" value="6" />
+            <Picker.Item label="7 yrs" value="7" />
+            <Picker.Item label="8 yrs" value="8" />
+            <Picker.Item label="9 yrs" value="9" />
+            <Picker.Item label="10 yrs" value="10" />
+            <Picker.Item label="11 yrs" value="11" />
+            <Picker.Item label="12 yrs" value="12" />
+            <Picker.Item label="13 yrs" value="13" />
+            <Picker.Item label="14 yrs" value="14" />
+            <Picker.Item label="15 yrs" value="15" />
+            <Picker.Item label="16 yrs" value="16" />
+            <Picker.Item label="17 yrs" value="17" />
+            <Picker.Item label="18 yrs" value="18" />
+            <Picker.Item label="19 yrs" value="19" />
+            <Picker.Item label="20+ yrs" value="20+" />
           </Picker>
         </View>
       </View>

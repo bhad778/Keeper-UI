@@ -4,12 +4,11 @@ import {
   View,
   ScrollView,
   Text,
-  TextInput as NativeTextInput,
+  TextInput,
   Modal,
+  TouchableOpacity,
+  Button,
 } from "react-native";
-
-import { Button, TextInput } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
 import Compensation from "../../../modals/Compensation";
@@ -19,7 +18,7 @@ import LocationModal from "../../../modals/LocationModal";
 import EmploymentModal from "../../../modals/EmploymentModal";
 import EducationModal from "../../../modals/EducationModal";
 import ExperienceModal from "../../../modals/ExperienceModal";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import WhoWeAreModal from "../../../modals/WhoWeAreModal";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -50,6 +49,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [logoModalVisible, setLogoModalVisible] = useState(false);
 
   const [educationModalVisible, setEducationModalVisible] = useState(false);
+  const [whoWeAreModalVisible, setWhoWeAreModalVisible] = useState(false);
 
   const goBack = () => {
     setAddJobModalVisible(false);
@@ -100,6 +100,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
   return (
     <Modal animationType="slide" visible={addJobModalVisible}>
+      <WhoWeAreModal
+        whoWeAreModalVisible={whoWeAreModalVisible}
+        setWhoWeAreModalVisible={setWhoWeAreModalVisible}
+      />
       <ExperienceModal
         setExperienceValue={setExperienceValue}
         experienceModalVisible={experienceModalVisible}
@@ -138,78 +142,69 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setEducationModalVisible={setEducationModalVisible}
       />
 
-      <ScrollView
-        contentContainerStyle={{
-          alignItems: "center",
-          backgroundColor: "pink",
-          height: 1050,
-        }}
-      >
+      <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.headerContainer}>
           <View style={styles.header}>
             <View style={styles.leftSideHeader}>
-              <Button color="black" onPress={goBack} uppercase={false}>
+              <TouchableOpacity
+                color="black"
+                onPress={goBack}
+                uppercase={false}
+              >
                 <Text style={{ fontFamily: "app-font", color: "black" }}>
                   Cancel
                 </Text>
-              </Button>
+              </TouchableOpacity>
             </View>
             <View styles={styles.middleSectionHeader}>
               <Text style={{ fontSize: 30 }}>Add Job</Text>
             </View>
             <View style={styles.rightSideHeader}>
-              <Button onPress={postJob} uppercase={false}>
+              <TouchableOpacity onPress={postJob} uppercase={false}>
                 <Text style={{ color: "black" }}>Done</Text>
-              </Button>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
         <View style={styles.addJobContainer}>
+          <View style={{ width: "95%", marginTop: 20 }}>
+            <Text style={{ fontFamily: "app-font" }}>Job Title</Text>
+          </View>
           <TextInput
-            style={{
-              height: 60,
-              marginTop: 10,
-              width: "90%",
-              backgroundColor: "white",
-            }}
-            theme={{ colors: { primary: "black" } }}
-            selectionColor="black"
+            style={styles.jobTitleTextInput}
             value={jobTitle}
             name="jobTitle"
             onChangeText={(value) => setJobTitle(value)}
-            label="Job Title"
-            mode="flat"
+            placeholder="Enter Job Title"
+            placeholderTextColor="#cbcbcb"
           />
-
+          <View style={{ width: "95%" }}>
+            <Text style={{ fontFamily: "app-font" }}>Company name</Text>
+          </View>
           <TextInput
-            style={{
-              height: 60,
-              width: "90%",
-              backgroundColor: "white",
-            }}
-            selectionColor="black"
-            theme={{ colors: { primary: "black" } }}
+            style={styles.companyNameTextInput}
             value={companyName}
-            name="companyName"
-            label="Company Name"
             onChangeText={(value) => setCompanyName(value)}
-            mode="flat"
+            placeholder="Enter Company Name"
+            placeholderTextColor="#cbcbcb"
           />
 
           <View
             style={{
+              width: "98%",
               alignItems: "flex-start",
-              width: "90%",
-              height: 40,
               justifyContent: "flex-end",
+              height: 70,
             }}
           >
-            <Text style={{ color: "rgba(0, 0, 0, 0.26)" }}>Company Info</Text>
+            <Text style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
+              Company Info
+            </Text>
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity
               onPress={() => setLogoModalVisible(true)}
-              style={styles.buttons}
+              style={styles.firstButtonCompanyInfo}
             >
               <Text style={styles.buttonTextColor}>Logo</Text>
               <Icon
@@ -233,28 +228,18 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </TouchableOpacity>
           </View>
 
-          <View
-            style={{
-              width: "95%",
-              alignItems: "center",
-              borderWidth: 1,
-              marginBottom: 60,
-              borderRadius: 20,
-              borderColor: "rgba(0, 0, 0, 0.26)",
-            }}
-          >
-            <Text style={styles.textAreaLabel}>Who We Are</Text>
-            <NativeTextInput
-              style={styles.textAreas}
-              value={data.whoWeAre}
-              name="whoWeAre"
-              onChangeText={(value) => setWhoWeAre(value)}
-              multiline={true}
-              mode="flat"
-            />
+          <View style={styles.textAreaContainer}>
+            <TouchableOpacity
+              onPress={() => setWhoWeAreModalVisible(true)}
+              style={styles.textButton}
+            >
+              <Text style={styles.textAreaLabel}>Who We Are</Text>
+            </TouchableOpacity>
           </View>
-          <View style={{ width: "90%", alignItems: "flex-start" }}>
-            <Text style={{ color: "rgba(0, 0, 0, 0.26)" }}>Job Info</Text>
+          <View style={{ width: "98%", alignItems: "flex-start" }}>
+            <Text style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
+              Job Info
+            </Text>
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity
@@ -262,6 +247,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               style={styles.buttons}
             >
               <Text style={styles.buttonTextColor}>Experience</Text>
+
               <Icon name="chevron-right" color="#141414" size={25} />
             </TouchableOpacity>
           </View>
@@ -271,7 +257,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               style={styles.buttons}
             >
               <Text style={styles.buttonTextColor}>Compensation</Text>
-              <Icon name="chevron-right" color="#141414" size={25} />
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.buttonsContainer}>
@@ -280,7 +271,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               style={styles.buttons}
             >
               <Text style={styles.buttonTextColor}>Employment</Text>
-              <Icon name="chevron-right" color="#141414" size={25} />
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.buttonsContainer}>
@@ -289,7 +285,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               style={styles.buttons}
             >
               <Text style={styles.buttonTextColor}>Education</Text>
-              <Icon name="chevron-right" color="#141414" size={25} />
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.buttonsContainer}>
@@ -298,20 +299,18 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               onPress={() => setResponsibilitiesModalVisible(true)}
             >
               <Text style={styles.buttonTextColor}>Responsibility</Text>
-              <Icon name="chevron-right" color="#141414" size={25} />
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
             </TouchableOpacity>
           </View>
 
           <View style={styles.textAreaContainer}>
-            <Text style={styles.textAreaLabel}>Overview</Text>
-            <NativeTextInput
-              style={styles.textAreas}
-              value={overview}
-              name="overview"
-              onChangeText={(value) => setOverview(value)}
-              multiline={true}
-              mode="flat"
-            />
+            <Text style={styles.textAreaLabel}> Job Overview</Text>
+            <TouchableOpacity style={{ height: 50 }} />
           </View>
         </View>
       </ScrollView>
@@ -319,8 +318,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
+  scrollView: { alignItems: "center", backgroundColor: "pink", height: 1130 },
+
   headerContainer: {
-    height: "15%",
+    height: "10%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "pink",
@@ -331,67 +332,92 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "60%",
+    height: "50%",
     width: "90%",
     backgroundColor: "white",
     borderRadius: 30,
-    borderWidth: 1,
   },
   leftSideHeader: { width: "25%" },
   middleSectionHeader: { width: "40%" },
   rightSideHeader: { width: "30%" },
   addJobContainer: {
-    padding: 10,
+    alignItems: "center",
+    padding: 15,
     backgroundColor: "white",
-    marginTop: 20,
-    borderWidth: 1,
     width: "90%",
-    height: 850,
+    height: 980,
     borderRadius: 30,
   },
-  buttonsContainer: { width: "100%" },
-  buttons: {
-    width: "100%",
-    height: 50,
+  jobTitleTextInput: {
+    fontSize: 20,
+    height: 40,
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    width: "95%",
+    backgroundColor: "white",
+  },
+  companyNameTextInput: {
+    alignItems: "flex-start",
+    fontSize: 20,
+    width: "95%",
+    height: 40,
+    justifyContent: "flex-end",
+    borderBottomWidth: 1,
+  },
+  buttonsContainer: { width: "100%", alignItems: "center" },
+  firstButtonCompanyInfo: {
+    width: "95%",
+    height: 40,
     justifyContent: "space-between",
     alignItems: "flex-end",
     flexDirection: "row",
     borderBottomWidth: 1,
     borderBottomColor: "#808080",
   },
-  lastButton: {
-    width: "100%",
-    height: 50,
+  buttons: {
+    width: "95%",
+    height: 55,
     justifyContent: "space-between",
-    alignItems: "flex-end",
+    alignItems: "center",
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#808080",
+  },
+  lastButton: {
+    width: "95%",
+    height: 55,
+    justifyContent: "space-between",
+    alignItems: "center",
     flexDirection: "row",
   },
 
   buttonTextColor: { fontFamily: "app-font", color: "black" },
+  arrowIcons: { marginLeft: 15 },
   textAreaContainer: {
     width: "95%",
     alignItems: "center",
-
     borderWidth: 1,
-    marginBottom: 30,
+    marginTop: 15,
+    marginBottom: 40,
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
   },
-  textAreas: {
-    width: "90%",
-    height: 100,
+  textButton: {
+    width: "100%",
+    height: 90,
     backgroundColor: "white",
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
   },
+
   textAreaLabel: {
-    position: "absolute",
+    position: "relative",
     zIndex: 2,
     alignSelf: "center",
-    marginTop: 20,
-    width: "80%",
-    fontSize: 20,
+    marginTop: 12,
+    width: "85%",
+    fontSize: 23,
   },
 
   button: { width: "60%" },
