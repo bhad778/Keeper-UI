@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import { Avatar, Button } from "react-native-paper";
+import { Avatar } from "react-native-paper";
 import Header from "../../components/header/Header";
 import EmployerService from "../../services/EmployerService";
 import { connect } from "react-redux";
@@ -39,51 +39,53 @@ const Matches = ({ navigation, selectedJob }) => {
         backgroundColor: selectedJob.color,
       }}
     >
-      <Header />
-      <View style={styles.matchesPageContents}>
-        <View style={styles.matchesScrollViewContainer}>
-          <ScrollView
-            contentContainerStyle={{ alignItems: "center" }}
-            style={styles.scrollView}
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={styles.scrollViewHeaderTextContainer}>
-              <Text style={styles.scrollViewHeaderText}>Matches</Text>
-            </View>
+      <ScrollView
+        contentContainerStyle={{ alignItems: "center" }}
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
+        <Header />
+        <View style={styles.matchesPageContents}>
+          <View style={styles.matchesScrollViewContainer}>
+            <View style={styles.whiteMatchesContainer}>
+              <View style={styles.scrollViewHeaderTextContainer}>
+                <Text style={styles.scrollViewHeaderText}>Matches</Text>
+              </View>
 
-            {matches.map((item, i) => (
-              <TouchableOpacity
-                key={i}
-                style={styles.matchButton}
-                underlayColor="#D3D3D3"
-                onPress={() => {
-                  switchScreen(item.profilePic, item.name, item.connectionId);
-                }}
-              >
-                <View style={styles.avatarImageContainer}>
-                  <Avatar.Image
-                    size={85}
-                    source={{
-                      uri:
-                        "https://data.whicdn.com/images/83928957/original.jpg",
-                    }}
-                    style={styles.images}
-                  />
-                  <View style={styles.matchTextContainer}>
-                    <View style={styles.notificationButtonContainer}>
-                      <Text style={styles.name}>Seto Kaiba</Text>
+              {matches.map((item, i) => (
+                <TouchableOpacity
+                  key={i}
+                  style={styles.matchButton}
+                  underlayColor="#D3D3D3"
+                  onPress={() => {
+                    switchScreen(item.profilePic, item.name, item.connectionId);
+                  }}
+                >
+                  <View style={styles.avatarImageContainer}>
+                    <Avatar.Image
+                      size={85}
+                      source={{
+                        uri:
+                          "https://data.whicdn.com/images/83928957/original.jpg",
+                      }}
+                      style={styles.images}
+                    />
+                    <View style={styles.matchTextContainer}>
+                      <View style={styles.notificationButtonContainer}>
+                        <Text style={styles.name}>Seto Kaiba</Text>
+                      </View>
+
+                      <Text numberOfLines={1} style={styles.nameInfo}>
+                        Your pathetic grandpas deck has no cards yugi
+                      </Text>
                     </View>
-
-                    <Text numberOfLines={1} style={styles.nameInfo}>
-                      Your pathetic grandpas deck has no cards yugi
-                    </Text>
                   </View>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
   },
-  scrollView: {
+  whiteMatchesContainer: {
     width: "100%",
     backgroundColor: "white",
     borderRadius: 35,
