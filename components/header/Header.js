@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
-import { Appbar, Text } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 import EntypoIcon from "react-native-vector-icons/Entypo";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import JobBoard from "../../screens/employer/jobBoard/JobBoard";
+import AppHeaderText from "../AppHeaderText";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -45,13 +46,13 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
             onPress={() => setJobBoardModalOpen(true)}
           >
             <View style={styles.titleSection}>
-              <Text style={styles.titleText}>
+              <AppHeaderText style={styles.titleText}>
                 {screenTitle
                   ? screenTitle
                   : selectedJob.title
                   ? selectedJob.title
                   : " "}
-              </Text>
+              </AppHeaderText>
             </View>
 
             <View style={styles.rightButtonSection}>
@@ -102,6 +103,10 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: 6,
+  },
+  titleText: {
+    fontSize: 20,
   },
   rightButtonSection: {
     height: "100%",
@@ -111,11 +116,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     alignItems: "center",
     paddingRight: 10,
-  },
-  titleText: {
-    fontSize: 21,
-    paddingTop: 6,
-    fontFamily: "app-header-font",
   },
 });
 
