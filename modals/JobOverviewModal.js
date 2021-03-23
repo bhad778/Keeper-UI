@@ -8,6 +8,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import ModalHeader from "../components/ModalHeader";
 
 const JobOverviewModal = ({
   jobOverviewModalVisible,
@@ -16,11 +17,7 @@ const JobOverviewModal = ({
   const [text, setText] = useState("");
   return (
     <Modal visible={jobOverviewModalVisible}>
-      <View style={styles.Header}>
-        <TouchableOpacity onPress={() => setJobOverviewModalVisible(false)}>
-          <Text>cancel</Text>
-        </TouchableOpacity>
-      </View>
+      <ModalHeader closeModal={setJobOverviewModalVisible} />
       <View style={styles.textSection}>
         <TextInput
           placeholder="Job Overview..."

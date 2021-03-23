@@ -1,42 +1,29 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from "react-native";
-
+import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
+import ModalHeader from "../components/ModalHeader";
 const EducationModal = ({
-  setEducationValue,
+  setEducation,
   educationModalVisible,
   setEducationModalVisible,
 }) => {
-  const [educationLevel, setEducationLevel] = useState([
+  const educationLevelButtons = [
     "GED",
     "Associate's",
     "Bachelor's",
     "Master's",
     "Doctoral",
-  ]);
+  ];
+
   const [buttonPressed, setButtonPressed] = useState();
 
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
+    setEducation(clickedButton);
   };
-  const goBack = () => {
-    setEducationValue(buttonPressed);
-    setEducationModalVisible(false);
-  };
+
   return (
     <Modal animationType="slide" visible={educationModalVisible}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => goBack()}>
-          <Text>cancel</Text>
-        </TouchableOpacity>
-      </View>
+      <ModalHeader closeModal={setEducationModalVisible} />
       <View style={styles.educationTypeContainer}>
         <View
           style={{
@@ -48,20 +35,21 @@ const EducationModal = ({
             alignItems: "center",
           }}
         >
-          {educationLevel.map((buttonText, i) => (
+          {educationLevelButtons.map((educationLevelText, i) => (
             <TouchableOpacity
-              onPress={() => onButtonClick(i)}
+              onPress={() => onButtonClick(educationLevelText)}
               key={i}
               style={
-                buttonPressed == i
+                buttonPressed == educationLevelText
                   ? styles.educationButtonsPressed
                   : styles.educationButtons
               }
             >
-              <Text>{buttonText}</Text>
+              <Text>{educationLevelText}</Text>
             </TouchableOpacity>
           ))}
-          {!educationLevel.length % 2 == 0 && (
+
+          {!educationLevelButtons.length % 2 == 0 && (
             <TouchableOpacity
               style={{
                 margin: 6,

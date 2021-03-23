@@ -20,6 +20,7 @@ import EducationModal from "../../../modals/EducationModal";
 import ExperienceModal from "../../../modals/ExperienceModal";
 import CompanyDescriptionModal from "../../../modals/CompanyDescriptionModal";
 import JobOverviewModal from "../../../modals/JobOverviewModal";
+import ModalHeader from "../../../components/ModalHeader";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -27,9 +28,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [location, setLocation] = useState();
   const [compensationType, setCompensationType] = useState([]);
   const [experience, setExperience] = useState();
-  const [employment, setEmployment] = useState();
+  const [employmentType, setEmploymentType] = useState();
   const [education, setEducation] = useState();
   const [responsibilities, setResponsibilities] = useState();
+
   const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
   );
@@ -54,6 +56,8 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   ] = useState(false);
   const [jobOverviewModalVisible, setJobOverviewModalVisible] = useState(false);
 
+  const [currentModal, setCurrentModal] = useState();
+
   const goBack = () => {
     setAddJobModalVisible(false);
   };
@@ -65,17 +69,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const setCompensation = (compensationValue) => {
     setCompensationType(compensationValue);
   };
-  const setExperienceValue = (experienceValue) => {
-    setExperience(experienceValue);
-  };
 
-  const setEmploymentValue = (employmentType) => {
-    setEmployment(employmentType);
-  };
-
-  const setEducationValue = (educationLevel) => {
-    setEducation(educationLevel);
-  };
   const setLogoValue = (logoValue) => {
     setLogo(logoValue);
   };
@@ -87,6 +81,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const setResponsibilitiesList = (responsibilities) => {
     setResponsibilities(responsibilities);
   };
+
+  const goToLogoModal = () => {
+    setLogoModalVisible(true);
+    setCurrentModal(logoModalVisible);
+  };
+
   const data = {
     jobTitle: jobTitle,
     companyName: companyName,
@@ -94,7 +94,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     location: location,
     compensationType: compensationType,
     experience: experience,
-    employment: employment,
+    employment: employmentType,
     education: education,
     responsibilities: responsibilities,
   };
@@ -112,13 +112,14 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
       />
 
       <ExperienceModal
-        setExperienceValue={setExperienceValue}
+        experience={experience}
+        setExperience={setExperience}
         experienceModalVisible={experienceModalVisible}
         setExperienceModalVisible={setExperienceModalVisible}
       />
 
       <EmploymentModal
-        setEmploymentValue={setEmploymentValue}
+        setEmploymentType={setEmploymentType}
         employmentModalVisible={employmentModalVisible}
         setEmploymentModalVisible={setEmploymentModalVisible}
       />
@@ -144,35 +145,21 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
       />
 
       <EducationModal
-        setEducationValue={setEducationValue}
+        setEducation={setEducation}
         educationModalVisible={educationModalVisible}
         setEducationModalVisible={setEducationModalVisible}
       />
 
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.header}>
-          <View style={styles.leftSideHeader}>
-            <TouchableOpacity color="black" onPress={goBack} uppercase={false}>
-              <Text style={{ fontFamily: "app-font", color: "black" }}>
-                Cancel
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View styles={styles.middleSectionHeader}>
-            <Text style={{ fontSize: 30 }}>Add Job</Text>
-          </View>
-          <View style={styles.rightSideHeader}>
-            <TouchableOpacity onPress={postJob} uppercase={false}>
-              <Text style={{ color: "black" }}>Done</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <ModalHeader
+          currentModal={currentModal}
+          setCurrentModal={setCurrentModal}
+          closeModal={setAddJobModalVisible}
+        />
 
         <View style={styles.addJobContainer}>
           <View style={{ width: "100%", marginTop: 20 }}>
-            <Text style={{ fontFamily: "app-font", color: "#cacaca" }}>
-              Job Title
-            </Text>
+            <Text style={{ color: "#cacaca" }}>Job Title</Text>
           </View>
           <TextInput
             style={styles.jobTitleTextInput}
@@ -183,9 +170,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             placeholderTextColor="black"
           />
           <View style={{ width: "100%" }}>
-            <Text style={{ fontFamily: "app-font", color: "#cacaca" }}>
-              Company name
-            </Text>
+            <Text style={{ color: "#cacaca" }}>Company name</Text>
           </View>
           <TextInput
             style={styles.companyNameTextInput}
@@ -400,7 +385,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
-  buttonTextColor: { fontFamily: "app-font", color: "black" },
+  buttonTextColor: { color: "black" },
   arrowIcons: { position: "absolute", left: 279 },
   textAreaContainer: {
     width: "100%",

@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import ModalHeader from "../components/ModalHeader";
 const AddResponsibility = ({
   addTextBox,
   addResponsibilityModalVisible,
@@ -22,19 +23,7 @@ const AddResponsibility = ({
   };
   return (
     <Modal animationType="slide" visible={addResponsibilityModalVisible}>
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => setAddResponsibilityModalVisible(false)}
-          >
-            <Icon size={20} name="x" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20 }}>Add Responsibility</Text>
-          <TouchableOpacity onPress={addNewResponsibility}>
-            <Icon size={20} name="check" />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <ModalHeader closeModal={setAddResponsibilityModalVisible} />
 
       <View style={styles.textInputContainer}>
         <TextInput

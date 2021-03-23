@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-
+import ModalHeader from "../components/ModalHeader";
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
@@ -21,23 +21,16 @@ const LocationModal = ({
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?t=${locationText}&apikey=42c21425`)
       .then((response) => response.json())
-      .then((response) => setData(response));
+      .then((response) => setData(response))
+      .then(setLocationValue(data));
   }, [locationText]);
 
   const goBack = () => {
-    setLocationValue(data);
     setLocationModalVisible(false);
   };
   return (
     <Modal animationType="slide" visible={locationModalVisible}>
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => goBack()}>
-            <Icon size={20} name="x" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20 }}>Location</Text>
-        </View>
-      </View>
+      <ModalHeader closeModal={setLocationModalVisible} />
 
       <View style={styles.searchContainer}>
         <View style={styles.textInputContainer}>

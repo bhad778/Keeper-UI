@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 // import MultiSlider from "@ptomasroos/react-native-multi-slider";
-
+import ModalHeader from "../components/ModalHeader";
 const Compensation = ({
   compensationModalVisible,
   setCompensationModalVisible,
   setCompensation,
 }) => {
-  const goBack = () => {
-    setCompensationModalVisible(false);
-  };
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
     setButtonTextPressed(clickedButton);
@@ -31,26 +28,7 @@ const Compensation = ({
 
   return (
     <Modal visible={compensationModalVisible}>
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity color="black" onPress={goBack}>
-            <Text style={{ color: "black" }}>Cancel</Text>
-          </TouchableOpacity>
-
-          <Text style={{ fontSize: 30 }}>Compensation</Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              buttonPressed === "annually"
-                ? setCompensation(multiSliderValueAnnual)
-                : setCompensation(multiSliderValueHourly);
-            }}
-          >
-            <Text style={{ color: "black" }}>Add</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
+      <ModalHeader closeModal={setCompensationModalVisible} />
       <View style={styles.sliderSection}>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
@@ -114,8 +92,8 @@ const Compensation = ({
             sliderLength={345}
             onValuesChange={
               buttonPressed === "annually"
-                ? setMultiSliderValueAnnual
-                : setMultiSliderValueHourly
+                ? setCompensation(MultiSliderValueAnnual)
+                : SetCompensation(setMultiSliderValueHourly)
             }
             min={buttonPressed === "annually" ? 15000 : 8}
             max={buttonPressed === "annually" ? 200000 : 100}

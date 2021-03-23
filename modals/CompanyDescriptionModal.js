@@ -8,7 +8,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-
+import ModalHeader from "../components/ModalHeader";
 const CompanyDescriptionModal = ({
   companyDescriptionModalVisible,
   setCompanyDescriptionModalVisible,
@@ -16,13 +16,7 @@ const CompanyDescriptionModal = ({
   const [text, setText] = useState("");
   return (
     <Modal visible={companyDescriptionModalVisible}>
-      <View style={styles.Header}>
-        <TouchableOpacity
-          onPress={() => setCompanyDescriptionModalVisible(false)}
-        >
-          <Text>cancel</Text>
-        </TouchableOpacity>
-      </View>
+      <ModalHeader closeModal={setCompanyDescriptionModalVisible} />
       <View style={styles.textSection}>
         <TextInput
           placeholder="Describe your company..."

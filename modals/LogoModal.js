@@ -11,9 +11,9 @@ import {
 import { Avatar } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
-import Header from "../components/header/Header";
-import Icon from "react-native-vector-icons/Feather";
 
+import Icon from "react-native-vector-icons/Feather";
+import ModalHeader from "../components/ModalHeader";
 const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
   const [image, setImage] = useState(null);
 
@@ -42,25 +42,18 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      setLogoValue(image);
     }
   };
   const removeImage = () => {
     setImage(null);
   };
   const goBack = () => {
-    setLogoValue(image);
     setLogoModalVisible(false);
   };
   return (
     <Modal animationType="slide" visible={logoModalVisible}>
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => goBack(false)}>
-            <Icon size={20} name="x" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20 }}>Logo</Text>
-        </View>
-      </View>
+      <ModalHeader closeModal={setLogoModalVisible} />
       <View style={styles.imageSelectorSection}>
         <TouchableOpacity>
           <Avatar.Image

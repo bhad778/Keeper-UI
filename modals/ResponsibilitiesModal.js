@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import AddResponsibilityModal from "../modals/AddResponsibilityModal";
+import ModalHeader from "../components/ModalHeader";
 const ResponsibilitiesModal = ({
   responsibilitiesModalVisible,
   setResponsibilitiesModalVisible,
@@ -73,18 +74,7 @@ const ResponsibilitiesModal = ({
         setAddResponsibilityModalVisible={setAddResponsibilityModalVisible}
         addTextBox={addTextBox}
       />
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => {
-            goBackAndCancel();
-          }}
-        >
-          <Text style={{ fontSize: 30 }}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => goBackAndSave()}>
-          <Text>Save</Text>
-        </TouchableOpacity>
-      </View>
+      <ModalHeader closeModal={setResponsibilitiesModalVisible} />
 
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableOpacity

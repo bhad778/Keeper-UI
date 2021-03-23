@@ -1,40 +1,26 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
+import ModalHeader from "../components/ModalHeader";
 
 const EmploymentModal = ({
-  setEmploymentValue,
+  setEmploymentType,
   employmentModalVisible,
   setEmploymentModalVisible,
 }) => {
-  const [employmentType, setEmploymentType] = useState([
-    "Full TIme",
-    "Part Time",
-    "Contract",
-    "Other",
-  ]);
-  const [buttonPressed, setButtonPressed] = useState();
-  const goBack = () => {
-    setEmploymentValue(buttonPressed);
-    setEmploymentModalVisible(false);
-  };
+  const [buttonPressed, setButtonPressed] = useState({
+    button1: "",
+    button2: "",
+    button3: "",
+    button4: "",
+  });
+
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
+    setEmploymentType(buttonPressed);
   };
   return (
     <Modal animationType="slide" visible={employmentModalVisible}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => goBack()}>
-          <Text>Cancel</Text>
-        </TouchableOpacity>
-      </View>
+      <ModalHeader closeModal={setEmploymentModalVisible} />
       <View style={styles.employmentTypeContainer}>
         <View
           style={{
@@ -46,19 +32,46 @@ const EmploymentModal = ({
             alignItems: "center",
           }}
         >
-          {employmentType.map((buttonText, i) => (
-            <TouchableOpacity
-              onPress={() => onButtonClick(i)}
-              key={i}
-              style={
-                buttonPressed == i
-                  ? styles.employmentButtonsPressed
-                  : styles.employmentButtons
-              }
-            >
-              <Text>{buttonText}</Text>
-            </TouchableOpacity>
-          ))}
+          <TouchableOpacity
+            onPress={() => onButtonClick({ button1: "full-time" })}
+            style={
+              buttonPressed.button1 == "full-time"
+                ? styles.employmentButtonsPressed
+                : styles.employmentButtons
+            }
+          >
+            <Text>Full time</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onButtonClick({ button2: "part-time" })}
+            style={
+              buttonPressed.button2 == "pressed"
+                ? styles.employmentButtonsPressed
+                : styles.employmentButtons
+            }
+          >
+            <Text>Part Time</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onButtonClick({ button3: "contract" })}
+            style={
+              buttonPressed.button3 == "contract"
+                ? styles.employmentButtonsPressed
+                : styles.employmentButtons
+            }
+          >
+            <Text>Contract</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onButtonClick({ button4: "other" })}
+            style={
+              buttonPressed.button4 == "other"
+                ? styles.employmentButtonsPressed
+                : styles.employmentButtons
+            }
+          >
+            <Text>Other</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>

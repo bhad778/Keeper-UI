@@ -10,28 +10,21 @@ import {
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
-import Header from "../components/header/Header";
+import ModalHeader from "../components/ModalHeader";
 const ExperienceModal = ({
-  setExperienceValue,
+  experience,
+  setExperience,
   experienceModalVisible,
   setExperienceModalVisible,
 }) => {
-  const [yearsOfExperience, setYearsOfExperience] = useState();
-
-  const goBack = () => {
-    setExperienceValue(yearsOfExperience);
-    setExperienceModalVisible(false);
-  };
   return (
     <Modal animationType="slide" visible={experienceModalVisible}>
-      <Header screenTitle="Experience" dontShowJobBoardModal withBackButton />
+      <ModalHeader closeModal={setExperienceModalVisible} />
       <View style={styles.yrsExperienceContainer}>
         <View style={styles.pickerContainer}>
           <Picker
-            selectedValue={yearsOfExperience}
-            onValueChange={(itemValue, itemIndex) =>
-              setYearsOfExperience(itemValue)
-            }
+            selectedValue={experience}
+            onValueChange={(itemValue, itemIndex) => setExperience(itemValue)}
           >
             <Picker.Item label="1 yr" value="1" />
             <Picker.Item label="2 yrs" value="2" />
