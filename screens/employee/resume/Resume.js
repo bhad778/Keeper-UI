@@ -105,7 +105,6 @@ const Resume = (props) => {
       onStartShouldSetResponder={onDoublePress}
     >
       <HideBottomNavScrollView
-        style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
         currentEmployee={props.currentEmployee}
       >
