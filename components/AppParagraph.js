@@ -10,7 +10,6 @@ const AppParagraph = (props) => {
           lineHeight: 25,
           fontSize: 15,
           textAlign: "justify",
-          textJustify: "inter-word",
         },
         props.style,
       ]}
