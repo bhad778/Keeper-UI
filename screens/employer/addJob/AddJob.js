@@ -21,6 +21,8 @@ import ExperienceModal from "../../../modals/ExperienceModal";
 import CompanyDescriptionModal from "../../../modals/CompanyDescriptionModal";
 import JobOverviewModal from "../../../modals/JobOverviewModal";
 import ModalHeader from "../../../components/ModalHeader";
+import AppText from '../../../components/AppText'
+import AppBoldText from '../../../components/AppBoldText'
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -159,18 +161,18 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
         <View style={styles.addJobContainer}>
           <View style={{ width: "100%", marginTop: 20 }}>
-            <Text style={{ color: "#cacaca" }}>Job Title</Text>
+            <AppText style={{ color: "#cacaca" }}>Job Title</AppText>
           </View>
           <TextInput
             style={styles.jobTitleTextInput}
             value={jobTitle}
             name="jobTitle"
             onChangeText={(value) => setJobTitle(value)}
-            placeholder="Enter Job Title"
+            placeholder='Enter Job Title'
             placeholderTextColor="black"
           />
           <View style={{ width: "100%" }}>
-            <Text style={{ color: "#cacaca" }}>Company name</Text>
+            <AppText style={{ color: "#cacaca" }}>Company name</AppText>
           </View>
           <TextInput
             style={styles.companyNameTextInput}
@@ -188,16 +190,16 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               height: 70,
             }}
           >
-            <Text style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
+            <AppText style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
               Company Info
-            </Text>
+            </AppText>
           </View>
 
           <TouchableOpacity
             onPress={() => setLogoModalVisible(true)}
             style={styles.firstButtonCompanyInfo}
           >
-            <Text style={styles.buttonTextColor}>Logo</Text>
+            <AppBoldText style={styles.buttonTextColor}>Logo</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -210,7 +212,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             onPress={() => setLocationModalVisible(true)}
             style={styles.lastButton}
           >
-            <Text style={styles.buttonTextColor}>Location</Text>
+            <AppBoldText style={styles.buttonTextColor}>Location</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -224,7 +226,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               onPress={() => setCompanyDescriptionModalVisible(true)}
               style={styles.textButton}
             >
-              <Text style={styles.textAreaLabel}>Company Description</Text>
+              <AppBoldText style={styles.textAreaLabel}>Company Description</AppBoldText>
             </TouchableOpacity>
           </View>
           <View style={{ width: "98%", alignItems: "flex-start" }}>
@@ -237,7 +239,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             onPress={() => setExperienceModalVisible(true)}
             style={styles.buttons}
           >
-            <Text style={styles.buttonTextColor}>Experience</Text>
+            <AppBoldText style={styles.buttonTextColor}>Experience</AppBoldText>
 
             <Icon
               style={styles.arrowIcons}
@@ -251,7 +253,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             onPress={() => setCompensationModalVisible(true)}
             style={styles.buttons}
           >
-            <Text style={styles.buttonTextColor}>Compensation</Text>
+            <AppBoldText style={styles.buttonTextColor}>Compensation</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -264,7 +266,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             onPress={() => setEmploymentModalVisible(true)}
             style={styles.buttons}
           >
-            <Text style={styles.buttonTextColor}>Employment</Text>
+            <AppBoldText style={styles.buttonTextColor}>Employment</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -277,7 +279,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             onPress={() => setEducationModalVisible(true)}
             style={styles.buttons}
           >
-            <Text style={styles.buttonTextColor}>Education</Text>
+            <AppBoldText style={styles.buttonTextColor}>Education</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -290,7 +292,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             style={styles.lastButton}
             onPress={() => setResponsibilitiesModalVisible(true)}
           >
-            <Text style={styles.buttonTextColor}>Responsibility</Text>
+            <AppBoldText style={styles.buttonTextColor}>Responsibility</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -304,7 +306,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               onPress={() => setJobOverviewModalVisible(true)}
               style={styles.textButton}
             >
-              <Text style={styles.textAreaLabel}> Job Overview</Text>
+              <AppBoldText style={styles.textAreaLabel}> Job Overview</AppBoldText>
             </TouchableOpacity>
           </View>
         </View>
@@ -394,7 +396,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 40,
     borderRadius: 20,
-    borderColor: "rgba(0, 0, 0, 0.26)",
+    
   },
   textButton: {
     width: "100%",

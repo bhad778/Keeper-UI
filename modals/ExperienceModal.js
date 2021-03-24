@@ -2,29 +2,26 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   View,
-  Text,
+ 
   Modal,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
+ 
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
 import ModalHeader from "../components/ModalHeader";
 const ExperienceModal = ({
-  experience,
-  setExperience,
   experienceModalVisible,
   setExperienceModalVisible,
 }) => {
+  const [experience, setExperience] = useState()
   return (
     <Modal animationType="slide" visible={experienceModalVisible}>
-      <ModalHeader closeModal={setExperienceModalVisible} />
+      <ModalHeader closeModal={setExperienceModalVisible} screenTitle='Experience' />
       <View style={styles.yrsExperienceContainer}>
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={experience}
-            onValueChange={(itemValue, itemIndex) => setExperience(itemValue)}
+            onValueChange={(itemValue) => setExperience(itemValue)}
           >
             <Picker.Item label="1 yr" value="1" />
             <Picker.Item label="2 yrs" value="2" />
@@ -61,6 +58,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   yrsExperienceContainer: { flex: 6, alignItems: "center" },
-  pickerContainer: { width: "80%" },
+  pickerContainer: { width: "80%", borderWidth:1, height:300, justifyContent:'center' },
 });
 export default ExperienceModal;

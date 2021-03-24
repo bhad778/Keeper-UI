@@ -15,13 +15,7 @@ const ModalHeader = ({ closeModal, screenTitle }) => {
   };
 
   return (
-    <Appbar.Header
-      style={{
-        width: SCREEN_WIDTH,
-        height: 80,
-        elevation: 0,
-      }}
-    >
+    
       <View style={styles.headerContents}>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
@@ -34,7 +28,7 @@ const ModalHeader = ({ closeModal, screenTitle }) => {
             onPress={() => setJobBoardModalOpen(true)}
           >
             <View style={styles.titleSection}>
-              <AppHeaderText style={styles.titleText}></AppHeaderText>
+              <AppHeaderText style={styles.titleText}>{screenTitle}</AppHeaderText>
             </View>
 
             <View style={styles.rightButtonSection}>
@@ -43,16 +37,13 @@ const ModalHeader = ({ closeModal, screenTitle }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </Appbar.Header>
   );
 };
 const styles = StyleSheet.create({
   headerContents: {
-    width: SCREEN_WIDTH,
+    width: '100%',
     justifyContent: "center",
-    alignItems: "center",
-    paddingRight: 18,
-    paddingLeft: 10,
+    marginBottom:10
   },
   headerPill: {
     backgroundColor: "white",
