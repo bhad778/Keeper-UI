@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   Modal,
-  TouchableOpacity,
   TextInput,
-  ScrollView,
 } from "react-native";
 import ModalHeader from "../components/ModalHeader";
 const CompanyDescriptionModal = ({
@@ -16,8 +13,9 @@ const CompanyDescriptionModal = ({
   const [text, setText] = useState("");
   return (
     <Modal visible={companyDescriptionModalVisible}>
-      <ModalHeader closeModal={setCompanyDescriptionModalVisible} />
       <View style={styles.textSection}>
+      <ModalHeader rightIcon='check' leftIcon="chevron-left" screenTitle="description" border={1} closeModal={setCompanyDescriptionModalVisible} />
+
         <TextInput
           placeholder="Describe your company..."
           placeholderTextColor="black"
@@ -32,14 +30,9 @@ const CompanyDescriptionModal = ({
 };
 
 const styles = StyleSheet.create({
-  Header: {
-    flex: 1,
-    backgroundColor: "blue",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textSection: { flex: 6, alignItems: "center", justifyContent: "center" },
-  textInput: { width: "90%", height: "90%" },
+ 
+  textSection: { flex: 6, alignItems: "center", justifyContent: "center", padding:20, marginTop:10},
+  textInput: { width: "90%", height: "90%",  textAlignVertical:'top', marginTop:20 },
 });
 
 export default CompanyDescriptionModal;

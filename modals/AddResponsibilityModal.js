@@ -23,9 +23,10 @@ const AddResponsibility = ({
   };
   return (
     <Modal animationType="slide" visible={addResponsibilityModalVisible}>
-      <ModalHeader closeModal={setAddResponsibilityModalVisible} />
+    
 
       <View style={styles.textInputContainer}>
+      <ModalHeader leftIcon='chevron-left' rightIcon="check" screenTitle="Add" border={1} closeModal={setAddResponsibilityModalVisible} />
         <TextInput
           value={newResponsibilityText}
           onChangeText={(newResponsibilityText) =>
@@ -40,23 +41,14 @@ const AddResponsibility = ({
 };
 
 const styles = StyleSheet.create({
-  headerContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
-  header: {
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "row",
-    width: "90%",
-    height: "50%",
-    borderWidth: 1,
-    borderRadius: 20,
-  },
-  textInputContainer: { flex: 4, alignItems: "center" },
+  
+  textInputContainer: { flex: 4, alignItems: "center", padding:20},
   textInput: {
     paddingTop: 20,
     padding: 15,
     borderWidth: 1,
     height: "40%",
-    width: "90%",
+    width: "100%",
     borderRadius: 20,
   },
 });

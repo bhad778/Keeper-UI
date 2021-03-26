@@ -53,9 +53,9 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
   };
   return (
     <Modal animationType="slide" visible={logoModalVisible}>
-      <ModalHeader closeModal={setLogoModalVisible} />
       <View style={styles.imageSelectorSection}>
-        <TouchableOpacity>
+      <ModalHeader rightIcon="check" leftIcon="chevron-left" screenTitle="Logo" border={1} closeModal={setLogoModalVisible} />
+        <TouchableOpacity style={styles.logoContainer}>
           <Avatar.Image
             size={200}
             style={styles.logoImage}
@@ -75,21 +75,15 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
   );
 };
 const styles = StyleSheet.create({
-  headerContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
-  header: {
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "row",
-    width: "90%",
-    height: "50%",
-    borderWidth: 1,
-    borderRadius: 20,
-  },
+
+
   imageSelectorSection: {
-    flex: 6,
-    justifyContent: "center",
+    padding:20,
+    flex: 1,
+    borderWidth:1,
     alignItems: "center",
   },
+  logoContainer:{marginTop:40},
   logoImage: { backgroundColor: "grey" },
 
   chooseLogoButton: {

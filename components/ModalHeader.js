@@ -1,15 +1,13 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
-import { Appbar } from "react-native-paper";
-import EntypoIcon from "react-native-vector-icons/Entypo";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
 import AppHeaderText from "../components/AppHeaderText";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const ModalHeader = ({ closeModal, screenTitle }) => {
+const ModalHeader = ({ closeModal, screenTitle, border, rightIcon, leftIcon }) => {
   const goBack = () => {
     closeModal(false);
   };
@@ -17,10 +15,18 @@ const ModalHeader = ({ closeModal, screenTitle }) => {
   return (
     
       <View style={styles.headerContents}>
-        <View style={styles.headerPill}>
+        <View style={{  backgroundColor: "white",
+    width: "100%",
+    height: 78,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    padding:10,
+    borderWidth:border,
+    flexDirection: "row",}}>
           <View style={styles.leftSection}>
             <TouchableOpacity onPress={() => goBack()}>
-              <MaterialIcon name="arrow-back" size={40} />
+              <Icon name={leftIcon} size={40} />
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -32,7 +38,7 @@ const ModalHeader = ({ closeModal, screenTitle }) => {
             </View>
 
             <View style={styles.rightButtonSection}>
-              <EntypoIcon name="chevron-small-down" size={40} />
+              <Icon name={rightIcon} size={40} />
             </View>
           </TouchableOpacity>
         </View>
@@ -43,21 +49,13 @@ const styles = StyleSheet.create({
   headerContents: {
     width: '100%',
     justifyContent: "center",
-    marginBottom:10
+    marginBottom:20,
+    alignItems:'center'
   },
-  headerPill: {
-    backgroundColor: "white",
-    width: "100%",
-    height: 78,
-    borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "row",
-  },
+  
   leftSection: {
     height: "100%",
-    width: 60,
+    width: 55,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

@@ -20,11 +20,13 @@ const EmploymentModal = ({
   };
   return (
     <Modal animationType="slide" visible={employmentModalVisible}>
-      <ModalHeader closeModal={setEmploymentModalVisible} />
+      
+     
       <View style={styles.employmentTypeContainer}>
+      <ModalHeader rightIcon='check' leftIcon="chevron-left" screenTitle='Employment' closeModal={setEmploymentModalVisible} border={1} />
         <View
           style={{
-            width: "90%",
+            width: "100%",
             marginTop: 40,
             flexDirection: "row",
             flexWrap: "wrap",
@@ -79,18 +81,17 @@ const EmploymentModal = ({
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    backgroundColor: "blue",
+  header: { 
     justifyContent: "center",
     alignItems: "center",
   },
   employmentTypeContainer: {
+    padding:20,
     flex: 6,
     alignItems: "center",
   },
   employmentButtons: {
-    margin: 6,
+    margin: 8,
     justifyContent: "center",
     alignItems: "center",
     height: 50,

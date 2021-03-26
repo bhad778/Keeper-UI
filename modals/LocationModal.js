@@ -30,9 +30,10 @@ const LocationModal = ({
   };
   return (
     <Modal animationType="slide" visible={locationModalVisible}>
-      <ModalHeader closeModal={setLocationModalVisible} />
 
       <View style={styles.searchContainer}>
+      <ModalHeader rightIcon='check' leftIcon="chevron-left" screenTitle='Location' border={1} closeModal={setLocationModalVisible} />
+
         <View style={styles.textInputContainer}>
           <TextInput
             multiline
@@ -60,18 +61,9 @@ const LocationModal = ({
   );
 };
 const styles = StyleSheet.create({
-  headerContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
-  header: {
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "row",
-    width: "90%",
-    height: "50%",
-    borderWidth: 1,
-    borderRadius: 20,
-  },
+  
   searchContainer: {
-    flex: 6,
+    padding:20,
     alignItems: "center",
     justifyContent: "flex-start",
   },

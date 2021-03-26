@@ -22,12 +22,13 @@ const EducationModal = ({
   };
 
   return (
-    <Modal animationType="slide" visible={educationModalVisible}>
-      <ModalHeader closeModal={setEducationModalVisible} />
+    <Modal  animationType="slide" visible={educationModalVisible}>
+  
       <View style={styles.educationTypeContainer}>
+      <ModalHeader leftIcon="chevron-left" rightIcon='check' screenTitle='Education' border={1} closeModal={setEducationModalVisible} />
         <View
           style={{
-            width: "90%",
+            width: "100%",
             marginTop: 40,
             flexDirection: "row",
             flexWrap: "wrap",
@@ -69,13 +70,8 @@ const EducationModal = ({
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "blue",
-  },
-  educationTypeContainer: { flex: 5, alignItems: "center" },
+  
+  educationTypeContainer: { flex: 5, alignItems: "center", padding:20 },
   educationButtonsPressed: {
     margin: 6,
     justifyContent: "center",

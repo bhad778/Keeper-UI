@@ -17,9 +17,11 @@ const JobOverviewModal = ({
   const [text, setText] = useState("");
   return (
     <Modal visible={jobOverviewModalVisible}>
-      <ModalHeader closeModal={setJobOverviewModalVisible} />
       <View style={styles.textSection}>
+      <ModalHeader leftIcon="chevron-left" rightIcon='check' screenTitle='Overview' border={1} closeModal={setJobOverviewModalVisible} />
+
         <TextInput
+          
           placeholder="Job Overview..."
           placeholderTextColor="black"
           value={text}
@@ -39,8 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  textSection: { flex: 6, alignItems: "center", justifyContent: "center" },
-  textInput: { width: "90%", height: "90%" },
+  textSection: { flex: 6, alignItems: "center", justifyContent: "center", padding:20, marginTop:10 },
+  textInput: { width: "90%", height: "90%", textAlignVertical:'top', marginTop:20},
 });
 
 export default JobOverviewModal;

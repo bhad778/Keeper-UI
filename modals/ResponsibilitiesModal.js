@@ -74,7 +74,10 @@ const ResponsibilitiesModal = ({
         setAddResponsibilityModalVisible={setAddResponsibilityModalVisible}
         addTextBox={addTextBox}
       />
-      <ModalHeader closeModal={setResponsibilitiesModalVisible} />
+      <View style={styles.headerContainer}>
+      <ModalHeader leftIcon="chevron-left" rightIcon='check' border={1} closeModal={setResponsibilitiesModalVisible} screenTitle='Responsibilities' />
+
+      </View>
 
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TouchableOpacity
@@ -94,22 +97,16 @@ const ResponsibilitiesModal = ({
   );
 };
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    height: 40,
-    backgroundColor: "blue",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  scrollView: { alignItems: "center" },
+  headerContainer:{padding:20},
+  scrollView: { alignItems: "center", padding:20,  },
 
   addResponsibilityButton: {
     flexDirection: "row",
-    width: "90%",
+    width: "100%",
     borderWidth: 1,
     borderRadius: 20,
     height: 60,
-    marginTop: 40,
+    
     borderColor: "#dadada",
     justifyContent: "space-around",
     alignItems: "center",

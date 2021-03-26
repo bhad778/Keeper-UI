@@ -114,7 +114,6 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
       />
 
       <ExperienceModal
-        experience={experience}
         setExperience={setExperience}
         experienceModalVisible={experienceModalVisible}
         setExperienceModalVisible={setExperienceModalVisible}
@@ -154,6 +153,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
       <ScrollView contentContainerStyle={styles.scrollView}>
         <ModalHeader
+        leftIcon="x"
+        rightIcon='check'
+        screenTitle='Add Job'
+          border={0}
           currentModal={currentModal}
           setCurrentModal={setCurrentModal}
           closeModal={setAddJobModalVisible}
@@ -366,7 +369,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 4,
     borderBottomWidth: 1,
-    borderBottomColor: "#808080",
+    borderBottomColor: "black",
   },
   buttons: {
     width: "100%",
@@ -376,7 +379,7 @@ const styles = StyleSheet.create({
     padding: 4,
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#808080",
+    borderBottomColor: "black",
   },
   lastButton: {
     width: "100%",
@@ -388,7 +391,7 @@ const styles = StyleSheet.create({
   },
 
   buttonTextColor: { color: "black" },
-  arrowIcons: { position: "absolute", left: 279 },
+  arrowIcons: { position: "absolute", left: 295 },
   textAreaContainer: {
     width: "100%",
     alignItems: "center",

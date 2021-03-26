@@ -29,8 +29,12 @@ const Compensation = ({
 
   return (
     <Modal visible={compensationModalVisible}>
-      <ModalHeader closeModal={setCompensationModalVisible} />
+
       <View style={styles.sliderSection}>
+    
+        <ModalHeader rightIcon="chevron-left" leftIcon="check" border={1} closeModal={setCompensationModalVisible} screenTitle='Compensation' />
+
+    
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             onPress={() => onButtonClick("annually")}
@@ -104,36 +108,26 @@ const Compensation = ({
           />
         </View>
       </View>
-      <View style={{ width: "90%", alignItems: "flex-start" }}></View>
     </Modal>
   );
 };
 const styles = StyleSheet.create({
-  headerContainer: {
-    height: 150,
-    marginBottom: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    borderRadius: 30,
-    height: "40%",
-    width: "90%",
+  
+  header:{marginBottom:20},
 
-    borderWidth: 1,
-  },
   sliderSection: {
     flex: 6,
-    alignItems: "center",
+    padding:20,
+    alignItems:'center',
+    
+    
   },
   buttonsContainer: {
     alignItems: "center",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+    marginTop:40,
     marginBottom: 40,
   },
   buttons: {
