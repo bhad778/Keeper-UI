@@ -14,7 +14,7 @@ import Constants from "expo-constants";
 
 import Icon from "react-native-vector-icons/Feather";
 import ModalHeader from "../components/ModalHeader";
-const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
+const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -42,19 +42,17 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogoValue }) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
-      setLogoValue(image);
+      setLogo(image);
     }
   };
   const removeImage = () => {
     setImage(null);
   };
-  const goBack = () => {
-    setLogoModalVisible(false);
-  };
+ 
   return (
     <Modal animationType="slide" visible={logoModalVisible}>
       <View style={styles.imageSelectorSection}>
-      <ModalHeader rightIcon="check" leftIcon="chevron-left" screenTitle="Logo" border={1} closeModal={setLogoModalVisible} />
+      <ModalHeader leftIcon="chevron-left" screenTitle="Logo" border={1} closeModal={setLogoModalVisible} />
         <TouchableOpacity style={styles.logoContainer}>
           <Avatar.Image
             size={200}

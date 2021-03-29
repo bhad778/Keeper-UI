@@ -7,9 +7,10 @@ import AppHeaderText from "../components/AppHeaderText";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const ModalHeader = ({ closeModal, screenTitle, border, rightIcon, leftIcon }) => {
+const ModalHeader = ({ addNewResponsibility, saveText, closeModal, text, screenTitle, border, rightIcon, leftIcon }) => {
   const goBack = () => {
     closeModal(false);
+    text && saveText(text)
   };
 
   return (
@@ -38,7 +39,10 @@ const ModalHeader = ({ closeModal, screenTitle, border, rightIcon, leftIcon }) =
             </View>
 
             <View style={styles.rightButtonSection}>
+              <TouchableOpacity onPress={()=>addNewResponsibility()}>
               <Icon name={rightIcon} size={40} />
+              </TouchableOpacity>
+            
             </View>
           </TouchableOpacity>
         </View>

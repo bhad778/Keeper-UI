@@ -7,22 +7,25 @@ import {
 } from "react-native";
 import ModalHeader from "../components/ModalHeader";
 const CompanyDescriptionModal = ({
+  setCompanyDescription,
   companyDescriptionModalVisible,
   setCompanyDescriptionModalVisible,
 }) => {
-  const [text, setText] = useState("");
+  const [descriptionText, setDescriptionText] = useState("");
+ 
   return (
     <Modal visible={companyDescriptionModalVisible}>
       <View style={styles.textSection}>
-      <ModalHeader rightIcon='check' leftIcon="chevron-left" screenTitle="description" border={1} closeModal={setCompanyDescriptionModalVisible} />
+      <ModalHeader saveText={setCompanyDescription} text={descriptionText} leftIcon="chevron-left" screenTitle="Description" border={1} closeModal={setCompanyDescriptionModalVisible} />
 
         <TextInput
           placeholder="Describe your company..."
           placeholderTextColor="black"
-          value={text}
+          value={descriptionText}
           style={styles.textInput}
           multiline={true}
-          onChangeText={(text) => setText(text)}
+          onChangeText={(descriptionText) => setDescriptionText(descriptionText)}
+          onEndEditing={() => setCompanyDescription()}
         />
       </View>
     </Modal>
@@ -31,7 +34,7 @@ const CompanyDescriptionModal = ({
 
 const styles = StyleSheet.create({
  
-  textSection: { flex: 6, alignItems: "center", justifyContent: "center", padding:20, marginTop:10},
+  textSection: { flex: 6, alignItems: "center", justifyContent: "center", padding:20, marginTop:20},
   textInput: { width: "90%", height: "90%",  textAlignVertical:'top', marginTop:20 },
 });
 

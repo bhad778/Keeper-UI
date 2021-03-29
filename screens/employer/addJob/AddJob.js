@@ -28,11 +28,13 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [companyName, setCompanyName] = useState("");
   const [logo, setLogo] = useState();
   const [location, setLocation] = useState();
+  const [companyDescription, setCompanyDescription] = useState('')
+  const [jobOverview,setJobOverview] =useState('')
   const [compensationType, setCompensationType] = useState([]);
   const [experience, setExperience] = useState();
   const [employmentType, setEmploymentType] = useState();
   const [education, setEducation] = useState();
-  const [responsibilities, setResponsibilities] = useState();
+  const [responsibilitiesList, setResponsibilitiesList] = useState();
 
   const [compensationModalVisible, setCompensationModalVisible] = useState(
     false
@@ -60,55 +62,34 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
   const [currentModal, setCurrentModal] = useState();
 
-  const goBack = () => {
-    setAddJobModalVisible(false);
-  };
-
   const postJob = () => {
     JobsService.addJob(data);
-  };
-
-  const setCompensation = (compensationValue) => {
-    setCompensationType(compensationValue);
-  };
-
-  const setLogoValue = (logoValue) => {
-    setLogo(logoValue);
-  };
-
-  const setLocationValue = (locationValue) => {
-    setLocation(locationValue);
-  };
-
-  const setResponsibilitiesList = (responsibilities) => {
-    setResponsibilities(responsibilities);
-  };
-
-  const goToLogoModal = () => {
-    setLogoModalVisible(true);
-    setCurrentModal(logoModalVisible);
   };
 
   const data = {
     jobTitle: jobTitle,
     companyName: companyName,
+    companyDescription:companyDescription,
+    jobOverview:jobOverview,
     logo: logo,
     location: location,
     compensationType: compensationType,
     experience: experience,
     employment: employmentType,
     education: education,
-    responsibilities: responsibilities,
+    responsibilities: responsibilitiesList,
   };
 
   return (
     <Modal animationType="slide" visible={addJobModalVisible}>
       <CompanyDescriptionModal
+        setCompanyDescription={setCompanyDescription}
         companyDescriptionModalVisible={companyDescriptionModalVisible}
         setCompanyDescriptionModalVisible={setCompanyDescriptionModalVisible}
       />
 
       <JobOverviewModal
+        setJobOverview={setJobOverview}
         jobOverviewModalVisible={jobOverviewModalVisible}
         setJobOverviewModalVisible={setJobOverviewModalVisible}
       />
@@ -125,7 +106,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setEmploymentModalVisible={setEmploymentModalVisible}
       />
       <LocationModal
-        setLocationValue={setLocationValue}
+        setLocation={setLocation}
         locationModalVisible={locationModalVisible}
         setLocationModalVisible={setLocationModalVisible}
       />
@@ -135,12 +116,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setResponsibilitiesModalVisible={setResponsibilitiesModalVisible}
       />
       <Compensation
-        setCompensation={setCompensation}
+        setCompensationType={setCompensationType}
         compensationModalVisible={compensationModalVisible}
         setCompensationModalVisible={setCompensationModalVisible}
       />
       <LogoModal
-        setLogoValue={setLogoValue}
+        setLogo={setLogo}
         logoModalVisible={logoModalVisible}
         setLogoModalVisible={setLogoModalVisible}
       />
@@ -203,6 +184,22 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             style={styles.firstButtonCompanyInfo}
           >
             <AppBoldText style={styles.buttonTextColor}>Logo</AppBoldText>
+            
+            <Icon
+              style={styles.arrowIcons}
+              name="chevron-right"
+              color="#141414"
+              size={25}
+            />
+            
+    
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setLocationModalVisible(true)}
+            style={styles.middleCompanyInfoButton}
+          >
+            <AppBoldText style={styles.buttonTextColor}>Location</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -215,7 +212,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             onPress={() => setLocationModalVisible(true)}
             style={styles.lastButton}
           >
-            <AppBoldText style={styles.buttonTextColor}>Location</AppBoldText>
+            <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -224,7 +221,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             />
           </TouchableOpacity>
 
-          <View style={styles.textAreaContainer}>
+          <View style={styles.companyDescriptionContainer}>
             <TouchableOpacity
               onPress={() => setCompanyDescriptionModalVisible(true)}
               style={styles.textButton}
@@ -238,6 +235,14 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </Text>
           </View>
 
+          <View style={styles.jobOverviewContainer}>
+            <TouchableOpacity
+              onPress={() => setJobOverviewModalVisible(true)}
+              style={styles.textButton}
+            >
+              <AppBoldText style={styles.textAreaLabel}> Job Overview</AppBoldText>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             onPress={() => setExperienceModalVisible(true)}
             style={styles.buttons}
@@ -295,7 +300,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             style={styles.lastButton}
             onPress={() => setResponsibilitiesModalVisible(true)}
           >
-            <AppBoldText style={styles.buttonTextColor}>Responsibility</AppBoldText>
+            <AppBoldText style={styles.buttonTextColor}>Responsibilities</AppBoldText>
             <Icon
               style={styles.arrowIcons}
               name="chevron-right"
@@ -304,27 +309,19 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             />
           </TouchableOpacity>
 
-          <View style={styles.textAreaContainer}>
-            <TouchableOpacity
-              onPress={() => setJobOverviewModalVisible(true)}
-              style={styles.textButton}
-            >
-              <AppBoldText style={styles.textAreaLabel}> Job Overview</AppBoldText>
-            </TouchableOpacity>
-          </View>
         </View>
       </ScrollView>
     </Modal>
   );
 };
 const styles = StyleSheet.create({
-  scrollView: { padding: 20, backgroundColor: "pink", height: 1150 },
+  scrollView: { padding: 20, backgroundColor: "pink", height: 1200 },
   addJobContainer: {
     alignItems: "center",
     padding: 20,
     backgroundColor: "white",
     width: "100%",
-    height: 980,
+    height: 1060,
     borderRadius: 30,
   },
   header: {
@@ -367,39 +364,54 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    padding: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+  },
+  middleCompanyInfoButton: {
+    width: "100%",
+    height: 70,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
     borderBottomWidth: 1,
     borderBottomColor: "black",
   },
   buttons: {
     width: "100%",
-    height: 60,
+    height: 70,
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 4,
     flexDirection: "row",
-    borderBottomWidth: 1,
+    borderBottomWidth:1,
     borderBottomColor: "black",
   },
+  arrowIcons:{ position:'absolute', left:292},
   lastButton: {
     width: "100%",
     height: 60,
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 4,
+  
     flexDirection: "row",
   },
 
-  buttonTextColor: { color: "black" },
-  arrowIcons: { position: "absolute", left: 295 },
-  textAreaContainer: {
+  buttonTextColor: { color: "black", fontSize:18,   },
+  
+  jobOverviewContainer: {
     width: "100%",
     alignItems: "center",
     borderWidth: 1,
     marginTop: 15,
-    marginBottom: 40,
+    marginBottom: 5,
     borderRadius: 20,
     
+  },
+  companyDescriptionContainer:{
+    width: "100%",
+    alignItems: "center",
+    borderWidth: 1,
+    marginBottom: 45,
+    borderRadius: 20,
   },
   textButton: {
     width: "100%",

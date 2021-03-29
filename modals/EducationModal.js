@@ -25,11 +25,11 @@ const EducationModal = ({
     <Modal  animationType="slide" visible={educationModalVisible}>
   
       <View style={styles.educationTypeContainer}>
-      <ModalHeader leftIcon="chevron-left" rightIcon='check' screenTitle='Education' border={1} closeModal={setEducationModalVisible} />
+      <ModalHeader leftIcon="chevron-left"  screenTitle='Education' border={1} closeModal={setEducationModalVisible} />
         <View
           style={{
             width: "100%",
-            marginTop: 40,
+            marginTop: 60,
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "center",

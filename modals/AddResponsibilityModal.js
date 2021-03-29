@@ -20,13 +20,14 @@ const AddResponsibility = ({
     setAddResponsibilityModalVisible(false);
     addTextBox(newResponsibilityText);
     setNewResponsibilityText("");
+    
   };
   return (
-    <Modal animationType="slide" visible={addResponsibilityModalVisible}>
+    <Modal  animationType="slide" visible={addResponsibilityModalVisible}>
     
 
       <View style={styles.textInputContainer}>
-      <ModalHeader leftIcon='chevron-left' rightIcon="check" screenTitle="Add" border={1} closeModal={setAddResponsibilityModalVisible} />
+      <ModalHeader addNewResponsibility={addNewResponsibility} leftIcon='chevron-left' rightIcon="check" screenTitle="Add" border={1} closeModal={setAddResponsibilityModalVisible} />
         <TextInput
           value={newResponsibilityText}
           onChangeText={(newResponsibilityText) =>

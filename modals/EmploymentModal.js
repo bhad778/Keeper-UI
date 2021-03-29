@@ -16,28 +16,21 @@ const EmploymentModal = ({
 
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
-    setEmploymentType(buttonPressed);
+    setEmploymentType(clickedButton);
   };
   return (
     <Modal animationType="slide" visible={employmentModalVisible}>
       
      
       <View style={styles.employmentTypeContainer}>
-      <ModalHeader rightIcon='check' leftIcon="chevron-left" screenTitle='Employment' closeModal={setEmploymentModalVisible} border={1} />
+      <ModalHeader leftIcon="chevron-left" screenTitle='Employment' closeModal={setEmploymentModalVisible} border={1} />
         <View
-          style={{
-            width: "100%",
-            marginTop: 40,
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={styles.employmentButtonsContainer}
         >
           <TouchableOpacity
-            onPress={() => onButtonClick({ button1: "full-time" })}
+            onPress={() => onButtonClick({ button1: true })}
             style={
-              buttonPressed.button1 == "full-time"
+              buttonPressed.button1 == true
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -45,9 +38,9 @@ const EmploymentModal = ({
             <Text>Full time</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button2: "part-time" })}
+            onPress={() => onButtonClick({ button2: true })}
             style={
-              buttonPressed.button2 == "pressed"
+              buttonPressed.button2 == true
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -55,9 +48,9 @@ const EmploymentModal = ({
             <Text>Part Time</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button3: "contract" })}
+            onPress={() => onButtonClick({ button3: true })}
             style={
-              buttonPressed.button3 == "contract"
+              buttonPressed.button3 == true
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -65,9 +58,9 @@ const EmploymentModal = ({
             <Text>Contract</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button4: "other" })}
+            onPress={() => onButtonClick({ button4: true })}
             style={
-              buttonPressed.button4 == "other"
+              buttonPressed.button4 == true
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -88,6 +81,14 @@ const styles = StyleSheet.create({
   employmentTypeContainer: {
     padding:20,
     flex: 6,
+    alignItems: "center",
+  },
+  employmentButtonsContainer:{
+    width: "100%",
+    marginTop: 60,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
     alignItems: "center",
   },
   employmentButtons: {

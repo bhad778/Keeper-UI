@@ -11,23 +11,25 @@ import {
 import ModalHeader from "../components/ModalHeader";
 
 const JobOverviewModal = ({
+  setJobOverview,
   jobOverviewModalVisible,
   setJobOverviewModalVisible,
 }) => {
-  const [text, setText] = useState("");
+  const [overviewText, setOverviewText] = useState("");
   return (
     <Modal visible={jobOverviewModalVisible}>
       <View style={styles.textSection}>
-      <ModalHeader leftIcon="chevron-left" rightIcon='check' screenTitle='Overview' border={1} closeModal={setJobOverviewModalVisible} />
+      <ModalHeader saveText={setJobOverview} text={overviewText} leftIcon="chevron-left"  screenTitle='Overview' border={1} closeModal={setJobOverviewModalVisible} />
 
         <TextInput
           
           placeholder="Job Overview..."
           placeholderTextColor="black"
-          value={text}
+          value={overviewText}
           style={styles.textInput}
           multiline={true}
-          onChangeText={(text) => setText(text)}
+          onChangeText={(overviewText) => setOverviewText(overviewText)}
+          onEndEditing={() => setJobOverview()}
         />
       </View>
     </Modal>
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  textSection: { flex: 6, alignItems: "center", justifyContent: "center", padding:20, marginTop:10 },
+  textSection: { flex: 6, alignItems: "center", justifyContent: "center", padding:20, marginTop:20 },
   textInput: { width: "90%", height: "90%", textAlignVertical:'top', marginTop:20},
 });
 

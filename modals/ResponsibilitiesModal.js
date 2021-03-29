@@ -31,6 +31,8 @@ const ResponsibilitiesModal = ({
     const addResponsibility = [...responsibilities];
     addResponsibility.push(text);
     setResponsibilities(addResponsibility);
+    setResponsibilitiesList(responsibilities);
+    console.log(responsibilities);
   };
 
   const changeText = (index, responsibility) => {
@@ -39,7 +41,7 @@ const ResponsibilitiesModal = ({
     setResponsibilities(text);
   };
 
-  const makeTextBox = (responsibility, index) => {
+  const textBox = (responsibility, index) => {
     return (
       <View key={index} style={styles.textAreasContainer}>
         <TouchableOpacity
@@ -59,37 +61,33 @@ const ResponsibilitiesModal = ({
       </View>
     );
   };
-  const goBackAndSave = () => {
-    setResponsibilitiesList(responsibilities);
-    setResponsibilitiesModalVisible(false);
-  };
-  const goBackAndCancel = () => {
-    setResponsibilitiesModalVisible(false);
-    setResponsibilities([]);
-  };
+  
+  
   return (
     <Modal visible={responsibilitiesModalVisible}>
       <AddResponsibilityModal
         addResponsibilityModalVisible={addResponsibilityModalVisible}
         setAddResponsibilityModalVisible={setAddResponsibilityModalVisible}
         addTextBox={addTextBox}
+      
       />
-      <View style={styles.headerContainer}>
-      <ModalHeader leftIcon="chevron-left" rightIcon='check' border={1} closeModal={setResponsibilitiesModalVisible} screenTitle='Responsibilities' />
+      
 
-      </View>
+      
 
       <ScrollView contentContainerStyle={styles.scrollView}>
+      <ModalHeader leftIcon="chevron-left"  border={1} closeModal={setResponsibilitiesModalVisible} screenTitle='Responsibilities' />
+
         <TouchableOpacity
           onPress={() => setAddResponsibilityModalVisible(true)}
           style={styles.addResponsibilityButton}
         >
           <Text style={{ fontSize: 20 }}>Add Responsibility</Text>
-          <Icon size={30} name="chevron-right" />
+          <Icon  size={30} name="chevron-right" />
         </TouchableOpacity>
         {responsibilities.length >= 0
           ? responsibilities.map((responsibility, index) =>
-              makeTextBox(responsibility, index)
+              textBox(responsibility, index)
             )
           : null}
       </ScrollView>
@@ -97,21 +95,23 @@ const ResponsibilitiesModal = ({
   );
 };
 const styles = StyleSheet.create({
-  headerContainer:{padding:20},
+  
   scrollView: { alignItems: "center", padding:20,  },
 
   addResponsibilityButton: {
     flexDirection: "row",
     width: "100%",
     borderWidth: 1,
-    borderRadius: 20,
-    height: 60,
-    
+    borderRadius: 30,
+    height: 65,
+    padding:15,
+    marginTop:60,
     borderColor: "#dadada",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
   },
-  textAreasContainer: { width: "90%", marginBottom: 20 },
+  
+  textAreasContainer: { width: "100%", marginBottom: 20 },
   textAreas: {
     padding: 15,
     height: 100,

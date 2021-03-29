@@ -13,7 +13,7 @@ import ModalHeader from "../components/ModalHeader";
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
-  setLocationValue,
+  setLocation
 }) => {
   const [locationText, setLocationText] = useState("");
   const [data, setData] = useState();
@@ -22,17 +22,16 @@ const LocationModal = ({
     fetch(`http://www.omdbapi.com/?t=${locationText}&apikey=42c21425`)
       .then((response) => response.json())
       .then((response) => setData(response))
-      .then(setLocationValue(data));
   }, [locationText]);
 
-  const goBack = () => {
-    setLocationModalVisible(false);
-  };
+  const saveLocation = (location) => {
+    setLocation(location)
+  }
   return (
     <Modal animationType="slide" visible={locationModalVisible}>
 
       <View style={styles.searchContainer}>
-      <ModalHeader rightIcon='check' leftIcon="chevron-left" screenTitle='Location' border={1} closeModal={setLocationModalVisible} />
+      <ModalHeader leftIcon="chevron-left" screenTitle='Location' border={1} closeModal={setLocationModalVisible} />
 
         <View style={styles.textInputContainer}>
           <TextInput
@@ -45,13 +44,13 @@ const LocationModal = ({
         {data && (
           <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
-            <TouchableOpacity style={styles.cityOptionsButton}>
+            <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{data.Title}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cityOptionsButton}>
+            <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{data.Released}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.lastCityOptionsButton}>
+            <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{data.Genre}</Text>
             </TouchableOpacity>
           </View>

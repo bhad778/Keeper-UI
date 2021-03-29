@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ModalHeader from "../components/ModalHeader";
+import { button } from "@aws-amplify/ui";
 const Compensation = ({
   compensationModalVisible,
   setCompensationModalVisible,
-  setCompensation,
+  setCompensationType,
 }) => {
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
@@ -32,7 +33,7 @@ const Compensation = ({
 
       <View style={styles.sliderSection}>
     
-        <ModalHeader rightIcon="chevron-left" leftIcon="check" border={1} closeModal={setCompensationModalVisible} screenTitle='Compensation' />
+        <ModalHeader  leftIcon="chevron-left" border={1} closeModal={setCompensationModalVisible} screenTitle='Compensation' />
 
     
         <View style={styles.buttonsContainer}>
@@ -100,6 +101,7 @@ const Compensation = ({
                 ? (values)=> setMultiSliderValueAnnual(values)
                 : (values) => setMultiSliderValueHourly(values)
             }
+            onValuesChangeFinish={(values) => setCompensationType(values)}
             min={buttonPressed === "annually" ? 15000 : 8}
             max={buttonPressed === "annually" ? 200000 : 100}
             step={buttonPressed === "annually" ? 1000 : 2}
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    marginTop:40,
+    marginTop:60,
     marginBottom: 40,
   },
   buttons: {
@@ -151,6 +153,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: { color: "black" },
-  buttonTextPressed: { color: "white" },
+  buttonTextPressed: { color: "black" },
 });
 export default Compensation;
