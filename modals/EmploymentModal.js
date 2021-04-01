@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 import ModalHeader from "../components/ModalHeader";
-
+import AppBoldText from '../components/AppBoldText'
 const EmploymentModal = ({
   setEmploymentType,
   employmentModalVisible,
@@ -24,9 +24,7 @@ const EmploymentModal = ({
      
       <View style={styles.employmentTypeContainer}>
       <ModalHeader leftIcon="chevron-left" screenTitle='Employment' closeModal={setEmploymentModalVisible} border={1} />
-        <View
-          style={styles.employmentButtonsContainer}
-        >
+          <View style={styles.employmentButtonsContainer1}>
           <TouchableOpacity
             onPress={() => onButtonClick({ button1: true })}
             style={
@@ -35,7 +33,7 @@ const EmploymentModal = ({
                 : styles.employmentButtons
             }
           >
-            <Text>Full time</Text>
+            <AppBoldText style={styles.buttonsText}>Full time</AppBoldText>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onButtonClick({ button2: true })}
@@ -45,8 +43,10 @@ const EmploymentModal = ({
                 : styles.employmentButtons
             }
           >
-            <Text>Part Time</Text>
+            <AppBoldText style={styles.buttonsText}>Part Time</AppBoldText>
           </TouchableOpacity>
+          </View>
+          <View style={styles.employmentButtonsContainer2}>
           <TouchableOpacity
             onPress={() => onButtonClick({ button3: true })}
             style={
@@ -55,7 +55,7 @@ const EmploymentModal = ({
                 : styles.employmentButtons
             }
           >
-            <Text>Contract</Text>
+            <AppBoldText style={styles.buttonsText}>Contract</AppBoldText>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onButtonClick({ button4: true })}
@@ -65,50 +65,60 @@ const EmploymentModal = ({
                 : styles.employmentButtons
             }
           >
-            <Text>Other</Text>
+            <AppBoldText style={styles.buttonsText}>Other</AppBoldText>
           </TouchableOpacity>
-        </View>
+          </View>
+          
+        
       </View>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  header: { 
-    justifyContent: "center",
-    alignItems: "center",
-  },
+ 
   employmentTypeContainer: {
     padding:20,
     flex: 6,
     alignItems: "center",
+    
   },
-  employmentButtonsContainer:{
+
+  buttonsText:{fontSize:20},
+
+  employmentButtonsContainer1:{
     width: "100%",
     marginTop: 60,
     flexDirection: "row",
-    flexWrap: "wrap",
+    justifyContent: "center",
+    marginBottom:5
+  },
+  employmentButtonsContainer2:{
+    width: "100%",
+    
+    flexDirection: "row",
+  
     justifyContent: "center",
     alignItems: "center",
   },
   employmentButtons: {
-    margin: 8,
+    margin:4,
     justifyContent: "center",
     alignItems: "center",
     height: 50,
-    width: 150,
+    width: "49%",
     backgroundColor: "#f0f0f0",
-    borderRadius: 20,
+    borderRadius: 30,
   },
   employmentButtonsPressed: {
-    margin: 6,
+    margin:4,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f6cffe",
     height: 50,
-    width: 150,
+    width: "49%",
 
-    borderRadius: 20,
+    borderRadius: 30,
   },
 });
 export default EmploymentModal;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ModalHeader from "../components/ModalHeader";
-import { button } from "@aws-amplify/ui";
+import AppBoldText from '../components/AppBoldText'
 const Compensation = ({
   compensationModalVisible,
   setCompensationModalVisible,
@@ -45,15 +45,14 @@ const Compensation = ({
                 : styles.buttons
             }
           >
-            <Text
+            <AppBoldText
               style={
-                buttonTextPressed === "annually"
-                  ? styles.buttonTextPressed
-                  : styles.buttonText
+            
+                   styles.buttonText
               }
             >
               Annually
-            </Text>
+            </AppBoldText>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onButtonClick("hourly")}
@@ -63,15 +62,14 @@ const Compensation = ({
                 : styles.buttons
             }
           >
-            <Text
+            <AppBoldText
               style={
-                buttonTextPressed === "hourly"
-                  ? styles.buttonTextPressed
-                  : styles.buttonText
+              
+                   styles.buttonText
               }
             >
               Hourly
-            </Text>
+            </AppBoldText>
           </TouchableOpacity>
         </View>
 
@@ -90,6 +88,7 @@ const Compensation = ({
              markerStyle={{ backgroundColor: "black" }} 
             trackStyle={{ backgroundColor: "#b6b6b6", width: 1 }}
             selectedStyle={{ backgroundColor: "black" }}
+            sliderSection={270}
             values={
               buttonPressed === "annually"
                 ? [multiSliderValueAnnual[0], multiSliderValueAnnual[1]]
@@ -125,18 +124,18 @@ const styles = StyleSheet.create({
     
   },
   buttonsContainer: {
-    alignItems: "center",
+    justifyContent:'flex-start',
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
     marginTop:60,
     marginBottom: 40,
+  
   },
   buttons: {
     borderRadius: 30,
-    width: "45%",
+    
+    width: "49%",
     height: 50,
-    margin: 5,
+    margin: 4,
     marginBottom: 10,
     backgroundColor: "#f0f0f0",
     justifyContent: "center",
@@ -144,15 +143,15 @@ const styles = StyleSheet.create({
   },
   buttonsPressed: {
     borderRadius: 30,
-    width: "45%",
+    width: "49%",
     height: 50,
-    margin: 5,
+    margin: 4,
     marginBottom: 10,
     backgroundColor: "#f6cffe",
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonText: { color: "black" },
-  buttonTextPressed: { color: "black" },
+  buttonText: { color: "black", fontSize:20 },
+
 });
 export default Compensation;

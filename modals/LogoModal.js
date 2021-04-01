@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     alignItems: "center",
   },
-  logoContainer:{marginTop:40},
+  logoContainer:{marginTop:60},
   logoImage: { backgroundColor: "grey" },
 
   chooseLogoButton: {

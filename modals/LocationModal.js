@@ -6,10 +6,10 @@ import {
   Modal,
   TouchableOpacity,
   TextInput,
-  ScrollView,
 } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
+
 import ModalHeader from "../components/ModalHeader";
+
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
@@ -18,15 +18,16 @@ const LocationModal = ({
   const [locationText, setLocationText] = useState("");
   const [data, setData] = useState();
 
+
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?t=${locationText}&apikey=42c21425`)
       .then((response) => response.json())
       .then((response) => setData(response))
   }, [locationText]);
-
   const saveLocation = (location) => {
     setLocation(location)
   }
+ 
   return (
     <Modal animationType="slide" visible={locationModalVisible}>
 
@@ -41,8 +42,7 @@ const LocationModal = ({
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        {data && (
-          <View style={styles.cityOptionsButtonsContainer}>
+        {data ? <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{data.Title}</Text>
@@ -53,8 +53,9 @@ const LocationModal = ({
             <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{data.Genre}</Text>
             </TouchableOpacity>
-          </View>
-        )}
+          </View> : null }
+         
+        
       </View>
     </Modal>
   );
