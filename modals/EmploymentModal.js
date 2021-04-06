@@ -95,9 +95,7 @@ const styles = StyleSheet.create({
   },
   employmentButtonsContainer2:{
     width: "100%",
-    
     flexDirection: "row",
-  
     justifyContent: "center",
     alignItems: "center",
   },

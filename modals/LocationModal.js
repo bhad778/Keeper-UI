@@ -24,6 +24,8 @@ const LocationModal = ({
       .then((response) => response.json())
       .then((response) => setData(response))
   }, [locationText]);
+
+
   const saveLocation = (location) => {
     setLocation(location)
   }
@@ -42,7 +44,7 @@ const LocationModal = ({
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        {data ? <View style={styles.cityOptionsButtonsContainer}>
+        {locationText ? <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{data.Title}</Text>

@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 12,
     width: "85%",
-    fontSize: 20,
+    fontSize: 18,
   },
 
   button: { width: "60%" },

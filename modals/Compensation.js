@@ -124,10 +124,12 @@ const styles = StyleSheet.create({
     
   },
   buttonsContainer: {
-    justifyContent:'flex-start',
+    justifyContent:'center',
     flexDirection: "row",
     marginTop:60,
+    width:'100%',
     marginBottom: 40,
+    
   
   },
   buttons: {
