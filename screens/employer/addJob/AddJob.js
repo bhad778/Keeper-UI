@@ -131,7 +131,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         educationModalVisible={educationModalVisible}
         setEducationModalVisible={setEducationModalVisible}
       />
-
+      <View>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <ModalHeader
         leftIcon="x"
@@ -311,11 +311,14 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
         </View>
       </ScrollView>
+      </View>
+     
     </Modal>
   );
 };
 const styles = StyleSheet.create({
-  scrollView: { padding: 20, backgroundColor: "pink", height: 1200 },
+  scrollViewContainer:{backgroundColor:'red'  },
+  scrollView: { padding: 20, backgroundColor: "pink", height:1250},
   addJobContainer: {
     alignItems: "center",
     padding: 20,
