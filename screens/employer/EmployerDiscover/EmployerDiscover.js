@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Swiper from "../../../components/swiper/Swiper";
 
 import {
   ActivityIndicator,
@@ -7,7 +6,6 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  TouchableOpacity,
   Image,
   Easing,
 } from "react-native";
@@ -18,6 +16,10 @@ import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
+import { updateLoggedInUser } from "../../../redux/actions/UsersActions";
+import { updateMatches } from "../../../redux/actions/MatchesActions";
+
+import UsersService from "../../../services/UsersService";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -114,6 +116,18 @@ class EmployerDiscover extends Component {
   };
 
   componentDidMount() {
+    UsersService.getEmployer({
+      email: "Bhad7778@gmail.com",
+    }).then((data) => {
+      this.props.updateLoggedInUser(data[0]);
+      UsersService.getMatches({
+        accountType: data[0].accountType,
+        matches: data[0].matches,
+      }).then((data) => {
+        this.props.updateMatches(data);
+      });
+    });
+
     this.runSlideUpAnimation();
   }
 
@@ -385,14 +399,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { bottomNavBarHeight } = state;
-  return { bottomNavBarHeight };
+  const { bottomNavBarHeight, loggedInUserObject } = state;
+  return { bottomNavBarHeight, loggedInUserObject };
 };
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateBottomNavBarHeight,
+      updateLoggedInUser,
+      updateMatches,
     },
     dispatch
   );

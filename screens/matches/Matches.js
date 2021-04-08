@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -9,26 +9,15 @@ import {
 } from "react-native";
 import { Avatar } from "react-native-paper";
 import Header from "../../components/header/Header";
-import EmployerService from "../../services/EmployerService";
 import { connect } from "react-redux";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const Matches = ({ navigation, selectedJob }) => {
-  const [matches, setMatches] = useState([]);
-
-  useEffect(() => {
-    EmployerService.getEmployer({
-      email: "employer123@gmail.com",
-    }).then((data) => {
-      setMatches(data[0].matches);
-    });
-  }, []);
-
-  const switchScreen = (img, name, connectionId) => {
+const Matches = ({ navigation, selectedJob, matches }) => {
+  const switchScreen = (img, firstName, connectionId) => {
     navigation.navigate("Messages", {
       pic: img,
-      title: name,
+      firstName: firstName,
       connectionId: connectionId,
     });
   };
@@ -59,7 +48,11 @@ const Matches = ({ navigation, selectedJob }) => {
                   style={styles.matchButton}
                   underlayColor="#D3D3D3"
                   onPress={() => {
-                    switchScreen(item.profilePic, item.name, item.connectionId);
+                    switchScreen(
+                      item.profilePic,
+                      item.firstName,
+                      item.connectionId
+                    );
                   }}
                 >
                   <View style={styles.avatarImageContainer}>
@@ -73,7 +66,9 @@ const Matches = ({ navigation, selectedJob }) => {
                     />
                     <View style={styles.matchTextContainer}>
                       <View style={styles.notificationButtonContainer}>
-                        <Text style={styles.name}>Seto Kaiba</Text>
+                        <Text style={styles.name}>
+                          {item.firstName + " " + item.lastName}
+                        </Text>
                       </View>
 
                       <Text numberOfLines={1} style={styles.nameInfo}>
@@ -165,8 +160,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, matches } = state;
+  return { selectedJob, matches };
 };
 
 export default connect(mapStateToProps)(Matches);

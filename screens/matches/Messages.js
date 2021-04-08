@@ -17,7 +17,7 @@ const Messages = ({ navigation, route, selectedJob }) => {
   const [webSocket, setWebSocket] = useState();
 
   const user = { _id: "asdf@asdf.com" };
-  const { title } = route.params;
+  const { firstName } = route.params;
 
   useEffect(() => {
     if (!webSocket) {
@@ -124,7 +124,7 @@ const Messages = ({ navigation, route, selectedJob }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.middleSection}>
-          <Text style={styles.title}>Seto</Text>
+          <Text style={styles.title}>{firstName}</Text>
         </View>
         <View style={styles.rightSection}>
           <Avatar.Image
