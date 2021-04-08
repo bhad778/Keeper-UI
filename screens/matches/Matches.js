@@ -37,6 +37,7 @@ const Matches = ({ navigation, selectedJob }) => {
     <View
       style={{
         backgroundColor: selectedJob.color,
+        flex: 1,
       }}
     >
       <ScrollView
@@ -46,12 +47,12 @@ const Matches = ({ navigation, selectedJob }) => {
       >
         <Header />
         <View style={styles.matchesPageContents}>
-          <View style={styles.matchesScrollViewContainer}>
-            <View style={styles.whiteMatchesContainer}>
-              <View style={styles.scrollViewHeaderTextContainer}>
-                <Text style={styles.scrollViewHeaderText}>Matches</Text>
-              </View>
+          <View style={styles.whiteMatchesContainer}>
+            <View style={styles.scrollViewHeaderTextContainer}>
+              <Text style={styles.scrollViewHeaderText}>Matches</Text>
+            </View>
 
+            <View style={styles.matchesContainer}>
               {matches.map((item, i) => (
                 <TouchableOpacity
                   key={i}
@@ -91,6 +92,16 @@ const Matches = ({ navigation, selectedJob }) => {
 };
 
 const styles = StyleSheet.create({
+  matchesPageContents: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginTop: 20,
+    flex: 1,
+    paddingBottom: 100,
+  },
   scrollViewHeaderTextContainer: {
     justifyContent: "flex-end",
     alignItems: "flex-start",
@@ -99,31 +110,28 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   scrollViewHeaderText: { fontSize: 40 },
-  matchesPageContents: {
-    height: SCREEN_HEIGHT - 204,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  matchesScrollViewContainer: {
-    height: "95%",
-    width: "100%",
-    paddingRight: 15,
-    paddingLeft: 15,
-  },
-  whiteMatchesContainer: {
-    width: "100%",
-    backgroundColor: "white",
-    borderRadius: 35,
+  matchesContainer: {
+    paddingBottom: 10,
   },
   matchButton: {
-    height: 105,
+    height: 90,
+    marginTop: 5,
+    marginBottom: 5,
     width: "90%",
     backgroundColor: "white",
   },
   matchTextContainer: {
     height: "100%",
     width: "68%",
+  },
+  whiteMatchesContainer: {
+    width: "100%",
+    minHeight: SCREEN_HEIGHT - 230,
+    flex: 1,
+    backgroundColor: "white",
+    borderRadius: 35,
+    paddingLeft: 20,
+    overflow: "hidden",
   },
   avatarImageContainer: {
     flexDirection: "row",

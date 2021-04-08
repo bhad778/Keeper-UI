@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Text,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import Header from "../../../components/header/Header";
@@ -22,36 +21,36 @@ const Resume = (props) => {
 
   const [pastJobs] = useState([
     {
-      months: "FIRST",
-      jobTitle: "FIRST",
-      company: "Snapchat Inc.",
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-      enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat.`,
-    },
-    {
-      months: "SEPTEMBER 2013 - APRIL 2015",
+      number: "01",
       jobTitle: "Senior Web Developer",
-      company: "Snapchat Inc.",
+      months: "May 2018 - Present",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
       enim ad minim veniam, quis nostrud exercitation ullamco laboris
       nisi ut aliquip ex ea commodo consequat.`,
     },
     {
-      months: "SEPTEMBER 2013 - APRIL 2015",
-      jobTitle: "Senior Web Developer",
-      company: "Snapchat Inc.",
+      number: "02",
+      jobTitle: "Web Developer",
+      months: "July 2016 - May 2018",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
       enim ad minim veniam, quis nostrud exercitation ullamco laboris
       nisi ut aliquip ex ea commodo consequat.`,
     },
     {
-      months: "LAST",
-      jobTitle: "LAST",
-      company: "Snapchat Inc.",
+      number: "03",
+      jobTitle: "Junior Web Developer",
+      months: "Jan 2013 - July 2016",
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      nisi ut aliquip ex ea commodo consequat.`,
+    },
+    {
+      number: "04",
+      jobTitle: "Front End Intern",
+      months: "May 2011 - Jan 2013",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
       enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -59,17 +58,31 @@ const Resume = (props) => {
     },
   ]);
   const [activeAccordions, setActiveAccordions] = useState([]);
+  const [education] = useState([
+    {
+      degreeType: "MFA",
+      school: "Notre Dame",
+      major: "Computer Science",
+      months: "2014 - 2016",
+    },
+    {
+      degreeType: "BFA",
+      school: "University of Georgia",
+      major: "Computer Science",
+      months: "2010 - 2014",
+    },
+  ]);
   const [skills] = useState([
-    "ILLUSTRATION",
-    "GRAPHIC DESIGN",
-    "BRANDING",
-    "UI/UX DESIGN",
-    "WEB DESIGN",
-    "WEB DEVELOPMENT",
-    "PHOTOGRAPHY",
-    "CREATIVE DIRECTION",
-    "ADVERTISING",
-    "LAYOUT",
+    "Illustration",
+    "Graphic Design",
+    "Branding",
+    "UI/UX Design",
+    "Web Design",
+    "Web Development",
+    "Photography",
+    "Creative Director",
+    "Advertising",
+    "Layout",
   ]);
 
   const onAccordionClick = (i) => {
@@ -105,7 +118,6 @@ const Resume = (props) => {
       onStartShouldSetResponder={onDoublePress}
     >
       <HideBottomNavScrollView
-        style={styles.peopleWhoLikedYou}
         navigation={props.navigation}
         currentEmployee={props.currentEmployee}
       >
@@ -155,54 +167,37 @@ const Resume = (props) => {
             </View>
           </View>
           <View style={styles.experienceDetailsSection}>
-            <View style={styles.experienceAndAvailabilitySection}>
-              <View style={styles.yearsOfExperienceSection}>
-                <AppBoldText style={styles.name}>
-                  8 <Text style={{ fontSize: 20 }}>YRS</Text>
-                </AppBoldText>
-                <AppBoldText style={styles.experienceAndAvailabilitySubtitles}>
-                  EXPERIENCE
-                </AppBoldText>
-              </View>
-              <View style={styles.availabilitySection}>
-                <AppBoldText style={styles.name}>Now</AppBoldText>
-                <AppBoldText style={styles.experienceAndAvailabilitySubtitles}>
-                  AVAILABILITY
-                </AppBoldText>
-              </View>
+            <View style={styles.jobHistoryTitleSection}>
+              <AppBoldText style={styles.jobHistoryTitle}>
+                Job History
+              </AppBoldText>
             </View>
             <View style={styles.pastJobsSection}>
               {pastJobs.map((item, i) => (
                 <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
                   <View style={styles.specificPastJob}>
-                    <View
-                      style={
-                        i === pastJobs.length - 1
-                          ? styles.lastJobDetailsSection
-                          : styles.jobDetailsSection
-                      }
-                    >
-                      <AppBoldText style={styles.monthsText}>
-                        {item.months}
+                    <View style={styles.jobDetailsSection}>
+                      <FontAwesome
+                        style={styles.angleDownIcon}
+                        color="black"
+                        name={
+                          activeAccordions.includes(i)
+                            ? "angle-up"
+                            : "angle-down"
+                        }
+                        size={30}
+                      />
+                      <AppBoldText style={styles.numberText}>
+                        {item.number}
                       </AppBoldText>
                       <View style={styles.jobTitleContainer}>
                         <AppBoldText style={styles.jobTitleText}>
                           {item.jobTitle}
                         </AppBoldText>
-                        <FontAwesome
-                          style={styles.angleDownIcon}
-                          color="black"
-                          name={
-                            activeAccordions.includes(i)
-                              ? "angle-up"
-                              : "angle-down"
-                          }
-                          size={30}
-                        />
                       </View>
-                      <AppBoldText style={styles.subtitleText}>
-                        {item.company}
-                      </AppBoldText>
+                      <AppText style={styles.jobMonthsText}>
+                        {item.months}
+                      </AppText>
                       <AppParagraph
                         style={
                           activeAccordions.includes(i)
@@ -222,87 +217,53 @@ const Resume = (props) => {
               ))}
             </View>
             <View style={styles.skillsSection}>
-              <View style={styles.numberOfSkillsAndFocusedSkillsSection}>
-                <View style={styles.numberOfSkillsContainer}>
-                  <View style={styles.imageAndTextContainer}>
-                    <Text style={styles.skillCircleNumber}>12</Text>
-                    <Text style={styles.skillCircleImageSubtext}>Skills</Text>
-                    <Image
-                      style={styles.skillCircleImage}
-                      source={{
-                        uri:
-                          "https://rileymann.com/wp-content/uploads/2020/12/pare_skills-circle.png",
-                      }}
-                    ></Image>
-                  </View>
-                </View>
-                <View style={styles.focusedSkillsSection}>
-                  <View style={styles.focusedSkillContainer}>
-                    <AppBoldText style={styles.focusedSkill}>
-                      Illustration
-                    </AppBoldText>
-                  </View>
-                  <View style={styles.focusedSkillContainer}>
-                    <AppBoldText style={styles.focusedSkill}>
-                      Graphic Design
-                    </AppBoldText>
-                  </View>
-                  <View style={styles.focusedSkillContainer}>
-                    <AppBoldText style={styles.focusedSkill}>
-                      Branding
-                    </AppBoldText>
-                  </View>
-                </View>
-              </View>
+              <AppBoldText style={styles.skillsTitle}>Skills</AppBoldText>
               <View style={styles.skillsListSection}>
                 {skills.map((skill, i) => (
                   <View key={i} style={styles.skillContainer}>
-                    <Text style={styles.skillText}>{skill}</Text>
-                    <Text
+                    <AppParagraph style={styles.skillText}>
+                      {skill}
+                    </AppParagraph>
+                    <AppParagraph
                       style={
                         i === skills.length - 1
                           ? styles.hidden
                           : styles.bulletPoint
                       }
-                    ></Text>
+                    ></AppParagraph>
                   </View>
                 ))}
               </View>
             </View>
             <View style={styles.educationSection}>
-              <AppBoldText style={styles.educationTitle}>EDUCATION</AppBoldText>
-              <View style={styles.educationItemContainer}>
-                <View style={styles.degreeTypeAcronymContainer}>
-                  <Text style={styles.degreeTypeAcronym}>BFA</Text>
-                </View>
-                <View style={styles.educationDetails}>
-                  <AppBoldText style={styles.monthsText}>
-                    2010 -2014
-                  </AppBoldText>
-                  <AppBoldText>University of Georgia</AppBoldText>
-                  <AppBoldText
-                    style={[styles.subtitleText, styles.degreeTypeText]}
+              <AppBoldText style={styles.educationTitle}>Education</AppBoldText>
+              {/* style={styles.educationItemContainer} */}
+              {education.map((educationItem, i) => {
+                return (
+                  <View
+                    style={
+                      i === education.length - 1
+                        ? styles.lastEducationItemContainer
+                        : styles.educationItemContainer
+                    }
+                    key={i}
                   >
-                    Bachelor of Fine Arts
-                  </AppBoldText>
-                </View>
-              </View>
-              <View style={styles.educationItemContainer}>
-                <View style={styles.degreeTypeAcronymContainer}>
-                  <Text style={styles.degreeTypeAcronym}>MFA</Text>
-                </View>
-                <View style={styles.educationDetails}>
-                  <AppBoldText style={styles.monthsText}>
-                    2010 -2014
-                  </AppBoldText>
-                  <AppBoldText>University of Georgia</AppBoldText>
-                  <AppBoldText
-                    style={[styles.subtitleText, styles.degreeTypeText]}
-                  >
-                    Masters of Fine Arts
-                  </AppBoldText>
-                </View>
-              </View>
+                    <AppText style={styles.numberText}>
+                      {educationItem.months}
+                    </AppText>
+                    <View style={styles.jobTitleContainer}>
+                      <AppBoldText style={styles.jobTitleText}>
+                        {educationItem.major}
+                      </AppBoldText>
+                    </View>
+                    <AppText style={styles.jobMonthsText}>
+                      {educationItem.degreeType}
+                      &nbsp; &#9679; &nbsp;
+                      {educationItem.school}
+                    </AppText>
+                  </View>
+                );
+              })}
             </View>
           </View>
           <View
@@ -341,7 +302,6 @@ const Resume = (props) => {
           style={styles.dislikeButtonTouchableOpacity}
         >
           <Image
-            // style={styles.skillCircleImage}
             style={styles.dislikeButton}
             source={{
               uri:
@@ -384,31 +344,33 @@ const styles = StyleSheet.create({
     fontSize: 40,
     paddingTop: 10,
   },
+  jobHistoryTitle: {
+    fontSize: 40,
+    marginBottom: 10,
+  },
   jobTitle: {
     fontSize: 20,
     fontWeight: "500",
-  },
-  descriptionText: {
-    paddingBottom: 20,
   },
   experienceDetailsSection: {
     backgroundColor: "white",
     borderBottomLeftRadius: 45,
     borderBottomRightRadius: 45,
     borderRadius: 45,
+    marginTop: 50,
+    marginBottom: 50,
+    paddingTop: 60,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   experienceAndAvailabilitySection: {
     display: "flex",
     flexDirection: "row",
     height: 120,
   },
-  yearsOfExperienceSection: {
+  jobHistoryTitleSection: {
     display: "flex",
-    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    borderRightWidth: 1,
-    borderRightColor: "black",
   },
   availabilitySection: {
     display: "flex",
@@ -418,31 +380,28 @@ const styles = StyleSheet.create({
   },
   experienceAndAvailabilitySubtitles: {
     fontSize: 15,
-    fontWeight: "bold",
-  },
-  pastJobsSection: {
-    padding: 30,
-    borderTopWidth: 1,
-    borderTopColor: "black",
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
   },
   specificPastJob: {
     display: "flex",
     flexDirection: "row",
-  },
-  jobDetailsSection: {
-    flex: 1,
-    display: "flex",
     borderBottomWidth: 1,
     borderBottomColor: "black",
+    paddingTop: 20,
+    paddingBottom: 20,
   },
-  lastJobDetailsSection: {
+  numberText: {
+    fontSize: 15,
+  },
+  jobMonthsText: {
+    fontSize: 16,
+  },
+  jobDetailsSection: {
     flex: 1,
     display: "flex",
   },
   jobDetailsOpened: {
     display: "flex",
+    marginTop: 15,
     paddingBottom: 15,
   },
   hidden: {
@@ -457,36 +416,33 @@ const styles = StyleSheet.create({
     display: "flex",
   },
   jobTitleText: {
-    marginTop: 0,
-    marginBottom: 0,
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 10,
     lineHeight: 20,
   },
   angleDownIcon: {
     position: "absolute",
-    top: -8,
+    top: -10,
     alignSelf: "flex-end",
   },
   companyNameText: {
     marginTop: 0,
     lineHeight: 20,
   },
-
   skillsSection: {
     display: "flex",
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
-    paddingBottom: 40,
+    paddingBottom: 10,
+  },
+  skillsTitle: {
+    fontSize: 32,
+    marginTop: 30,
+    marginBottom: 30,
   },
   numberOfSkillsAndFocusedSkillsSection: {
     display: "flex",
     flexDirection: "row",
     minHeight: 200,
-  },
-  numberOfSkillsContainer: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
   imageAndTextContainer: {
     flex: 1,
@@ -525,10 +481,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingRight: 20,
-    paddingLeft: 20,
   },
   skillContainer: {
     display: "flex",
@@ -537,38 +489,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   skillText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    lineHeight: 20,
-    letterSpacing: 0.5,
+    fontSize: 17,
+    lineHeight: 26,
+    // letterSpacing: 0.5,
   },
   educationSection: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     paddingTop: 20,
     paddingBottom: 50,
   },
   educationTitle: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    fontSize: 28,
+    marginTop: 10,
+    marginBottom: 20,
   },
   educationItemContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    minHeight: 100,
+    marginBottom: 20,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+  },
+  lastEducationItemContainer: {
+    marginBottom: 20,
   },
   degreeTypeAcronymContainer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: 100,
+    marginRight: 20,
   },
   degreeTypeAcronym: {
-    fontWeight: "bold",
     fontSize: 26,
   },
   educationDetails: {
@@ -577,7 +527,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 1,
     borderBottomColor: "black",
-    marginRight: 20,
   },
   subtitleText: {
     marginTop: 0,
