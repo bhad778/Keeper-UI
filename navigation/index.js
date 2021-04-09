@@ -39,7 +39,6 @@ function RootNavigator() {
         component={BottomTabEmployerNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="RootEmployee"
         component={BottomTabEmployeeNavigator}
