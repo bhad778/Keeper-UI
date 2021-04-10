@@ -6,13 +6,19 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
-  Button,
 } from "react-native";
 import { Title } from "react-native-paper";
+import { connect } from "react-redux";
 import { Formik } from "formik";
+import { updateLoggedInUser } from "../../redux/actions/UsersActions";
+import { updateMatches } from "../../redux/actions/MatchesActions";
+import { updateEmployersJobs } from "../../redux/actions/EmployersJobsActions";
+import { bindActionCreators } from "redux";
 import * as SecureStore from "expo-secure-store";
 import { Auth } from "aws-amplify";
 import * as yup from "yup";
+
+import UsersService from "../../services/UsersService";
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -32,9 +38,14 @@ async function save(key, value) {
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const Login = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = ({
+  navigation,
+  updateLoggedInUser,
+  updateMatches,
+  updateEmployersJobs,
+}) => {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   // TODO sign in works now just need to take token and use it
   // also need to navigate to correct page
@@ -43,7 +54,10 @@ const Login = ({ navigation }) => {
   // does call to get user first time by using email then saves their mongoId for faster calls? or hits email index anyway
   const signIn = async (values) => {
     try {
-      let signInResponse = await Auth.signIn(values.email, values.password);
+      let signInResponse = await Auth.signIn(
+        "Bhad7778@gmail.com",
+        "Ululavit#8"
+      );
       save(
         "secretToken",
         signInResponse.signInUserSession.accessToken.jwtToken
@@ -51,7 +65,18 @@ const Login = ({ navigation }) => {
       if (
         signInResponse.attributes["custom:custom:accountType"] === "employer"
       ) {
-        navigation.navigate("RootEmployer");
+        UsersService.getEmployerData({
+          email: "Bhad7778@gmail.com",
+        })
+          .then((data) => {
+            updateLoggedInUser(data.userData);
+            updateMatches(data.matchesData);
+            updateEmployersJobs(data.employersJobs);
+            navigation.navigate("RootEmployer");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else if (
         signInResponse.attributes["custom:custom:accountType"] === "employee"
       ) {
@@ -91,7 +116,8 @@ const Login = ({ navigation }) => {
                 style={styles.inputText}
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
-                value={values.email}
+                // value={values.email}
+                value={"Bhad7778@gmail.com"}
                 keyboardType="email-address"
               />
               {errors.email && touched.email && (
@@ -106,7 +132,8 @@ const Login = ({ navigation }) => {
                 style={styles.inputText}
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
-                value={values.password}
+                // value={values.password}
+                value={"Ululavit#8"}
                 secureTextEntry
               />
               {errors.password && touched.password && (
@@ -117,12 +144,12 @@ const Login = ({ navigation }) => {
               <Text style={styles.forgot}>Forgot Password?</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={handleSubmit}
-              disabled={
-                (errors.email && touched.email) ||
-                (errors.password && touched.password) ||
-                !touched.email
-              }
+              onPress={signIn}
+              // disabled={
+              //   (errors.email && touched.email) ||
+              //   (errors.password && touched.password) ||
+              //   !touched.email
+              // }
               style={{
                 width: "80%",
                 backgroundColor:
@@ -198,4 +225,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+const mapStateToProps = (state) => {
+  const { loggedInUserObject } = state;
+  return { loggedInUserObject };
+};
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      updateLoggedInUser,
+      updateMatches,
+      updateEmployersJobs,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
