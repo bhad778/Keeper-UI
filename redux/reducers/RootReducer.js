@@ -4,10 +4,12 @@ import JobReducer from "./JobReducer";
 import MatchesReducer from "./MatchesReducer";
 import NavigationReducer from "./NavigationReducer";
 import UsersReducer from "./UsersReducer";
+import EmployersJobsReducer from "./EmployersJobsReducer";
 
 export default combineReducers({
   selectedJob: JobReducer,
   bottomNavBarHeight: NavigationReducer,
   loggedInUserObject: UsersReducer,
   matches: MatchesReducer,
+  employersJobs: EmployersJobsReducer,
 });

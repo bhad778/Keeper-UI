@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   StyleSheet,
@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Card, Appbar } from "react-native-paper";
-import JobsService from "../../../services/JobsService";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateSelectedJob } from "../../../redux/actions/JobActions";
@@ -25,17 +24,9 @@ const JobBoard = ({
   jobBoardModalOpen,
   setJobBoardModalOpen,
   selectedJob,
+  employersJobs,
 }) => {
-  const [jobs, setJobs] = useState();
   const [addJobModalVisible, setAddJobModalVisible] = useState(false);
-
-  useEffect(() => {
-    JobsService.getEmployersJobs({
-      email: "employer123@gmail.com",
-    }).then((data) => {
-      setJobs(data);
-    });
-  }, []);
 
   const selectJob = (selectedJob) => {
     setJobBoardModalOpen(false);
@@ -70,10 +61,10 @@ const JobBoard = ({
         </Appbar.Header>
         <View style={styles.scrollViewContainer}>
           <ScrollView contentContainerStyle={styles.scrollView}>
-            {!jobs && <ActivityIndicator size="large" />}
+            {!employersJobs && <ActivityIndicator size="large" />}
 
-            {jobs &&
-              jobs.map((job, i) => (
+            {employersJobs &&
+              employersJobs.map((job, i) => (
                 <Card
                   key={i}
                   style={{
@@ -107,7 +98,7 @@ const JobBoard = ({
                 </Card>
               ))}
             {/* if theres an odd number of jobs the last job needs to be left aligned */}
-            {jobs && !jobs.length % 2 == 0 && (
+            {employersJobs && !employersJobs.length % 2 == 0 && (
               <Card
                 style={{
                   borderRadius: 15,
@@ -186,8 +177,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, employersJobs } = state;
+  return { selectedJob, employersJobs };
 };
 
 const mapDispatchToProps = (dispatch) =>
