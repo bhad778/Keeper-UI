@@ -7,13 +7,7 @@ const EducationModal = ({
   educationModalVisible,
   setEducationModalVisible,
 }) => {
-  const [buttonPressed, setButtonPressed] = useState({
-    button1: "",
-    button2: "",
-    button3: "",
-    button4: "",
-    button5: ""
-  });
+  const [buttonPressed, setButtonPressed] = useState('');
 
   
 
@@ -32,9 +26,9 @@ const EducationModal = ({
         >
 
             <TouchableOpacity
-              onPress={() => onButtonClick({button1: true})}
+              onPress={() => onButtonClick("GED")}
               style={
-                buttonPressed.button1 == true
+                buttonPressed == "GED"
                   ? styles.educationButtonsPressed
                   : styles.educationButtons
               }
@@ -42,10 +36,10 @@ const EducationModal = ({
               <AppBoldText style={styles.buttonText}>GED</AppBoldText>
             </TouchableOpacity>
                      <TouchableOpacity
-                     onPress={() => onButtonClick({button2:true})}
+                     onPress={() => onButtonClick( "Associate's")}
                     
                      style={
-                       buttonPressed.button2 == true
+                       buttonPressed == "Associate's"
                          ? styles.educationButtonsPressed
                          : styles.educationButtons
                      }
@@ -55,10 +49,10 @@ const EducationModal = ({
                    </View>
                    <View style={styles.buttonsContainer2}>
                    <TouchableOpacity
-                            onPress={() => onButtonClick({button3:true})}
+                            onPress={() => onButtonClick("Bachelor's")}
                             
                             style={
-                              buttonPressed.button3 == true
+                              buttonPressed == "Bachelor's"
                                 ? styles.educationButtonsPressed
                                 : styles.educationButtons
                             }
@@ -66,10 +60,10 @@ const EducationModal = ({
                             <AppBoldText style={styles.buttonText}>Bachelor's</AppBoldText>
                           </TouchableOpacity>
                                    <TouchableOpacity
-                                   onPress={() => onButtonClick({button4:true})}
+                                   onPress={() => onButtonClick("Master's")}
                                 
                                    style={
-                                     buttonPressed.button4 == true
+                                     buttonPressed == "Master's"
                                        ? styles.educationButtonsPressed
                                        : styles.educationButtons
                                    }
@@ -79,10 +73,10 @@ const EducationModal = ({
                    </View>
                             <View style={styles.buttonsContainer3}>
                             <TouchableOpacity
-                                          onPress={() => onButtonClick({button5:true})}
+                                          onPress={() => onButtonClick("Doctoral")}
                                     
                                           style={
-                                            buttonPressed.button5 == true
+                                            buttonPressed == "Doctoral"
                                               ? styles.educationButtonsPressed
                                               : styles.educationButtons
                                           }

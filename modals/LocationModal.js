@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import ModalHeader from "../components/ModalHeader";
-
+import Places from "google-places-web";
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
@@ -17,13 +17,17 @@ const LocationModal = ({
 }) => {
   const [locationText, setLocationText] = useState("");
   const [data, setData] = useState();
+  Places.apiKey = "AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I";
+  const radius = 2000;
+  const language = "en"
+  const type = "cities"
 
-
-  useEffect(() => {
-    fetch(`http://www.omdbapi.com/?t=${locationText}&apikey=42c21425`)
-      .then((response) => response.json())
-      .then((response) => setData(response))
-  }, [locationText]);
+  Places.autocomplete({ input: locationText, radius, language, type  })
+  .then(results => {
+    setData(results)
+    // results array of partial matches
+  })
+  .catch(e => console.log(e));
 
 
   const saveLocation = (location) => {
@@ -44,16 +48,16 @@ const LocationModal = ({
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        {locationText ? <View style={styles.cityOptionsButtonsContainer}>
+        {data ? <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{data.Title}</Text>
+              <Text style={styles.cityOptionsButtonText}>{data.predictions[0].description}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{data.Released}</Text>
+              <Text style={styles.cityOptionsButtonText}>{data.predictions[1].description}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{data.Genre}</Text>
+              <Text style={styles.cityOptionsButtonText}>{data.predictions[2].description}</Text>
             </TouchableOpacity>
           </View> : null }
          

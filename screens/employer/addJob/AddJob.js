@@ -24,15 +24,17 @@ import ModalHeader from "../../../components/ModalHeader";
 import AppText from '../../../components/AppText'
 import AppBoldText from '../../../components/AppBoldText'
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
-  const [jobTitle, setJobTitle] = useState("");
+  const [title, setTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [logo, setLogo] = useState();
-  const [location, setLocation] = useState();
-  const [companyDescription, setCompanyDescription] = useState('')
+  const [address, setAddress] = useState();
+  const [description, setDescription] = useState('')
   const [jobOverview,setJobOverview] =useState('')
-  const [compensationType, setCompensationType] = useState([]);
+  const [compensationType, setCompensationType] = useState('');
+  const [compensation, setCompensation] = useState('')
   const [experience, setExperience] = useState();
   const [employmentType, setEmploymentType] = useState();
+
   const [education, setEducation] = useState();
   const [responsibilitiesList, setResponsibilitiesList] = useState();
 
@@ -67,15 +69,16 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   };
 
   const data = {
-    jobTitle: jobTitle,
+    title: title,
     companyName: companyName,
-    companyDescription:companyDescription,
+    description:description,
     jobOverview:jobOverview,
     logo: logo,
-    location: location,
+    address: address,
     compensationType: compensationType,
+    compensation:compensation,
     experience: experience,
-    employment: employmentType,
+    employmentType: employmentType,
     education: education,
     responsibilities: responsibilitiesList,
   };
@@ -83,7 +86,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   return (
     <Modal animationType="slide" visible={addJobModalVisible}>
       <CompanyDescriptionModal
-        setCompanyDescription={setCompanyDescription}
+        setDescription={setDescription}
         companyDescriptionModalVisible={companyDescriptionModalVisible}
         setCompanyDescriptionModalVisible={setCompanyDescriptionModalVisible}
       />
@@ -106,7 +109,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setEmploymentModalVisible={setEmploymentModalVisible}
       />
       <LocationModal
-        setLocation={setLocation}
+        setAddress={setAddress}
         locationModalVisible={locationModalVisible}
         setLocationModalVisible={setLocationModalVisible}
       />
@@ -116,6 +119,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setResponsibilitiesModalVisible={setResponsibilitiesModalVisible}
       />
       <Compensation
+        setCompensation={setCompensation}
         setCompensationType={setCompensationType}
         compensationModalVisible={compensationModalVisible}
         setCompensationModalVisible={setCompensationModalVisible}
@@ -150,9 +154,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
           </View>
           <TextInput
             style={styles.jobTitleTextInput}
-            value={jobTitle}
+            value={title}
             name="jobTitle"
-            onChangeText={(value) => setJobTitle(value)}
+            onChangeText={(value) => setTitle(value)}
             placeholder='Enter Job Title'
             placeholderTextColor="black"
           />

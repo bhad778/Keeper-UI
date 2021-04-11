@@ -7,10 +7,12 @@ const Compensation = ({
   compensationModalVisible,
   setCompensationModalVisible,
   setCompensationType,
+  setCompensation
 }) => {
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
     setButtonTextPressed(clickedButton);
+    setCompensationType(clickedButton)
   };
   const [multiSliderValueAnnual, setMultiSliderValueAnnual] = React.useState([
     45000,
@@ -100,7 +102,7 @@ const Compensation = ({
                 ? (values)=> setMultiSliderValueAnnual(values)
                 : (values) => setMultiSliderValueHourly(values)
             }
-            onValuesChangeFinish={(values) => setCompensationType(values)}
+            onValuesChangeFinish={(values) => setCompensation(values)}
             min={buttonPressed === "annually" ? 15000 : 8}
             max={buttonPressed === "annually" ? 200000 : 100}
             step={buttonPressed === "annually" ? 1000 : 2}

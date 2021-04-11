@@ -7,12 +7,7 @@ const EmploymentModal = ({
   employmentModalVisible,
   setEmploymentModalVisible,
 }) => {
-  const [buttonPressed, setButtonPressed] = useState({
-    button1: "",
-    button2: "",
-    button3: "",
-    button4: "",
-  });
+  const [buttonPressed, setButtonPressed] = useState('');
 
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
@@ -26,9 +21,9 @@ const EmploymentModal = ({
       <ModalHeader leftIcon="chevron-left" screenTitle='Employment' closeModal={setEmploymentModalVisible} border={1} />
           <View style={styles.employmentButtonsContainer1}>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button1: true })}
+            onPress={() => onButtonClick("Full Time")}
             style={
-              buttonPressed.button1 == true
+              buttonPressed == 'Full Time'
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -36,9 +31,9 @@ const EmploymentModal = ({
             <AppBoldText style={styles.buttonsText}>Full time</AppBoldText>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button2: true })}
+            onPress={() => onButtonClick("Part Time")}
             style={
-              buttonPressed.button2 == true
+              buttonPressed == "Part Time"
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -48,9 +43,9 @@ const EmploymentModal = ({
           </View>
           <View style={styles.employmentButtonsContainer2}>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button3: true })}
+            onPress={() => onButtonClick("Contract")}
             style={
-              buttonPressed.button3 == true
+              buttonPressed == "Contract"
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }
@@ -58,9 +53,9 @@ const EmploymentModal = ({
             <AppBoldText style={styles.buttonsText}>Contract</AppBoldText>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onButtonClick({ button4: true })}
+            onPress={() => onButtonClick("Other")}
             style={
-              buttonPressed.button4 == true
+              buttonPressed == "Other"
                 ? styles.employmentButtonsPressed
                 : styles.employmentButtons
             }

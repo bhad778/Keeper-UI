@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import ModalHeader from "../components/ModalHeader";
 const CompanyDescriptionModal = ({
-  setCompanyDescription,
+  setDescription,
   companyDescriptionModalVisible,
   setCompanyDescriptionModalVisible,
 }) => {
@@ -16,7 +16,7 @@ const CompanyDescriptionModal = ({
   return (
     <Modal visible={companyDescriptionModalVisible}>
       <View style={styles.textSection}>
-      <ModalHeader saveText={setCompanyDescription} text={descriptionText} leftIcon="chevron-left" screenTitle="Description" border={1} closeModal={setCompanyDescriptionModalVisible} />
+      <ModalHeader saveText={setDescription} text={descriptionText} leftIcon="chevron-left" screenTitle="Description" border={1} closeModal={setCompanyDescriptionModalVisible} />
 
         <TextInput
           placeholder="Describe your company..."
@@ -25,7 +25,7 @@ const CompanyDescriptionModal = ({
           style={styles.textInput}
           multiline={true}
           onChangeText={(descriptionText) => setDescriptionText(descriptionText)}
-          onEndEditing={() => setCompanyDescription()}
+          onEndEditing={() => setDescription()}
         />
       </View>
     </Modal>
