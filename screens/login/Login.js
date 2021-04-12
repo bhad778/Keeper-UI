@@ -8,12 +8,15 @@ import {
   TextInput,
 } from "react-native";
 import { Title } from "react-native-paper";
-import { connect } from "react-redux";
 import { Formik } from "formik";
+
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { updateLoggedInUser } from "../../redux/actions/UsersActions";
 import { updateMatches } from "../../redux/actions/MatchesActions";
 import { updateEmployersJobs } from "../../redux/actions/EmployersJobsActions";
-import { bindActionCreators } from "redux";
+import { updateEmployeesForSwiping } from "../../redux/actions/EmployeesForSwipingActions";
+
 import * as SecureStore from "expo-secure-store";
 import { Auth } from "aws-amplify";
 import * as yup from "yup";
@@ -72,6 +75,7 @@ const Login = ({
             updateLoggedInUser(data.userData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
+            updateEmployeesForSwiping(data.employeesForSwiping);
             navigation.navigate("RootEmployer");
           })
           .catch((error) => {
@@ -236,6 +240,7 @@ const mapDispatchToProps = (dispatch) =>
       updateLoggedInUser,
       updateMatches,
       updateEmployersJobs,
+      updateEmployeesForSwiping,
     },
     dispatch
   );
