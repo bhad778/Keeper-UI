@@ -7,10 +7,11 @@ import AppHeaderText from "../components/AppHeaderText";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const ModalHeader = ({ addNewResponsibility, postJob, saveText, closeModal, text, screenTitle, border, rightIcon, leftIcon }) => {
+const ModalHeader = ({ addNewResponsibility,  postJob, saveText, closeModal, text, screenTitle, border, rightIcon, leftIcon }) => {
   const goBack = () => {
     closeModal(false);
-    text && saveText(text)
+    text && saveText(text);
+
   };
 
   return (

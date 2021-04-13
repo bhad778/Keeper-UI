@@ -44,6 +44,7 @@ const Login = ({
   updateMatches,
   updateEmployersJobs,
 }) => {
+  const [signInButtonPressed, setSignInButtonPressed] = useState(false)
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
@@ -91,9 +92,13 @@ const Login = ({
     navigation.navigate("SignUp");
   };
 
+  const testFunction = () => {
+    setSignInButtonPressed(!signInButtonPressed)
+    console.log(signInButtonPressed)
+  }
   return (
     <View style={styles.container}>
-      <Title style={styles.title}>Edge</Title>
+      <Title style={styles.title}>Keeper</Title>
       <Formik
         validationSchema={loginValidationSchema}
         initialValues={{ email: "", password: "" }}
@@ -109,7 +114,22 @@ const Login = ({
           isValid,
         }) => (
           <>
-            <View style={styles.inputView}>
+          {
+            !signInButtonPressed ? 
+  <TouchableOpacity
+  style={styles.signUpButton}
+  onPress={redirectToSignUp}
+>
+  <Text style={styles.loginText}>Creat account</Text>
+</TouchableOpacity> : null
+          }
+        
+          
+            
+           { 
+              signInButtonPressed ?
+            <>
+           <View style={styles.inputView}>
               <TextInput
                 name="email"
                 placeholder="Email Address"
@@ -140,9 +160,7 @@ const Login = ({
                 <Text style={styles.errorText}>{errors.password}</Text>
               )}
             </View>
-            <TouchableOpacity>
-              <Text style={styles.forgot}>Forgot Password?</Text>
-            </TouchableOpacity>
+           
             <TouchableOpacity
               onPress={signIn}
               // disabled={
@@ -158,21 +176,21 @@ const Login = ({
                   !touched.email
                     ? "grey"
                     : "#fb5b5a",
-                borderRadius: 25,
-                height: 50,
+                borderRadius: 30,
+                height: 60,
                 alignItems: "center",
                 justifyContent: "center",
-                marginBottom: 10,
+                marginBottom: 5,
               }}
             >
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              // style={styles.signUpButton}
-              onPress={redirectToSignUp}
-            >
-              <Text style={styles.loginText}>Signup</Text>
-            </TouchableOpacity>
+            </>
+            : null
+            }
+
+            <TouchableOpacity onPress={testFunction} style={styles.signInButton}><Text>Sign In</Text></TouchableOpacity>
+            
           </>
         )}
       </Formik>
@@ -192,9 +210,9 @@ const styles = StyleSheet.create({
   inputView: {
     width: "80%",
     backgroundColor: "#ccc",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 40,
+    borderRadius: 30,
+    height: 60,
+    marginBottom: 20,
     justifyContent: "center",
     padding: 20,
     borderWidth: 1,
@@ -223,6 +241,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
+  signInButton:{  width: "80%",
+  backgroundColor: "white",
+  borderRadius: 25,
+  height: 50,
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: 10,
+  marginBottom: 10,}
 });
 
 const mapStateToProps = (state) => {

@@ -232,6 +232,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               style={styles.textButton}
             >
               <AppBoldText style={styles.textAreaLabel}>Company Description</AppBoldText>
+              <AppText numberOfLines={2}>{description}</AppText>
             </TouchableOpacity>
           </View>
           <View style={{ width: "98%", alignItems: "flex-start" }}>
@@ -246,6 +247,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
               style={styles.textButton}
             >
               <AppBoldText style={styles.textAreaLabel}> Job Overview</AppBoldText>
+              <AppText numberOfLines={2}>{jobOverview}</AppText>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -428,6 +430,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
+    paddingLeft:20,
+    paddingRight:20
   },
 
   textAreaLabel: {
@@ -437,6 +441,8 @@ const styles = StyleSheet.create({
     marginTop: 12,
     width: "85%",
     fontSize: 18,
+    marginBottom:10
+    
   },
 
   button: { width: "60%" },

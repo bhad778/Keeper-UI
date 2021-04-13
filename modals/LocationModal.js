@@ -16,7 +16,7 @@ const LocationModal = ({
   setLocation
 }) => {
   const [locationText, setLocationText] = useState("");
-  const [data, setData] = useState();
+  const [locationData, setLocationData] = useState();
   Places.apiKey = "AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I";
   const radius = 2000;
   const language = "en"
@@ -24,21 +24,26 @@ const LocationModal = ({
 
   Places.autocomplete({ input: locationText, radius, language, type  })
   .then(results => {
-    setData(results)
-    // results array of partial matches
+   locationText === "a" ? setLocationData(null): setLocationData(results)
+  
+
+  
   })
   .catch(e => console.log(e));
+
 
 
   const saveLocation = (location) => {
     setLocation(location)
   }
  
+  
+
   return (
     <Modal animationType="slide" visible={locationModalVisible}>
 
       <View style={styles.searchContainer}>
-      <ModalHeader leftIcon="chevron-left" screenTitle='Location' border={1} closeModal={setLocationModalVisible} />
+      <ModalHeader   leftIcon="chevron-left" screenTitle='Location' border={1} closeModal={setLocationModalVisible} />
 
         <View style={styles.textInputContainer}>
           <TextInput
@@ -48,16 +53,16 @@ const LocationModal = ({
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        {data ? <View style={styles.cityOptionsButtonsContainer}>
+        {  locationData ? <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{data.predictions[0].description}</Text>
+              <Text style={styles.cityOptionsButtonText}>{locationData.predictions[0].description}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{data.predictions[1].description}</Text>
+              <Text style={styles.cityOptionsButtonText}>{locationData.predictions[1].description}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{data.predictions[2].description}</Text>
+              <Text style={styles.cityOptionsButtonText}>{locationData.predictions[2].description}</Text>
             </TouchableOpacity>
           </View> : null }
          
