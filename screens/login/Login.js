@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Video, AVPlaybackStatus } from 'expo-av';
 import {
   StyleSheet,
   Text,
@@ -96,9 +97,24 @@ const Login = ({
     setSignInButtonPressed(!signInButtonPressed)
     console.log(signInButtonPressed)
   }
+  const video = React.useRef(null);
+  const [status, setStatus] = useState({});
   return (
     <View style={styles.container}>
-      <Title style={styles.title}>Keeper</Title>
+  <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        
+        resizeMode="cover"
+        isLooping
+        shouldPlay
+      />
+    
+      <Text style={styles.title}>Keeper</Text>
+      
       <Formik
         validationSchema={loginValidationSchema}
         initialValues={{ email: "", password: "" }}
@@ -177,7 +193,7 @@ const Login = ({
                     ? "grey"
                     : "#fb5b5a",
                 borderRadius: 30,
-                height: 60,
+                height: 50,
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 5,
@@ -189,7 +205,7 @@ const Login = ({
             : null
             }
 
-            <TouchableOpacity onPress={testFunction} style={styles.signInButton}><Text>Sign In</Text></TouchableOpacity>
+            <TouchableOpacity onPress={testFunction} style={styles.signInButton}><Text>{!signInButtonPressed ? "Sign in" : "Back"}</Text></TouchableOpacity>
             
           </>
         )}
@@ -202,16 +218,26 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center",
-    height: SCREEN_HEIGHT,
+    justifyContent: "flex-end",
+    flex:1,
     width: SCREEN_WIDTH,
   },
-  title: { position: "relative", bottom: 60, fontSize: 30 },
+  video: {
+    position:'absolute',
+    top:0,
+    left:0,
+    bottom:0,
+    right:0,
+    width: SCREEN_WIDTH,
+    flex:1
+  },
+  
+  title: {position:'absolute', bottom:400, fontSize:50 },
   inputView: {
     width: "80%",
     backgroundColor: "#ccc",
     borderRadius: 30,
-    height: 60,
+    height: 50,
     marginBottom: 20,
     justifyContent: "center",
     padding: 20,
@@ -239,10 +265,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    marginBottom: 10,
+    
   },
   signInButton:{  width: "80%",
-  backgroundColor: "white",
   borderRadius: 25,
   height: 50,
   alignItems: "center",

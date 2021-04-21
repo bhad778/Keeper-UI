@@ -9,27 +9,21 @@ import {
 } from "react-native";
 
 import ModalHeader from "../components/ModalHeader";
-import Places from "google-places-web";
+
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
   setLocation
 }) => {
-  const [locationText, setLocationText] = useState("");
+  const [locationText, setLocationText] = useState("a");
   const [locationData, setLocationData] = useState();
-  Places.apiKey = "AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I";
-  const radius = 2000;
-  const language = "en"
-  const type = "cities"
-
-  Places.autocomplete({ input: locationText, radius, language, type  })
-  .then(results => {
-   locationText === "a" ? setLocationData(null): setLocationData(results)
+  const apiKey = "AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I";
+ 
+useEffect(()=> {
+  fetch("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=a&key=AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I")
+  .then( (response) => setLocationData(response))
+},[locationText])
   
-
-  
-  })
-  .catch(e => console.log(e));
 
 
 
@@ -53,7 +47,7 @@ const LocationModal = ({
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        {  locationData ? <View style={styles.cityOptionsButtonsContainer}>
+        { locationData && !(locationText === "")  && <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{locationData.predictions[0].description}</Text>
@@ -64,7 +58,7 @@ const LocationModal = ({
             <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
               <Text style={styles.cityOptionsButtonText}>{locationData.predictions[2].description}</Text>
             </TouchableOpacity>
-          </View> : null }
+          </View> }
          
         
       </View>
