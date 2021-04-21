@@ -48,6 +48,7 @@
     "react-native-web": "0.14.9",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
+    "use-debounce": "^6.0.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {

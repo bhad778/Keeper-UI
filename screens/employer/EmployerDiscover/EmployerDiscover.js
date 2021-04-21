@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useCallback } from "react";
 
 import {
   ActivityIndicator,
@@ -16,6 +16,8 @@ import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
+import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
+import { useDebouncedCallback } from "use-debounce";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -57,8 +59,11 @@ class EmployerDiscover extends Component {
         "Brooke",
         "Blue",
       ],
+      employeeDataReal: this.props.employeesForSwiping,
     };
   }
+
+  swipeData = [];
 
   hotGirls = [
     {
@@ -111,6 +116,22 @@ class EmployerDiscover extends Component {
     }).start();
   };
 
+  debouncedUpdateSwipeDataApiCall = useDebouncedCallback(
+    // to memoize debouncedFunction we use useCallback hook.
+    // In this case all linters work correctly
+    useCallback(() => {
+      console.log(this.swipeData);
+    }, []),
+    700,
+    // The maximum time func is allowed to be delayed before it's invoked:
+    { maxWait: 2000 }
+  );
+
+  updateSwipeData = (isLike) => {
+    this.swipeData.push(isLike);
+    this.debouncedUpdateSwipeDataApiCall();
+  };
+
   componentDidMount() {
     // UsersService.getEmployer({
     //   email: "Bhad7778@gmail.com",
@@ -138,25 +159,12 @@ class EmployerDiscover extends Component {
   toggleJobBoardModal = () => {
     this.setState({ jobBoardModalOpen: !this.state.jobBoardModalOpen });
   };
+
   filtersModalOn = (visible) => {
     this.setState({ filtersModal: visible });
   };
-  pressLikeButton = () => {
-    this.setState({ isLoading: true }, () => {
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-        this.runSlideUpAnimation();
-      }, 500);
-    });
-  };
-  pressDislikeButton = () => {
-    this.props.updateBottomNavBarHeight(-1);
 
-    let tempEmployeeArray = this.state.employeeData.slice(
-      1,
-      this.state.employeeData.length
-    );
-
+  runSwipeAnimation = () => {
     Animated.parallel([
       // swiper fades out
       Animated.timing(this.state.wholeSwiperFadeAnim, {
@@ -171,7 +179,10 @@ class EmployerDiscover extends Component {
             duration: 1,
             useNativeDriver: true,
           }),
-          this.setState({ employeeData: tempEmployeeArray }, () => {}),
+          this.setState(
+            { employeeData: this.props.employeesForSwiping[0] },
+            () => {}
+          ),
           // after resume has faded, slide down out of view, and the state has been set,
           // then fade back in for slide back up into view later
           Animated.timing(this.state.wholeSwiperFadeAnim, {
@@ -240,6 +251,26 @@ class EmployerDiscover extends Component {
         ]).start(() => {});
       }),
     ]).start(() => {});
+  };
+
+  removeSwipedEmployeeFromState = () => {
+    this.setState({
+      employeeDataReal: this.state.employeeDataReal.slice(
+        1,
+        this.state.employeeDataReal.length
+      ),
+    });
+  };
+
+  swipe = (isLike) => {
+    this.props.updateBottomNavBarHeight(-1);
+
+    // remove the employee thats been swiped on from the array,
+    // while also recorded the swipe in the updateSwipeData function
+    this.removeSwipedEmployeeFromState();
+    this.updateSwipeData(isLike);
+
+    this.runSwipeAnimation();
   };
 
   render() {
@@ -319,7 +350,7 @@ class EmployerDiscover extends Component {
             >
               <Resume
                 navigation={this.props.navigation}
-                pressDislikeButton={this.pressDislikeButton}
+                swipe={this.swipe}
                 resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
                 currentEmployee={this.state.employeeData[0]}
               />
@@ -395,14 +426,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { bottomNavBarHeight, loggedInUserObject } = state;
-  return { bottomNavBarHeight, loggedInUserObject };
+  const { employeesForSwiping } = state;
+  return { employeesForSwiping };
 };
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateBottomNavBarHeight,
+      updateEmployeesForSwiping,
     },
     dispatch
   );

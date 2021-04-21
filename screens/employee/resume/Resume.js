@@ -105,7 +105,7 @@ const Resume = (props) => {
 
     const DOUBLE_PRESS_DELAY = 400;
     if (delta < DOUBLE_PRESS_DELAY) {
-      props.pressDislikeButton();
+      props.swipe(true);
     }
     lastPress = time;
   };
@@ -298,7 +298,7 @@ const Resume = (props) => {
         }}
       >
         <TouchableOpacity
-          onPress={props.pressDislikeButton}
+          onPress={props.swipe(false)}
           style={styles.dislikeButtonTouchableOpacity}
         >
           <Image
