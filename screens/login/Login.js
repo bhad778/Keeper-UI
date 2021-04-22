@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { Video } from 'expo-av';
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import { Title } from "react-native-paper";
+
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import { updateLoggedInUser } from "../../redux/actions/UsersActions";

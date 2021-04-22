@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -15,13 +16,13 @@ const LocationModal = ({
   setLocationModalVisible,
   setLocation
 }) => {
-  const [locationText, setLocationText] = useState("a");
+  const [locationText, setLocationText] = useState("");
   const [locationData, setLocationData] = useState();
   const apiKey = "AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I";
  
 useEffect(()=> {
-  fetch("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=a&key=AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I")
-  .then( (response) => setLocationData(response))
+  axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${locationText}&types=geocode&key=${apiKey}`)
+  .then( (response) => locationText != "" ? setLocationData(response) : setLocationData(null))
 },[locationText])
   
 
@@ -47,16 +48,16 @@ useEffect(()=> {
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        { locationData && !(locationText === "")  && <View style={styles.cityOptionsButtonsContainer}>
+        { locationData && !(locationText === "") && <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{locationData.predictions[0].description}</Text>
+              <Text style={styles.cityOptionsButtonText}>{locationData.data.predictions[0].description}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{locationData.predictions[1].description}</Text>
+              <Text style={styles.cityOptionsButtonText}>{locationData.data.predictions[1].description}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{locationData.predictions[2].description}</Text>
+              <Text style={styles.cityOptionsButtonText}>{locationData.data.predictions[2].description}</Text>
             </TouchableOpacity>
           </View> }
          
