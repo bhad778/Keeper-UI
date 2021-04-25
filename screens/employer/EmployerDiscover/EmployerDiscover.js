@@ -17,7 +17,7 @@ import Resume from "../../employee/resume/Resume";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
-import { useDebouncedCallback } from "use-debounce";
+import { debounce } from "lodash";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -116,16 +116,9 @@ class EmployerDiscover extends Component {
     }).start();
   };
 
-  debouncedUpdateSwipeDataApiCall = useDebouncedCallback(
-    // to memoize debouncedFunction we use useCallback hook.
-    // In this case all linters work correctly
-    useCallback(() => {
-      console.log(this.swipeData);
-    }, []),
-    700,
-    // The maximum time func is allowed to be delayed before it's invoked:
-    { maxWait: 2000 }
-  );
+  debouncedUpdateSwipeDataApiCall = debounce((query) => {
+    console.log("heyyyyyy");
+  }, 1000);
 
   updateSwipeData = (isLike) => {
     this.swipeData.push(isLike);
