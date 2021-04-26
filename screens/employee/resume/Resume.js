@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -142,12 +142,11 @@ const Resume = (props) => {
             style={{
               backgroundColor: props.selectedJob.color,
               flex: 1,
-              // padding: 15,
             }}
           >
             <View style={styles.nameAndJobTitleSection}>
               <AppBoldText style={styles.name}>
-                {props.currentEmployee}
+                {props.currentEmployee.firstName}
               </AppBoldText>
               <AppBoldText style={styles.jobTitle}>DESIGN DIRECTOR</AppBoldText>
             </View>
@@ -298,7 +297,7 @@ const Resume = (props) => {
         }}
       >
         <TouchableOpacity
-          onPress={props.swipe(false)}
+          onPress={() => props.swipe(false)}
           style={styles.dislikeButtonTouchableOpacity}
         >
           <Image
@@ -491,7 +490,6 @@ const styles = StyleSheet.create({
   skillText: {
     fontSize: 17,
     lineHeight: 26,
-    // letterSpacing: 0.5,
   },
   educationSection: {
     display: "flex",

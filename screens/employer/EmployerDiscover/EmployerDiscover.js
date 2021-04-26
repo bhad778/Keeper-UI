@@ -40,25 +40,6 @@ class EmployerDiscover extends Component {
       xIconScale: new Animated.Value(0),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
-      employeeData: [
-        "Jasmine",
-        "Rider",
-        "Caroline",
-        "Melissa",
-        "Sora",
-        "Daphne",
-        "Otto",
-        "Liandra",
-        "Carissa",
-        "Pikachu",
-        "Blastoise",
-        "Charizard",
-        "Venasaur",
-        "Ash",
-        "Red",
-        "Brooke",
-        "Blue",
-      ],
       employeeDataReal: this.props.employeesForSwiping,
     };
   }
@@ -117,8 +98,8 @@ class EmployerDiscover extends Component {
   };
 
   debouncedUpdateSwipeDataApiCall = debounce((query) => {
-    console.log("heyyyyyy");
-  }, 1000);
+    console.log(this.swipeData);
+  }, 5000);
 
   updateSwipeData = (isLike) => {
     this.swipeData.push(isLike);
@@ -172,10 +153,7 @@ class EmployerDiscover extends Component {
             duration: 1,
             useNativeDriver: true,
           }),
-          this.setState(
-            { employeeData: this.props.employeesForSwiping[0] },
-            () => {}
-          ),
+          this.removeSwipedEmployeeFromState(),
           // after resume has faded, slide down out of view, and the state has been set,
           // then fade back in for slide back up into view later
           Animated.timing(this.state.wholeSwiperFadeAnim, {
@@ -260,7 +238,6 @@ class EmployerDiscover extends Component {
 
     // remove the employee thats been swiped on from the array,
     // while also recorded the swipe in the updateSwipeData function
-    this.removeSwipedEmployeeFromState();
     this.updateSwipeData(isLike);
 
     this.runSwipeAnimation();
@@ -345,7 +322,7 @@ class EmployerDiscover extends Component {
                 navigation={this.props.navigation}
                 swipe={this.swipe}
                 resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
-                currentEmployee={this.state.employeeData[0]}
+                currentEmployee={this.state.employeeDataReal[0]}
               />
             </Animated.View>
           )}
