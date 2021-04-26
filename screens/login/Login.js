@@ -51,11 +51,6 @@ const Login = ({
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  // TODO sign in works now just need to take token and use it
-  // also need to navigate to correct page
-  // once signIn to aws is done then we must
-  // do a call to mongo to get that users info
-  // does call to get user first time by using email then saves their mongoId for faster calls? or hits email index anyway
   const signIn = async (values) => {
     try {
       let signInResponse = await Auth.signIn(
