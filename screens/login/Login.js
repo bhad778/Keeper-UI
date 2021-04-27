@@ -10,11 +10,16 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
+import { Title } from "react-native-paper";
 import { Formik } from "formik";
+
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { updateLoggedInUser } from "../../redux/actions/UsersActions";
 import { updateMatches } from "../../redux/actions/MatchesActions";
 import { updateEmployersJobs } from "../../redux/actions/EmployersJobsActions";
-import { bindActionCreators } from "redux";
+import { updateEmployeesForSwiping } from "../../redux/actions/EmployeesForSwipingActions";
+
 import * as SecureStore from "expo-secure-store";
 import { Auth } from "aws-amplify";
 import * as yup from "yup";
@@ -44,16 +49,12 @@ const Login = ({
   updateLoggedInUser,
   updateMatches,
   updateEmployersJobs,
+  updateEmployeesForSwiping,
 }) => {
   const [signInButtonPressed, setSignInButtonPressed] = useState(false)
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  // TODO sign in works now just need to take token and use it
-  // also need to navigate to correct page
-  // once signIn to aws is done then we must
-  // do a call to mongo to get that users info
-  // does call to get user first time by using email then saves their mongoId for faster calls? or hits email index anyway
   const signIn = async (values) => {
     try {
       let signInResponse = await Auth.signIn(
@@ -74,6 +75,7 @@ const Login = ({
             updateLoggedInUser(data.userData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
+            updateEmployeesForSwiping(data.employeesForSwiping);
             navigation.navigate("RootEmployer");
           })
           .catch((error) => {
@@ -287,6 +289,7 @@ const mapDispatchToProps = (dispatch) =>
       updateLoggedInUser,
       updateMatches,
       updateEmployersJobs,
+      updateEmployeesForSwiping,
     },
     dispatch
   );
