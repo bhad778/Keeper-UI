@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Video } from 'expo-av';
+import { Video } from "expo-av";
 import {
   StyleSheet,
   Text,
@@ -10,11 +10,9 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
-import { Title } from "react-native-paper";
 import { Formik } from "formik";
 
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { updateLoggedInUser } from "../../redux/actions/UsersActions";
 import { updateMatches } from "../../redux/actions/MatchesActions";
 import { updateEmployersJobs } from "../../redux/actions/EmployersJobsActions";
@@ -51,7 +49,7 @@ const Login = ({
   updateEmployersJobs,
   updateEmployeesForSwiping,
 }) => {
-  const [signInButtonPressed, setSignInButtonPressed] = useState(false)
+  const [signInButtonPressed, setSignInButtonPressed] = useState(false);
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
@@ -96,27 +94,26 @@ const Login = ({
   };
 
   const testFunction = () => {
-    setSignInButtonPressed(!signInButtonPressed)
-    console.log(signInButtonPressed)
-  }
+    setSignInButtonPressed(!signInButtonPressed);
+    console.log(signInButtonPressed);
+  };
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
   return (
     <View style={styles.container}>
-  <Video
+      <Video
         ref={video}
         style={styles.video}
         source={{
-          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+          uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
         }}
-        
         resizeMode="cover"
         isLooping
         shouldPlay
       />
-    
+
       <Text style={styles.title}>Keeper</Text>
-      
+
       <Formik
         validationSchema={loginValidationSchema}
         initialValues={{ email: "", password: "" }}
@@ -132,83 +129,82 @@ const Login = ({
           isValid,
         }) => (
           <>
-          {
-            !signInButtonPressed ? 
-  <TouchableOpacity
-  style={styles.signUpButton}
-  onPress={redirectToSignUp}
->
-  <Text style={styles.loginText}>Creat account</Text>
-</TouchableOpacity> : null
-          }
-        
-          
-            
-           { 
-              signInButtonPressed ?
-            <>
-           <View style={styles.inputView}>
-              <TextInput
-                name="email"
-                placeholder="Email Address"
-                style={styles.inputText}
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                // value={values.email}
-                value={"Bhad7778@gmail.com"}
-                keyboardType="email-address"
-              />
-              {errors.email && touched.email && (
-                <Text style={styles.errorText}>{errors.email}</Text>
-              )}
-            </View>
+            {!signInButtonPressed ? (
+              <TouchableOpacity
+                style={styles.signUpButton}
+                onPress={redirectToSignUp}
+              >
+                <Text style={styles.loginText}>Creat account</Text>
+              </TouchableOpacity>
+            ) : null}
 
-            <View style={styles.inputView}>
-              <TextInput
-                name="password"
-                placeholder="Password"
-                style={styles.inputText}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                // value={values.password}
-                value={"Ululavit#8"}
-                secureTextEntry
-              />
-              {errors.password && touched.password && (
-                <Text style={styles.errorText}>{errors.password}</Text>
-              )}
-            </View>
-           
+            {signInButtonPressed ? (
+              <>
+                <View style={styles.inputView}>
+                  <TextInput
+                    name="email"
+                    placeholder="Email Address"
+                    style={styles.inputText}
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                    // value={values.email}
+                    value={"Bhad7778@gmail.com"}
+                    keyboardType="email-address"
+                  />
+                  {errors.email && touched.email && (
+                    <Text style={styles.errorText}>{errors.email}</Text>
+                  )}
+                </View>
+
+                <View style={styles.inputView}>
+                  <TextInput
+                    name="password"
+                    placeholder="Password"
+                    style={styles.inputText}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    // value={values.password}
+                    value={"Ululavit#8"}
+                    secureTextEntry
+                  />
+                  {errors.password && touched.password && (
+                    <Text style={styles.errorText}>{errors.password}</Text>
+                  )}
+                </View>
+
+                <TouchableOpacity
+                  onPress={signIn}
+                  // disabled={
+                  //   (errors.email && touched.email) ||
+                  //   (errors.password && touched.password) ||
+                  //   !touched.email
+                  // }
+                  style={{
+                    width: "80%",
+                    backgroundColor:
+                      (errors.email && touched.email) ||
+                      (errors.password && touched.password) ||
+                      !touched.email
+                        ? "grey"
+                        : "#fb5b5a",
+                    borderRadius: 30,
+                    height: 50,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 5,
+                  }}
+                >
+                  <Text style={styles.loginText}>LOGIN</Text>
+                </TouchableOpacity>
+              </>
+            ) : null}
+
             <TouchableOpacity
-              onPress={signIn}
-              // disabled={
-              //   (errors.email && touched.email) ||
-              //   (errors.password && touched.password) ||
-              //   !touched.email
-              // }
-              style={{
-                width: "80%",
-                backgroundColor:
-                  (errors.email && touched.email) ||
-                  (errors.password && touched.password) ||
-                  !touched.email
-                    ? "grey"
-                    : "#fb5b5a",
-                borderRadius: 30,
-                height: 50,
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: 5,
-              }}
+              onPress={testFunction}
+              style={styles.signInButton}
             >
-              <Text style={styles.loginText}>LOGIN</Text>
+              <Text>{!signInButtonPressed ? "Sign in" : "Back"}</Text>
             </TouchableOpacity>
-            </>
-            : null
-            }
-
-            <TouchableOpacity onPress={testFunction} style={styles.signInButton}><Text>{!signInButtonPressed ? "Sign in" : "Back"}</Text></TouchableOpacity>
-            
           </>
         )}
       </Formik>
@@ -221,20 +217,20 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "flex-end",
-    flex:1,
+    flex: 1,
     width: SCREEN_WIDTH,
   },
   video: {
-    position:'absolute',
-    top:0,
-    left:0,
-    bottom:0,
-    right:0,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
     width: SCREEN_WIDTH,
-    flex:1
+    flex: 1,
   },
-  
-  title: {position:'absolute', bottom:400, fontSize:50 },
+
+  title: { position: "absolute", bottom: 400, fontSize: 50 },
   inputView: {
     width: "80%",
     backgroundColor: "#ccc",
@@ -267,15 +263,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    
   },
-  signInButton:{  width: "80%",
-  borderRadius: 25,
-  height: 50,
-  alignItems: "center",
-  justifyContent: "center",
-  marginTop: 10,
-  marginBottom: 10,}
+  signInButton: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });
 
 const mapStateToProps = (state) => {
