@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Video } from "expo-av";
 import {
   StyleSheet,
@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
+  Animated,
+  Easing,
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -92,13 +94,47 @@ const Login = ({
   const redirectToSignUp = () => {
     navigation.navigate("SignUp");
   };
+  const loginCredentialsPosition = new Animated.Value(300);
+  const creatAccountPosition = new Animated.Value(0);
+  !signInButtonPressed
+    ? Animated.parallel([
+        Animated.timing(creatAccountPosition, {
+          toValue: 200,
+          duration: 150,
+          useNativeDriver: true,
+        }).start(() => {
+          Animated.parallel([
+            Animated.timing(loginCredentialsPosition, {
+              toValue: 300,
+              duration: 10,
+              useNativeDriver: true,
+            }).start(),
+          ]);
+        }),
+      ])
+    : Animated.parallel([
+        Animated.timing(creatAccountPosition, {
+          toValue: -500,
+          duration: 200,
+          useNativeDriver: true,
+        }).start(() => {
+          Animated.parallel([
+            Animated.timing(loginCredentialsPosition, {
+              toValue: 10,
+              duration: 500,
+              useNativeDriver: true,
+            }).start(),
+          ]);
+        }),
+      ]);
 
-  const testFunction = () => {
+  const toggleUI = () => {
     setSignInButtonPressed(!signInButtonPressed);
-    console.log(signInButtonPressed);
   };
   const video = React.useRef(null);
-  const [status, setStatus] = useState({});
+
+  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
   return (
     <View style={styles.container}>
       <Video
@@ -129,17 +165,27 @@ const Login = ({
           isValid,
         }) => (
           <>
-            {!signInButtonPressed ? (
-              <TouchableOpacity
+            <Animated.View
+              style={[
+                styles.animatedContainer,
+                { transform: [{ translateY: creatAccountPosition }] },
+              ]}
+            >
+              <AnimatedTouchable
                 style={styles.signUpButton}
                 onPress={redirectToSignUp}
               >
-                <Text style={styles.loginText}>Creat account</Text>
-              </TouchableOpacity>
-            ) : null}
+                <Text style={styles.loginText}>Create account</Text>
+              </AnimatedTouchable>
+            </Animated.View>
 
-            {signInButtonPressed ? (
-              <>
+            <>
+              <Animated.View
+                style={[
+                  styles.animatedContainer,
+                  { transform: [{ translateY: loginCredentialsPosition }] },
+                ]}
+              >
                 <View style={styles.inputView}>
                   <TextInput
                     name="email"
@@ -172,7 +218,7 @@ const Login = ({
                   )}
                 </View>
 
-                <TouchableOpacity
+                <AnimatedTouchable
                   onPress={signIn}
                   // disabled={
                   //   (errors.email && touched.email) ||
@@ -195,14 +241,11 @@ const Login = ({
                   }}
                 >
                   <Text style={styles.loginText}>LOGIN</Text>
-                </TouchableOpacity>
-              </>
-            ) : null}
+                </AnimatedTouchable>
+              </Animated.View>
+            </>
 
-            <TouchableOpacity
-              onPress={testFunction}
-              style={styles.signInButton}
-            >
+            <TouchableOpacity onPress={toggleUI} style={styles.signInButton}>
               <Text>{!signInButtonPressed ? "Sign in" : "Back"}</Text>
             </TouchableOpacity>
           </>
@@ -220,6 +263,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: SCREEN_WIDTH,
   },
+  animatedContainer: {
+    width: SCREEN_WIDTH,
+    alignItems: "center",
+  },
   video: {
     position: "absolute",
     top: 0,
@@ -229,7 +276,7 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     flex: 1,
   },
-
+  fadingContainer: { backgroundColor: "blue" },
   title: { position: "absolute", bottom: 400, fontSize: 50 },
   inputView: {
     width: "80%",
