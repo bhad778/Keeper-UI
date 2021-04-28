@@ -36,9 +36,21 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
-    console.log(result);
+    // get what type of file it is
+    const ext = result.uri.match(/\.[0-9a-z]+$/i)[0];
+    // regex returns .jpg for example, so remove the dot with substring(1)
+    // and make the mime (which is the standard for naming file types)
+    const mime = "image/" + ext.substring(1);
+
+    const base64Image = result.base64;
+
+    const imagePayload = {
+      "mime": mime,
+      "image": base64Image,
+    };
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -48,11 +60,16 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
   const removeImage = () => {
     setImage(null);
   };
- 
+
   return (
     <Modal animationType="slide" visible={logoModalVisible}>
       <View style={styles.imageSelectorSection}>
-      <ModalHeader leftIcon="chevron-left" screenTitle="Logo" border={1} closeModal={setLogoModalVisible} />
+        <ModalHeader
+          leftIcon="chevron-left"
+          screenTitle="Logo"
+          border={1}
+          closeModal={setLogoModalVisible}
+        />
         <TouchableOpacity style={styles.logoContainer}>
           <Avatar.Image
             size={200}
@@ -73,15 +90,13 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
   );
 };
 const styles = StyleSheet.create({
-
-
   imageSelectorSection: {
-    padding:20,
+    padding: 20,
     flex: 1,
-    borderWidth:1,
+    borderWidth: 1,
     alignItems: "center",
   },
-  logoContainer:{marginTop:60},
+  logoContainer: { marginTop: 60 },
   logoImage: { backgroundColor: "grey" },
 
   chooseLogoButton: {
