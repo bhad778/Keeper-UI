@@ -21,17 +21,17 @@ import ExperienceModal from "../../../modals/ExperienceModal";
 import CompanyDescriptionModal from "../../../modals/CompanyDescriptionModal";
 import JobOverviewModal from "../../../modals/JobOverviewModal";
 import ModalHeader from "../../../components/ModalHeader";
-import AppText from '../../../components/AppText'
-import AppBoldText from '../../../components/AppBoldText'
+import AppText from "../../../components/AppText";
+import AppBoldText from "../../../components/AppBoldText";
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [title, setTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [logo, setLogo] = useState();
   const [address, setAddress] = useState();
-  const [description, setDescription] = useState('')
-  const [jobOverview,setJobOverview] =useState('')
-  const [compensationType, setCompensationType] = useState('');
-  const [compensation, setCompensation] = useState('')
+  const [description, setDescription] = useState("");
+  const [jobOverview, setJobOverview] = useState("");
+  const [compensationType, setCompensationType] = useState("");
+  const [compensation, setCompensation] = useState("");
   const [experience, setExperience] = useState();
   const [employmentType, setEmploymentType] = useState();
 
@@ -71,12 +71,12 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const data = {
     title: title,
     companyName: companyName,
-    description:description,
-    jobOverview:jobOverview,
-    logo: logo,
+    description: description,
+    jobOverview: jobOverview,
+    imagePayload: logo,
     address: address,
     compensationType: compensationType,
-    compensation:compensation,
+    compensation: compensation,
     experience: experience,
     employmentType: employmentType,
     education: education,
@@ -136,196 +136,207 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setEducationModalVisible={setEducationModalVisible}
       />
       <View style={styles.scrollViewContainer}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <ModalHeader
-        leftIcon="x"
-        rightIcon='check'
-        screenTitle='Add Job'
-        postJob={postJob}
-          border={0}
-          currentModal={currentModal}
-          setCurrentModal={setCurrentModal}
-          closeModal={setAddJobModalVisible}
-        />
-
-        <View style={styles.addJobContainer}>
-          <View style={{ width: "100%", marginTop: 20 }}>
-            <AppText style={{ color: "#cacaca" }}>Job Title</AppText>
-          </View>
-          <TextInput
-            style={styles.jobTitleTextInput}
-            value={title}
-            name="jobTitle"
-            onChangeText={(value) => setTitle(value)}
-            placeholder='Enter Job Title'
-            placeholderTextColor="black"
-          />
-          <View style={{ width: "100%" }}>
-            <AppText style={{ color: "#cacaca" }}>Company name</AppText>
-          </View>
-          <TextInput
-            style={styles.companyNameTextInput}
-            value={companyName}
-            onChangeText={(value) => setCompanyName(value)}
-            placeholder="Enter Company Name"
-            placeholderTextColor="black"
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <ModalHeader
+            leftIcon="x"
+            rightIcon="check"
+            screenTitle="Add Job"
+            postJob={postJob}
+            border={0}
+            currentModal={currentModal}
+            setCurrentModal={setCurrentModal}
+            closeModal={setAddJobModalVisible}
           />
 
-          <View
-            style={{
-              width: "98%",
-              alignItems: "flex-start",
-              justifyContent: "flex-end",
-              height: 70,
-            }}
-          >
-            <AppText style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
-              Company Info
-            </AppText>
-          </View>
-
-          <TouchableOpacity
-            onPress={() => setLogoModalVisible(true)}
-            style={styles.firstButtonCompanyInfo}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Logo</AppBoldText>
-            
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
+          <View style={styles.addJobContainer}>
+            <View style={{ width: "100%", marginTop: 20 }}>
+              <AppText style={{ color: "#cacaca" }}>Job Title</AppText>
+            </View>
+            <TextInput
+              style={styles.jobTitleTextInput}
+              value={title}
+              name="jobTitle"
+              onChangeText={(value) => setTitle(value)}
+              placeholder="Enter Job Title"
+              placeholderTextColor="black"
             />
-            
-    
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => setLocationModalVisible(true)}
-            style={styles.middleCompanyInfoButton}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Location</AppBoldText>
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
+            <View style={{ width: "100%" }}>
+              <AppText style={{ color: "#cacaca" }}>Company name</AppText>
+            </View>
+            <TextInput
+              style={styles.companyNameTextInput}
+              value={companyName}
+              onChangeText={(value) => setCompanyName(value)}
+              placeholder="Enter Company Name"
+              placeholderTextColor="black"
             />
-          </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => setLocationModalVisible(true)}
-            style={styles.lastButton}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
-            />
-          </TouchableOpacity>
-
-          <View style={styles.companyDescriptionContainer}>
-            <TouchableOpacity
-              onPress={() => setCompanyDescriptionModalVisible(true)}
-              style={styles.textButton}
+            <View
+              style={{
+                width: "98%",
+                alignItems: "flex-start",
+                justifyContent: "flex-end",
+                height: 70,
+              }}
             >
-              <AppBoldText style={styles.textAreaLabel}>Company Description</AppBoldText>
-              <AppText numberOfLines={2}>{description}</AppText>
+              <AppText style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
+                Company Info
+              </AppText>
+            </View>
+
+            <TouchableOpacity
+              onPress={() => setLogoModalVisible(true)}
+              style={styles.firstButtonCompanyInfo}
+            >
+              <AppBoldText style={styles.buttonTextColor}>Logo</AppBoldText>
+
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => setLocationModalVisible(true)}
+              style={styles.middleCompanyInfoButton}
+            >
+              <AppBoldText style={styles.buttonTextColor}>Location</AppBoldText>
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => setLocationModalVisible(true)}
+              style={styles.lastButton}
+            >
+              <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <View style={styles.companyDescriptionContainer}>
+              <TouchableOpacity
+                onPress={() => setCompanyDescriptionModalVisible(true)}
+                style={styles.textButton}
+              >
+                <AppBoldText style={styles.textAreaLabel}>
+                  Company Description
+                </AppBoldText>
+                <AppText numberOfLines={2}>{description}</AppText>
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: "98%", alignItems: "flex-start" }}>
+              <Text style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
+                Job Info
+              </Text>
+            </View>
+
+            <View style={styles.jobOverviewContainer}>
+              <TouchableOpacity
+                onPress={() => setJobOverviewModalVisible(true)}
+                style={styles.textButton}
+              >
+                <AppBoldText style={styles.textAreaLabel}>
+                  {" "}
+                  Job Overview
+                </AppBoldText>
+                <AppText numberOfLines={2}>{jobOverview}</AppText>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              onPress={() => setExperienceModalVisible(true)}
+              style={styles.buttons}
+            >
+              <AppBoldText style={styles.buttonTextColor}>
+                Experience
+              </AppBoldText>
+
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => setCompensationModalVisible(true)}
+              style={styles.buttons}
+            >
+              <AppBoldText style={styles.buttonTextColor}>
+                Compensation
+              </AppBoldText>
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => setEmploymentModalVisible(true)}
+              style={styles.buttons}
+            >
+              <AppBoldText style={styles.buttonTextColor}>
+                Employment
+              </AppBoldText>
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => setEducationModalVisible(true)}
+              style={styles.buttons}
+            >
+              <AppBoldText style={styles.buttonTextColor}>
+                Education
+              </AppBoldText>
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.lastButton}
+              onPress={() => setResponsibilitiesModalVisible(true)}
+            >
+              <AppBoldText style={styles.buttonTextColor}>
+                Responsibilities
+              </AppBoldText>
+              <Icon
+                style={styles.arrowIcons}
+                name="chevron-right"
+                color="#141414"
+                size={25}
+              />
             </TouchableOpacity>
           </View>
-          <View style={{ width: "98%", alignItems: "flex-start" }}>
-            <Text style={{ color: "rgba(0, 0, 0, 0.26)", fontSize: 15 }}>
-              Job Info
-            </Text>
-          </View>
-
-          <View style={styles.jobOverviewContainer}>
-            <TouchableOpacity
-              onPress={() => setJobOverviewModalVisible(true)}
-              style={styles.textButton}
-            >
-              <AppBoldText style={styles.textAreaLabel}> Job Overview</AppBoldText>
-              <AppText numberOfLines={2}>{jobOverview}</AppText>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            onPress={() => setExperienceModalVisible(true)}
-            style={styles.buttons}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Experience</AppBoldText>
-
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => setCompensationModalVisible(true)}
-            style={styles.buttons}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Compensation</AppBoldText>
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => setEmploymentModalVisible(true)}
-            style={styles.buttons}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Employment</AppBoldText>
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => setEducationModalVisible(true)}
-            style={styles.buttons}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Education</AppBoldText>
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.lastButton}
-            onPress={() => setResponsibilitiesModalVisible(true)}
-          >
-            <AppBoldText style={styles.buttonTextColor}>Responsibilities</AppBoldText>
-            <Icon
-              style={styles.arrowIcons}
-              name="chevron-right"
-              color="#141414"
-              size={25}
-            />
-          </TouchableOpacity>
-
-        </View>
-      </ScrollView>
+        </ScrollView>
       </View>
-     
     </Modal>
   );
 };
 const styles = StyleSheet.create({
-  scrollViewContainer:{backgroundColor:'pink', flex:1  },
-  scrollView: { padding: 20, backgroundColor: "pink", },
+  scrollViewContainer: { backgroundColor: "pink", flex: 1 },
+  scrollView: { padding: 20, backgroundColor: "pink" },
   addJobContainer: {
     alignItems: "center",
     padding: 20,
@@ -392,21 +403,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    borderBottomWidth:1,
+    borderBottomWidth: 1,
     borderBottomColor: "black",
   },
-  arrowIcons:{ },
+  arrowIcons: {},
   lastButton: {
     width: "100%",
     height: 60,
     justifyContent: "space-between",
     alignItems: "center",
-  
+
     flexDirection: "row",
   },
 
-  buttonTextColor: { color: "black", fontSize:18,   },
-  
+  buttonTextColor: { color: "black", fontSize: 18 },
+
   jobOverviewContainer: {
     width: "100%",
     alignItems: "center",
@@ -414,9 +425,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 5,
     borderRadius: 20,
-    
   },
-  companyDescriptionContainer:{
+  companyDescriptionContainer: {
     width: "100%",
     alignItems: "center",
     borderWidth: 1,
@@ -430,8 +440,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
-    paddingLeft:20,
-    paddingRight:20
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 
   textAreaLabel: {
@@ -441,8 +451,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     width: "85%",
     fontSize: 18,
-    marginBottom:10
-    
+    marginBottom: 10,
   },
 
   button: { width: "60%" },
