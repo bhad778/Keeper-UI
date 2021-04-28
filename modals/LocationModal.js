@@ -14,31 +14,35 @@ import ModalHeader from "../components/ModalHeader";
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
-  setLocation
+  setAddress,
 }) => {
   const [locationText, setLocationText] = useState("");
   const [locationData, setLocationData] = useState();
   const apiKey = "AIzaSyB0GiWadL-4lSXe7PNO9Vr47iTC4t7C94I";
- 
-useEffect(()=> {
-  axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${locationText}&types=geocode&key=${apiKey}`)
-  .then( (response) => locationText != "" ? setLocationData(response) : setLocationData(null))
-},[locationText])
-  
 
-
+  useEffect(() => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${locationText}&types=geocode&key=${apiKey}`
+      )
+      .then((response) =>
+        locationText != "" ? setLocationData(response) : setLocationData(null)
+      );
+  }, [locationText]);
 
   const saveLocation = (location) => {
-    setLocation(location)
-  }
- 
-  
+    setAddress(location);
+  };
 
   return (
     <Modal animationType="slide" visible={locationModalVisible}>
-
       <View style={styles.searchContainer}>
-      <ModalHeader   leftIcon="chevron-left" screenTitle='Location' border={1} closeModal={setLocationModalVisible} />
+        <ModalHeader
+          leftIcon="chevron-left"
+          screenTitle="Location"
+          border={1}
+          closeModal={setLocationModalVisible}
+        />
 
         <View style={styles.textInputContainer}>
           <TextInput
@@ -48,28 +52,42 @@ useEffect(()=> {
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        { locationData && !(locationText === "") && <View style={styles.cityOptionsButtonsContainer}>
+        {locationData && !(locationText === "") && (
+          <View style={styles.cityOptionsButtonsContainer}>
             <View style={styles.pointerTip} />
-            <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{locationData.data.predictions[0].description}</Text>
+            <TouchableOpacity
+              onPress={saveLocation}
+              style={styles.cityOptionsButton}
+            >
+              <Text style={styles.cityOptionsButtonText}>
+                {locationData.data.predictions[0].description}
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={saveLocation}  style={styles.cityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{locationData.data.predictions[1].description}</Text>
+            <TouchableOpacity
+              onPress={saveLocation}
+              style={styles.cityOptionsButton}
+            >
+              <Text style={styles.cityOptionsButtonText}>
+                {locationData.data.predictions[1].description}
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={saveLocation}  style={styles.lastCityOptionsButton}>
-              <Text style={styles.cityOptionsButtonText}>{locationData.data.predictions[2].description}</Text>
+            <TouchableOpacity
+              onPress={saveLocation}
+              style={styles.lastCityOptionsButton}
+            >
+              <Text style={styles.cityOptionsButtonText}>
+                {locationData.data.predictions[2].description}
+              </Text>
             </TouchableOpacity>
-          </View> }
-         
-        
+          </View>
+        )}
       </View>
     </Modal>
   );
 };
 const styles = StyleSheet.create({
-  
   searchContainer: {
-    padding:20,
+    padding: 20,
     alignItems: "center",
     justifyContent: "flex-start",
   },
