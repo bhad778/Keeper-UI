@@ -22,6 +22,11 @@ import { debounce } from "lodash";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
+// this page gets the employeesForSwiping from redux only so we can do that api call in
+// parallel with the others, the only time we update employeesForSwiping is after login,
+// then we just use it to initialize employeesData here then never update it again and just
+// behave like it was a variable made in this file, which is why we initialize employeeData
+// from redux in componentDidMount and also delete it from redux there
 class EmployerDiscover extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +45,7 @@ class EmployerDiscover extends Component {
       xIconScale: new Animated.Value(0),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
-      employeeDataReal: this.props.employeesForSwiping,
+      employeeData: this.props.employeesForSwiping,
     };
   }
 
@@ -99,7 +104,7 @@ class EmployerDiscover extends Component {
 
   debouncedUpdateSwipeDataApiCall = debounce((query) => {
     console.log(this.swipeData);
-  }, 5000);
+  }, 3000);
 
   updateSwipeData = (isLike) => {
     this.swipeData.push(isLike);
@@ -119,6 +124,7 @@ class EmployerDiscover extends Component {
     //   });
     // });
 
+    this.props.updateEmployeesForSwiping([]);
     this.runSlideUpAnimation();
   }
 
@@ -226,9 +232,9 @@ class EmployerDiscover extends Component {
 
   removeSwipedEmployeeFromState = () => {
     this.setState({
-      employeeDataReal: this.state.employeeDataReal.slice(
+      employeeDataReal: this.state.employeeData.slice(
         1,
-        this.state.employeeDataReal.length
+        this.state.employeeData.length
       ),
     });
   };
@@ -322,7 +328,7 @@ class EmployerDiscover extends Component {
                 navigation={this.props.navigation}
                 swipe={this.swipe}
                 resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
-                currentEmployee={this.state.employeeDataReal[0]}
+                currentEmployee={this.state.employeeData[0]}
               />
             </Animated.View>
           )}
