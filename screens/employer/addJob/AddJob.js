@@ -18,6 +18,7 @@ import LocationModal from "../../../modals/LocationModal";
 import EmploymentModal from "../../../modals/EmploymentModal";
 import EducationModal from "../../../modals/EducationModal";
 import ExperienceModal from "../../../modals/ExperienceModal";
+import BenefitsModal from "../../../modals/BenefitsModal"
 import CompanyDescriptionModal from "../../../modals/CompanyDescriptionModal";
 import JobOverviewModal from "../../../modals/JobOverviewModal";
 import ModalHeader from "../../../components/ModalHeader";
@@ -47,6 +48,8 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [experienceModalVisible, setExperienceModalVisible] = useState(false);
 
   const [employmentModalVisible, setEmploymentModalVisible] = useState(false);
+  
+  const [benefitsModalVisible, setBenefitsModalVisible] = useState(false)
 
   const [
     responsibilitiesModalVisible,
@@ -102,7 +105,10 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         experienceModalVisible={experienceModalVisible}
         setExperienceModalVisible={setExperienceModalVisible}
       />
-
+      <BenefitsModal
+      benefitsModalVisible={benefitsModalVisible}
+      setBenefitsModalVisible={setBenefitsModalVisible}
+      />
       <EmploymentModal
         setEmploymentType={setEmploymentType}
         employmentModalVisible={employmentModalVisible}
@@ -214,7 +220,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => setLocationModalVisible(true)}
+            onPress={() => setBenefitsModalVisible(true)}
             style={styles.lastButton}
           >
             <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>

@@ -54,7 +54,7 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
-      setLogo(image);
+      setLogo(imagePayload);
     }
   };
   const removeImage = () => {

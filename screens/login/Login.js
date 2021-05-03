@@ -95,38 +95,39 @@ const Login = ({
     navigation.navigate("SignUp");
   };
   const loginCredentialsPosition = new Animated.Value(300);
-  const creatAccountPosition = new Animated.Value(0);
-  !signInButtonPressed
+  const creatAccountPosition = new Animated.Value(200);
+  const createAccountFade = new Animated.Value(1)
+  signInButtonPressed
     ? Animated.parallel([
         Animated.timing(creatAccountPosition, {
-          toValue: 200,
-          duration: 150,
+          toValue: 10,
+          duration: 80,
           useNativeDriver: true,
         }).start(() => {
           Animated.parallel([
-            Animated.timing(loginCredentialsPosition, {
-              toValue: 300,
-              duration: 10,
+            Animated.timing(createAccountFade, {
+              toValue: 0,
+              duration: 1,
               useNativeDriver: true,
-            }).start(),
+            }).start(),Animated.timing(loginCredentialsPosition,{
+              toValue:10,
+              duration:100,
+              useNativeDriver:true
+            }).start()
           ]);
         }),
-      ])
-    : Animated.parallel([
+      ]):  Animated.parallel([
         Animated.timing(creatAccountPosition, {
-          toValue: -500,
-          duration: 200,
+          toValue: 200,
+          duration: 50,
           useNativeDriver: true,
-        }).start(() => {
-          Animated.parallel([
-            Animated.timing(loginCredentialsPosition, {
-              toValue: 10,
-              duration: 500,
-              useNativeDriver: true,
-            }).start(),
-          ]);
         }),
-      ]);
+          Animated.timing(loginCredentialsPosition,{
+              toValue:300,
+              duration:100,
+              useNativeDriver:true
+            }).start()
+      ])
 
   const toggleUI = () => {
     setSignInButtonPressed(!signInButtonPressed);
@@ -168,7 +169,7 @@ const Login = ({
             <Animated.View
               style={[
                 styles.animatedContainer,
-                { transform: [{ translateY: creatAccountPosition }] },
+                {opacity:createAccountFade, transform: [{ translateY: creatAccountPosition }] },
               ]}
             >
               <AnimatedTouchable
