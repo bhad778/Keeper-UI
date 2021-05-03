@@ -70,7 +70,7 @@ const Login = ({
           email: "Bhad7778@gmail.com",
         })
           .then((data) => {
-            updateLoggedInUser(data.userData);
+            updateLoggedInUser(data.loggedInUserData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
             updateEmployeesForSwiping(data.employeesForSwiping);
@@ -276,8 +276,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { loggedInUserObject } = state;
-  return { loggedInUserObject };
+  const { loggedInUserData } = state;
+  return { loggedInUserData };
 };
 
 const mapDispatchToProps = (dispatch) =>

@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
+import UsersService from "../../../services/UsersService";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
@@ -102,13 +103,35 @@ class EmployerDiscover extends Component {
     }).start();
   };
 
-  debouncedUpdateSwipeDataApiCall = debounce((query) => {
-    console.log(this.swipeData);
+  debouncedUpdateSwipeDataApiCall = debounce(() => {
+    UsersService.recordEmployersSwipes({
+      _id: this.props.loggedInUserData._id,
+      employeesAlreadySwipedOn: this.swipeData,
+    });
   }, 3000);
 
-  updateSwipeData = (isLike) => {
-    this.swipeData.push(isLike);
+  updateSwipeData = () => {
+    this.swipeData.push(this.state.employeeData[0]._id);
     this.debouncedUpdateSwipeDataApiCall();
+  };
+
+  swipe = (isLike) => {
+    this.props.updateBottomNavBarHeight(-1);
+
+    // remove the employee thats been swiped on from the array,
+    // while also recorded the swipe in the updateSwipeData function
+    this.updateSwipeData(isLike);
+
+    this.runSwipeAnimation();
+  };
+
+  removeSwipedEmployeeFromState = () => {
+    this.setState({
+      employeeData: this.state.employeeData.slice(
+        1,
+        this.state.employeeData.length
+      ),
+    });
   };
 
   componentDidMount() {
@@ -228,25 +251,6 @@ class EmployerDiscover extends Component {
         ]).start(() => {});
       }),
     ]).start(() => {});
-  };
-
-  removeSwipedEmployeeFromState = () => {
-    this.setState({
-      employeeDataReal: this.state.employeeData.slice(
-        1,
-        this.state.employeeData.length
-      ),
-    });
-  };
-
-  swipe = (isLike) => {
-    this.props.updateBottomNavBarHeight(-1);
-
-    // remove the employee thats been swiped on from the array,
-    // while also recorded the swipe in the updateSwipeData function
-    this.updateSwipeData(isLike);
-
-    this.runSwipeAnimation();
   };
 
   render() {
@@ -402,8 +406,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { employeesForSwiping } = state;
-  return { employeesForSwiping };
+  const { employeesForSwiping, loggedInUserData } = state;
+  return { employeesForSwiping, loggedInUserData };
 };
 
 const mapDispatchToProps = (dispatch) =>
