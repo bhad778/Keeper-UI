@@ -39,7 +39,6 @@ async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
 }
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Login = ({
@@ -47,7 +46,6 @@ const Login = ({
   updateLoggedInUser,
   updateMatches,
   updateEmployersJobs,
-  updateEmployeesForSwiping,
 }) => {
   const [signInButtonPressed, setSignInButtonPressed] = useState(false);
   // const [email, setEmail] = useState("");
@@ -73,7 +71,6 @@ const Login = ({
             updateLoggedInUser(data.loggedInUserData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
-            updateEmployeesForSwiping(data.employeesForSwiping);
             navigation.navigate("RootEmployer");
           })
           .catch((error) => {

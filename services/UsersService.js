@@ -73,8 +73,8 @@ const UsersService = {
         console.error("Error:", error);
       });
   },
-  recordEmployersSwipes: (payload) => {
-    return fetch(`${apiUrl}/recordEmployersSwipes`, {
+  getEmployeesForSwiping: (payload) => {
+    return fetch(`${apiUrl}/getEmployeesForSwiping`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

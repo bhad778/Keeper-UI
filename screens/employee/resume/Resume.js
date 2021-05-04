@@ -122,170 +122,176 @@ const Resume = (props) => {
         currentEmployee={props.currentEmployee}
       >
         <Header />
-        <View
-          style={{
-            backgroundColor: props.selectedJob.color,
-            flex: 1,
-            alignItems: "center",
-            paddingLeft: 16,
-            paddingRight: 16,
-          }}
-        >
-          <Image
-            style={styles.profileImage}
-            source={{
-              uri:
-                "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
-            }}
-          />
+        {props.currentEmployee && (
           <View
             style={{
               backgroundColor: props.selectedJob.color,
               flex: 1,
+              alignItems: "center",
+              paddingLeft: 16,
+              paddingRight: 16,
             }}
           >
-            <View style={styles.nameAndJobTitleSection}>
-              <AppBoldText style={styles.name}>
-                {props.currentEmployee.firstName}
-              </AppBoldText>
-              <AppBoldText style={styles.jobTitle}>DESIGN DIRECTOR</AppBoldText>
+            <Image
+              style={styles.profileImage}
+              source={{
+                uri:
+                  "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
+              }}
+            />
+            <View
+              style={{
+                backgroundColor: props.selectedJob.color,
+                flex: 1,
+              }}
+            >
+              <View style={styles.nameAndJobTitleSection}>
+                <AppBoldText style={styles.name}>
+                  {props.currentEmployee.firstName}
+                </AppBoldText>
+                <AppBoldText style={styles.jobTitle}>
+                  DESIGN DIRECTOR
+                </AppBoldText>
+              </View>
+              <View style={styles.descriptionTextSection}>
+                <AppParagraph style={styles.descriptionText}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </AppParagraph>
+                <AppParagraph style={styles.descriptionText}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </AppParagraph>
+              </View>
             </View>
-            <View style={styles.descriptionTextSection}>
-              <AppParagraph style={styles.descriptionText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </AppParagraph>
-              <AppParagraph style={styles.descriptionText}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </AppParagraph>
-            </View>
-          </View>
-          <View style={styles.experienceDetailsSection}>
-            <View style={styles.jobHistoryTitleSection}>
-              <AppBoldText style={styles.jobHistoryTitle}>
-                Job History
-              </AppBoldText>
-            </View>
-            <View style={styles.pastJobsSection}>
-              {pastJobs.map((item, i) => (
-                <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
-                  <View style={styles.specificPastJob}>
-                    <View style={styles.jobDetailsSection}>
-                      <FontAwesome
-                        style={styles.angleDownIcon}
-                        color="black"
-                        name={
-                          activeAccordions.includes(i)
-                            ? "angle-up"
-                            : "angle-down"
+            <View style={styles.experienceDetailsSection}>
+              <View style={styles.jobHistoryTitleSection}>
+                <AppBoldText style={styles.jobHistoryTitle}>
+                  Job History
+                </AppBoldText>
+              </View>
+              <View style={styles.pastJobsSection}>
+                {pastJobs.map((item, i) => (
+                  <TouchableOpacity onPress={() => onAccordionClick(i)} key={i}>
+                    <View style={styles.specificPastJob}>
+                      <View style={styles.jobDetailsSection}>
+                        <FontAwesome
+                          style={styles.angleDownIcon}
+                          color="black"
+                          name={
+                            activeAccordions.includes(i)
+                              ? "angle-up"
+                              : "angle-down"
+                          }
+                          size={30}
+                        />
+                        <AppBoldText style={styles.numberText}>
+                          {item.number}
+                        </AppBoldText>
+                        <View style={styles.jobTitleContainer}>
+                          <AppBoldText style={styles.jobTitleText}>
+                            {item.jobTitle}
+                          </AppBoldText>
+                        </View>
+                        <AppText style={styles.jobMonthsText}>
+                          {item.months}
+                        </AppText>
+                        <AppParagraph
+                          style={
+                            activeAccordions.includes(i)
+                              ? styles.jobDetailsOpened
+                              : styles.hidden
+                          }
+                        >
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                          nostrud exercitation ullamco laboris nisi ut aliquip
+                          ex ea commodo consequat.
+                        </AppParagraph>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              <View style={styles.skillsSection}>
+                <AppBoldText style={styles.skillsTitle}>Skills</AppBoldText>
+                <View style={styles.skillsListSection}>
+                  {skills.map((skill, i) => (
+                    <View key={i} style={styles.skillContainer}>
+                      <AppParagraph style={styles.skillText}>
+                        {skill}
+                      </AppParagraph>
+                      <AppParagraph
+                        style={
+                          i === skills.length - 1
+                            ? styles.hidden
+                            : styles.bulletPoint
                         }
-                        size={30}
-                      />
-                      <AppBoldText style={styles.numberText}>
-                        {item.number}
-                      </AppBoldText>
+                      ></AppParagraph>
+                    </View>
+                  ))}
+                </View>
+              </View>
+              <View style={styles.educationSection}>
+                <AppBoldText style={styles.educationTitle}>
+                  Education
+                </AppBoldText>
+                {/* style={styles.educationItemContainer} */}
+                {education.map((educationItem, i) => {
+                  return (
+                    <View
+                      style={
+                        i === education.length - 1
+                          ? styles.lastEducationItemContainer
+                          : styles.educationItemContainer
+                      }
+                      key={i}
+                    >
+                      <AppText style={styles.numberText}>
+                        {educationItem.months}
+                      </AppText>
                       <View style={styles.jobTitleContainer}>
                         <AppBoldText style={styles.jobTitleText}>
-                          {item.jobTitle}
+                          {educationItem.major}
                         </AppBoldText>
                       </View>
                       <AppText style={styles.jobMonthsText}>
-                        {item.months}
+                        {educationItem.degreeType}
+                        &nbsp; &#9679; &nbsp;
+                        {educationItem.school}
                       </AppText>
-                      <AppParagraph
-                        style={
-                          activeAccordions.includes(i)
-                            ? styles.jobDetailsOpened
-                            : styles.hidden
-                        }
-                      >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                      </AppParagraph>
                     </View>
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <View style={styles.skillsSection}>
-              <AppBoldText style={styles.skillsTitle}>Skills</AppBoldText>
-              <View style={styles.skillsListSection}>
-                {skills.map((skill, i) => (
-                  <View key={i} style={styles.skillContainer}>
-                    <AppParagraph style={styles.skillText}>
-                      {skill}
-                    </AppParagraph>
-                    <AppParagraph
-                      style={
-                        i === skills.length - 1
-                          ? styles.hidden
-                          : styles.bulletPoint
-                      }
-                    ></AppParagraph>
-                  </View>
-                ))}
+                  );
+                })}
               </View>
             </View>
-            <View style={styles.educationSection}>
-              <AppBoldText style={styles.educationTitle}>Education</AppBoldText>
-              {/* style={styles.educationItemContainer} */}
-              {education.map((educationItem, i) => {
-                return (
-                  <View
-                    style={
-                      i === education.length - 1
-                        ? styles.lastEducationItemContainer
-                        : styles.educationItemContainer
-                    }
-                    key={i}
-                  >
-                    <AppText style={styles.numberText}>
-                      {educationItem.months}
-                    </AppText>
-                    <View style={styles.jobTitleContainer}>
-                      <AppBoldText style={styles.jobTitleText}>
-                        {educationItem.major}
-                      </AppBoldText>
-                    </View>
-                    <AppText style={styles.jobMonthsText}>
-                      {educationItem.degreeType}
-                      &nbsp; &#9679; &nbsp;
-                      {educationItem.school}
-                    </AppText>
-                  </View>
-                );
-              })}
+            <View
+              style={{
+                backgroundColor: props.selectedJob.color,
+                flex: 1,
+                paddingBottom: 100,
+              }}
+            >
+              <AppParagraph style={styles.descriptionText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </AppParagraph>
+              <AppParagraph style={styles.descriptionText}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </AppParagraph>
             </View>
           </View>
-          <View
-            style={{
-              backgroundColor: props.selectedJob.color,
-              flex: 1,
-              paddingBottom: 100,
-            }}
-          >
-            <AppParagraph style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </AppParagraph>
-            <AppParagraph style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </AppParagraph>
-          </View>
-        </View>
+        )}
       </HideBottomNavScrollView>
       <View
         style={{

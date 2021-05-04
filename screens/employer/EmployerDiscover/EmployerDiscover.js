@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
-import UsersService from "../../../services/UsersService";
+import UsersService from "../../../services/JobsService";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
@@ -46,6 +46,7 @@ class EmployerDiscover extends Component {
       xIconScale: new Animated.Value(0),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
+      selectedJobColor: this.props.selectedJob.color,
       employeeData: this.props.employeesForSwiping,
     };
   }
@@ -104,23 +105,26 @@ class EmployerDiscover extends Component {
   };
 
   debouncedUpdateSwipeDataApiCall = debounce(() => {
-    UsersService.recordEmployersSwipes({
-      _id: this.props.loggedInUserData._id,
+    UsersService.recordJobsSwipes({
+      _id: this.props.selectedJob._id,
       employeesAlreadySwipedOn: this.swipeData,
     });
   }, 3000);
 
-  updateSwipeData = () => {
-    this.swipeData.push(this.state.employeeData[0]._id);
+  updateSwipeData = (isRightSwipe) => {
+    this.swipeData.push({
+      employeeId: this.state.employeeData[0]._id,
+      isRightSwipe: isRightSwipe,
+    });
     this.debouncedUpdateSwipeDataApiCall();
   };
 
-  swipe = (isLike) => {
+  swipe = (isRightSwipe) => {
     this.props.updateBottomNavBarHeight(-1);
 
     // remove the employee thats been swiped on from the array,
     // while also recorded the swipe in the updateSwipeData function
-    this.updateSwipeData(isLike);
+    this.updateSwipeData(isRightSwipe);
 
     this.runSwipeAnimation();
   };
@@ -134,20 +138,16 @@ class EmployerDiscover extends Component {
     });
   };
 
-  componentDidMount() {
-    // UsersService.getEmployer({
-    //   email: "Bhad7778@gmail.com",
-    // }).then((data) => {
-    //   this.props.updateLoggedInUser(data[0]);
-    //   UsersService.getMatches({
-    //     accountType: data[0].accountType,
-    //     matches: data[0].matches,
-    //   }).then((data) => {
-    //     this.props.updateMatches(data);
-    //   });
-    // });
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedJob.color !== this.state.selectedJobColor) {
+      this.setState({
+        employeeData: nextProps.employeesForSwiping,
+        selectedJobColor: nextProps.selectedJob.color,
+      });
+    }
+  }
 
-    this.props.updateEmployeesForSwiping([]);
+  componentDidMount() {
     this.runSlideUpAnimation();
   }
 
@@ -406,8 +406,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { employeesForSwiping, loggedInUserData } = state;
-  return { employeesForSwiping, loggedInUserData };
+  const { selectedJob, employeesForSwiping } = state;
+  return { selectedJob, employeesForSwiping };
 };
 
 const mapDispatchToProps = (dispatch) =>
