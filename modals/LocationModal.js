@@ -4,13 +4,15 @@ import {
   StyleSheet,
   View,
   Text,
-  Modal,
   TouchableOpacity,
   TextInput,
+  Dimensions,
 } from "react-native";
+import Modal from "react-native-modal";
 
 import ModalHeader from "../components/ModalHeader";
-
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const LocationModal = ({
   locationModalVisible,
   setLocationModalVisible,
@@ -35,7 +37,12 @@ const LocationModal = ({
   };
 
   return (
-    <Modal animationType="slide" visible={locationModalVisible}>
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      style={styles.modal}
+      isVisible={locationModalVisible}
+    >
       <View style={styles.searchContainer}>
         <ModalHeader
           leftIcon="chevron-left"
@@ -86,10 +93,15 @@ const LocationModal = ({
   );
 };
 const styles = StyleSheet.create({
+  modal: {
+    backgroundColor: "white",
+    margin: 0,
+  },
+
   searchContainer: {
     padding: 20,
     alignItems: "center",
-    justifyContent: "flex-start",
+    flex: 1,
   },
   textInput: {
     height: 60,

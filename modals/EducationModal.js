@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import ModalHeader from "../components/ModalHeader";
 import AppBoldText from "../components/AppBoldText";
+import Modal from "react-native-modal";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const EducationModal = ({
   setEducation,
   educationModalVisible,
@@ -15,7 +24,12 @@ const EducationModal = ({
   };
 
   return (
-    <Modal animationType="slide" visible={educationModalVisible}>
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      style={styles.modal}
+      isVisible={educationModalVisible}
+    >
       <View style={styles.educationTypeContainer}>
         <ModalHeader
           leftIcon="chevron-left"
@@ -97,6 +111,7 @@ const EducationModal = ({
 };
 
 const styles = StyleSheet.create({
+  modal: { width: SCREEN_WIDTH, backgroundColor: "white", margin: 0 },
   educationTypeContainer: { flex: 5, alignItems: "center", padding: 20 },
   educationButtons: {
     margin: 4,

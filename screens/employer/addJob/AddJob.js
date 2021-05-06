@@ -218,7 +218,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setLocationModalVisible(true)}
+              onPress={() => setBenefitsModalVisible(true)}
               style={styles.lastButton}
             >
               <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>
@@ -232,7 +232,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
             <View style={styles.companyDescriptionContainer}>
               <TouchableOpacity
-                onPress={() => setCompanyDescriptionModalVisible(true)}
+                onPress={() => {
+                  setCompanyDescriptionModalVisible(true);
+                }}
                 style={styles.textButton}
               >
                 <AppBoldText style={styles.textAreaLabel}>

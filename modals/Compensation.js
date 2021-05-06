@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ModalHeader from "../components/ModalHeader";
-import AppBoldText from '../components/AppBoldText'
+import AppBoldText from "../components/AppBoldText";
+import Modal from "react-native-modal";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const Compensation = ({
   compensationModalVisible,
   setCompensationModalVisible,
   setCompensationType,
-  setCompensation
+  setCompensation,
 }) => {
   const onButtonClick = (clickedButton) => {
     setButtonPressed(clickedButton);
     setButtonTextPressed(clickedButton);
-    setCompensationType(clickedButton)
+    setCompensationType(clickedButton);
   };
   const [multiSliderValueAnnual, setMultiSliderValueAnnual] = React.useState([
     45000,
@@ -23,7 +32,6 @@ const Compensation = ({
     60,
   ]);
 
-  
   const [buttonPressed, setButtonPressed] = useState("annually");
   const [buttonTextPressed, setButtonTextPressed] = useState("annually");
   function numberWithCommas(x) {
@@ -31,13 +39,20 @@ const Compensation = ({
   }
 
   return (
-    <Modal visible={compensationModalVisible}>
-
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      style={styles.modal}
+      isVisible={compensationModalVisible}
+    >
       <View style={styles.sliderSection}>
-    
-        <ModalHeader  leftIcon="chevron-left" border={1} closeModal={setCompensationModalVisible} screenTitle='Compensation' />
+        <ModalHeader
+          leftIcon="chevron-left"
+          border={1}
+          closeModal={setCompensationModalVisible}
+          screenTitle="Compensation"
+        />
 
-    
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             onPress={() => onButtonClick("annually")}
@@ -47,14 +62,7 @@ const Compensation = ({
                 : styles.buttons
             }
           >
-            <AppBoldText
-              style={
-            
-                   styles.buttonText
-              }
-            >
-              Annually
-            </AppBoldText>
+            <AppBoldText style={styles.buttonText}>Annually</AppBoldText>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onButtonClick("hourly")}
@@ -64,14 +72,7 @@ const Compensation = ({
                 : styles.buttons
             }
           >
-            <AppBoldText
-              style={
-              
-                   styles.buttonText
-              }
-            >
-              Hourly
-            </AppBoldText>
+            <AppBoldText style={styles.buttonText}>Hourly</AppBoldText>
           </TouchableOpacity>
         </View>
 
@@ -86,8 +87,8 @@ const Compensation = ({
             </Text>
           </View>
 
-          <MultiSlider 
-             markerStyle={{ backgroundColor: "black" }} 
+          <MultiSlider
+            markerStyle={{ backgroundColor: "black" }}
             trackStyle={{ backgroundColor: "#b6b6b6", width: 1 }}
             selectedStyle={{ backgroundColor: "black" }}
             sliderSection={270}
@@ -99,7 +100,7 @@ const Compensation = ({
             sliderLength={345}
             onValuesChange={
               buttonPressed === "annually"
-                ? (values)=> setMultiSliderValueAnnual(values)
+                ? (values) => setMultiSliderValueAnnual(values)
                 : (values) => setMultiSliderValueHourly(values)
             }
             onValuesChangeFinish={(values) => setCompensation(values)}
@@ -115,28 +116,24 @@ const Compensation = ({
   );
 };
 const styles = StyleSheet.create({
-  
-  header:{marginBottom:20},
+  modal: { width: SCREEN_WIDTH, backgroundColor: "white", margin: 0 },
+  header: { marginBottom: 20 },
 
   sliderSection: {
     flex: 6,
-    padding:20,
-    alignItems:'center',
-    
-    
+    padding: 20,
+    alignItems: "center",
   },
   buttonsContainer: {
-    justifyContent:'center',
+    justifyContent: "center",
     flexDirection: "row",
-    marginTop:60,
-    width:'100%',
+    marginTop: 60,
+    width: "100%",
     marginBottom: 40,
-    
-  
   },
   buttons: {
     borderRadius: 30,
-    
+
     width: "49%",
     height: 50,
     margin: 4,
@@ -155,7 +152,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonText: { color: "black", fontSize:20 },
-
+  buttonText: { color: "black", fontSize: 20 },
 });
 export default Compensation;
