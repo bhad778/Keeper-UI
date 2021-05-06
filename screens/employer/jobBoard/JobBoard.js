@@ -13,6 +13,8 @@ import { Card, Appbar } from "react-native-paper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateSelectedJob } from "../../../redux/actions/JobActions";
+import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
+import UsersService from "../../../services/UsersService";
 import Icon from "react-native-vector-icons/Feather";
 import AddJob from "../addJob/AddJob";
 
@@ -23,14 +25,24 @@ const JobBoard = ({
   updateSelectedJob,
   jobBoardModalOpen,
   setJobBoardModalOpen,
+  updateEmployeesForSwiping,
   selectedJob,
   employersJobs,
 }) => {
   const [addJobModalVisible, setAddJobModalVisible] = useState(false);
 
   const selectJob = (selectedJob) => {
-    setJobBoardModalOpen(false);
-    updateSelectedJob(selectedJob);
+    UsersService.getEmployeesForSwiping({
+      "lng": selectedJob.geoLocation.coordinates[0],
+      "lat": selectedJob.geoLocation.coordinates[1],
+      "distance": 10000,
+      "employeesAlreadySwipedOn": selectedJob.employeesAlreadySwipedOn,
+      "filtersArray": [{ "firstName": "Ash" }, { "lastName": "Ketchum" }],
+    }).then((data) => {
+      updateEmployeesForSwiping(data);
+      updateSelectedJob(selectedJob);
+      setJobBoardModalOpen(false);
+    });
   };
 
   return (
@@ -185,6 +197,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateSelectedJob,
+      updateEmployeesForSwiping,
     },
     dispatch
   );

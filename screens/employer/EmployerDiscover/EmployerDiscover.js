@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
+import UsersService from "../../../services/JobsService";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
@@ -22,6 +23,11 @@ import { debounce } from "lodash";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
+// this page gets the employeesForSwiping from redux only so we can do that api call in
+// parallel with the others, the only time we update employeesForSwiping is after login,
+// then we just use it to initialize employeesData here then never update it again and just
+// behave like it was a variable made in this file, which is why we initialize employeeData
+// from redux in componentDidMount and also delete it from redux there
 class EmployerDiscover extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +46,8 @@ class EmployerDiscover extends Component {
       xIconScale: new Animated.Value(0),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
-      employeeDataReal: this.props.employeesForSwiping,
+      selectedJobColor: this.props.selectedJob.color,
+      employeeData: this.props.employeesForSwiping,
     };
   }
 
@@ -97,28 +104,50 @@ class EmployerDiscover extends Component {
     }).start();
   };
 
-  debouncedUpdateSwipeDataApiCall = debounce((query) => {
-    console.log(this.swipeData);
-  }, 5000);
+  debouncedUpdateSwipeDataApiCall = debounce(() => {
+    UsersService.recordJobsSwipes({
+      _id: this.props.selectedJob._id,
+      employeesAlreadySwipedOn: this.swipeData,
+    });
+  }, 3000);
 
-  updateSwipeData = (isLike) => {
-    this.swipeData.push(isLike);
+  updateSwipeData = (isRightSwipe) => {
+    this.swipeData.push({
+      employeeId: this.state.employeeData[0]._id,
+      isRightSwipe: isRightSwipe,
+    });
     this.debouncedUpdateSwipeDataApiCall();
   };
 
-  componentDidMount() {
-    // UsersService.getEmployer({
-    //   email: "Bhad7778@gmail.com",
-    // }).then((data) => {
-    //   this.props.updateLoggedInUser(data[0]);
-    //   UsersService.getMatches({
-    //     accountType: data[0].accountType,
-    //     matches: data[0].matches,
-    //   }).then((data) => {
-    //     this.props.updateMatches(data);
-    //   });
-    // });
+  swipe = (isRightSwipe) => {
+    this.props.updateBottomNavBarHeight(-1);
 
+    // remove the employee thats been swiped on from the array,
+    // while also recorded the swipe in the updateSwipeData function
+    this.updateSwipeData(isRightSwipe);
+
+    this.runSwipeAnimation();
+  };
+
+  removeSwipedEmployeeFromState = () => {
+    this.setState({
+      employeeData: this.state.employeeData.slice(
+        1,
+        this.state.employeeData.length
+      ),
+    });
+  };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedJob.color !== this.state.selectedJobColor) {
+      this.setState({
+        employeeData: nextProps.employeesForSwiping,
+        selectedJobColor: nextProps.selectedJob.color,
+      });
+    }
+  }
+
+  componentDidMount() {
     this.runSlideUpAnimation();
   }
 
@@ -224,25 +253,6 @@ class EmployerDiscover extends Component {
     ]).start(() => {});
   };
 
-  removeSwipedEmployeeFromState = () => {
-    this.setState({
-      employeeDataReal: this.state.employeeDataReal.slice(
-        1,
-        this.state.employeeDataReal.length
-      ),
-    });
-  };
-
-  swipe = (isLike) => {
-    this.props.updateBottomNavBarHeight(-1);
-
-    // remove the employee thats been swiped on from the array,
-    // while also recorded the swipe in the updateSwipeData function
-    this.updateSwipeData(isLike);
-
-    this.runSwipeAnimation();
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -322,7 +332,7 @@ class EmployerDiscover extends Component {
                 navigation={this.props.navigation}
                 swipe={this.swipe}
                 resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
-                currentEmployee={this.state.employeeDataReal[0]}
+                currentEmployee={this.state.employeeData[0]}
               />
             </Animated.View>
           )}
@@ -396,8 +406,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { employeesForSwiping } = state;
-  return { employeesForSwiping };
+  const { selectedJob, employeesForSwiping } = state;
+  return { selectedJob, employeesForSwiping };
 };
 
 const mapDispatchToProps = (dispatch) =>

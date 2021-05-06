@@ -1,5 +1,4 @@
 const inititalState = {
-  title: null,
   color: "white",
 };
 
