@@ -36,6 +36,8 @@ const JobBoard = ({
       "lng": selectedJob.geoLocation.coordinates[0],
       "lat": selectedJob.geoLocation.coordinates[1],
       "distance": 10000,
+      "employeesAlreadySwipedOn": selectedJob.employeesAlreadySwipedOn,
+      "filtersArray": [{ "firstName": "Ash" }, { "lastName": "Ketchum" }],
     }).then((data) => {
       updateEmployeesForSwiping(data);
       updateSelectedJob(selectedJob);
