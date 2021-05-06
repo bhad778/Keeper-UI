@@ -19,6 +19,7 @@ import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
 import { debounce } from "lodash";
+// import CustomModal from "../../../components/customModal/customModal";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -256,6 +257,7 @@ class EmployerDiscover extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <CustomModal></CustomModal>
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}

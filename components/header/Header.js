@@ -7,6 +7,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import JobBoard from "../../screens/employer/jobBoard/JobBoard";
 import AppHeaderText from "../AppHeaderText";
+import CustomModal from "../customModal";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
