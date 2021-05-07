@@ -6,6 +6,7 @@ import NavigationReducer from "./NavigationReducer";
 import UsersReducer from "./UsersReducer";
 import EmployersJobsReducer from "./EmployersJobsReducer";
 import EmployeesForSwipingReducer from "./EmployeesForSwipingReducer";
+import ToggleJobBoardOpen from "./ToggleJobBoardOpenReducer";
 
 export default combineReducers({
   selectedJob: JobReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   matches: MatchesReducer,
   employersJobs: EmployersJobsReducer,
   employeesForSwiping: EmployeesForSwipingReducer,
+  isJobBoardOpen: ToggleJobBoardOpen,
 });

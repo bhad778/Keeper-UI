@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  Text,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import Header from "../../../components/header/Header";
@@ -13,6 +14,7 @@ import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView
 import AppText from "../../../components/AppText";
 import AppParagraph from "../../../components/AppParagraph";
 import AppBoldText from "../../../components/AppBoldText";
+import CustomModal from "../../../components/customModal/CustomModal";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -147,7 +149,7 @@ const Resume = (props) => {
             >
               <View style={styles.nameAndJobTitleSection}>
                 <AppBoldText style={styles.name}>
-                  {props.currentEmployee.firstName}
+                  {/* {props.currentEmployee.firstName} */}
                 </AppBoldText>
                 <AppBoldText style={styles.jobTitle}>
                   DESIGN DIRECTOR
@@ -300,6 +302,7 @@ const Resume = (props) => {
           position: "absolute",
           bottom: props.bottomNavBarHeight + 10,
           left: 10,
+          zIndex: props.isJobBoardOpen ? -1 : 1,
         }}
       >
         <TouchableOpacity
@@ -558,8 +561,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob, bottomNavBarHeight } = state;
-  return { selectedJob, bottomNavBarHeight };
+  const { selectedJob, bottomNavBarHeight, isJobBoardOpen } = state;
+  return { selectedJob, bottomNavBarHeight, isJobBoardOpen };
 };
 
 export default connect(mapStateToProps)(Resume);

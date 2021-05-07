@@ -25,8 +25,12 @@ function BottomTabNavigator(props) {
           bottom: 0,
         },
         activeTintColor: "black",
-        inactiveBackgroundColor: props.selectedJob.color,
-        activeBackgroundColor: props.selectedJob.color,
+        inactiveBackgroundColor: props.isJobBoardOpen
+          ? "white"
+          : props.selectedJob.color,
+        activeBackgroundColor: props.isJobBoardOpen
+          ? "white"
+          : props.selectedJob.color,
       }}
     >
       <Tab.Screen
@@ -34,7 +38,12 @@ function BottomTabNavigator(props) {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon style={styles.tabs} name="sliders" size={30} color={color} />
+            <Icon
+              style={styles.tabs}
+              name="sliders"
+              size={30}
+              color={props.isJobBoardOpen ? "white" : color}
+            />
           ),
         }}
       />
@@ -43,7 +52,12 @@ function BottomTabNavigator(props) {
         component={EmployerDiscover}
         options={() => ({
           tabBarIcon: ({ color }) => (
-            <Icon style={styles.tabs} name="search" size={30} color={color} />
+            <Icon
+              style={styles.tabs}
+              name="search"
+              size={30}
+              color={props.isJobBoardOpen ? "white" : color}
+            />
           ),
         })}
       />
@@ -56,7 +70,7 @@ function BottomTabNavigator(props) {
               style={styles.tabs}
               name="message-square"
               size={30}
-              color={color}
+              color={props.isJobBoardOpen ? "white" : color}
             />
           ),
         }}
@@ -70,8 +84,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob, bottomNavBarHeight } = state;
-  return { selectedJob, bottomNavBarHeight };
+  const { selectedJob, bottomNavBarHeight, isJobBoardOpen } = state;
+  return { selectedJob, bottomNavBarHeight, isJobBoardOpen };
 };
 
 export default connect(mapStateToProps)(BottomTabNavigator);

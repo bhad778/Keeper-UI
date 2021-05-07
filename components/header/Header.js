@@ -5,11 +5,10 @@ import { Appbar } from "react-native-paper";
 import EntypoIcon from "react-native-vector-icons/Entypo";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
-import JobBoard from "../../screens/employer/jobBoard/JobBoard";
 import AppHeaderText from "../AppHeaderText";
-import CustomModal from "../customModal";
+import CustomModal from "../customModal/CustomModal";
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
   const goBack = () => {
@@ -20,20 +19,13 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
   );
 
   return (
-    <Appbar.Header
-      style={{
-        backgroundColor: selectedJob.color,
-        width: SCREEN_WIDTH,
-        height: 80,
-        elevation: 0,
-      }}
-    >
-      <View style={styles.headerContents}>
-        <JobBoard
-          navigation={navigation}
+    <View style={styles.headerContainer}>
+      <View>
+        <CustomModal
           jobBoardModalOpen={jobBoardModalOpen}
           setJobBoardModalOpen={setJobBoardModalOpen}
-        ></JobBoard>
+          navigation={navigation}
+        ></CustomModal>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
             {withBackButton && (
@@ -44,7 +36,7 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
           </View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
-            onPress={() => setJobBoardModalOpen(true)}
+            onPress={() => setJobBoardModalOpen(!jobBoardModalOpen)}
           >
             <View style={styles.titleSection}>
               <AppHeaderText style={styles.titleText}>
@@ -62,16 +54,13 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </Appbar.Header>
+    </View>
   );
 };
 const styles = StyleSheet.create({
-  headerContents: {
-    width: SCREEN_WIDTH,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingRight: 18,
-    paddingLeft: 10,
+  headerContainer: {
+    zIndex: 101,
+    // opacity: 0.5,
   },
   headerPill: {
     backgroundColor: "white",
@@ -82,6 +71,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
+    zIndex: 101,
   },
   leftSection: {
     height: "100%",

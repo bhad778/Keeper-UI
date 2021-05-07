@@ -6,7 +6,6 @@ import {
   ScrollView,
   Dimensions,
   Text,
-  Modal,
   TouchableOpacity,
 } from "react-native";
 import { Card, Appbar } from "react-native-paper";
@@ -23,10 +22,8 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const JobBoard = ({
   updateSelectedJob,
-  jobBoardModalOpen,
-  setJobBoardModalOpen,
+  setJobBoardModalOpenProp,
   updateEmployeesForSwiping,
-  selectedJob,
   employersJobs,
 }) => {
   const [addJobModalVisible, setAddJobModalVisible] = useState(false);
@@ -37,20 +34,16 @@ const JobBoard = ({
       "lat": selectedJob.geoLocation.coordinates[1],
       "distance": 10000,
       "employeesAlreadySwipedOn": selectedJob.employeesAlreadySwipedOn,
-      "filtersArray": [{ "firstName": "Ash" }, { "lastName": "Ketchum" }],
+      // "filtersArray": [{ "firstName": "Ash" }, { "lastName": "Ketchum" }],
     }).then((data) => {
       updateEmployeesForSwiping(data);
       updateSelectedJob(selectedJob);
-      setJobBoardModalOpen(false);
+      setJobBoardModalOpenProp(false);
     });
   };
 
   return (
-    <Modal
-      animationType={selectedJob.title ? "slide" : "none"}
-      visible={jobBoardModalOpen}
-      style={styles.jobBoardModal}
-    >
+    <View style={styles.jobBoardModal}>
       <View style={styles.container}>
         <AddJob
           addJobModalVisible={addJobModalVisible}
@@ -125,15 +118,15 @@ const JobBoard = ({
           </ScrollView>
         </View>
       </View>
-    </Modal>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   jobBoardModal: {
-    position: "absolute",
-    left: 1000,
-    top: 1000,
+    // position: "absolute",
+    // left: 0,
+    // top: 0,
   },
   container: {
     display: "flex",

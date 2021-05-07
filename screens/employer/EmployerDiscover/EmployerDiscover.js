@@ -8,6 +8,7 @@ import {
   Dimensions,
   Image,
   Easing,
+  Text,
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -19,7 +20,7 @@ import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
 import { debounce } from "lodash";
-// import CustomModal from "../../../components/customModal/customModal";
+import Header from "../../../components/header/Header";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -40,7 +41,6 @@ class EmployerDiscover extends Component {
       swipedAllCards: false,
       swipeDirection: "",
       cardIndex: 0,
-      isLoading: false,
       slideUpValue: new Animated.Value(0),
       wholeSwiperFadeAnim: new Animated.Value(1),
       xIconFadeAnim: new Animated.Value(0),
@@ -257,7 +257,7 @@ class EmployerDiscover extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <CustomModal></CustomModal>
+        {/* <Header></Header> */}
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -312,32 +312,29 @@ class EmployerDiscover extends Component {
           ]}
         ></Animated.Image>
         <View style={styles.swiperContainer}>
-          {this.state.isLoading && <ActivityIndicator size="large" />}
-          {!this.state.isLoading && (
-            <Animated.View
-              style={[
-                styles.resumeContainer,
-                {
-                  opacity: this.state.wholeSwiperFadeAnim,
-                  transform: [
-                    {
-                      translateY: this.state.wholeSwiperTranslateY.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, SCREEN_HEIGHT],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              <Resume
-                navigation={this.props.navigation}
-                swipe={this.swipe}
-                resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
-                currentEmployee={this.state.employeeData[0]}
-              />
-            </Animated.View>
-          )}
+          <Animated.View
+            style={[
+              styles.resumeContainer,
+              {
+                opacity: this.state.wholeSwiperFadeAnim,
+                transform: [
+                  {
+                    translateY: this.state.wholeSwiperTranslateY.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, SCREEN_HEIGHT],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
+            <Resume
+              navigation={this.props.navigation}
+              swipe={this.swipe}
+              resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
+              currentEmployee={"hey"}
+            />
+          </Animated.View>
         </View>
       </View>
     );

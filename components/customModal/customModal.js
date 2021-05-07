@@ -1,33 +1,77 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Animated, StyleSheet, View, Dimensions } from "react-native";
+import JobBoard from "../../screens/employer/jobBoard/JobBoard";
+import { connect } from "react-redux";
+import { toggleJobBoardOpen } from "../../redux/actions/ToggleJobBoardOpenActions";
+import { bindActionCreators } from "redux";
 
-class CustomModal extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header} />
-        <View style={styles.body} />
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+
+function CustomModal({
+  jobBoardModalOpen,
+  setJobBoardModalOpen,
+  toggleJobBoardOpen,
+}) {
+  const [top] = useState(new Animated.Value(SCREEN_HEIGHT));
+
+  useEffect(() => {
+    if (jobBoardModalOpen && top._value != 0) {
+      openModal();
+      toggleJobBoardOpen(true);
+    } else {
+      closeModal();
+      toggleJobBoardOpen(false);
+    }
+  }, [jobBoardModalOpen]);
+
+  const setJobBoardModalOpenProp = (isOpen) => {
+    setJobBoardModalOpen(isOpen);
+  };
+
+  const openModal = () => {
+    Animated.spring(top, {
+      toValue: 0,
+    }).start();
+  };
+
+  const closeModal = () => {
+    Animated.spring(top, {
+      toValue: SCREEN_HEIGHT,
+    }).start();
+  };
+
+  return (
+    <Animated.View
+      style={{
+        position: "absolute",
+        backgroundColor: "gold",
+        width: "100%",
+        height: SCREEN_HEIGHT,
+        zIndex: 100,
+        top: top,
+      }}
+    >
+      <View style={styles.body}>
+        <JobBoard
+          setJobBoardModalOpenProp={setJobBoardModalOpenProp}
+        ></JobBoard>
       </View>
-    );
-  }
+    </Animated.View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    backgroundColor: "white",
-    width: "100%",
-    height: "100%",
-    zIndex: 100,
-  },
-  header: {
-    backgroundColor: "#333",
-    height: 150,
-  },
   body: {
-    backgroundColor: "#eaeaea",
-    height: 900,
+    height: "100%",
   },
 });
 
-export default CustomModal;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      toggleJobBoardOpen,
+    },
+    dispatch
+  );
+
+export default connect(null, mapDispatchToProps)(CustomModal);
