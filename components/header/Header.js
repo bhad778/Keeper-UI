@@ -60,10 +60,9 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
 const styles = StyleSheet.create({
   headerContainer: {
     zIndex: 101,
-    // opacity: 0.5,
   },
   headerPill: {
-    backgroundColor: "white",
+    backgroundColor: "gold",
     width: "100%",
     height: 78,
     borderRadius: 100,
@@ -72,6 +71,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     zIndex: 101,
+    marginTop: 60,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   leftSection: {
     height: "100%",

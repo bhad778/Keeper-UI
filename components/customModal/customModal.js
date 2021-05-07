@@ -6,6 +6,7 @@ import { toggleJobBoardOpen } from "../../redux/actions/ToggleJobBoardOpenAction
 import { bindActionCreators } from "redux";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 function CustomModal({
   jobBoardModalOpen,
@@ -45,7 +46,7 @@ function CustomModal({
       style={{
         position: "absolute",
         backgroundColor: "gold",
-        width: "100%",
+        width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         zIndex: 100,
         top: top,
