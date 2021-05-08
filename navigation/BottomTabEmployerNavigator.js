@@ -26,12 +26,8 @@ function BottomTabNavigator(props) {
           bottom: 0,
         },
         activeTintColor: "black",
-        inactiveBackgroundColor: props.isJobBoardOpen
-          ? "white"
-          : props.selectedJob.color,
-        activeBackgroundColor: props.isJobBoardOpen
-          ? "white"
-          : props.selectedJob.color,
+        inactiveBackgroundColor: props.selectedJob.color,
+        activeBackgroundColor: props.selectedJob.color,
       }}
     >
       <Tab.Screen
