@@ -1,5 +1,6 @@
 const inititalState = {
   color: "white",
+  title: "Job Board",
 };
 
 const jobReducer = (state = inititalState, action) => {

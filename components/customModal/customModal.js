@@ -50,6 +50,7 @@ function CustomModal({
         height: SCREEN_HEIGHT,
         zIndex: 100,
         top: top,
+        left: -15,
       }}
     >
       <View style={styles.body}>

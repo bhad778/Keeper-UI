@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
 import { Appbar } from "react-native-paper";
-import EntypoIcon from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import AppHeaderText from "../AppHeaderText";
@@ -15,7 +16,7 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
     navigation.goBack();
   };
   const [jobBoardModalOpen, setJobBoardModalOpen] = useState(
-    selectedJob.title ? false : true
+    selectedJob.title === "Job Board" ? true : false
   );
 
   return (
@@ -48,9 +49,17 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
               </AppHeaderText>
             </View>
 
-            <View style={styles.rightButtonSection}>
-              <EntypoIcon name="chevron-small-down" size={40} />
-            </View>
+            {selectedJob.title === "Job Board" && (
+              <View style={styles.rightButtonSection}>
+                <AntDesign name="plus" size={40} />
+              </View>
+            )}
+
+            {selectedJob.title !== "Job Board" && (
+              <View style={styles.rightButtonSection}>
+                <Entypo name="chevron-small-down" size={40} />
+              </View>
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -60,20 +69,21 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
 const styles = StyleSheet.create({
   headerContainer: {
     zIndex: 101,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   headerPill: {
-    backgroundColor: "gold",
+    backgroundColor: "white",
     width: "100%",
-    height: 78,
+    height: 72,
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     zIndex: 101,
-    marginTop: 60,
-    paddingLeft: 15,
-    paddingRight: 15,
+    marginTop: 50,
+    borderWidth: 1,
   },
   leftSection: {
     height: "100%",
