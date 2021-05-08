@@ -12,6 +12,7 @@ function CustomModal({
   jobBoardModalOpen,
   setJobBoardModalOpen,
   toggleJobBoardOpen,
+  isJobBoardOpen,
 }) {
   const [top] = useState(new Animated.Value(SCREEN_HEIGHT));
 
@@ -51,6 +52,7 @@ function CustomModal({
         zIndex: 100,
         top: top,
         left: -15,
+        display: isJobBoardOpen ? "unset" : "none",
       }}
     >
       <View style={styles.body}>
@@ -68,6 +70,11 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapStateToProps = (state) => {
+  const { isJobBoardOpen } = state;
+  return { isJobBoardOpen };
+};
+
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
@@ -76,4 +83,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(null, mapDispatchToProps)(CustomModal);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomModal);

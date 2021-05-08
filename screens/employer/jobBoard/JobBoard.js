@@ -17,6 +17,7 @@ import UsersService from "../../../services/UsersService";
 import Icon from "react-native-vector-icons/Feather";
 import AddJob from "../addJob/AddJob";
 import AppHeaderText from "../../../components/AppHeaderText";
+import AppText from "../../../components/AppText";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -78,7 +79,7 @@ const JobBoard = ({
 
             {employersJobs &&
               employersJobs.map((job, i) => (
-                <View
+                <TouchableOpacity
                   key={i}
                   style={{
                     backgroundColor: job.color,
@@ -87,26 +88,31 @@ const JobBoard = ({
                   }}
                   onPress={() => selectJob(job)}
                 >
-                  <View
-                    style={{ height: "100%", justifyContent: "space-around" }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 25,
-                      }}
-                    >
-                      {job.title}
-                    </Text>
+                  <View style={styles.jobListing}>
+                    <View style={styles.jobListingNumberSection}>
+                      <AppText style={styles.jobListingNumberText}>
+                        {"0" + i}
+                      </AppText>
+                    </View>
+                    <View style={styles.jobListingTextSection}>
+                      <AppHeaderText
+                        style={{
+                          fontSize: 25,
+                        }}
+                      >
+                        {job.title}
+                      </AppHeaderText>
 
-                    <Text
-                      style={{
-                        fontSize: 14,
-                      }}
-                    >
-                      {job.companyName.toUpperCase()}
-                    </Text>
+                      <AppHeaderText
+                        style={{
+                          fontSize: 14,
+                        }}
+                      >
+                        {job.companyName.toUpperCase()}
+                      </AppHeaderText>
+                    </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               ))}
           </ScrollView>
         </View>
@@ -134,6 +140,25 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingLeft: 30,
     marginTop: 25,
+  },
+  jobListing: {
+    height: "100%",
+    flexDirection: "row",
+  },
+  jobListingNumberSection: {
+    height: "100%",
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  jobListingNumberText: {
+    fontSize: 22,
+  },
+  jobListingTextSection: {
+    height: "100%",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-start",
   },
   selectListingTextContainer: {
     height: "100%",

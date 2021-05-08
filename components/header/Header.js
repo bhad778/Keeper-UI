@@ -11,10 +11,8 @@ import CustomModal from "../customModal/CustomModal";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
-  const goBack = () => {
-    navigation.goBack();
-  };
+const Header = ({ navigation, selectedJob }) => {
+  // this is just what sets it to be open initially
   const [jobBoardModalOpen, setJobBoardModalOpen] = useState(
     selectedJob.title === "Job Board" ? true : false
   );
@@ -28,24 +26,14 @@ const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
           navigation={navigation}
         ></CustomModal>
         <View style={styles.headerPill}>
-          <View style={styles.leftSection}>
-            {withBackButton && (
-              <TouchableOpacity onPress={goBack}>
-                <MaterialIcon name="arrow-back" size={40} />
-              </TouchableOpacity>
-            )}
-          </View>
+          <View style={styles.leftSection}></View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
             onPress={() => setJobBoardModalOpen(!jobBoardModalOpen)}
           >
             <View style={styles.titleSection}>
               <AppHeaderText style={styles.titleText}>
-                {screenTitle
-                  ? screenTitle
-                  : selectedJob.title
-                  ? selectedJob.title
-                  : " "}
+                {selectedJob.title}
               </AppHeaderText>
             </View>
 
