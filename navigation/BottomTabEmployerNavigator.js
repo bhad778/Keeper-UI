@@ -16,11 +16,12 @@ function BottomTabNavigator(props) {
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
-          height: 80,
+          height: props.isJobBoardOpen ? 0 : 80,
           bottom: props.bottomNavBarHeight - 80,
           backgroundColor: "black",
           position: "absolute",
         },
+        // tabBarVisible: false,
         safeAreaInsets: {
           bottom: 0,
         },

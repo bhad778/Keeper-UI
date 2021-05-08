@@ -16,6 +16,7 @@ import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSw
 import UsersService from "../../../services/UsersService";
 import Icon from "react-native-vector-icons/Feather";
 import AddJob from "../addJob/AddJob";
+import AppHeaderText from "../../../components/AppHeaderText";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -66,22 +67,27 @@ const JobBoard = ({
         </Appbar.Header>
         <View style={styles.scrollViewContainer}>
           <ScrollView contentContainerStyle={styles.scrollView}>
+            <View style={styles.selectListingTextSection}>
+              <View style={styles.selectListingTextContainer}>
+                <AppHeaderText style={styles.selectListingText}>
+                  Please select your job listing
+                </AppHeaderText>
+              </View>
+            </View>
             {!employersJobs && <ActivityIndicator size="large" />}
 
             {employersJobs &&
               employersJobs.map((job, i) => (
-                <Card
+                <View
                   key={i}
                   style={{
-                    borderRadius: 15,
                     backgroundColor: job.color,
-                    height: 145,
-                    margin: 6,
-                    width: "45%",
+                    height: 120,
+                    width: "100%",
                   }}
                   onPress={() => selectJob(job)}
                 >
-                  <Card.Content
+                  <View
                     style={{ height: "100%", justifyContent: "space-around" }}
                   >
                     <Text
@@ -99,22 +105,9 @@ const JobBoard = ({
                     >
                       {job.companyName.toUpperCase()}
                     </Text>
-                  </Card.Content>
-                </Card>
+                  </View>
+                </View>
               ))}
-            {/* if theres an odd number of jobs the last job needs to be left aligned */}
-            {employersJobs && !employersJobs.length % 2 == 0 && (
-              <Card
-                style={{
-                  borderRadius: 15,
-                  backgroundColor: "transparant",
-                  color: "transparant",
-                  height: 145,
-                  margin: 6,
-                  width: "45%",
-                }}
-              ></Card>
-            )}
           </ScrollView>
         </View>
       </View>
@@ -132,6 +125,22 @@ const styles = StyleSheet.create({
     display: "flex",
     backgroundColor: "white",
     alignItems: "center",
+  },
+  selectListingTextSection: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    height: 90,
+    width: "100%",
+    paddingLeft: 30,
+    marginTop: 25,
+  },
+  selectListingTextContainer: {
+    height: "100%",
+    width: "70%",
+  },
+  selectListingText: {
+    fontSize: 22,
   },
   scrollViewContainer: {
     height: SCREEN_HEIGHT - 80,
@@ -152,7 +161,6 @@ const styles = StyleSheet.create({
   outlinedAppBar: {
     backgroundColor: "white",
     elevation: 0,
-    borderBottomWidth: 1,
     height: 80,
     width: SCREEN_WIDTH,
     display: "flex",
