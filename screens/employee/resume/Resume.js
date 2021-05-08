@@ -14,7 +14,6 @@ import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView
 import AppText from "../../../components/AppText";
 import AppParagraph from "../../../components/AppParagraph";
 import AppBoldText from "../../../components/AppBoldText";
-import CustomModal from "../../../components/customModal/CustomModal";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
