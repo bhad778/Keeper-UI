@@ -35,12 +35,7 @@ function BottomTabNavigator(props) {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon
-              style={styles.tabs}
-              name="sliders"
-              size={30}
-              color={props.isJobBoardOpen ? "white" : color}
-            />
+            <Icon style={styles.tabs} name="sliders" size={30} color={color} />
           ),
         }}
       />
@@ -49,12 +44,7 @@ function BottomTabNavigator(props) {
         component={EmployerDiscover}
         options={() => ({
           tabBarIcon: ({ color }) => (
-            <Icon
-              style={styles.tabs}
-              name="search"
-              size={30}
-              color={props.isJobBoardOpen ? "white" : color}
-            />
+            <Icon style={styles.tabs} name="search" size={30} color={color} />
           ),
         })}
       />
@@ -67,7 +57,7 @@ function BottomTabNavigator(props) {
               style={styles.tabs}
               name="message-square"
               size={30}
-              color={props.isJobBoardOpen ? "white" : color}
+              color={color}
             />
           ),
         }}
