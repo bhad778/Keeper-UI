@@ -21,7 +21,6 @@ function BottomTabNavigator(props) {
           backgroundColor: "black",
           position: "absolute",
         },
-        // tabBarVisible: false,
         safeAreaInsets: {
           bottom: 0,
         },
