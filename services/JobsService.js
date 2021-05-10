@@ -1,6 +1,17 @@
 import getEnvVars from "../environment";
 const { apiUrl } = getEnvVars();
-
+const getCircularReplacer = () => {
+  const seen = new WeakSet();
+  return (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return;
+      }
+      seen.add(value);
+    }
+    return value;
+  };
+};
 const JobsService = {
   getJobs: (payload) => {
     return fetch(`${apiUrl}/getJobs`, {
@@ -42,7 +53,7 @@ const JobsService = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload, getCircularReplacer()),
     })
       .then((response) => response.json())
       .then((data) => {

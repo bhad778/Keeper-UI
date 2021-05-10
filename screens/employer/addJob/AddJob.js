@@ -35,7 +35,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [compensation, setCompensation] = useState("");
   const [experience, setExperience] = useState();
   const [employmentType, setEmploymentType] = useState();
-
+  const [benefits, setBenefits] = useState();
   const [education, setEducation] = useState();
   const [responsibilitiesList, setResponsibilitiesList] = useState();
 
@@ -78,6 +78,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     jobOverview: jobOverview,
     imagePayload: logo,
     address: address,
+    benefits: benefits,
     compensationType: compensationType,
     compensation: compensation,
     experience: experience,
@@ -106,6 +107,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setExperienceModalVisible={setExperienceModalVisible}
       />
       <BenefitsModal
+        setBenefits={setBenefits}
         benefitsModalVisible={benefitsModalVisible}
         setBenefitsModalVisible={setBenefitsModalVisible}
       />

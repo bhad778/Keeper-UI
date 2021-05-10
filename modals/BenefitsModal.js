@@ -11,11 +11,21 @@ import AppBoldText from "../components/AppBoldText";
 import Modal from "react-native-modal";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const BenefitsModal = ({ benefitsModalVisible, setBenefitsModalVisible }) => {
+const BenefitsModal = ({
+  benefitsModalVisible,
+  setBenefitsModalVisible,
+  setBenefits,
+}) => {
   const benefits = ["Dental", "Vision", "Health Care", "401k"];
 
   const [pressedButton, setPressedButton] = useState([]);
 
+  const onButtonClick = (index) => {
+    pressedButton.includes(index)
+      ? setPressedButton(pressedButton.filter((item) => item !== index))
+      : setPressedButton([...pressedButton, index]);
+    setBenefits(pressedButton);
+  };
   return (
     <Modal
       animationIn="slideInRight"
@@ -36,13 +46,7 @@ const BenefitsModal = ({ benefitsModalVisible, setBenefitsModalVisible }) => {
             return (
               <TouchableOpacity
                 key={index}
-                onPress={() =>
-                  pressedButton.includes(index)
-                    ? setPressedButton(
-                        pressedButton.filter((item) => item !== index)
-                      )
-                    : setPressedButton([...pressedButton, index])
-                }
+                onPress={() => onButtonClick(index)}
                 style={
                   pressedButton.includes(index)
                     ? styles.benefitsButtonsPressed

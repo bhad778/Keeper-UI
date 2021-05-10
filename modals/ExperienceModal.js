@@ -31,6 +31,7 @@ const ExperienceModal = ({
         />
         <View style={styles.pickerContainer}>
           <Picker
+            style={{ height: 100 }}
             selectedValue={yearsOfExperience}
             onValueChange={(itemValue, itemIndex) => saveExperience(itemValue)}
           >
@@ -67,7 +68,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  yrsExperienceContainer: { flex: 6, alignItems: "center", padding: 20 },
-  pickerContainer: { width: "50%", justifyContent: "center", marginTop: 60 },
+  yrsExperienceContainer: { flex: 1, alignItems: "center", padding: 20 },
+  pickerContainer: {
+    width: "50%",
+
+    justifyContent: "center",
+    marginTop: 60,
+  },
 });
 export default ExperienceModal;

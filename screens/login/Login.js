@@ -93,7 +93,7 @@ const Login = ({
   };
   const loginCredentialsPosition = new Animated.Value(300);
   const creatAccountPosition = new Animated.Value(200);
-  const createAccountFade = new Animated.Value(1)
+  const createAccountFade = new Animated.Value(1);
   signInButtonPressed
     ? Animated.parallel([
         Animated.timing(creatAccountPosition, {
@@ -106,25 +106,27 @@ const Login = ({
               toValue: 0,
               duration: 1,
               useNativeDriver: true,
-            }).start(),Animated.timing(loginCredentialsPosition,{
-              toValue:10,
-              duration:100,
-              useNativeDriver:true
-            }).start()
+            }).start(),
+            Animated.timing(loginCredentialsPosition, {
+              toValue: 10,
+              duration: 100,
+              useNativeDriver: true,
+            }).start(),
           ]);
         }),
-      ]):  Animated.parallel([
+      ])
+    : Animated.parallel([
         Animated.timing(creatAccountPosition, {
           toValue: 200,
           duration: 50,
           useNativeDriver: true,
         }),
-          Animated.timing(loginCredentialsPosition,{
-              toValue:300,
-              duration:100,
-              useNativeDriver:true
-            }).start()
-      ])
+        Animated.timing(loginCredentialsPosition, {
+          toValue: 300,
+          duration: 100,
+          useNativeDriver: true,
+        }).start(),
+      ]);
 
   const toggleUI = () => {
     setSignInButtonPressed(!signInButtonPressed);
@@ -166,7 +168,10 @@ const Login = ({
             <Animated.View
               style={[
                 styles.animatedContainer,
-                {opacity:createAccountFade, transform: [{ translateY: creatAccountPosition }] },
+                {
+                  opacity: createAccountFade,
+                  transform: [{ translateY: creatAccountPosition }],
+                },
               ]}
             >
               <AnimatedTouchable
