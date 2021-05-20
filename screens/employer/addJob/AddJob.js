@@ -149,7 +149,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             leftIcon="x"
             rightIcon="check"
             screenTitle="Add Job"
-            postJob={postJob}
+            postJob={() => postJob()}
             border={0}
             currentModal={currentModal}
             setCurrentModal={setCurrentModal}

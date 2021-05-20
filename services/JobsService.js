@@ -53,7 +53,7 @@ const JobsService = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload, getCircularReplacer()),
+      body: JSON.stringify(payload, getCircularReplacer),
     })
       .then((response) => response.json())
       .then((data) => {
