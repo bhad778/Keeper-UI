@@ -90,7 +90,7 @@ const Login = ({
     navigation.navigate("SignUp");
   };
 
-  const testFunction = () => {
+  const toggleUI = () => {
     setSignInButtonPressed(!signInButtonPressed);
     console.log(signInButtonPressed);
   };
@@ -196,10 +196,7 @@ const Login = ({
               </>
             ) : null}
 
-            <TouchableOpacity
-              onPress={testFunction}
-              style={styles.signInButton}
-            >
+            <TouchableOpacity onPress={toggleUI} style={styles.signInButton}>
               <Text>{!signInButtonPressed ? "Sign in" : "Back"}</Text>
             </TouchableOpacity>
           </>
