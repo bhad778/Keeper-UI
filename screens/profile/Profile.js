@@ -49,7 +49,7 @@ const Profile = (props) => {
           style={{
             justifyContent: "center",
             width: "100%",
-            height: SCREEN_HEIGHT - 204,
+            height: SCREEN_HEIGHT - 202,
             backgroundColor: props.selectedJob.color,
             paddingLeft: 15,
             paddingRight: 15,
