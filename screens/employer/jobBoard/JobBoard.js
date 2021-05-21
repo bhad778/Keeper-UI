@@ -8,11 +8,12 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { Card, Appbar } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateSelectedJob } from "../../../redux/actions/JobActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
+import { toggleJobBoardOpen } from "../../../redux/actions/ToggleJobBoardOpenActions";
 import UsersService from "../../../services/UsersService";
 import Icon from "react-native-vector-icons/Feather";
 import AddJob from "../addJob/AddJob";
@@ -24,7 +25,7 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const JobBoard = ({
   updateSelectedJob,
-  setJobBoardModalOpenProp,
+  toggleJobBoardOpen,
   updateEmployeesForSwiping,
   employersJobs,
 }) => {
@@ -40,7 +41,7 @@ const JobBoard = ({
     }).then((data) => {
       updateEmployeesForSwiping(data);
       updateSelectedJob(selectedJob);
-      setJobBoardModalOpenProp(false);
+      toggleJobBoardOpen(false);
     });
   };
 
@@ -224,6 +225,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       updateSelectedJob,
       updateEmployeesForSwiping,
+      toggleJobBoardOpen,
     },
     dispatch
   );

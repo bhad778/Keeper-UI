@@ -8,28 +8,26 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import AppHeaderText from "../AppHeaderText";
 import CustomModal from "../customModal/CustomModal";
+import { bindActionCreators } from "redux";
+import { toggleJobBoardOpen } from "../../redux/actions/ToggleJobBoardOpenActions";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const Header = ({ navigation, selectedJob }) => {
-  // this is just what sets it to be open initially
-  const [jobBoardModalOpen, setJobBoardModalOpen] = useState(
-    selectedJob.title === "Job Board" ? true : false
-  );
-
+const Header = ({
+  navigation,
+  selectedJob,
+  isJobBoardOpen,
+  toggleJobBoardOpen,
+}) => {
   return (
     <View style={styles.headerContainer}>
       <View>
-        <CustomModal
-          jobBoardModalOpen={jobBoardModalOpen}
-          setJobBoardModalOpen={setJobBoardModalOpen}
-          navigation={navigation}
-        ></CustomModal>
+        <CustomModal navigation={navigation}></CustomModal>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}></View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
-            onPress={() => setJobBoardModalOpen(!jobBoardModalOpen)}
+            onPress={() => toggleJobBoardOpen(!isJobBoardOpen)}
           >
             <View style={styles.titleSection}>
               <AppHeaderText style={styles.titleText}>
@@ -111,8 +109,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, isJobBoardOpen } = state;
+  return { selectedJob, isJobBoardOpen };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      toggleJobBoardOpen,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

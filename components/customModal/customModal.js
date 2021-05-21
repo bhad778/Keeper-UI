@@ -8,27 +8,18 @@ import { bindActionCreators } from "redux";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function CustomModal({
-  jobBoardModalOpen,
-  setJobBoardModalOpen,
-  toggleJobBoardOpen,
-  isJobBoardOpen,
-}) {
+function CustomModal({ toggleJobBoardOpen, isJobBoardOpen }) {
   const [top] = useState(new Animated.Value(SCREEN_HEIGHT));
 
   useEffect(() => {
-    if (jobBoardModalOpen && top._value != 0) {
+    if (isJobBoardOpen) {
       openModal();
       toggleJobBoardOpen(true);
     } else {
       closeModal();
       toggleJobBoardOpen(false);
     }
-  }, [jobBoardModalOpen]);
-
-  const setJobBoardModalOpenProp = (isOpen) => {
-    setJobBoardModalOpen(isOpen);
-  };
+  }, [isJobBoardOpen]);
 
   const openModal = () => {
     Animated.spring(top, {
@@ -38,8 +29,8 @@ function CustomModal({
 
   const closeModal = () => {
     Animated.spring(top, {
-      toValue: SCREEN_HEIGHT,
-    }).start();
+      toValue: SCREEN_HEIGHT * 3,
+    }).start(() => {});
   };
 
   return (
@@ -52,13 +43,10 @@ function CustomModal({
         zIndex: 100,
         top: top,
         left: -15,
-        display: isJobBoardOpen ? "unset" : "none",
       }}
     >
       <View style={styles.body}>
-        <JobBoard
-          setJobBoardModalOpenProp={setJobBoardModalOpenProp}
-        ></JobBoard>
+        <JobBoard></JobBoard>
       </View>
     </Animated.View>
   );

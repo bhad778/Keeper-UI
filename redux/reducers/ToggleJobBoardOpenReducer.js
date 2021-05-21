@@ -1,4 +1,4 @@
-const inititalState = false;
+const inititalState = true;
 
 const toggleJobBoardOpenReducer = (state = inititalState, action) => {
   switch (action.type) {
