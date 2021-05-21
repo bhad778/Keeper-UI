@@ -25,11 +25,6 @@ import Header from "../../../components/header/Header";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-// this page gets the employeesForSwiping from redux only so we can do that api call in
-// parallel with the others, the only time we update employeesForSwiping is after login,
-// then we just use it to initialize employeesData here then never update it again and just
-// behave like it was a variable made in this file, which is why we initialize employeeData
-// from redux in componentDidMount and also delete it from redux there
 class EmployerDiscover extends Component {
   constructor(props) {
     super(props);
