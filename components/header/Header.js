@@ -1,17 +1,13 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
-import { Appbar } from "react-native-paper";
+import React from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
 import AppHeaderText from "../AppHeaderText";
 import CustomModal from "../customModal/CustomModal";
 import { bindActionCreators } from "redux";
 import { toggleJobBoardOpen } from "../../redux/actions/ToggleJobBoardOpenActions";
-
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Header = ({
   navigation,
