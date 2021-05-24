@@ -66,9 +66,7 @@ const Matches = ({ navigation, selectedJob, matches }) => {
                     />
                     <View style={styles.matchTextContainer}>
                       <View style={styles.notificationButtonContainer}>
-                        <Text style={styles.name}>
-                          {item.firstName + " " + item.lastName}
-                        </Text>
+                        <Text style={styles.name}>{item.firstName}</Text>
                       </View>
 
                       <Text numberOfLines={1} style={styles.nameInfo}>
