@@ -43,16 +43,17 @@ const Profile = (props) => {
           backgroundColor: props.selectedJob.color,
         }}
       >
-        <Header screenTitle="Design Director" withEditButton />
+        <Header />
 
         <View
           style={{
             justifyContent: "center",
             width: "100%",
-            height: SCREEN_HEIGHT - 202,
+            height: SCREEN_HEIGHT,
             backgroundColor: props.selectedJob.color,
             paddingLeft: 15,
             paddingRight: 15,
+            paddingBottom: 202,
           }}
         >
           <View style={styles.imageSection}>
