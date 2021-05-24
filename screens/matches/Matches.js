@@ -29,12 +29,12 @@ const Matches = ({ navigation, selectedJob, matches }) => {
         flex: 1,
       }}
     >
-      <Header />
       <ScrollView
         contentContainerStyle={{ alignItems: "center" }}
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
+        <Header />
         <View style={styles.matchesPageContents}>
           <View style={styles.whiteMatchesContainer}>
             <View style={styles.scrollViewHeaderTextContainer}>

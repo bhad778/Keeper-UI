@@ -30,6 +30,7 @@ function CustomModal({ toggleJobBoardOpen, isJobBoardOpen }) {
   const closeModal = () => {
     Animated.spring(top, {
       toValue: SCREEN_HEIGHT * 3,
+      speed: 1,
     }).start(() => {});
   };
 

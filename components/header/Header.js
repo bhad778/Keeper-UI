@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     zIndex: 101,
     paddingLeft: 15,
     paddingRight: 15,
+    width: "100%",
   },
   headerPill: {
     backgroundColor: "white",
