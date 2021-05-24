@@ -34,6 +34,7 @@ const LocationModal = ({
 
   const saveLocation = (location) => {
     setAddress(location);
+    setLocationText(location);
   };
 
   return (
@@ -59,35 +60,54 @@ const LocationModal = ({
             onChangeText={(locationText) => setLocationText(locationText)}
           />
         </View>
-        {locationData && !(locationText === "") && (
-          <View style={styles.cityOptionsButtonsContainer}>
-            <View style={styles.pointerTip} />
-            <TouchableOpacity
-              onPress={saveLocation}
-              style={styles.cityOptionsButton}
-            >
-              <Text style={styles.cityOptionsButtonText}>
-                {locationData.data.predictions[0].description}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={saveLocation}
-              style={styles.cityOptionsButton}
-            >
-              <Text style={styles.cityOptionsButtonText}>
-                {locationData.data.predictions[1].description}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={saveLocation}
-              style={styles.lastCityOptionsButton}
-            >
-              <Text style={styles.cityOptionsButtonText}>
-                {locationData.data.predictions[2].description}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
+        {locationData &&
+          !(
+            locationText === "" ||
+            locationText === locationData.data.predictions[0].description
+          ) && (
+            <View style={styles.cityOptionsButtonsContainer}>
+              <View style={styles.pointerTip} />
+              <TouchableOpacity
+                onPress={() =>
+                  saveLocation(locationData.data.predictions[0].description)
+                }
+                style={styles.cityOptionsButton}
+              >
+                <Text style={styles.cityOptionsButtonText}>
+                  {locationData.data.predictions[0].description.replace(
+                    /, USA/g,
+                    ""
+                  )}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  saveLocation(locationData.data.predictions[1].description)
+                }
+                style={styles.cityOptionsButton}
+              >
+                <Text style={styles.cityOptionsButtonText}>
+                  {locationData.data.predictions[1].description.replace(
+                    /, USA/g,
+                    ""
+                  )}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  saveLocation(locationData.data.predictions[2].description)
+                }
+                style={styles.lastCityOptionsButton}
+              >
+                <Text style={styles.cityOptionsButtonText}>
+                  {locationData.data.predictions[2].description.replace(
+                    /, USA/g,
+                    ""
+                  )}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
       </View>
     </Modal>
   );

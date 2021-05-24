@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  textAreasContainer: { width: "100%", marginBottom: 20 },
+  textAreasContainer: { width: "100%", marginBottom: 5 },
   textAreas: {
-    padding: 15,
+    padding: 20,
     height: 100,
     backgroundColor: "white",
     borderRadius: 20,

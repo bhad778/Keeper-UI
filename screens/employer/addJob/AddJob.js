@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingRight: 20,
   },
 
