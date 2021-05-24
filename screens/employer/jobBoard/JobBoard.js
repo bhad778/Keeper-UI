@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   Dimensions,
-  Text,
   TouchableOpacity,
 } from "react-native";
 import { Appbar } from "react-native-paper";
@@ -15,7 +14,6 @@ import { updateSelectedJob } from "../../../redux/actions/JobActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
 import { toggleJobBoardOpen } from "../../../redux/actions/ToggleJobBoardOpenActions";
 import UsersService from "../../../services/UsersService";
-import Icon from "react-native-vector-icons/Feather";
 import AddJob from "../addJob/AddJob";
 import AppHeaderText from "../../../components/AppHeaderText";
 import AppText from "../../../components/AppText";
