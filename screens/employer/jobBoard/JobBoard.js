@@ -59,11 +59,7 @@ const JobBoard = ({
           >
             <View style={styles.leftSection}></View>
             <View style={styles.middleSection}></View>
-            <View style={styles.rightSection}>
-              <TouchableOpacity onPress={() => setAddJobModalVisible(true)}>
-                <Icon name="plus" size={40} />
-              </TouchableOpacity>
-            </View>
+            <View style={styles.rightSection}></View>
           </View>
         </Appbar.Header>
         <View style={styles.scrollViewContainer}>
