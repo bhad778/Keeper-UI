@@ -35,7 +35,8 @@ const JobBoard = ({
     UsersService.getEmployeesForSwiping({
       "lng": selectedJob.geoLocation.coordinates[0],
       "lat": selectedJob.geoLocation.coordinates[1],
-      "distance": 10000,
+      // 16000 meters = about 10 miles
+      "distance": 16000,
       "employeesAlreadySwipedOn": selectedJob.employeesAlreadySwipedOn,
       // "filtersArray": [{ "firstName": "Ash" }, { "lastName": "Ketchum" }],
     }).then((data) => {
@@ -57,9 +58,7 @@ const JobBoard = ({
             style={{ display: "flex", width: "100%", flexDirection: "row" }}
           >
             <View style={styles.leftSection}></View>
-            <View style={styles.middleSection}>
-              <Text style={styles.titleText}>Job Board</Text>
-            </View>
+            <View style={styles.middleSection}></View>
             <View style={styles.rightSection}>
               <TouchableOpacity onPress={() => setAddJobModalVisible(true)}>
                 <Icon name="plus" size={40} />

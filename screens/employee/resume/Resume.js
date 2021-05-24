@@ -148,7 +148,7 @@ const Resume = (props) => {
             >
               <View style={styles.nameAndJobTitleSection}>
                 <AppBoldText style={styles.name}>
-                  {/* {props.currentEmployee.firstName} */}
+                  {props.currentEmployee.firstName}
                 </AppBoldText>
                 <AppBoldText style={styles.jobTitle}>
                   DESIGN DIRECTOR

@@ -27,7 +27,11 @@ const Header = ({
           <View style={styles.leftSection}></View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
-            onPress={() => toggleJobBoardOpen(!isJobBoardOpen)}
+            onPress={() => {
+              if (selectedJob.title !== "Job Board") {
+                toggleJobBoardOpen(!isJobBoardOpen);
+              }
+            }}
           >
             <View style={styles.titleSection}>
               <AppHeaderText style={styles.titleText}>

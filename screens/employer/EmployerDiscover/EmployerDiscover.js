@@ -43,7 +43,9 @@ class EmployerDiscover extends Component {
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
       selectedJobColor: this.props.selectedJob.color,
-      employeeData: this.props.employeesForSwiping,
+      employeeData: this.props.employeesForSwiping.length
+        ? this.props.employeesForSwiping
+        : "hey",
     };
   }
 
@@ -327,7 +329,7 @@ class EmployerDiscover extends Component {
               navigation={this.props.navigation}
               swipe={this.swipe}
               resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
-              currentEmployee={"hey"}
+              currentEmployee={this.state.employeeData[0]}
             />
           </Animated.View>
         </View>

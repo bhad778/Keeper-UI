@@ -107,6 +107,7 @@ const Login = ({
         resizeMode="cover"
         isLooping
         shouldPlay
+        isMuted
       />
 
       <Text style={styles.title}>Keeper</Text>
