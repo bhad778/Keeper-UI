@@ -41,6 +41,7 @@ const Profile = (props) => {
         style={{
           width: "100%",
           backgroundColor: props.selectedJob.color,
+          height: SCREEN_HEIGHT,
         }}
       >
         <Header />
@@ -49,11 +50,9 @@ const Profile = (props) => {
           style={{
             justifyContent: "center",
             width: "100%",
-            height: SCREEN_HEIGHT,
             backgroundColor: props.selectedJob.color,
             paddingLeft: 15,
             paddingRight: 15,
-            paddingBottom: 202,
           }}
         >
           <View style={styles.imageSection}>
