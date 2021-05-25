@@ -13,11 +13,13 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 // so that they can be easily pulled for each user.
 const Messages = ({ navigation, route, selectedJob }) => {
   const [messages, setMessages] = useState();
+  // do we even need connectionId? Yes there are two connectionIds per conversation. The one here is going to be the one
+  // of the other person in the conversation, so we can connect to them
   const [connectionId, setConnectionId] = useState();
   const [webSocket, setWebSocket] = useState();
 
   const user = { _id: "asdf@asdf.com" };
-  const { firstName } = route.params;
+  const { matchData } = route.params;
 
   useEffect(() => {
     if (!webSocket) {
@@ -124,15 +126,17 @@ const Messages = ({ navigation, route, selectedJob }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.middleSection}>
-          <Text style={styles.title}>{firstName}</Text>
+          <Text style={styles.title}>{matchData.firstName}</Text>
         </View>
         <View style={styles.rightSection}>
-          <Avatar.Image
-            source={{
-              uri: "https://data.whicdn.com/images/83928957/original.jpg",
-            }}
-            size={50}
-          />
+          <TouchableOpacity>
+            <Avatar.Image
+              source={{
+                uri: "https://data.whicdn.com/images/83928957/original.jpg",
+              }}
+              size={50}
+            />
+          </TouchableOpacity>
         </View>
       </Appbar.Header>
       <View style={styles.chatContainer}>

@@ -14,11 +14,9 @@ import { connect } from "react-redux";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const Matches = ({ navigation, selectedJob, matches }) => {
-  const switchScreen = (img, firstName, connectionId) => {
+  const switchScreen = (matchData) => {
     navigation.navigate("Messages", {
-      pic: img,
-      firstName: firstName,
-      connectionId: connectionId,
+      matchData,
     });
   };
 
@@ -42,17 +40,13 @@ const Matches = ({ navigation, selectedJob, matches }) => {
             </View>
 
             <View style={styles.matchesContainer}>
-              {matches.map((item, i) => (
+              {matches.map((matchData, i) => (
                 <TouchableOpacity
                   key={i}
                   style={styles.matchButton}
                   underlayColor="#D3D3D3"
                   onPress={() => {
-                    switchScreen(
-                      item.profilePic,
-                      item.firstName,
-                      item.connectionId
-                    );
+                    switchScreen(matchData);
                   }}
                 >
                   <View style={styles.avatarImageContainer}>
@@ -66,7 +60,7 @@ const Matches = ({ navigation, selectedJob, matches }) => {
                     />
                     <View style={styles.matchTextContainer}>
                       <View style={styles.notificationButtonContainer}>
-                        <Text style={styles.name}>{item.firstName}</Text>
+                        <Text style={styles.name}>{matchData.firstName}</Text>
                       </View>
 
                       <Text numberOfLines={1} style={styles.nameInfo}>
