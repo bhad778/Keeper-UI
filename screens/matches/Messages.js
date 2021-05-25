@@ -109,6 +109,13 @@ const Messages = ({ navigation, route, selectedJob }) => {
     navigation.goBack();
   };
 
+  const openPublicProfile = () => {
+    // if employer navigate to resume if navigate to job description
+    navigation.navigate("Resume", {
+      matchData,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Appbar.Header
@@ -129,7 +136,7 @@ const Messages = ({ navigation, route, selectedJob }) => {
           <Text style={styles.title}>{matchData.firstName}</Text>
         </View>
         <View style={styles.rightSection}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={openPublicProfile}>
             <Avatar.Image
               source={{
                 uri: "https://data.whicdn.com/images/83928957/original.jpg",

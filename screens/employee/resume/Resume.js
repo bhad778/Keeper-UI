@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
   Image,
   TouchableOpacity,
   Dimensions,
-  Text,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import Header from "../../../components/header/Header";
@@ -14,11 +13,25 @@ import HideBottomNavScrollView from "../../../components/hideBottomNavScrollView
 import AppText from "../../../components/AppText";
 import AppParagraph from "../../../components/AppParagraph";
 import AppBoldText from "../../../components/AppBoldText";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { Appbar } from "react-native-paper";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Resume = (props) => {
   let lastPress = 0;
+
+  const [currentEmployeeToDisplay, setCurrentEmployeeToDisplay] = useState([]);
+  const [isPublicFacingProfile, setIsPublicFacingProfile] = useState(false);
+
+  useEffect(() => {
+    if (props.route) {
+      setCurrentEmployeeToDisplay(props.route.params.matchData);
+      setIsPublicFacingProfile(true);
+    } else {
+      setCurrentEmployeeToDisplay(props.currentEmployee);
+    }
+  }, [props.currentEmployee]);
 
   const [pastJobs] = useState([
     {
@@ -111,6 +124,10 @@ const Resume = (props) => {
     lastPress = time;
   };
 
+  const goBack = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <View
       style={{
@@ -120,10 +137,27 @@ const Resume = (props) => {
     >
       <HideBottomNavScrollView
         navigation={props.navigation}
-        currentEmployee={props.currentEmployee}
+        currentEmployee={currentEmployeeToDisplay}
       >
-        <Header />
-        {props.currentEmployee && (
+        {isPublicFacingProfile && (
+          <Appbar.Header
+            style={{
+              backgroundColor: props.selectedJob.color,
+              width: SCREEN_WIDTH,
+              height: 40,
+            }}
+          >
+            <View style={styles.leftSection}>
+              <TouchableOpacity onPress={goBack}>
+                <MaterialIcon name="arrow-back" size={40} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.middleSection}></View>
+            <View style={styles.rightSection}></View>
+          </Appbar.Header>
+        )}
+        {!isPublicFacingProfile && <Header />}
+        {currentEmployeeToDisplay && (
           <View
             style={{
               backgroundColor: props.selectedJob.color,
@@ -134,7 +168,14 @@ const Resume = (props) => {
             }}
           >
             <Image
-              style={styles.profileImage}
+              style={{
+                flex: 1,
+                height: SCREEN_WIDTH - 30,
+                width: SCREEN_WIDTH - 30,
+                resizeMode: "cover",
+                borderRadius: 4000,
+                marginTop: isPublicFacingProfile ? 0 : 30,
+              }}
               source={{
                 uri:
                   "https://i.pinimg.com/originals/6b/6a/7c/6b6a7c9f4a5174b9d7052444ae7d8da5.jpg",
@@ -148,7 +189,7 @@ const Resume = (props) => {
             >
               <View style={styles.nameAndJobTitleSection}>
                 <AppBoldText style={styles.name}>
-                  {props.currentEmployee.firstName}
+                  {currentEmployeeToDisplay.firstName}
                 </AppBoldText>
                 <AppBoldText style={styles.jobTitle}>
                   DESIGN DIRECTOR
@@ -294,29 +335,31 @@ const Resume = (props) => {
           </View>
         )}
       </HideBottomNavScrollView>
-      <View
-        style={{
-          height: props.bottomNavBarHeight == -1 ? 0 : 70,
-          width: props.bottomNavBarHeight == -1 ? 0 : 70,
-          position: "absolute",
-          bottom: props.bottomNavBarHeight + 10,
-          left: 10,
-          zIndex: props.isJobBoardOpen ? -1 : 1,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => props.swipe(false)}
-          style={styles.dislikeButtonTouchableOpacity}
+      {!isPublicFacingProfile && (
+        <View
+          style={{
+            height: props.bottomNavBarHeight == -1 ? 0 : 70,
+            width: props.bottomNavBarHeight == -1 ? 0 : 70,
+            position: "absolute",
+            bottom: props.bottomNavBarHeight + 10,
+            left: 10,
+            zIndex: props.isJobBoardOpen ? -1 : 1,
+          }}
         >
-          <Image
-            style={styles.dislikeButton}
-            source={{
-              uri:
-                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
-            }}
-          ></Image>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            onPress={() => props.swipe(false)}
+            style={styles.dislikeButtonTouchableOpacity}
+          >
+            <Image
+              style={styles.dislikeButton}
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+              }}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
@@ -556,6 +599,21 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginRight: 8,
     marginLeft: 8,
+  },
+  leftSection: {
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  middleSection: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  rightSection: {
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

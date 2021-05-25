@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
 import {
-  ActivityIndicator,
   Animated,
   StyleSheet,
   View,
   Dimensions,
   Image,
   Easing,
-  Text,
 } from "react-native";
 import { connect } from "react-redux";
 
@@ -20,7 +18,6 @@ import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
 import { debounce } from "lodash";
-import Header from "../../../components/header/Header";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
