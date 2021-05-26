@@ -2,8 +2,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import EmployeeDiscover from "../screens/employee/employeeDiscover/EmployeeDiscover";
-import Profile from "../screens/profile/Profile";
-import Matches from "../screens/matches/Matches";
+import EmployeeProfile from "../screens/profile/EmployeeProfile";
+import EmployeeMatches from "../screens/matches/EmployeeMatches";
 import Icon from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
@@ -21,7 +21,7 @@ export default function BottomTabNavigator() {
     >
       <Tab.Screen
         name=" "
-        component={Profile}
+        component={EmployeeProfile}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="sliders" size={30} color={color} />
@@ -39,7 +39,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name="   "
-        component={Matches}
+        component={EmployeeMatches}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon

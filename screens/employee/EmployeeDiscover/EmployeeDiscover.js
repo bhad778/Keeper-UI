@@ -9,9 +9,10 @@ import {
   Easing,
 } from "react-native";
 import { connect } from "react-redux";
-
+import JobPost from "../../employer/jobPost/JobPost";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
+
 import UsersService from "../../../services/JobsService";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
@@ -320,7 +321,14 @@ class EmployerDiscover extends Component {
                 ],
               },
             ]}
-          ></Animated.View>
+          >
+            <JobPost
+              navigation={this.props.navigation}
+              swipe={this.swipe}
+              resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
+              currentEmployee={this.state.employeeData[0]}
+            />
+          </Animated.View>
         </View>
       </View>
     );
