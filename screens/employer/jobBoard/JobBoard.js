@@ -14,7 +14,6 @@ import { updateSelectedJob } from "../../../redux/actions/JobActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
 import { toggleJobBoardOpen } from "../../../redux/actions/ToggleJobBoardOpenActions";
 import UsersService from "../../../services/UsersService";
-import AddJob from "../addJob/AddJob";
 import AppHeaderText from "../../../components/AppHeaderText";
 import AppText from "../../../components/AppText";
 
@@ -27,8 +26,6 @@ const JobBoard = ({
   updateEmployeesForSwiping,
   employersJobs,
 }) => {
-  const [addJobModalVisible, setAddJobModalVisible] = useState(false);
-
   const selectJob = (selectedJob) => {
     UsersService.getEmployeesForSwiping({
       lng: selectedJob.geoLocation.coordinates[0],
@@ -47,10 +44,6 @@ const JobBoard = ({
   return (
     <View style={styles.jobBoardModal}>
       <View style={styles.container}>
-        <AddJob
-          addJobModalVisible={addJobModalVisible}
-          setAddJobModalVisible={setAddJobModalVisible}
-        />
         <Appbar.Header style={styles.outlinedAppBar}>
           <View
             style={{ display: "flex", width: "100%", flexDirection: "row" }}
