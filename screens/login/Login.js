@@ -71,7 +71,7 @@ const Login = ({
             updateLoggedInUser(data.loggedInUserData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
-            navigation.navigate("RootEmployer");
+            navigation.navigate("RootEmployee");
           })
           .catch((error) => {
             console.log(error);

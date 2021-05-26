@@ -1,23 +1,51 @@
 import React, { Component } from "react";
-import Swiper from "../../../components/swiper/Swiper";
-import { Button } from "react-native-paper";
-import { StyleSheet, Text, View, Image } from "react-native";
+
+import {
+  Animated,
+  StyleSheet,
+  View,
+  Dimensions,
+  Image,
+  Easing,
+} from "react-native";
+import { connect } from "react-redux";
+
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
-import Icon from "react-native-vector-icons/Feather";
+import UsersService from "../../../services/JobsService";
+import { bindActionCreators } from "redux";
+import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
+import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
+import { debounce } from "lodash";
 
-export default class Example extends Component {
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+
+class EmployerDiscover extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filtersModal: false,
+      jobBoardModalOpen: false,
       employeeInfoModal: false,
       cards: this.hotGirls,
       swipedAllCards: false,
       swipeDirection: "",
       cardIndex: 0,
+      slideUpValue: new Animated.Value(0),
+      wholeSwiperFadeAnim: new Animated.Value(1),
+      xIconFadeAnim: new Animated.Value(0),
+      xIconScale: new Animated.Value(0),
+      xIconTranslateYValue: new Animated.Value(0),
+      wholeSwiperTranslateY: new Animated.Value(0),
+      selectedJobColor: this.props.selectedJob.color,
+      employeeData: this.props.employeesForSwiping.length
+        ? this.props.employeesForSwiping
+        : "hey",
     };
   }
+
+  swipeData = [];
 
   hotGirls = [
     {
@@ -61,6 +89,62 @@ export default class Example extends Component {
       name: "Rust Creek",
     },
   ];
+
+  runSlideUpAnimation = () => {
+    Animated.timing(this.state.slideUpValue, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  debouncedUpdateSwipeDataApiCall = debounce(() => {
+    UsersService.recordJobsSwipes({
+      _id: this.props.selectedJob._id,
+      employeesAlreadySwipedOn: this.swipeData,
+    });
+  }, 3000);
+
+  updateSwipeData = (isRightSwipe) => {
+    this.swipeData.push({
+      employeeId: this.state.employeeData[0]._id,
+      isRightSwipe: isRightSwipe,
+    });
+    this.debouncedUpdateSwipeDataApiCall();
+  };
+
+  swipe = (isRightSwipe) => {
+    this.props.updateBottomNavBarHeight(-1);
+
+    // remove the employee thats been swiped on from the array,
+    // while also recorded the swipe in the updateSwipeData function
+    this.updateSwipeData(isRightSwipe);
+
+    this.runSwipeAnimation();
+  };
+
+  removeSwipedEmployeeFromState = () => {
+    this.setState({
+      employeeData: this.state.employeeData.slice(
+        1,
+        this.state.employeeData.length
+      ),
+    });
+  };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedJob.color !== this.state.selectedJobColor) {
+      this.setState({
+        employeeData: nextProps.employeesForSwiping,
+        selectedJobColor: nextProps.selectedJob.color,
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.runSlideUpAnimation();
+  }
+
   renderCard = (card) => {
     return (
       <View style={styles.card}>
@@ -69,31 +153,104 @@ export default class Example extends Component {
     );
   };
 
-  onSwiped = (type) => {
-    console.log(`on swiped ${type}`);
+  toggleJobBoardModal = () => {
+    this.setState({ jobBoardModalOpen: !this.state.jobBoardModalOpen });
   };
 
-  onSwipedAllCards = () => {
-    this.setState({
-      swipedAllCards: true,
-    });
-  };
-  swipeRight = (goTo) => {
-    this.props.navigation.navigate(goTo);
-  };
-
-  swipeLeft = () => {
-    this.swiper.swipeLeft();
-  };
   filtersModalOn = (visible) => {
     this.setState({ filtersModal: visible });
   };
-  employeeInfoModalOn = (visible) => {
-    this.setState({ employeeInfoModal: visible });
+
+  runSwipeAnimation = () => {
+    Animated.parallel([
+      // swiper fades out
+      Animated.timing(this.state.wholeSwiperFadeAnim, {
+        toValue: 0,
+        duration: 1,
+        useNativeDriver: true,
+      }).start(() => {
+        Animated.parallel([
+          // instantly after fade send swiper down below screen so it can slide back up later
+          Animated.timing(this.state.wholeSwiperTranslateY, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: true,
+          }),
+          this.removeSwipedEmployeeFromState(),
+          // after resume has faded, slide down out of view, and the state has been set,
+          // then fade back in for slide back up into view later
+          Animated.timing(this.state.wholeSwiperFadeAnim, {
+            toValue: 1,
+            duration: 1,
+            useNativeDriver: true,
+          }),
+        ]).start();
+      }),
+
+      // X icon fade in
+      Animated.timing(this.state.xIconFadeAnim, {
+        toValue: 1,
+        duration: 350,
+        useNativeDriver: true,
+      }).start(),
+
+      // X icon grow
+      Animated.timing(this.state.xIconScale, {
+        toValue: 1,
+        duration: 700,
+        useNativeDriver: true,
+        // cubic-bezier(.34,.21,0,.99)
+        easing: Easing.bezier(0.34, 0.21, 0, 0.99),
+      }).start(),
+
+      // X icon slide up
+      Animated.timing(this.state.xIconTranslateYValue, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        Animated.parallel([
+          // slide swiper back up
+          Animated.timing(this.state.wholeSwiperTranslateY, {
+            toValue: 0,
+            delay: 200,
+            duration: 500,
+            useNativeDriver: true,
+            // cubic-bezier(.25,1.07,.91,.99)
+            easing: Easing.bezier(0.25, 1.07, 0.91, 0.99),
+          }),
+
+          //X icon shrink
+          Animated.timing(this.state.xIconScale, {
+            toValue: 0,
+            delay: 30,
+            duration: 400,
+            useNativeDriver: true,
+          }).start(() => {
+            // revert y value for next swipe
+            Animated.timing(this.state.xIconTranslateYValue, {
+              toValue: 0.5,
+              duration: 1,
+              useNativeDriver: true,
+            }).start();
+            // revert X icon size for next swipe
+            Animated.timing(this.state.xIconScale, {
+              toValue: 0,
+              duration: 1,
+              useNativeDriver: true,
+            }).start(() => {
+              this.props.updateBottomNavBarHeight(80);
+            });
+          }),
+        ]).start(() => {});
+      }),
+    ]).start(() => {});
   };
+
   render() {
     return (
       <View style={styles.container}>
+        {/* <Header></Header> */}
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -102,28 +259,69 @@ export default class Example extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
-        <View style={styles.headerContainer}>
-          <View style={styles.peopleWhoLikeYou}>
-            <Button mode="text" style={styles.newMatchButton} color="black">
-              <Icon name="sliders" size={25} />
-            </Button>
-          </View>
-          <View style={styles.headerTextContainer}>
-            <Text style={styles.headerText}>Leen</Text>
-          </View>
-          <View style={styles.headerFilterButtonContainer}>
-            <Button
-              style={styles.filterButton}
-              mode="text"
-              color="black"
-              onPress={() => this.filtersModalOn(true)}
-            >
-              <Icon name="sliders" size={25} />
-            </Button>
-          </View>
-        </View>
+        {/* <View
+          style={{
+            height: 100,
+            width: 100,
+            position: "absolute",
+            zIndex: 999999999,
+            // top: 0,
+            // left: 20,
+          }}
+        >
+          <TouchableOpacity onPress={this.pressDislikeButton}>
+            <Image
+              // style={styles.skillCircleImage}
+              style={styles.dislikeButton}
+              source={{
+                uri:
+                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+              }}
+            ></Image>
+          </TouchableOpacity>
+        </View> */}
+        <Animated.Image
+          source={{
+            uri:
+              "https://rileymann.com/wp-content/uploads/2021/03/keeper_logo_black.png",
+          }}
+          style={[
+            styles.xIcon,
+            {
+              opacity: this.state.xIconFadeAnim, // Bind opacity to animated value
+              transform: [
+                {
+                  scale: this.state.xIconScale.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 2.2],
+                  }),
+                },
 
-        <Swiper />
+                {
+                  translateY: this.state.xIconTranslateYValue,
+                },
+              ],
+            },
+          ]}
+        ></Animated.Image>
+        <View style={styles.swiperContainer}>
+          <Animated.View
+            style={[
+              styles.resumeContainer,
+              {
+                opacity: this.state.wholeSwiperFadeAnim,
+                transform: [
+                  {
+                    translateY: this.state.wholeSwiperTranslateY.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, SCREEN_HEIGHT],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          ></Animated.View>
+        </View>
       </View>
     );
   }
@@ -134,9 +332,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  xIcon: {
+    width: 45,
+    height: 39,
+    position: "absolute",
+    left: SCREEN_WIDTH / 2 - 45 / 2,
+    top: SCREEN_HEIGHT / 2 - 39 / 2 - 80,
+    zIndex: 1,
+  },
+  resumeContainer: {},
+
   headerContainer: {
     height: "12%",
-    zIndex: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -169,7 +376,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   card: {
-    zIndex: 444,
     flex: 2,
     borderWidth: 2,
     borderColor: "#E8E8E8",
@@ -183,3 +389,19 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
+
+const mapStateToProps = (state) => {
+  const { selectedJob, employeesForSwiping } = state;
+  return { selectedJob, employeesForSwiping };
+};
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      updateBottomNavBarHeight,
+      updateEmployeesForSwiping,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployerDiscover);
