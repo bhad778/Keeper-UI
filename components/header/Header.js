@@ -17,7 +17,7 @@ const Header = ({
 }) => {
   return (
     <View style={styles.headerContainer}>
-      <View>
+      <View style={{ zIndex: 100 }}>
         <CustomModal navigation={navigation}></CustomModal>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}></View>

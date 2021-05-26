@@ -13,11 +13,13 @@ import { connect } from "react-redux";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const Matches = ({ navigation, selectedJob, matches }) => {
+const Matches = ({ navigation, selectedJob, matches, isJobBoardOpen }) => {
   const switchScreen = (matchData) => {
-    navigation.navigate("Messages", {
-      matchData,
-    });
+    if (!isJobBoardOpen) {
+      navigation.navigate("Messages", {
+        matchData,
+      });
+    }
   };
 
   return (
@@ -152,8 +154,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob, matches } = state;
-  return { selectedJob, matches };
+  const { selectedJob, matches, isJobBoardOpen } = state;
+  return { selectedJob, matches, isJobBoardOpen };
 };
 
 export default connect(mapStateToProps)(Matches);
