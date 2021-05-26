@@ -41,7 +41,6 @@ async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
 }
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Login = ({
@@ -49,7 +48,6 @@ const Login = ({
   updateLoggedInUser,
   updateMatches,
   updateEmployersJobs,
-  updateEmployeesForSwiping,
 }) => {
   const [signInButtonPressed, setSignInButtonPressed] = useState(false);
   // const [email, setEmail] = useState("");
@@ -72,10 +70,9 @@ const Login = ({
           email: "Bhad7778@gmail.com",
         })
           .then((data) => {
-            updateLoggedInUser(data.userData);
+            updateLoggedInUser(data.loggedInUserData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
-            updateEmployeesForSwiping(data.employeesForSwiping);
             navigation.navigate("RootEmployer");
           })
           .catch((error) => {
@@ -147,6 +144,7 @@ const Login = ({
         resizeMode="cover"
         isLooping
         shouldPlay
+        isMuted
       />
 
       <Text style={styles.title}>Keeper</Text>
@@ -324,8 +322,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { loggedInUserObject } = state;
-  return { loggedInUserObject };
+  const { loggedInUserData } = state;
+  return { loggedInUserData };
 };
 
 const mapDispatchToProps = (dispatch) =>

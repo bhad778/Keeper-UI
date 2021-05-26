@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import {
-  ActivityIndicator,
   Animated,
   StyleSheet,
   View,
@@ -14,6 +13,7 @@ import { connect } from "react-redux";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 import Resume from "../../employee/resume/Resume";
+import UsersService from "../../../services/JobsService";
 import { bindActionCreators } from "redux";
 import { updateBottomNavBarHeight } from "../../../redux/actions/NavigationActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
@@ -33,14 +33,16 @@ class EmployerDiscover extends Component {
       swipedAllCards: false,
       swipeDirection: "",
       cardIndex: 0,
-      isLoading: false,
       slideUpValue: new Animated.Value(0),
       wholeSwiperFadeAnim: new Animated.Value(1),
       xIconFadeAnim: new Animated.Value(0),
       xIconScale: new Animated.Value(0),
       xIconTranslateYValue: new Animated.Value(0),
       wholeSwiperTranslateY: new Animated.Value(0),
-      employeeDataReal: this.props.employeesForSwiping,
+      selectedJobColor: this.props.selectedJob.color,
+      employeeData: this.props.employeesForSwiping.length
+        ? this.props.employeesForSwiping
+        : "hey",
     };
   }
 
@@ -97,28 +99,50 @@ class EmployerDiscover extends Component {
     }).start();
   };
 
-  debouncedUpdateSwipeDataApiCall = debounce((query) => {
-    console.log(this.swipeData);
-  }, 5000);
+  debouncedUpdateSwipeDataApiCall = debounce(() => {
+    UsersService.recordJobsSwipes({
+      _id: this.props.selectedJob._id,
+      employeesAlreadySwipedOn: this.swipeData,
+    });
+  }, 3000);
 
-  updateSwipeData = (isLike) => {
-    this.swipeData.push(isLike);
+  updateSwipeData = (isRightSwipe) => {
+    this.swipeData.push({
+      employeeId: this.state.employeeData[0]._id,
+      isRightSwipe: isRightSwipe,
+    });
     this.debouncedUpdateSwipeDataApiCall();
   };
 
-  componentDidMount() {
-    // UsersService.getEmployer({
-    //   email: "Bhad7778@gmail.com",
-    // }).then((data) => {
-    //   this.props.updateLoggedInUser(data[0]);
-    //   UsersService.getMatches({
-    //     accountType: data[0].accountType,
-    //     matches: data[0].matches,
-    //   }).then((data) => {
-    //     this.props.updateMatches(data);
-    //   });
-    // });
+  swipe = (isRightSwipe) => {
+    this.props.updateBottomNavBarHeight(-1);
 
+    // remove the employee thats been swiped on from the array,
+    // while also recorded the swipe in the updateSwipeData function
+    this.updateSwipeData(isRightSwipe);
+
+    this.runSwipeAnimation();
+  };
+
+  removeSwipedEmployeeFromState = () => {
+    this.setState({
+      employeeData: this.state.employeeData.slice(
+        1,
+        this.state.employeeData.length
+      ),
+    });
+  };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedJob.color !== this.state.selectedJobColor) {
+      this.setState({
+        employeeData: nextProps.employeesForSwiping,
+        selectedJobColor: nextProps.selectedJob.color,
+      });
+    }
+  }
+
+  componentDidMount() {
     this.runSlideUpAnimation();
   }
 
@@ -224,28 +248,10 @@ class EmployerDiscover extends Component {
     ]).start(() => {});
   };
 
-  removeSwipedEmployeeFromState = () => {
-    this.setState({
-      employeeDataReal: this.state.employeeDataReal.slice(
-        1,
-        this.state.employeeDataReal.length
-      ),
-    });
-  };
-
-  swipe = (isLike) => {
-    this.props.updateBottomNavBarHeight(-1);
-
-    // remove the employee thats been swiped on from the array,
-    // while also recorded the swipe in the updateSwipeData function
-    this.updateSwipeData(isLike);
-
-    this.runSwipeAnimation();
-  };
-
   render() {
     return (
       <View style={styles.container}>
+        {/* <Header></Header> */}
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -300,32 +306,29 @@ class EmployerDiscover extends Component {
           ]}
         ></Animated.Image>
         <View style={styles.swiperContainer}>
-          {this.state.isLoading && <ActivityIndicator size="large" />}
-          {!this.state.isLoading && (
-            <Animated.View
-              style={[
-                styles.resumeContainer,
-                {
-                  opacity: this.state.wholeSwiperFadeAnim,
-                  transform: [
-                    {
-                      translateY: this.state.wholeSwiperTranslateY.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, SCREEN_HEIGHT],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              <Resume
-                navigation={this.props.navigation}
-                swipe={this.swipe}
-                resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
-                currentEmployee={this.state.employeeDataReal[0]}
-              />
-            </Animated.View>
-          )}
+          <Animated.View
+            style={[
+              styles.resumeContainer,
+              {
+                opacity: this.state.wholeSwiperFadeAnim,
+                transform: [
+                  {
+                    translateY: this.state.wholeSwiperTranslateY.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, SCREEN_HEIGHT],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
+            <Resume
+              navigation={this.props.navigation}
+              swipe={this.swipe}
+              resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
+              currentEmployee={this.state.employeeData[0]}
+            />
+          </Animated.View>
         </View>
       </View>
     );
@@ -396,8 +399,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { employeesForSwiping } = state;
-  return { employeesForSwiping };
+  const { selectedJob, employeesForSwiping } = state;
+  return { selectedJob, employeesForSwiping };
 };
 
 const mapDispatchToProps = (dispatch) =>

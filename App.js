@@ -11,6 +11,9 @@ import RootReducer from "./redux/reducers/RootReducer";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 Amplify.configure(awsconfig);
 

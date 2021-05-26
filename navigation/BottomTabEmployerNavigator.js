@@ -16,7 +16,7 @@ function BottomTabNavigator(props) {
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
-          height: 80,
+          height: props.isJobBoardOpen ? 0 : 80,
           bottom: props.bottomNavBarHeight - 80,
           backgroundColor: "black",
           position: "absolute",
@@ -34,7 +34,12 @@ function BottomTabNavigator(props) {
         component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon style={styles.tabs} name="sliders" size={30} color={color} />
+            <Icon
+              style={styles.tabs}
+              name="sliders"
+              size={props.isJobBoardOpen ? 0 : 30}
+              color={color}
+            />
           ),
         }}
       />
@@ -43,7 +48,12 @@ function BottomTabNavigator(props) {
         component={EmployerDiscover}
         options={() => ({
           tabBarIcon: ({ color }) => (
-            <Icon style={styles.tabs} name="search" size={30} color={color} />
+            <Icon
+              style={styles.tabs}
+              name="search"
+              size={props.isJobBoardOpen ? 0 : 30}
+              color={color}
+            />
           ),
         })}
       />
@@ -55,7 +65,7 @@ function BottomTabNavigator(props) {
             <Icon
               style={styles.tabs}
               name="message-square"
-              size={30}
+              size={props.isJobBoardOpen ? 0 : 30}
               color={color}
             />
           ),
@@ -70,8 +80,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob, bottomNavBarHeight } = state;
-  return { selectedJob, bottomNavBarHeight };
+  const { selectedJob, bottomNavBarHeight, isJobBoardOpen } = state;
+  return { selectedJob, bottomNavBarHeight, isJobBoardOpen };
 };
 
 export default connect(mapStateToProps)(BottomTabNavigator);

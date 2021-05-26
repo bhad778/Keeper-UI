@@ -13,13 +13,13 @@ import { connect } from "react-redux";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const Matches = ({ navigation, selectedJob, matches }) => {
-  const switchScreen = (img, firstName, connectionId) => {
-    navigation.navigate("Messages", {
-      pic: img,
-      firstName: firstName,
-      connectionId: connectionId,
-    });
+const Matches = ({ navigation, selectedJob, matches, isJobBoardOpen }) => {
+  const switchScreen = (matchData) => {
+    if (!isJobBoardOpen) {
+      navigation.navigate("Messages", {
+        matchData,
+      });
+    }
   };
 
   return (
@@ -42,17 +42,13 @@ const Matches = ({ navigation, selectedJob, matches }) => {
             </View>
 
             <View style={styles.matchesContainer}>
-              {matches.map((item, i) => (
+              {matches.map((matchData, i) => (
                 <TouchableOpacity
                   key={i}
                   style={styles.matchButton}
                   underlayColor="#D3D3D3"
                   onPress={() => {
-                    switchScreen(
-                      item.profilePic,
-                      item.firstName,
-                      item.connectionId
-                    );
+                    switchScreen(matchData);
                   }}
                 >
                   <View style={styles.avatarImageContainer}>
@@ -66,9 +62,7 @@ const Matches = ({ navigation, selectedJob, matches }) => {
                     />
                     <View style={styles.matchTextContainer}>
                       <View style={styles.notificationButtonContainer}>
-                        <Text style={styles.name}>
-                          {item.firstName + " " + item.lastName}
-                        </Text>
+                        <Text style={styles.name}>{matchData.firstName}</Text>
                       </View>
 
                       <Text numberOfLines={1} style={styles.nameInfo}>
@@ -160,8 +154,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob, matches } = state;
-  return { selectedJob, matches };
+  const { selectedJob, matches, isJobBoardOpen } = state;
+  return { selectedJob, matches, isJobBoardOpen };
 };
 
 export default connect(mapStateToProps)(Matches);

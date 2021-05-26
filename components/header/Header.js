@@ -1,86 +1,81 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
-import { Appbar } from "react-native-paper";
-import EntypoIcon from "react-native-vector-icons/Entypo";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import React from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
-import JobBoard from "../../screens/employer/jobBoard/JobBoard";
 import AppHeaderText from "../AppHeaderText";
+import CustomModal from "../customModal/CustomModal";
+import { bindActionCreators } from "redux";
+import { toggleJobBoardOpen } from "../../redux/actions/ToggleJobBoardOpenActions";
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
-
-const Header = ({ screenTitle, navigation, withBackButton, selectedJob }) => {
-  const goBack = () => {
-    navigation.goBack();
-  };
-  const [jobBoardModalOpen, setJobBoardModalOpen] = useState(
-    selectedJob.title ? false : true
-  );
-
+const Header = ({
+  navigation,
+  selectedJob,
+  isJobBoardOpen,
+  toggleJobBoardOpen,
+}) => {
   return (
-    <Appbar.Header
-      style={{
-        backgroundColor: selectedJob.color,
-        width: SCREEN_WIDTH,
-        height: 80,
-        elevation: 0,
-      }}
-    >
-      <View style={styles.headerContents}>
-        <JobBoard
-          navigation={navigation}
-          jobBoardModalOpen={jobBoardModalOpen}
-          setJobBoardModalOpen={setJobBoardModalOpen}
-        ></JobBoard>
+    <View style={styles.headerContainer}>
+      <View style={{ zIndex: 100 }}>
+        <CustomModal navigation={navigation}></CustomModal>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
-            {withBackButton && (
-              <TouchableOpacity onPress={goBack}>
-                <MaterialIcon name="arrow-back" size={40} />
-              </TouchableOpacity>
-            )}
+            {<MaterialCommunityIcons onPress name="filter" size={30} />}
           </View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
-            onPress={() => setJobBoardModalOpen(true)}
+            onPress={() => {
+              // we must do this because on android the click goes
+              // through the job board modal onto the underlying page
+              if (selectedJob.title !== "Job Board") {
+                toggleJobBoardOpen(!isJobBoardOpen);
+              }
+            }}
           >
             <View style={styles.titleSection}>
               <AppHeaderText style={styles.titleText}>
-                {screenTitle
-                  ? screenTitle
-                  : selectedJob.title
-                  ? selectedJob.title
-                  : " "}
+                {selectedJob.title}
               </AppHeaderText>
             </View>
 
-            <View style={styles.rightButtonSection}>
-              <EntypoIcon name="chevron-small-down" size={40} />
-            </View>
+            {selectedJob.title === "Job Board" && (
+              <View style={styles.rightButtonSection}>
+                <AntDesign name="plus" size={40} />
+              </View>
+            )}
+
+            {selectedJob.title !== "Job Board" && (
+              <View style={styles.rightButtonSection}>
+                <Entypo name="chevron-small-down" size={40} />
+              </View>
+            )}
           </TouchableOpacity>
         </View>
       </View>
-    </Appbar.Header>
+    </View>
   );
 };
 const styles = StyleSheet.create({
-  headerContents: {
-    width: SCREEN_WIDTH,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingRight: 18,
-    paddingLeft: 10,
+  headerContainer: {
+    zIndex: 101,
+    paddingLeft: 15,
+    paddingRight: 15,
+    width: "100%",
   },
   headerPill: {
     backgroundColor: "white",
     width: "100%",
-    height: 78,
+    height: 72,
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
+    zIndex: 101,
+    marginTop: 50,
+    borderWidth: 1,
   },
   leftSection: {
     height: "100%",
@@ -120,8 +115,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { selectedJob } = state;
-  return { selectedJob };
+  const { selectedJob, isJobBoardOpen } = state;
+  return { selectedJob, isJobBoardOpen };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      toggleJobBoardOpen,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

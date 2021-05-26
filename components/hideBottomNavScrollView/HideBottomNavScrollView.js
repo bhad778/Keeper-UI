@@ -113,10 +113,16 @@ const HideBottomNavScrollView = (props) => {
       onScrollEndDrag={() => onScrollEndDrag()}
       onMomentumScrollEnd={(e) => onMomentumScrollEnd(e)}
       ref={resumeScrollViewRef}
+      scrollEnabled={!props.isJobBoardOpen}
     >
       {props.children}
     </ScrollView>
   );
+};
+
+const mapStateToProps = (state) => {
+  const { isJobBoardOpen } = state;
+  return { isJobBoardOpen };
 };
 
 const mapDispatchToProps = (dispatch) =>
@@ -127,4 +133,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(null, mapDispatchToProps)(HideBottomNavScrollView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HideBottomNavScrollView);
