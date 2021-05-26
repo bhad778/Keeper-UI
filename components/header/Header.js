@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -7,6 +7,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { connect } from "react-redux";
 import AppHeaderText from "../AppHeaderText";
 import CustomModal from "../customModal/CustomModal";
+import AddJob from "../../screens/employer/addJob/AddJob";
 import { bindActionCreators } from "redux";
 import { toggleJobBoardOpen } from "../../redux/actions/ToggleJobBoardOpenActions";
 
@@ -16,10 +17,16 @@ const Header = ({
   isJobBoardOpen,
   toggleJobBoardOpen,
 }) => {
+  const [addJobModalVisible, setAddJobModalVisible] = useState(false);
+
   return (
     <View style={styles.headerContainer}>
       <View style={{ zIndex: 100 }}>
         <CustomModal navigation={navigation}></CustomModal>
+        <AddJob
+          addJobModalVisible={addJobModalVisible}
+          setAddJobModalVisible={setAddJobModalVisible}
+        />
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
             {
@@ -47,9 +54,11 @@ const Header = ({
             </View>
 
             {selectedJob.title === "Job Board" && (
-              <View style={styles.rightButtonSection}>
-                <AntDesign name="plus" size={40} />
-              </View>
+              <TouchableOpacity onPress={() => setAddJobModalVisible(true)}>
+                <View style={styles.rightButtonSection}>
+                  <AntDesign name="plus" size={40} />
+                </View>
+              </TouchableOpacity>
             )}
 
             {selectedJob.title !== "Job Board" && (

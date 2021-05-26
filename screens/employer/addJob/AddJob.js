@@ -18,6 +18,7 @@ import LocationModal from "../../../modals/LocationModal";
 import EmploymentModal from "../../../modals/EmploymentModal";
 import EducationModal from "../../../modals/EducationModal";
 import ExperienceModal from "../../../modals/ExperienceModal";
+import BenefitsModal from "../../../modals/BenefitsModal";
 import CompanyDescriptionModal from "../../../modals/CompanyDescriptionModal";
 import JobOverviewModal from "../../../modals/JobOverviewModal";
 import ModalHeader from "../../../components/ModalHeader";
@@ -34,7 +35,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [compensation, setCompensation] = useState("");
   const [experience, setExperience] = useState();
   const [employmentType, setEmploymentType] = useState();
-
+  const [benefits, setBenefits] = useState();
   const [education, setEducation] = useState();
   const [responsibilitiesList, setResponsibilitiesList] = useState();
 
@@ -47,6 +48,8 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [experienceModalVisible, setExperienceModalVisible] = useState(false);
 
   const [employmentModalVisible, setEmploymentModalVisible] = useState(false);
+
+  const [benefitsModalVisible, setBenefitsModalVisible] = useState(false);
 
   const [
     responsibilitiesModalVisible,
@@ -75,6 +78,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     jobOverview: jobOverview,
     imagePayload: logo,
     address: address,
+    benefits: benefits,
     compensationType: compensationType,
     compensation: compensation,
     experience: experience,
@@ -102,7 +106,11 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         experienceModalVisible={experienceModalVisible}
         setExperienceModalVisible={setExperienceModalVisible}
       />
-
+      <BenefitsModal
+        setBenefits={setBenefits}
+        benefitsModalVisible={benefitsModalVisible}
+        setBenefitsModalVisible={setBenefitsModalVisible}
+      />
       <EmploymentModal
         setEmploymentType={setEmploymentType}
         employmentModalVisible={employmentModalVisible}
@@ -141,7 +149,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             leftIcon="x"
             rightIcon="check"
             screenTitle="Add Job"
-            postJob={postJob}
+            postJob={() => postJob()}
             border={0}
             currentModal={currentModal}
             setCurrentModal={setCurrentModal}
@@ -212,7 +220,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setLocationModalVisible(true)}
+              onPress={() => setBenefitsModalVisible(true)}
               style={styles.lastButton}
             >
               <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>
@@ -226,7 +234,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
             <View style={styles.companyDescriptionContainer}>
               <TouchableOpacity
-                onPress={() => setCompanyDescriptionModalVisible(true)}
+                onPress={() => {
+                  setCompanyDescriptionModalVisible(true);
+                }}
                 style={styles.textButton}
               >
                 <AppBoldText style={styles.textAreaLabel}>
@@ -335,8 +345,8 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
-  scrollViewContainer: { backgroundColor: "pink", flex: 1 },
-  scrollView: { padding: 20, backgroundColor: "pink" },
+  scrollViewContainer: { backgroundColor: "#ff8267", flex: 1, paddingTop: 30 },
+  scrollView: { padding: 20, backgroundColor: "#ff8267" },
   addJobContainer: {
     alignItems: "center",
     padding: 20,
@@ -440,7 +450,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingRight: 20,
   },
 

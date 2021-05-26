@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
-  Modal,
   TouchableOpacity,
-  Image,
   Platform,
-  Text,
+  Dimensions,
 } from "react-native";
 import { Avatar } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import Constants from "expo-constants";
 
 import Icon from "react-native-vector-icons/Feather";
 import ModalHeader from "../components/ModalHeader";
+import Modal from "react-native-modal";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
   const [image, setImage] = useState(null);
 
@@ -48,8 +48,8 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
     const base64Image = result.base64;
 
     const imagePayload = {
-      "mime": mime,
-      "image": base64Image,
+      mime: mime,
+      image: base64Image,
     };
 
     if (!result.cancelled) {
@@ -62,7 +62,12 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
   };
 
   return (
-    <Modal animationType="slide" visible={logoModalVisible}>
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      style={styles.modal}
+      isVisible={logoModalVisible}
+    >
       <View style={styles.imageSelectorSection}>
         <ModalHeader
           leftIcon="chevron-left"
@@ -90,6 +95,8 @@ const LogoModal = ({ logoModalVisible, setLogoModalVisible, setLogo }) => {
   );
 };
 const styles = StyleSheet.create({
+  modal: { width: SCREEN_WIDTH, backgroundColor: "white", margin: 0 },
+
   imageSelectorSection: {
     padding: 20,
     flex: 1,
