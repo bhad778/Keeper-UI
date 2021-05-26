@@ -22,11 +22,13 @@ const Header = ({
         <CustomModal navigation={navigation}></CustomModal>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
-            {<MaterialCommunityIcons name="filter" size={30} />}
+            {<MaterialCommunityIcons onPress name="filter" size={30} />}
           </View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
             onPress={() => {
+              // we must do this because on android the click goes
+              // through the job board modal onto the underlying page
               if (selectedJob.title !== "Job Board") {
                 toggleJobBoardOpen(!isJobBoardOpen);
               }
