@@ -345,8 +345,8 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   );
 };
 const styles = StyleSheet.create({
-  scrollViewContainer: { backgroundColor: "pink", flex: 1, paddingTop: 30 },
-  scrollView: { padding: 20, backgroundColor: "pink" },
+  scrollViewContainer: { backgroundColor: "#ff8267", flex: 1, paddingTop: 30 },
+  scrollView: { padding: 20, backgroundColor: "#ff8267" },
   addJobContainer: {
     alignItems: "center",
     padding: 20,
