@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 import AppHeaderText from "../AppHeaderText";
 import CustomModal from "../customModal/CustomModal";
@@ -20,7 +21,9 @@ const Header = ({
       <View style={{ zIndex: 100 }}>
         <CustomModal navigation={navigation}></CustomModal>
         <View style={styles.headerPill}>
-          <View style={styles.leftSection}></View>
+          <View style={styles.leftSection}>
+            {<MaterialCommunityIcons name="filter" size={30} />}
+          </View>
           <TouchableOpacity
             style={styles.openJobBoardSection}
             onPress={() => {
