@@ -3,14 +3,17 @@ import {
   StyleSheet,
   View,
   Text,
-  Modal,
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import AddResponsibilityModal from "../modals/AddResponsibilityModal";
 import ModalHeader from "../components/ModalHeader";
+import Modal from "react-native-modal";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const ResponsibilitiesModal = ({
   responsibilitiesModalVisible,
   setResponsibilitiesModalVisible,
@@ -61,29 +64,34 @@ const ResponsibilitiesModal = ({
       </View>
     );
   };
-  
-  
+
   return (
-    <Modal visible={responsibilitiesModalVisible}>
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      style={styles.modal}
+      isVisible={responsibilitiesModalVisible}
+    >
       <AddResponsibilityModal
         addResponsibilityModalVisible={addResponsibilityModalVisible}
         setAddResponsibilityModalVisible={setAddResponsibilityModalVisible}
         addTextBox={addTextBox}
-      
       />
-      
-
-      
 
       <ScrollView contentContainerStyle={styles.scrollView}>
-      <ModalHeader leftIcon="chevron-left"  border={1} closeModal={setResponsibilitiesModalVisible} screenTitle='Responsibilities' />
+        <ModalHeader
+          leftIcon="chevron-left"
+          border={1}
+          closeModal={setResponsibilitiesModalVisible}
+          screenTitle="Responsibilities"
+        />
 
         <TouchableOpacity
           onPress={() => setAddResponsibilityModalVisible(true)}
           style={styles.addResponsibilityButton}
         >
           <Text style={{ fontSize: 20 }}>Add Responsibility</Text>
-          <Icon  size={30} name="chevron-right" />
+          <Icon size={30} name="chevron-right" />
         </TouchableOpacity>
         {responsibilities.length >= 0
           ? responsibilities.map((responsibility, index) =>
@@ -95,8 +103,9 @@ const ResponsibilitiesModal = ({
   );
 };
 const styles = StyleSheet.create({
-  
-  scrollView: { alignItems: "center", padding:20,  },
+  modal: { width: SCREEN_WIDTH, backgroundColor: "white", margin: 0 },
+
+  scrollView: { alignItems: "center", padding: 20 },
 
   addResponsibilityButton: {
     flexDirection: "row",
@@ -104,16 +113,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 30,
     height: 65,
-    padding:15,
-    marginTop:60,
+    padding: 15,
+    marginTop: 60,
     borderColor: "#dadada",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  
-  textAreasContainer: { width: "100%", marginBottom: 20 },
+
+  textAreasContainer: { width: "100%", marginBottom: 5 },
   textAreas: {
-    padding: 15,
+    padding: 20,
     height: 100,
     backgroundColor: "white",
     borderRadius: 20,

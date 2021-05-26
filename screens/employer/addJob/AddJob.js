@@ -35,7 +35,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [compensation, setCompensation] = useState("");
   const [experience, setExperience] = useState();
   const [employmentType, setEmploymentType] = useState();
-
+  const [benefits, setBenefits] = useState();
   const [education, setEducation] = useState();
   const [responsibilitiesList, setResponsibilitiesList] = useState();
 
@@ -78,6 +78,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
     jobOverview: jobOverview,
     imagePayload: logo,
     address: address,
+    benefits: benefits,
     compensationType: compensationType,
     compensation: compensation,
     experience: experience,
@@ -106,6 +107,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
         setExperienceModalVisible={setExperienceModalVisible}
       />
       <BenefitsModal
+        setBenefits={setBenefits}
         benefitsModalVisible={benefitsModalVisible}
         setBenefitsModalVisible={setBenefitsModalVisible}
       />
@@ -147,7 +149,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             leftIcon="x"
             rightIcon="check"
             screenTitle="Add Job"
-            postJob={postJob}
+            postJob={() => postJob()}
             border={0}
             currentModal={currentModal}
             setCurrentModal={setCurrentModal}
@@ -218,7 +220,7 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setLocationModalVisible(true)}
+              onPress={() => setBenefitsModalVisible(true)}
               style={styles.lastButton}
             >
               <AppBoldText style={styles.buttonTextColor}>Benefits</AppBoldText>
@@ -232,7 +234,9 @@ const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
 
             <View style={styles.companyDescriptionContainer}>
               <TouchableOpacity
-                onPress={() => setCompanyDescriptionModalVisible(true)}
+                onPress={() => {
+                  setCompanyDescriptionModalVisible(true);
+                }}
                 style={styles.textButton}
               >
                 <AppBoldText style={styles.textAreaLabel}>
@@ -446,7 +450,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "rgba(0, 0, 0, 0.26)",
     zIndex: 1,
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingRight: 20,
   },
 

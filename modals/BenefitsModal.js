@@ -1,34 +1,52 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import ModalHeader from "../components/ModalHeader";
 import AppBoldText from "../components/AppBoldText";
-
-const BenefitsModal = ({ benefitsModalVisible, setBenefitsModalVisible }) => {
+import Modal from "react-native-modal";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const BenefitsModal = ({
+  benefitsModalVisible,
+  setBenefitsModalVisible,
+  setBenefits,
+}) => {
   const benefits = ["Dental", "Vision", "Health Care", "401k"];
 
   const [pressedButton, setPressedButton] = useState([]);
 
+  const onButtonClick = (index) => {
+    pressedButton.includes(index)
+      ? setPressedButton(pressedButton.filter((item) => item !== index))
+      : setPressedButton([...pressedButton, index]);
+    setBenefits(pressedButton);
+  };
   return (
-    <Modal animationType="slide" visible={benefitsModalVisible}>
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      isVisible={benefitsModalVisible}
+      style={styles.modal}
+    >
       <View style={styles.educationTypeContainer}>
         <ModalHeader
           leftIcon="chevron-left"
           screenTitle="Benefits"
           border={1}
           closeModal={setBenefitsModalVisible}
+          style={styles.modal}
         />
         <View style={styles.benefitButtonsContainer}>
           {benefits.map((benefits, index) => {
             return (
               <TouchableOpacity
                 key={index}
-                onPress={() =>
-                  pressedButton.includes(index)
-                    ? setPressedButton(
-                        pressedButton.filter((item) => item !== index)
-                      )
-                    : setPressedButton([...pressedButton, index])
-                }
+                onPress={() => onButtonClick(index)}
                 style={
                   pressedButton.includes(index)
                     ? styles.benefitsButtonsPressed
@@ -46,6 +64,7 @@ const BenefitsModal = ({ benefitsModalVisible, setBenefitsModalVisible }) => {
 };
 
 const styles = StyleSheet.create({
+  modal: { width: SCREEN_WIDTH, backgroundColor: "white", margin: 0 },
   educationTypeContainer: { flex: 5, alignItems: "center", padding: 20 },
   benefitButtons: {
     margin: 4,
