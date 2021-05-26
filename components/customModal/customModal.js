@@ -38,7 +38,6 @@ function CustomModal({ toggleJobBoardOpen, isJobBoardOpen }) {
     <Animated.View
       style={{
         position: "absolute",
-        backgroundColor: "gold",
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         zIndex: 100,

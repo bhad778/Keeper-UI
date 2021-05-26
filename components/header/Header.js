@@ -22,7 +22,13 @@ const Header = ({
         <CustomModal navigation={navigation}></CustomModal>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
-            {<MaterialCommunityIcons onPress name="filter" size={30} />}
+            {
+              <MaterialCommunityIcons
+                onPress={() => navigation.navigate("EmployerFilter")}
+                name="filter"
+                size={30}
+              />
+            }
           </View>
           <TouchableOpacity
             style={styles.openJobBoardSection}

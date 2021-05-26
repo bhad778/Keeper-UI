@@ -160,7 +160,7 @@ const Resume = (props) => {
             <View style={styles.rightSection}></View>
           </Appbar.Header>
         )}
-        {!isPublicFacingProfile && <Header />}
+        {!isPublicFacingProfile && <Header navigation={props.navigation} />}
         {currentEmployeeToDisplay && (
           <View
             style={{

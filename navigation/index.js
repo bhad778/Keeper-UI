@@ -14,6 +14,7 @@ import Matched from "../screens/matches/Matched";
 import SignUp from "../screens/login/SignUp";
 import AddJob from "../screens/employer/addJob/AddJob";
 import EmployeesThatLikedJob from "../screens/employer/employeesThatLikedJob/EmployeesThatLikedJob";
+import EmployerFilter from "../screens/employer/employerFilter/EmployerFilter";
 import Resume from "../screens/employee/resume/Resume";
 import JobDetails from "../screens/jobDetails/JobDetails";
 
@@ -51,6 +52,11 @@ function RootNavigator() {
       <Stack.Screen
         name="JobDetails"
         component={JobDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EmployerFilter"
+        component={EmployerFilter}
         options={{ headerShown: false }}
       />
       <Stack.Screen
