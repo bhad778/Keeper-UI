@@ -53,10 +53,7 @@ const Login = ({
 
   const signIn = async (values) => {
     try {
-      let signInResponse = await Auth.signIn(
-        "Bhad7778@gmail.com",
-        "Ululavit#8"
-      );
+      let signInResponse = await Auth.signIn("Bhad778@gmail.com", "Ululavit#8");
       save(
         "secretToken",
         signInResponse.signInUserSession.accessToken.jwtToken
@@ -71,7 +68,7 @@ const Login = ({
             updateLoggedInUser(data.loggedInUserData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
-            navigation.navigate("RootEmployee");
+            navigation.navigate("RootEmployor");
           })
           .catch((error) => {
             console.log(error);
@@ -146,7 +143,7 @@ const Login = ({
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     // value={values.email}
-                    value={"Bhad7778@gmail.com"}
+                    value={"Bhad778@gmail.com"}
                     keyboardType="email-address"
                   />
                   {errors.email && touched.email && (
