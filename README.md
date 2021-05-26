@@ -62,6 +62,12 @@ If you do not see an aws.exports file run this
 amplify init
 ```
 
+choose the dev environment
+
+if you still dont see aws.exports file in the root folder after this check that its not in the /src folder, if it is then move it to the root
+
+you might also get other errors about not being able to find files in the app, for example EmployeesThatLikedJob, that is only because that folder name needs to not be capitalized, if you get errors similar to this make the folder name not capitalized
+
 use existing environment
 
 After this, restart vscode and the project is ready

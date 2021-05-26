@@ -5,8 +5,8 @@ import {
   View,
   ScrollView,
   Dimensions,
-  TouchableOpacity,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Appbar } from "react-native-paper";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -14,7 +14,6 @@ import { updateSelectedJob } from "../../../redux/actions/JobActions";
 import { updateEmployeesForSwiping } from "../../../redux/actions/EmployeesForSwipingActions";
 import { toggleJobBoardOpen } from "../../../redux/actions/ToggleJobBoardOpenActions";
 import UsersService from "../../../services/UsersService";
-import AddJob from "../addJob/AddJob";
 import AppHeaderText from "../../../components/AppHeaderText";
 import AppText from "../../../components/AppText";
 
@@ -27,15 +26,13 @@ const JobBoard = ({
   updateEmployeesForSwiping,
   employersJobs,
 }) => {
-  const [addJobModalVisible, setAddJobModalVisible] = useState(false);
-
   const selectJob = (selectedJob) => {
     UsersService.getEmployeesForSwiping({
-      "lng": selectedJob.geoLocation.coordinates[0],
-      "lat": selectedJob.geoLocation.coordinates[1],
+      lng: selectedJob.geoLocation.coordinates[0],
+      lat: selectedJob.geoLocation.coordinates[1],
       // 16000 meters = about 10 miles
-      "distance": 16000,
-      "employeesAlreadySwipedOn": selectedJob.employeesAlreadySwipedOn,
+      distance: 16000,
+      employeesAlreadySwipedOn: selectedJob.employeesAlreadySwipedOn,
       // "filtersArray": [{ "firstName": "Ash" }, { "lastName": "Ketchum" }],
     }).then((data) => {
       updateEmployeesForSwiping(data);
@@ -47,10 +44,6 @@ const JobBoard = ({
   return (
     <View style={styles.jobBoardModal}>
       <View style={styles.container}>
-        <AddJob
-          addJobModalVisible={addJobModalVisible}
-          setAddJobModalVisible={setAddJobModalVisible}
-        />
         <Appbar.Header style={styles.outlinedAppBar}>
           <View
             style={{ display: "flex", width: "100%", flexDirection: "row" }}
@@ -78,7 +71,8 @@ const JobBoard = ({
                   style={{
                     backgroundColor: job.color,
                     height: 120,
-                    width: "100%",
+                    width: SCREEN_WIDTH,
+                    zIndex: 100,
                   }}
                   onPress={() => selectJob(job)}
                 >
@@ -120,11 +114,13 @@ const styles = StyleSheet.create({
     // position: "absolute",
     // left: 0,
     // top: 0,
+    zIndex: 100,
   },
   container: {
     display: "flex",
     backgroundColor: "white",
     alignItems: "center",
+    zIndex: 100,
   },
   selectListingTextSection: {
     display: "flex",
@@ -164,11 +160,13 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     height: SCREEN_HEIGHT - 80,
     width: SCREEN_WIDTH,
+    zIndex: 100,
   },
   scrollView: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+    zIndex: 100,
   },
   titleText: {
     fontSize: 30,

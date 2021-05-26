@@ -1,10 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, Modal, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
 import { Button } from "react-native-paper";
-
+import Modal from "react-native-modal";
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
   return (
-    <Modal animationType="slide" visible={employeeInfoModal}>
+    <Modal
+      animationIn="slideInRight"
+      animationOut="slideOutRight"
+      style={styles.modal}
+      isVisible={employeeInfoModal}
+    >
       <View style={styles.container}>
         <View style={styles.header}>
           <Button
@@ -84,6 +91,7 @@ const EmployeeInfoModal = ({ employeeInfoModal, employeeInfoModalOn }) => {
   );
 };
 const styles = StyleSheet.create({
+  modal: { width: SCREEN_WIDTH, backgroundColor: "white", margin: 0 },
   container: { flex: 1 },
   header: { flex: 1, justifyContent: "flex-end" },
   modalSection: { flex: 8 },

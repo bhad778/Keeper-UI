@@ -48,8 +48,8 @@ const Profile = (props) => {
 
         <View
           style={{
-            justifyContent: "center",
             width: "100%",
+            height: SCREEN_HEIGHT,
             backgroundColor: props.selectedJob.color,
             paddingLeft: 15,
             paddingRight: 15,
@@ -109,19 +109,18 @@ const Profile = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "white",
+    height: SCREEN_HEIGHT + 80,
   },
   imageSection: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
-    marginBottom: 20,
     backgroundColor: "white",
     borderRadius: 35,
     minHeight: SCREEN_WIDTH,
     overflow: "hidden",
+    marginTop: 30,
+    marginBottom: 15,
   },
   imageContainer: {
     top: -20,
@@ -154,7 +153,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   optionsSection: {
-    flex: 1,
     justifyContent: "center",
     paddingLeft: 10,
     paddingRight: 10,

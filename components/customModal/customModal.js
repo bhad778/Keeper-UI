@@ -29,7 +29,7 @@ function CustomModal({ toggleJobBoardOpen, isJobBoardOpen }) {
 
   const closeModal = () => {
     Animated.spring(top, {
-      toValue: SCREEN_HEIGHT * 3,
+      toValue: SCREEN_HEIGHT * 4,
       speed: 1,
     }).start(() => {});
   };
@@ -56,6 +56,7 @@ function CustomModal({ toggleJobBoardOpen, isJobBoardOpen }) {
 const styles = StyleSheet.create({
   body: {
     height: "100%",
+    zIndex: 100,
   },
 });
 

@@ -114,14 +114,16 @@ const Resume = (props) => {
   };
 
   const onDoublePress = () => {
-    const time = new Date().getTime();
-    const delta = time - lastPress;
+    if (!props.isJobBoardOpen) {
+      const time = new Date().getTime();
+      const delta = time - lastPress;
 
-    const DOUBLE_PRESS_DELAY = 400;
-    if (delta < DOUBLE_PRESS_DELAY) {
-      props.swipe(true);
+      const DOUBLE_PRESS_DELAY = 400;
+      if (delta < DOUBLE_PRESS_DELAY) {
+        props.swipe(true);
+      }
+      lastPress = time;
     }
-    lastPress = time;
   };
 
   const goBack = () => {
@@ -132,12 +134,14 @@ const Resume = (props) => {
     <View
       style={{
         backgroundColor: props.selectedJob.color,
+        zIndex: 1,
       }}
       onStartShouldSetResponder={onDoublePress}
     >
       <HideBottomNavScrollView
         navigation={props.navigation}
         currentEmployee={currentEmployeeToDisplay}
+        style={{ zIndex: 1 }}
       >
         {isPublicFacingProfile && (
           <Appbar.Header
@@ -165,6 +169,7 @@ const Resume = (props) => {
               alignItems: "center",
               paddingLeft: 16,
               paddingRight: 16,
+              zIndex: 1,
             }}
           >
             <Image
