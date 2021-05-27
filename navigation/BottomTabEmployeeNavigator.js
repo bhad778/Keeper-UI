@@ -15,8 +15,16 @@ export default function BottomTabNavigator() {
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
+          padding: 0,
+          height: 80,
+          backgroundColor: "black",
+        },
+        safeAreaInsets: {
+          bottom: 0,
         },
         activeTintColor: "#acd9d9",
+        inactiveBackgroundColor: "#ff8267",
+        activeBackgroundColor: "#ff8267",
       }}
     >
       <Tab.Screen
@@ -24,7 +32,7 @@ export default function BottomTabNavigator() {
         component={EmployeeProfile}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="sliders" size={30} color={color} />
+            <Icon style={styles.tabs} name="sliders" size={30} color={color} />
           ),
         }}
       />

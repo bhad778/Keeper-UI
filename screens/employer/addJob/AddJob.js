@@ -7,7 +7,6 @@ import {
   TextInput,
   Modal,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import JobsService from "../../../services/JobsService";
@@ -24,6 +23,7 @@ import JobOverviewModal from "../../../modals/JobOverviewModal";
 import ModalHeader from "../../../components/ModalHeader";
 import AppText from "../../../components/AppText";
 import AppBoldText from "../../../components/AppBoldText";
+
 const AddJob = ({ addJobModalVisible, setAddJobModalVisible }) => {
   const [title, setTitle] = useState("");
   const [companyName, setCompanyName] = useState("");

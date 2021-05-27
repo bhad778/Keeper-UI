@@ -18,7 +18,7 @@ import { connect } from "react-redux";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const Profile = (props) => {
+const EmployeeProfile = () => {
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const [profileEditModalVisible, setProfileEditModalVisible] = useState(false);
   const [profileViewModalVisible, setProfileViewModalVisible] = useState(false);
@@ -40,7 +40,7 @@ const Profile = (props) => {
       <ScrollView
         style={{
           width: "100%",
-          backgroundColor: props.selectedJob.color,
+          backgroundColor: "#ff8267",
           height: SCREEN_HEIGHT,
         }}
       >
@@ -48,9 +48,7 @@ const Profile = (props) => {
           style={{
             justifyContent: "center",
             width: "100%",
-            backgroundColor: props.selectedJob.color,
-            paddingLeft: 15,
-            paddingRight: 15,
+            backgroundColor: "#ff8267",
           }}
         >
           <View style={styles.imageSection}>
@@ -109,7 +107,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#ff8267",
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   imageSection: {
     alignItems: "center",
@@ -184,4 +184,4 @@ const mapStateToProps = (state) => {
   return { selectedJob };
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(EmployeeProfile);
