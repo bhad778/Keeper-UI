@@ -5,19 +5,21 @@ import EmployeeDiscover from "../screens/employee/employeeDiscover/EmployeeDisco
 import EmployeeProfile from "../screens/profile/EmployeeProfile";
 import EmployeeMatches from "../screens/matches/EmployeeMatches";
 import Icon from "react-native-vector-icons/Feather";
+import { connect } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator() {
+function BottomTabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouteName={"  "}
       tabBarOptions={{
         style: {
           borderTopWidth: 0,
-          padding: 0,
           height: 80,
+          bottom: props.bottomNavBarHeight - 80,
           backgroundColor: "black",
+          position: "absolute",
         },
         safeAreaInsets: {
           bottom: 0,
@@ -39,11 +41,11 @@ export default function BottomTabNavigator() {
       <Tab.Screen
         name="  "
         component={EmployeeDiscover}
-        options={{
+        options={() => ({
           tabBarIcon: ({ color }) => (
             <Icon style={styles.tabs} name="search" size={30} color={color} />
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name="   "
@@ -67,5 +69,9 @@ const styles = StyleSheet.create({
   tabs: { position: "relative", top: 5 },
 });
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
+const mapStateToProps = (state) => {
+  const { selectedJob, bottomNavBarHeight, isJobBoardOpen } = state;
+  return { selectedJob, bottomNavBarHeight, isJobBoardOpen };
+};
+
+export default connect(mapStateToProps)(BottomTabNavigator);

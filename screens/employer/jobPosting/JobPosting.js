@@ -50,7 +50,7 @@ const JobPosting = (props) => {
       style={styles.jobPostingContainer}
       onStartShouldSetResponder={onDoublePress}
     >
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <HideBottomNavScrollView>
         <View style={styles.headerPill}>
           <View style={styles.leftSection}>
             {<MaterialCommunityIcons onPress name="filter" size={30} />}
@@ -256,7 +256,30 @@ const JobPosting = (props) => {
             </View>
           </View>
         </View>
-      </ScrollView>
+      </HideBottomNavScrollView>
+      <View
+        style={{
+          height: props.bottomNavBarHeight == -1 ? 0 : 70,
+          width: props.bottomNavBarHeight == -1 ? 0 : 70,
+          position: "absolute",
+          bottom: props.bottomNavBarHeight + 10,
+          left: 10,
+          zIndex: 1,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => props.swipe(false)}
+          style={styles.dislikeButtonTouchableOpacity}
+        >
+          <Image
+            style={styles.dislikeButton}
+            source={{
+              uri:
+                "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
+            }}
+          ></Image>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -266,7 +289,7 @@ const styles = StyleSheet.create({
     minHeight: SCREEN_HEIGHT,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingBottom: 80,
+    // paddingBottom: 80,
   },
   headerPill: {
     backgroundColor: "white",
@@ -404,6 +427,20 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     marginRight: 8,
     marginLeft: 8,
+  },
+  dislikeButtonTouchableOpacity: {
+    shadowColor: "rgba(0, 0, 0, 0.3)",
+    shadowOpacity: 1,
+    elevation: 6,
+    shadowRadius: 30,
+    shadowOffset: { width: 1, height: 13 },
+  },
+  dislikeButton: {
+    width: 70,
+    height: 70,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
   },
 });
 

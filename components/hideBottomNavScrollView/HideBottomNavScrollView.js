@@ -108,12 +108,13 @@ const HideBottomNavScrollView = (props) => {
     <ScrollView
       style={props.style}
       scrollEventThrottle="16"
+      showsVerticalScrollIndicator={false}
       onScrollBeginDrag={(e) => onScrollBeginDrag(e)}
       onScroll={(e) => onScroll(e)}
       onScrollEndDrag={() => onScrollEndDrag()}
       onMomentumScrollEnd={(e) => onMomentumScrollEnd(e)}
       ref={resumeScrollViewRef}
-      scrollEnabled={!props.isJobBoardOpen}
+      // scrollEnabled={!props.isJobBoardOpen}
     >
       {props.children}
     </ScrollView>
