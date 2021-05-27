@@ -70,7 +70,7 @@ const Login = ({
             updateLoggedInUser(data.loggedInUserData);
             updateMatches(data.matchesData);
             updateEmployersJobs(data.employersJobs);
-            navigation.navigate("RootEmployor");
+            navigation.navigate("RootEmployer");
           })
           .catch((error) => {
             console.log(error);

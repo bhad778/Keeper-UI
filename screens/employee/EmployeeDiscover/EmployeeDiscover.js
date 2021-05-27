@@ -9,7 +9,7 @@ import {
   Easing,
 } from "react-native";
 import { connect } from "react-redux";
-import JobPost from "../../employer/jobPost/JobPost";
+import JobPosting from "../../employer/jobPosting/JobPosting";
 import Filters from "../../../modals/Filters";
 import EmployeeInfoModal from "../../../modals/EmployeeInfoModal";
 
@@ -22,7 +22,7 @@ import { debounce } from "lodash";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-class EmployerDiscover extends Component {
+class EmployeeDiscover extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -251,7 +251,6 @@ class EmployerDiscover extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Header></Header> */}
         <Filters
           filtersModal={this.state.filtersModal}
           filtersModalOn={this.filtersModalOn}
@@ -260,27 +259,6 @@ class EmployerDiscover extends Component {
           employeeInfoModal={this.state.employeeInfoModal}
           employeeInfoModalOn={this.employeeInfoModalOn}
         />
-        {/* <View
-          style={{
-            height: 100,
-            width: 100,
-            position: "absolute",
-            zIndex: 999999999,
-            // top: 0,
-            // left: 20,
-          }}
-        >
-          <TouchableOpacity onPress={this.pressDislikeButton}>
-            <Image
-              // style={styles.skillCircleImage}
-              style={styles.dislikeButton}
-              source={{
-                uri:
-                  "https://rileymann.com/wp-content/uploads/2021/02/keeper-dislike.png",
-              }}
-            ></Image>
-          </TouchableOpacity>
-        </View> */}
         <Animated.Image
           source={{
             uri:
@@ -322,7 +300,7 @@ class EmployerDiscover extends Component {
               },
             ]}
           >
-            <JobPost
+            <JobPosting
               navigation={this.props.navigation}
               swipe={this.swipe}
               resumeScrollViewRef={(el) => (this.resumeScrollViewRef = el)}
@@ -412,4 +390,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployerDiscover);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDiscover);
