@@ -51,6 +51,7 @@ const EmployeeProfile = () => {
             backgroundColor: "#ff8267",
           }}
         >
+          <View style={styles.headerPill}></View>
           <View style={styles.imageSection}>
             <View style={styles.imageContainer}>
               <Avatar.Image
@@ -110,6 +111,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff8267",
     paddingLeft: 15,
     paddingRight: 15,
+  },
+  headerPill: {
+    backgroundColor: "white",
+    width: "100%",
+    height: 72,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    zIndex: 101,
+    marginTop: 50,
+    borderWidth: 1,
   },
   imageSection: {
     alignItems: "center",

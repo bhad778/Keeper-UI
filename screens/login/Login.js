@@ -19,6 +19,7 @@ import { updateLoggedInUser } from "../../redux/actions/UsersActions";
 import { updateMatches } from "../../redux/actions/MatchesActions";
 import { updateEmployersJobs } from "../../redux/actions/EmployersJobsActions";
 import { updateEmployeesForSwiping } from "../../redux/actions/EmployeesForSwipingActions";
+import AppBoldText from "../../components/AppBoldText";
 
 import * as SecureStore from "expo-secure-store";
 import { Auth } from "aws-amplify";
@@ -137,9 +138,7 @@ const Login = ({
       <Video
         ref={video}
         style={styles.video}
-        source={{
-          uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-        }}
+        source={require("../../assets/pexels-tima-miroshnichenko-5438945.mp4")}
         resizeMode="cover"
         isLooping
         shouldPlay
@@ -176,7 +175,9 @@ const Login = ({
                 style={styles.signUpButton}
                 onPress={redirectToSignUp}
               >
-                <Text style={styles.loginText}>Create account</Text>
+                <AppBoldText style={styles.loginText}>
+                  Create an Account
+                </AppBoldText>
               </AnimatedTouchable>
             </Animated.View>
 
@@ -235,19 +236,22 @@ const Login = ({
                         ? "grey"
                         : "#fb5b5a",
                     borderRadius: 30,
-                    height: 50,
+                    height: 60,
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: 5,
+                    fontSize: 18,
                   }}
                 >
-                  <Text style={styles.loginText}>LOGIN</Text>
+                  <AppBoldText style={styles.loginText}>LOGIN</AppBoldText>
                 </AnimatedTouchable>
               </Animated.View>
             </>
 
             <TouchableOpacity onPress={toggleUI} style={styles.signInButton}>
-              <Text>{!signInButtonPressed ? "Sign in" : "Back"}</Text>
+              <AppBoldText>
+                {!signInButtonPressed ? "Sign in" : "Back"}
+              </AppBoldText>
             </TouchableOpacity>
           </>
         )}
@@ -278,7 +282,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fadingContainer: { backgroundColor: "blue" },
-  title: { position: "absolute", bottom: 400, fontSize: 50 },
+  title: { position: "absolute", top: 100, fontSize: 50 },
   inputView: {
     width: "80%",
     backgroundColor: "#ccc",
@@ -305,21 +309,21 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     width: "80%",
-    backgroundColor: "#fb5b5a",
-    borderRadius: 25,
-    height: 50,
+    backgroundColor: "white",
+    borderRadius: 100,
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 10,
   },
   signInButton: {
     width: "80%",
-    borderRadius: 25,
-    height: 50,
+    borderRadius: 100,
+    backgroundColor: "#fb5b5a",
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 40,
   },
 });
 
